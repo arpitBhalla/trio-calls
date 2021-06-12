@@ -1,10 +1,15 @@
 import React from "react";
 import { Provider } from "react-redux";
+import {} from "@fluentui/react";
 import store from "./app/store";
-import "./App.css";
+import Theme from "./Theme";
 
 const App: React.FunctionComponent = () => {
-  return <Provider store={store}></Provider>;
+  return (
+    <Provider store={store}>
+      <Theme />
+    </Provider>
+  );
 };
 
 export default App;

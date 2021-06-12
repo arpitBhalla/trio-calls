@@ -1,0 +1,8 @@
+{
+    "snippetName": {
+        "scope": "scope",
+        "prefix": "prefix",
+        "body": "snippet",
+        "description": "description"
+    }
+}
