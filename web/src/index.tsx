@@ -8,6 +8,7 @@ mergeStyles({
     margin: 0,
     padding: 0,
     height: "100vh",
+    fontFamily: "Segoe UI, sans-serif",
   },
 });
 
