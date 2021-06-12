@@ -1,10 +1,10 @@
-import React from 'react'
-import {} from '@fluentui/react';
+import React from "react";
+import {} from "@fluentui/react";
 
-const AppBar = () => {
-    return (
-        
-    );
-}
+type Props = {};
+
+const AppBar: React.FC<Props> = () => {
+  return <></>;
+};
 
 export default AppBar;

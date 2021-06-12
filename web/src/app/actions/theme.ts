@@ -2,10 +2,7 @@ import { PartialTheme } from "@fluentui/react";
 import { createSlice } from "@reduxjs/toolkit";
 
 const theme: PartialTheme = {
-  semanticColors: {
-    bodyBackground: "black",
-    bodyText: "white",
-  },
+  semanticColors: {},
 };
 
 export const themeStore = createSlice({
