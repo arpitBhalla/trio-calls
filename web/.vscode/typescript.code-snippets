@@ -1,8 +1,8 @@
 {
     "snippetName": {
         "scope": "scope",
-        "prefix": "prefix",
+        "prefix": "imrf",
         "body": "snippet",
-        "description": "description"
+        "description": "Basic Snip for Fluent UI"
     }
 }

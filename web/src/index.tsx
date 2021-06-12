@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import App from "./components/App";
+import App from "./container";
 import { mergeStyles } from "@fluentui/react";
 import reportWebVitals from "./reportWebVitals";
 
