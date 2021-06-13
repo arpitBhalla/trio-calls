@@ -1,10 +1,18 @@
 import React from "react";
-import { Toolbar } from "@fluentui/react-northstar";
+import { Flex } from "@fluentui/react-northstar";
+import AppBarIcon from "assets/img/appBar.svg";
 
 type Props = {};
 
 const AppBar: React.FC<Props> = () => {
-  return <Toolbar>asf</Toolbar>;
+  return (
+    <div style={{ backgroundColor: "brand" }}>
+      <Flex styles={{ backgroundColor: "brand.foreground3" }} color="brand">
+        aDS
+        <AppBarIcon />
+      </Flex>
+    </div>
+  );
 };
 
 export default AppBar;
