@@ -3,7 +3,7 @@
         "prefix": "fui",
         "body": [
             "import React from \"react\";",
-            "import {} from \"@fluentui/react\";",
+            "import {} from \"@fluentui/react-northstar\";",
             "",
             "type Props={}",
             "",

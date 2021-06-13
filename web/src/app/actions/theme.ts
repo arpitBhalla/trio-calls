@@ -1,26 +1,36 @@
-import { PartialTheme } from "@fluentui/react";
+import {
+  teamsTheme,
+  teamsDarkTheme,
+  teamsV2Theme,
+  teamsDarkV2Theme,
+} from "@fluentui/react-northstar";
 import { createSlice } from "@reduxjs/toolkit";
-
-const theme: PartialTheme = {
-  semanticColors: {},
-};
 
 export const themeStore = createSlice({
   name: "counter",
   initialState: {
-    useDark: false,
-    theme,
+    theme: teamsTheme,
   },
   reducers: {
-    darkMode: (state, action) => {
-      state.useDark = action.payload;
-    },
     updateTheme: (state, action) => {
-      state.theme += action.payload;
+      switch (action.payload) {
+        case "v1":
+          state.theme = teamsTheme;
+          break;
+        case "v1Dark":
+          state.theme = teamsDarkTheme;
+          break;
+        case "v2":
+          state.theme = teamsV2Theme;
+          break;
+        case "v2Dark":
+          state.theme = teamsDarkV2Theme;
+          break;
+      }
     },
   },
 });
 
-export const { darkMode, updateTheme } = themeStore.actions;
+export const { updateTheme } = themeStore.actions;
 
 export default themeStore.reducer;

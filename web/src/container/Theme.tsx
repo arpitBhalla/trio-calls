@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ThemeProvider } from "@fluentui/react";
+import { Provider as ThemeProvider } from "@fluentui/react-northstar";
 import { useAppSelector } from "app/hooks/redux";
 
 export const ThemeProviderWrapper: React.FunctionComponent = ({ children }) => {

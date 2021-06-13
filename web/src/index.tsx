@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 import App from "./container";
-import { mergeStyles } from "@fluentui/react";
+import { mergeStyles } from "@fluentui/react-northstar";
 import reportWebVitals from "./reportWebVitals";
 
 mergeStyles({
