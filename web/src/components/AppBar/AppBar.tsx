@@ -1,5 +1,12 @@
 import React from "react";
-import { Flex, FlexItem, Text } from "@fluentui/react-northstar";
+import {
+  Flex,
+  FlexItem,
+  Text,
+  Avatar,
+  Provider,
+} from "@fluentui/react-northstar";
+import { AcceptIcon } from "@fluentui/react-icons-northstar";
 import * as styles from "./AppBar.styles";
 import MenuIcon from "./AppWaffleIcon";
 import SearchBar from "./SearchBar";
@@ -23,6 +30,14 @@ const AppBar: React.FC<Props> = () => {
           />
         </FlexItem>
         <SearchBar />
+        <Avatar
+          name="Cecil Folk"
+          status={{
+            color: "green",
+            icon: <AcceptIcon />,
+            title: "Available",
+          }}
+        />
       </Flex>
       {/* <Provider.Consumer
         render={(theme) => (
