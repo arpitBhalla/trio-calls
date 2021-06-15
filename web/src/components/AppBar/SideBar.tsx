@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Menu, MenuItemProps } from "@fluentui/react-northstar";
+import { Menu, MenuItemProps, Flex } from "@fluentui/react-northstar";
+import { Stack } from "@fluentui/react";
 import {
   BellIcon,
   ChatIcon,
@@ -14,8 +15,19 @@ const items: (MenuItemProps & { key: string })[] = [
   { key: "events", content: "Upcoming Events" },
 ];
 
-const MenuExampleVerticalPointing = () => (
-  <Menu defaultActiveIndex={0} items={items} vertical pointing />
-);
+type Props = {};
 
-export default MenuExampleVerticalPointing;
+const SideBar: React.FC<Props> = () => {
+  return (
+    <Flex styles={({ theme: { siteVariables } }) => ({})}>
+      {/* <FlexItem */}
+      <BellIcon size="large" />
+      <ChatIcon outline={true} size="large" />
+      <ContactGroupIcon outline={true} size="larger" />
+      <CallIcon outline={true} size="larger" />
+      <FilesEmptyIcon outline={true} size="larger" />
+    </Flex>
+  );
+};
+
+export default SideBar;
