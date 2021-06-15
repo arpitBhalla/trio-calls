@@ -1,6 +1,7 @@
 import React from "react";
-import { Flex, FlexItem, Text, mergeStyles } from "@fluentui/react-northstar";
-import AppBarIcon from "./AppWaffleIcon";
+import { Flex, FlexItem, Text } from "@fluentui/react-northstar";
+import * as styles from "./AppBar.styles";
+import MenuIcon from "./AppWaffleIcon";
 import SearchBar from "./SearchBar";
 import SideBar from "./SideBar";
 
@@ -9,22 +10,11 @@ type Props = {};
 const AppBar: React.FC<Props> = () => {
   return (
     <>
-      <Flex
-        vAlign="center"
-        styles={({ theme: { siteVariables } }) => ({
-          padding: "8px 13px ",
-          backgroundColor: siteVariables.colorScheme.brand.background4,
-        })}
-      >
-        <FlexItem
-          styles={({ theme: { siteVariables } }) => ({
-            padding: "8px 13px ",
-            backgroundColor: siteVariables.colorScheme.brand.background4,
-          })}
-        >
-          <AppBarIcon />
+      <Flex vAlign="center" variables={{}} styles={styles.headerContainer}>
+        <FlexItem align="stretch" styles={styles.appIconContainer}>
+          <MenuIcon />
         </FlexItem>
-        <FlexItem styles={{ paddingLeft: "2em" }}>
+        <FlexItem styles={{ paddingLeft: "20px" }}>
           <Text
             color="white"
             content="Microsoft Teams"
