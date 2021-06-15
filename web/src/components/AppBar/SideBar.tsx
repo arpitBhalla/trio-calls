@@ -1,31 +1,36 @@
 import * as React from "react";
-import { Menu, MenuItemProps, Flex } from "@fluentui/react-northstar";
-import { Stack } from "@fluentui/react";
+import { Flex } from "@fluentui/react-northstar";
 import {
   BellIcon,
   ChatIcon,
   ContactGroupIcon,
-  CallIcon,
-  FilesEmptyIcon,
 } from "@fluentui/react-icons-northstar";
-
-const items: (MenuItemProps & { key: string })[] = [
-  { key: "editorials", content: "Editorials", icon: <BellIcon /> },
-  { key: "review", content: "Reviews" },
-  { key: "events", content: "Upcoming Events" },
-];
 
 type Props = {};
 
+const sideBarItems = [
+  ["Activity", BellIcon],
+  ["Chat", ChatIcon],
+  ["Teams", ContactGroupIcon],
+];
+
 const SideBar: React.FC<Props> = () => {
   return (
-    <Flex styles={({ theme: { siteVariables } }) => ({})}>
-      {/* <FlexItem */}
-      <BellIcon size="large" />
-      <ChatIcon outline={true} size="large" />
-      <ContactGroupIcon outline={true} size="larger" />
-      <CallIcon outline={true} size="larger" />
-      <FilesEmptyIcon outline={true} size="larger" />
+    <Flex
+      column
+      hAlign="center"
+      styles={({ theme: { siteVariables } }) => ({
+        padding: "2px 14px 15px 14px",
+        maxWidth: "68px",
+        backgroundColor: "red",
+      })}
+    >
+      {sideBarItems.map(([name, Icon]) => (
+        <React.Fragment>
+          <Icon outline={name !== "Chat"} size="large" />
+          {name}
+        </React.Fragment>
+      ))}
     </Flex>
   );
 };
