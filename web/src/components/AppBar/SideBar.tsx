@@ -6,7 +6,7 @@ import {
   ContactGroupIcon,
 } from "@fluentui/react-icons-northstar";
 
-type Props = {};
+type Props = unknown;
 
 const sideBarItems = [
   ["Activity", BellIcon],
@@ -19,13 +19,14 @@ const SideBar: React.FC<Props> = () => {
     <Flex
       column
       hAlign="stretch"
-      styles={({ theme: { siteVariables } }) => ({
+      styles={{
         backgroundColor: "#ebebeb",
         maxWidth: "68px",
-      })}
+      }}
     >
       {sideBarItems.map(([name, Icon]) => (
         <FlexItem
+          key={name}
           styles={({ theme: { siteVariables } }) => ({
             padding: "14px 15px ",
             maxWidth: "68px",

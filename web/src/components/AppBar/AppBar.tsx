@@ -1,18 +1,12 @@
 import React from "react";
-import {
-  Flex,
-  FlexItem,
-  Text,
-  Avatar,
-  Provider,
-} from "@fluentui/react-northstar";
+import { Flex, FlexItem, Text, Avatar } from "@fluentui/react-northstar";
 import { AcceptIcon } from "@fluentui/react-icons-northstar";
 import * as styles from "./AppBar.styles";
 import MenuIcon from "./AppWaffleIcon";
 import SearchBar from "./SearchBar";
 import SideBar from "./SideBar";
 
-type Props = {};
+type Props = unknown;
 
 const AppBar: React.FC<Props> = () => {
   return (

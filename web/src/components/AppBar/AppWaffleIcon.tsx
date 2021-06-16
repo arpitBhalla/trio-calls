@@ -4,7 +4,8 @@ import { SvgIconProps, createSvgIcon } from "@fluentui/react-icons-northstar";
 const AppWaffleIcon: React.FC<
   React.HTMLAttributes<HTMLSpanElement> & SvgIconProps
 > = createSvgIcon({
-  svg: () => {
+  displayName: "AppMenu",
+  svg: function AppMenu() {
     return (
       <svg
         width={"32px"}
@@ -17,7 +18,6 @@ const AppWaffleIcon: React.FC<
       </svg>
     );
   },
-  displayName: "AppMenu",
 });
 
 export default AppWaffleIcon;
