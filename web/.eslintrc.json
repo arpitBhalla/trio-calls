@@ -7,7 +7,8 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "plugin:prettier/recommended",
+    "plugin:react-redux/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -19,7 +20,9 @@
   },
   "plugins": [
     "react",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "react-redux",
+    "prettier"
   ],
   "rules": {
     "react/react-in-jsx-scope": "off",
@@ -34,6 +37,7 @@
     "semi": [
       "error",
       "always"
-    ]
+    ],
+    "no-console": "warn"
   }
 }
