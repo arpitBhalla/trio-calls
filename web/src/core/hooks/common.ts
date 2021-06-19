@@ -1,3 +1,3 @@
-export const useSetTitle = (title?: string) => {
+export const useSetTitle = (title?: string): void => {
   document.title = [title || "", "Microsoft Teams"].join(title ? " | " : "");
 };

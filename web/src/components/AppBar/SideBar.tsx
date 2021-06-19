@@ -26,7 +26,7 @@ const SideBar: React.FC<Props> = () => {
     >
       {sideBarItems.map(([name, Icon]) => (
         <FlexItem
-          key={name}
+          key={name.toString()}
           styles={({ theme: { siteVariables } }) => ({
             padding: "14px 15px ",
             maxWidth: "68px",
