@@ -10,11 +10,30 @@ import { useLocation } from "react-router-dom";
 
 type Props = unknown;
 
-const sideBarItems = [
+const sideBarItems: [string, typeof BellIcon][] = [
   ["Activity", BellIcon],
   ["Chat", ChatIcon],
   ["Teams", ContactGroupIcon],
 ];
+
+type ItemProps = {
+  Icon: typeof BellIcon;
+  name?: string;
+  selected?: boolean;
+};
+
+const Item: React.FC<ItemProps> = ({ Icon, name, selected }) => (
+  <FlexItem styles={styles.Box}>
+    <Flex column hAlign="center" variables={{ selected }} styles={styles.Item}>
+      <Icon outline={!selected} size="large" />
+      <Text
+        color={selected ? "brand" : "#ac1313"}
+        size="smaller"
+        content={name}
+      />
+    </Flex>
+  </FlexItem>
+);
 
 const SideBar: React.FC<Props> = () => {
   const { pathname } = useLocation();
@@ -29,21 +48,11 @@ const SideBar: React.FC<Props> = () => {
       }}
     >
       {sideBarItems.map(([name, Icon]) => (
-        <FlexItem key={name.toString()} styles={styles.Box}>
-          <Flex
-            column
-            hAlign="center"
-            variables={{ selected: name === "Chat" }}
-            styles={styles.Item}
-          >
-            <Icon outline={name !== "Chat"} size="large" />
-            <Text
-              color={name === "Chat" ? "brand" : "#ac1313"}
-              size="smaller"
-              content={name}
-            />
-          </Flex>
-        </FlexItem>
+        <Item
+          key={name.toString()}
+          {...{ Icon, name }}
+          selected={name === "Teams"}
+        />
       ))}
     </Flex>
   );

@@ -6,7 +6,7 @@ export const Box: ComponentSlotStyle = ({ theme: { siteVariables } }) => ({
   cursor: "pointer",
   color: siteVariables.colorScheme.brand.background6,
   "&:hover": {
-    backgroundColor: "#ffffff",
+    backgroundColor: "#e2e2e2",
   },
 });
 
@@ -17,6 +17,6 @@ export const Item: ComponentSlotStyle<unknown, { selected?: boolean }> = ({
   borderLeft: "2px solid transparent",
   borderLeftColor: variables.selected
     ? siteVariables.colorScheme.brand.background6
-    : "none",
+    : "transparent",
   margin: "2px",
 });
