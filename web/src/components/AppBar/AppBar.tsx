@@ -2,16 +2,16 @@ import React from "react";
 import { Flex, FlexItem, Text, Avatar } from "@fluentui/react-northstar";
 import { AcceptIcon } from "@fluentui/react-icons-northstar";
 import * as styles from "./AppBar.styles";
-import MenuIcon from "./AppWaffleIcon";
+import MenuIcon from "./AppBar.icon";
 import SearchBar from "./SearchBar";
-import SideBar from "./SideBar";
+import SideBar from "../SideBar/SideBar";
 
 type Props = unknown;
 
 const AppBar: React.FC<Props> = () => {
   return (
     <>
-      <Flex vAlign="center" variables={{}} styles={styles.headerContainer}>
+      <Flex vAlign="center" styles={styles.headerContainer}>
         <FlexItem align="stretch" styles={styles.appIconContainer}>
           <MenuIcon />
         </FlexItem>
@@ -33,11 +33,6 @@ const AppBar: React.FC<Props> = () => {
           }}
         />
       </Flex>
-      {/* <Provider.Consumer
-        render={(theme) => (
-          <code>{JSON.stringify(theme.siteVariables.colorScheme)}</code>
-        )}
-      /> */}
       <SideBar />
     </>
   );

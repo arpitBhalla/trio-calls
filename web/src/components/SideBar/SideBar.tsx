@@ -5,6 +5,8 @@ import {
   ChatIcon,
   ContactGroupIcon,
 } from "@fluentui/react-icons-northstar";
+import * as styles from "./SideBar.styles";
+import { useLocation } from "react-router-dom";
 
 type Props = unknown;
 
@@ -15,6 +17,8 @@ const sideBarItems = [
 ];
 
 const SideBar: React.FC<Props> = () => {
+  const { pathname } = useLocation();
+
   return (
     <Flex
       column
@@ -25,22 +29,16 @@ const SideBar: React.FC<Props> = () => {
       }}
     >
       {sideBarItems.map(([name, Icon]) => (
-        <FlexItem
-          key={name.toString()}
-          styles={({ theme: { siteVariables } }) => ({
-            padding: "14px 15px ",
-            maxWidth: "68px",
-            cursor: "pointer",
-            color: siteVariables.colorScheme.brand.background6,
-            "&:hover": {
-              backgroundColor: "#ffffff",
-            },
-          })}
-        >
-          <Flex column hAlign="center">
+        <FlexItem key={name.toString()} styles={styles.Box}>
+          <Flex
+            column
+            hAlign="center"
+            variables={{ selected: name === "Chat" }}
+            styles={styles.Item}
+          >
             <Icon outline={name !== "Chat"} size="large" />
             <Text
-              color={name === "Chat" ? "brand" : "grey"}
+              color={name === "Chat" ? "brand" : "#ac1313"}
               size="smaller"
               content={name}
             />

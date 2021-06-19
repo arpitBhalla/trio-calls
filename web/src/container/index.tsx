@@ -4,15 +4,18 @@ import store from "core/store";
 import ThemeProvider from "./Theme";
 import { AppBar } from "components";
 import { useSetTitle } from "core/hooks/common";
+import { BrowserRouter } from "react-router-dom";
 
 const App: React.FunctionComponent = () => {
   useSetTitle();
 
   return (
     <ReduxProvider store={store}>
-      <ThemeProvider>
-        <AppBar />
-      </ThemeProvider>
+      <BrowserRouter>
+        <ThemeProvider>
+          <AppBar />
+        </ThemeProvider>
+      </BrowserRouter>
     </ReduxProvider>
   );
 };
