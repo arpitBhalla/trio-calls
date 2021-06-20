@@ -24,14 +24,16 @@ const AppBar: React.FC<Props> = () => {
           />
         </FlexItem>
         <SearchBar />
-        <Avatar
-          name="Cecil Folk"
-          status={{
-            color: "green",
-            icon: <AcceptIcon />,
-            title: "Available",
-          }}
-        />
+        <FlexItem push>
+          <Avatar
+            name="Cecil Folk"
+            status={{
+              color: "green",
+              icon: <AcceptIcon />,
+              title: "Available",
+            }}
+          />
+        </FlexItem>
       </Flex>
       <SideBar />
     </>
