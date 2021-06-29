@@ -1,3 +1,7 @@
-export const useSetTitle = (title?: string): void => {
-  document.title = [title || "", "Microsoft Teams"].join(title ? " | " : "");
+import React from "react";
+
+export const useTitle = (title?: string): void => {
+  React.useEffect(() => {
+    document.title = [title || "", "Microsoft Teams"].join(title ? " | " : "");
+  }, [title]);
 };

@@ -1,9 +1,4 @@
-import {
-  teamsTheme,
-  teamsDarkTheme,
-  teamsV2Theme,
-  teamsDarkV2Theme,
-} from "@fluentui/react-northstar";
+import { teamsTheme, teamsDarkTheme } from "@fluentui/react-northstar";
 import { createSlice } from "@reduxjs/toolkit";
 
 export const themeStore = createSlice({
@@ -19,12 +14,6 @@ export const themeStore = createSlice({
           break;
         case "v1Dark":
           state.theme = teamsDarkTheme;
-          break;
-        case "v2":
-          state.theme = teamsV2Theme;
-          break;
-        case "v2Dark":
-          state.theme = teamsDarkV2Theme;
           break;
       }
     },
