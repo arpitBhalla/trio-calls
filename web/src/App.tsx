@@ -1,10 +1,9 @@
 import React from "react";
 import { Provider as ReduxProvider } from "react-redux";
 import store from "core/store";
-// import { AppBar } from "components";
+import Routes from "./views";
 import { useTitle } from "core/hooks/common";
 import { ThemeProvider } from "@fluentui/react";
-import { BrowserRouter } from "react-router-dom";
 
 const App: React.FunctionComponent = () => {
   useTitle();
@@ -12,11 +11,10 @@ const App: React.FunctionComponent = () => {
   return (
     <ReduxProvider store={store}>
       <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <ThemeProvider>{/* <AppBar /> */}sdgf</ThemeProvider>
-        </BrowserRouter>
+        <ThemeProvider>
+          <Routes />
+        </ThemeProvider>
       </ThemeProvider>
-      ;
     </ReduxProvider>
   );
 };
@@ -24,9 +22,8 @@ const App: React.FunctionComponent = () => {
 export default App;
 
 const theme = {
-  name: "Blue",
+  name: "Teams",
   isInverted: true,
-  backgroundImageUri: "",
   palette: {
     themePrimary: "#6b69d6",
     themeLighterAlt: "#f8f7fd",
