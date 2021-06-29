@@ -7,7 +7,6 @@ import {
   VideoGalleryLocalParticipant,
 } from "@azure/communication-react";
 import { Stack } from "@fluentui/react";
-import React from "react";
 
 const MockLocalParticipant: VideoGalleryLocalParticipant = {
   userId: "user1",
