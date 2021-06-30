@@ -17,6 +17,14 @@
     "@azure/communication-common" "^1.0.0"
     "@azure/logger" "^1.0.2"
 
+"@azure/communication-calling@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@azure/communication-calling/-/communication-calling-1.1.0.tgz#3db43b5f54f701d6f634873aa6c3343693fb82e6"
+  integrity sha512-cwsJXOAYzG4nk4NzFfyAKRCXgg9jXjLSBM1wSJYqbtj2eNsp4Z3eA2+EMLtfoHta+7l7J3jUwG7+r8PRTCNEUg==
+  dependencies:
+    "@azure/communication-common" "^1.0.0"
+    "@azure/logger" "^1.0.2"
+
 "@azure/communication-chat@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@azure/communication-chat/-/communication-chat-1.0.0.tgz#765fd93483c5444ad2ac7207a088b968cd490436"
@@ -45,6 +53,23 @@
     "@opentelemetry/api" "^0.10.2"
     events "^3.0.0"
     jwt-decode "~2.2.0"
+    tslib "^2.0.0"
+
+"@azure/communication-identity@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@azure/communication-identity/-/communication-identity-1.0.0.tgz#b11f1139b372ee4c59ddf9756565337c4899347d"
+  integrity sha512-fa220+fQn27JN8QtajeMe88rqrJn3qctT/8FV/abJe6tSBJlAWYXOHiIF3nCgSeyIb5F9pi7Fycd9M55OY4O9w==
+  dependencies:
+    "@azure/abort-controller" "^1.0.0"
+    "@azure/communication-common" "^1.0.0"
+    "@azure/core-auth" "^1.2.0"
+    "@azure/core-http" "^1.2.0"
+    "@azure/core-lro" "^1.0.2"
+    "@azure/core-paging" "^1.1.1"
+    "@azure/core-tracing" "1.0.0-preview.10"
+    "@azure/logger" "^1.0.0"
+    "@opentelemetry/api" "^0.10.2"
+    events "^3.0.0"
     tslib "^2.0.0"
 
 "@azure/communication-react@^1.0.0-beta.1":
@@ -132,6 +157,17 @@
     tunnel "^0.0.6"
     uuid "^8.3.0"
     xml2js "^0.4.19"
+
+"@azure/core-lro@^1.0.2":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@azure/core-lro/-/core-lro-1.0.5.tgz#856a2cb6a9bec739ee9cde33a27cc28f81ac0522"
+  integrity sha512-0EFCFZxARrIoLWMIRt4vuqconRVIO2Iin7nFBfJiYCCbKp5eEmxutNk8uqudPmG0XFl5YqlVh68/al/vbE5OOg==
+  dependencies:
+    "@azure/abort-controller" "^1.0.0"
+    "@azure/core-http" "^1.2.0"
+    "@azure/core-tracing" "1.0.0-preview.11"
+    events "^3.0.0"
+    tslib "^2.0.0"
 
 "@azure/core-paging@^1.1.1", "@azure/core-paging@~1.1.3":
   version "1.1.3"
