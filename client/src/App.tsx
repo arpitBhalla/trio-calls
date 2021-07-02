@@ -1,14 +1,20 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Home from "./Home";
-import Video from "./Video";
+import { ThemeProvider } from "@material-ui/core/styles";
+import Join from "./pages/Join";
+import theme from "./core/theme";
+import { SnackbarProvider } from "notistack";
+import store from "core/store";
+import { Provider as ReduxProvider } from "react-redux";
 
 function App() {
   return (
-    <Router>
-      <Route path="/" component={Home} exact />
-      <Route path="/:roomId" component={Video} />
-    </Router>
+    <ReduxProvider store={store}>
+      <ThemeProvider theme={theme}>
+        <SnackbarProvider maxSnack={3}>
+          <Join />
+        </SnackbarProvider>
+      </ThemeProvider>
+    </ReduxProvider>
   );
 }
 export default App;
