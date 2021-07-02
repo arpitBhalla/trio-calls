@@ -1,0 +1,276 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.show-case {
+  overflow: hidden;
+  height: 93.2vh;
+  display: flex;
+}
+
+.main-left {
+  flex: 0.7;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: black;
+}
+
+.video-group {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+video {
+  height: 300px;
+  border-radius: 1rem;
+  margin: 0.5rem;
+  width: 400px;
+  margin-top: 0.5rem;
+  object-fit: cover;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+}
+
+.main-right {
+  display: flex;
+  flex-direction: column;
+  flex: 0.3;
+  background-color: #3d3d42;
+}
+
+.main-chat-window {
+  flex-grow: 1;
+  overflow-y: scroll;
+}
+
+.main-chat-window::-webkit-scrollbar {
+  display: none;
+}
+
+.main-message-container {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-message-container > input {
+  height: 50px;
+  flex: 1;
+  font-size: 1rem;
+  border-radius: 5px;
+  padding-left: 20px;
+  border: none;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+
+.message {
+  display: flex;
+}
+#video-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#showChat {
+  display: none;
+}
+
+.msg {
+  width: 70%;
+  margin-bottom: 1.5rem;
+  margin-left: 1.5rem;
+  border-radius: 15px;
+  background: #00bfb6;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+  font-weight: 400;
+  font-family: arial;
+  position: relative;
+}
+
+.msg > p {
+  margin-right: 1rem;
+  color: rgb(255, 255, 255);
+  font-size: medium;
+}
+
+.chat:before {
+  content: '';
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 15px solid transparent;
+  border-right: 15px solid #00bfb6;
+  border-top: 15px solid #00bfb6;
+  border-bottom: 15px solid transparent;
+  left: -16px;
+  top: 0px;
+}
+
+/* OPTIONS */
+.options {
+  padding: 1rem;
+  display: flex;
+  background-color: #1c1e20;
+}
+
+.options-left {
+  display: flex;
+  align-content: center;
+}
+.options-right {
+  display: flex;
+  margin-left: auto;
+}
+
+.options-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2f80ec;
+  height: 50px;
+  border-radius: 5px;
+  color: #eeeeee;
+  font-size: 1.6rem;
+  width: 50px;
+  margin-left: 0.5rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.leave-meet {
+  display: flex;
+  justify-content: center;
+  border: none;
+  margin-left: 0.6rem;
+  text-align: center;
+}
+
+.leave-meet > button {
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.5rem;
+  color: #ffff;
+  background-color: #d63031;
+  border: none;
+  border-radius: 5px;
+}
+
+/* HOME PAGE */
+
+.wraper {
+  background: #50a3a2;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+  height: 400px;
+  height: 100vh;
+  text-align: center;
+}
+.container > h1 {
+  margin-bottom: 2rem;
+  font-size: 40px;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-put;
+  font-weight: 200;
+}
+
+.btn {
+  appearance: none;
+  outline: 0;
+  background-color: white;
+  border: 0;
+  padding: 1rem 2rem;
+  color: #50a3a2;
+  border-radius: 3px;
+  width: 20rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  font-size: 18px;
+  transition-duration: 0.25s;
+}
+
+.form > input {
+  display: block;
+  appearance: none;
+  outline: 0;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.308);
+
+  width: 18rem;
+
+  border-radius: 3px;
+  padding: 15px 15px;
+  margin: 0 auto 10px auto;
+  display: block;
+  text-align: center;
+  font-size: 18px;
+
+  color: white;
+
+  transition-duration: 0.25s;
+  font-weight: 300;
+}
+
+.form > input:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.form > input:focus {
+  background-color: white;
+  width: 20rem;
+
+  color: #50a3a2;
+}
+
+.video-icon {
+  font-size: 6rem;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+.video-icon > h1 {
+  font-size: 2rem;
+  letter-spacing: 2px;
+}
+
+.header {
+  padding: 1.2rem;
+  background-color: #0097e6;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header > p {
+  font-size: 1.2rem;
+  color: white;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
