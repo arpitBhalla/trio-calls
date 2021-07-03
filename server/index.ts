@@ -1,32 +1,24 @@
 import express from "express";
 import http from "http";
-import path from "path";
+import { Socket, Server } from "socket.io";
+import { ExpressPeerServer } from "peer";
+import { InviteRoute } from "./routes/invite";
 
 const app = express();
 const server = http.createServer(app);
-import { ExpressPeerServer } from "peer";
-
 const peerServer = ExpressPeerServer(server, {});
+const PORT = process.env.PORT || 4000;
 
-app.use("/peerjs", peerServer);
-
-const io = require("socket.io")(server, {
+app.use("/peerJs", peerServer);
+app.use(express.json());
+app.use("/invite", InviteRoute);
+const io = new Server(server, {
   cors: {
     origin: "*",
   },
 });
 
-app.use(express.json());
-
-const _dirname = path.resolve();
-app.use(express.static(path.join(_dirname, "/client/public")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(_dirname, "/client/public/index.html"));
-});
-
-io.on("connection", (socket) => {
-  console.log(" user connected", socket.id);
+io.on("connection", (socket: Socket) => {
   socket.on("join-room", (roomId, userId) => {
     console.log(roomId, userId);
     socket.join(roomId);
@@ -44,7 +36,6 @@ io.on("connection", (socket) => {
   });
 });
 
-const port = 8000;
-server.listen(port, () => {
-  console.log(`Running on Port: ${port}`);
+server.listen(PORT, () => {
+  console.log(`Running on Port: ${PORT}`);
 });
