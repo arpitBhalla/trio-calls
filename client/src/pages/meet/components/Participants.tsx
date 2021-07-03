@@ -41,7 +41,7 @@ const App: React.FC<Props> = () => {
         <ListItemText
           primary={
             <Typography variant="body1" color="textSecondary">
-              Arpit (You)
+              <b>Arpit (You)</b>
             </Typography>
           }
         />
