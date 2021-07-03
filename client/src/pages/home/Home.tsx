@@ -1,18 +1,14 @@
-import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
-import Chip from "@material-ui/core/Chip";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import NewMeet from "./components/NewMeet";
 import JoinMeet from "./components/JoinMeet";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-// import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
-import { useAppSelector } from "core/hooks/redux";
 import Fade from "@material-ui/core/Fade";
+import ActiveUser from "components/ActiveUser";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Home: React.FC = () => {
   const classes = useStyles();
-  const { displayName } = useAppSelector(({ authReducer }) => authReducer);
 
   return (
     <>
@@ -33,10 +28,7 @@ const Home: React.FC = () => {
           <Typography variant="h6" className={classes.typo}>
             Microsoft Teams
           </Typography>
-          <Chip
-            label={displayName}
-            avatar={<Avatar>{displayName[0].toUpperCase()}</Avatar>}
-          />
+          <ActiveUser />
         </Toolbar>
       </AppBar>
       <Container maxWidth="md" className={classes.root}>
