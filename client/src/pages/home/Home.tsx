@@ -5,8 +5,6 @@ import Box from "@material-ui/core/Box";
 import Chip from "@material-ui/core/Chip";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
 import NewMeet from "./components/NewMeet";
 import JoinMeet from "./components/JoinMeet";
 import AppBar from "@material-ui/core/AppBar";
@@ -21,18 +19,20 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     paddingTop: theme.spacing(10),
   },
+  typo: { flexGrow: 1 },
 }));
 
 const App: React.FC<Props> = () => {
   const classes = useStyles();
   const { displayName } = useAppSelector(({ authReducer }) => authReducer);
-  const [tabIndex, setTabIndex] = React.useState(0);
 
   return (
     <>
       <AppBar position="static" color="primary">
         <Toolbar>
-          <Typography variant="h6">Microsoft Mini Teams</Typography>
+          <Typography variant="h6" className={classes.typo}>
+            Microsoft Teams
+          </Typography>
           <Chip
             label={displayName}
             avatar={<Avatar>{displayName[0]}</Avatar>}
@@ -40,7 +40,7 @@ const App: React.FC<Props> = () => {
         </Toolbar>
       </AppBar>
       <Container maxWidth="md" className={classes.root}>
-        <Grid container spacing={1}>
+        <Grid container spacing={1} alignItems="center">
           <Grid item xs={7}>
             <img
               alt="Meeting"
@@ -48,23 +48,12 @@ const App: React.FC<Props> = () => {
             />
           </Grid>
           <Grid item xs={5}>
-            <Box
-              boxShadow="0px 0px 30px 1px rgb(214, 214, 214)"
-              p={3}
-              minHeight="50vh"
-            >
-              <Tabs
-                centered
-                value={tabIndex}
-                onChange={(e, n) => setTabIndex(n)}
-                variant="fullWidth"
-              >
-                <Tab label="Join with Code" />
-                <Tab label="Create New" />
-              </Tabs>
-              <Box pt={3} p={2}>
-                {tabIndex ? <NewMeet /> : <JoinMeet />}
-              </Box>
+            <Box boxShadow="0px 0px 30px 1px rgb(214, 214, 214)" p={4} py={5}>
+              <JoinMeet />
+              <Typography align="center" variant="h6" color="textSecondary">
+                or
+              </Typography>
+              <NewMeet />
             </Box>
           </Grid>
         </Grid>

@@ -1,60 +1,96 @@
 import * as React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import Button from "@material-ui/core/Button";
-import Switch from "@material-ui/core/Switch";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import FormLabel from "@material-ui/core/FormLabel";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import VideoCallIcon from "@material-ui/icons/VideoCall";
 
-interface Props {}
+const NewMeetComponent: React.FC = () => {
+  const [meetingName, setMeetingName] = React.useState({ text: "", error: "" });
+  const [meetingType, setMeetingType] = React.useState("anyone");
+  const [loading, setLoading] = React.useState(false);
+  const [openDialog, setOpenDialog] = React.useState(false);
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: theme.spacing(2),
-    paddingTop: theme.spacing(10),
-  },
-}));
-
-const App: React.FC<Props> = () => {
-  const classes = useStyles();
-
-  const [tabIndex, setTabIndex] = React.useState(0);
+  const handleSubmit = () => {
+    setLoading(true);
+  };
 
   return (
     <>
-      <TextField
+      <Button
         fullWidth
-        label="Meeting Name"
         variant="outlined"
-        // value={}
-        // onChange={}
-      />
-      <br />
-
-      <Switch
-        value="sad"
-        checked={false}
-        onChange={console.log}
-        inputProps={{ "aria-label": "asd" }}
-      />
-      <RadioGroup
-        aria-label=""
-        name=""
-        value={"aa"}
-        // onChange={}
+        color="primary"
+        onClick={() => setOpenDialog(!openDialog)}
+        startIcon={<VideoCallIcon />}
       >
-        <FormControlLabel value="a" label="Restricted" control={<Radio />} />
-        <FormControlLabel value="aa" label="Anyone " control={<Radio />} />
-      </RadioGroup>
-      <br />
-      <Button fullWidth variant="contained" color="primary">
-        Start New Meeting
+        Create New Link
       </Button>
+      <Dialog
+        fullWidth
+        onClose={() => setOpenDialog(!openDialog)}
+        maxWidth="xs"
+        open={openDialog}
+        aria-labelledby="new meeting dialog"
+      >
+        <DialogTitle>Create New Meeting</DialogTitle>
+        <DialogContent>
+          <FormControl fullWidth>
+            <TextField
+              disabled={loading}
+              fullWidth
+              label="Meeting Name"
+              variant="outlined"
+              value={meetingName.text}
+              error={Boolean(meetingName.error)}
+              onChange={(event) =>
+                setMeetingName({ text: event.target.value, error: "" })
+              }
+            />
+            <FormHelperText>{meetingName.error}</FormHelperText>
+          </FormControl>
+          <FormControl>
+            <RadioGroup
+              aria-label="meeting type"
+              value={meetingType}
+              onChange={(_event, value) => setMeetingType(value)}
+            >
+              <FormControlLabel
+                disabled={loading}
+                value="anyone"
+                label="Anyone can join"
+                control={<Radio />}
+              />
+              <FormControlLabel
+                disabled={loading}
+                value="invite"
+                label="Restricted to invited users"
+                control={<Radio />}
+              />
+            </RadioGroup>
+          </FormControl>
+          <br />
+          <br />
+          <Button
+            disabled={loading}
+            fullWidth
+            variant="contained"
+            color="primary"
+            onClick={handleSubmit}
+          >
+            Start New Meeting
+          </Button>
+          <br />
+          <br />
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
-export default App;
+export default NewMeetComponent;
