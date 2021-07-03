@@ -12,6 +12,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 // import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import { useAppSelector } from "core/hooks/redux";
+import Fade from "@material-ui/core/Fade";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,16 +48,18 @@ const Home: React.FC = () => {
             />
           </Grid>
           <Grid item xs={5}>
-            <Box boxShadow="0px 0px 30px 1px rgb(214, 214, 214)" p={4} py={5}>
-              <JoinMeet />
-              <Typography align="center" variant="h6" color="textSecondary">
-                or
-              </Typography>
-              <NewMeet />
-            </Box>
-            {/* <Box textAlign="center">
+            <Fade in timeout={500} unmountOnExit>
+              <Box boxShadow="0px 0px 30px 1px rgb(214, 214, 214)" p={4} py={5}>
+                <JoinMeet />
+                <Typography align="center" variant="h6" color="textSecondary">
+                  or
+                </Typography>
+                <NewMeet />
+              </Box>
+              {/* <Box textAlign="center">
               <CircularProgress />
             </Box> */}
+            </Fade>
           </Grid>
         </Grid>
       </Container>
