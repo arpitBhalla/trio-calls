@@ -35,7 +35,7 @@ const Home: React.FC = () => {
           </Typography>
           <Chip
             label={displayName}
-            avatar={<Avatar>{displayName[0]}</Avatar>}
+            avatar={<Avatar>{displayName[0].toUpperCase()}</Avatar>}
           />
         </Toolbar>
       </AppBar>
