@@ -6,20 +6,25 @@ export const mediaStore = createSlice({
     isAudio: false,
     isVideo: false,
     isHand: false,
+    isScreenShare: false,
   },
   reducers: {
     toggleAudio: (state, action) => {
       state.isAudio = action.payload ?? !state.isAudio;
     },
     toggleVideo: (state, action) => {
-      state.isVideo = !state.isVideo;
+      state.isVideo = action.payload ?? !state.isVideo;
     },
     toggleHand: (state, action) => {
-      state.isHand = !state.isHand;
+      state.isHand = action.payload ?? !state.isHand;
+    },
+    toggleScreen: (state, action) => {
+      state.isScreenShare = action.payload ?? !state.isScreenShare;
     },
   },
 });
 
-export const { toggleAudio, toggleHand, toggleVideo } = mediaStore.actions;
+export const { toggleAudio, toggleHand, toggleVideo, toggleScreen } =
+  mediaStore.actions;
 
 export default mediaStore.reducer;

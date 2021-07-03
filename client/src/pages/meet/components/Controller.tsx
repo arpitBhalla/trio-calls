@@ -2,19 +2,20 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
 import {
-  VideoCallOutlined,
-  ScreenShareOutlined,
+  MicOutlined,
   MicOffOutlined,
   VideocamOffOutlined,
+  VideocamOutlined,
   CancelPresentationOutlined,
   PresentToAllOutlined,
   PanToolOutlined,
   InfoOutlined,
-  AirplayOutlined,
   CategoryOutlined,
 } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
+import { useAppDispatch, useAppSelector } from "core/hooks/redux";
+import { toggleAudio, toggleScreen, toggleVideo } from "core/actions/media";
 
 interface Props {}
 
@@ -27,25 +28,60 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const App: React.FC<Props> = ({}) => {
+type ControlButtonProps = {
+  title?: string;
+  isEnabled?: boolean;
+  IconOn: typeof MicOffOutlined;
+  IconOff: typeof MicOffOutlined;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+};
+
+const ControlButton: React.FC<ControlButtonProps> = ({
+  title,
+  isEnabled,
+  IconOn,
+  IconOff,
+  onClick,
+}) => (
+  <Tooltip title={title + " " + (isEnabled ? "off" : "on")}>
+    {/* @ts-ignore */}
+    <IconButton onClick={onClick}>
+      {isEnabled ? <IconOn htmlColor="red" /> : <IconOff />}
+    </IconButton>
+  </Tooltip>
+);
+
+const App: React.FC<Props> = () => {
   const classes = useStyles();
+  const dispatch = useAppDispatch();
+  const { isAudio, isVideo, isScreenShare } = useAppSelector(
+    ({ mediaReducer }) => mediaReducer
+  );
+
   return (
     <Box className={classes.root}>
-      <Tooltip title="Microphone">
-        <IconButton style={{ backgroundColor: "red" }}>
-          <MicOffOutlined htmlColor="white" />
-        </IconButton>
-      </Tooltip>
-      <Tooltip title="Video">
-        <IconButton>
-          <VideocamOffOutlined />
-        </IconButton>
-      </Tooltip>
-      <Tooltip title="Screen Share">
-        <IconButton>
-          <ScreenShareOutlined />
-        </IconButton>
-      </Tooltip>
+      <ControlButton
+        title="Microphone"
+        isEnabled={isAudio}
+        IconOn={MicOutlined}
+        IconOff={MicOffOutlined}
+        onClick={() => dispatch(toggleAudio(null))}
+      />
+      <ControlButton
+        title="Video"
+        isEnabled={isVideo}
+        IconOn={VideocamOutlined}
+        IconOff={VideocamOffOutlined}
+        onClick={() => dispatch(toggleVideo(null))}
+      />
+      <ControlButton
+        title="ScreenShare"
+        isEnabled={isScreenShare}
+        IconOn={PresentToAllOutlined}
+        IconOff={CancelPresentationOutlined}
+        onClick={() => dispatch(toggleScreen(null))}
+      />
+
       <Tooltip title="Raise Hand">
         <IconButton>
           <PanToolOutlined />
