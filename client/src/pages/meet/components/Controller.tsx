@@ -16,6 +16,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { toggleAudio, toggleScreen, toggleVideo } from "core/actions/media";
+import ControlButton from "components/ControllerButton";
 
 interface Props {}
 
@@ -27,29 +28,6 @@ const useStyles = makeStyles((theme) => ({
     left: "50%",
   },
 }));
-
-type ControlButtonProps = {
-  title?: string;
-  isEnabled?: boolean;
-  IconOn: typeof MicOffOutlined;
-  IconOff: typeof MicOffOutlined;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-};
-
-const ControlButton: React.FC<ControlButtonProps> = ({
-  title,
-  isEnabled,
-  IconOn,
-  IconOff,
-  onClick,
-}) => (
-  <Tooltip title={title + " " + (isEnabled ? "off" : "on")}>
-    {/* @ts-ignore */}
-    <IconButton onClick={onClick}>
-      {isEnabled ? <IconOn htmlColor="red" /> : <IconOff />}
-    </IconButton>
-  </Tooltip>
-);
 
 const App: React.FC<Props> = () => {
   const classes = useStyles();

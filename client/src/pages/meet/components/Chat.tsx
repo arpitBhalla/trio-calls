@@ -5,7 +5,6 @@ import Typography from "@material-ui/core/Typography";
 import ChatMessage from "./ChatMessage";
 import TextField from "@material-ui/core/TextField";
 import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
-import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
