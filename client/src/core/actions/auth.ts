@@ -8,7 +8,8 @@ export const authStore = createSlice({
   },
   reducers: {
     updateAuth: (state, action: PayloadAction<typeof state>) => {
-      state = action.payload;
+      state.isAuth = action.payload.isAuth;
+      state.displayName = action.payload.displayName;
     },
   },
 });

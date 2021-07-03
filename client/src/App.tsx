@@ -6,6 +6,7 @@ import store from "core/store";
 import { Provider as ReduxProvider } from "react-redux";
 import { useTitle } from "core/hooks/common";
 import Routes from "./pages";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   useTitle();
@@ -14,7 +15,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <SnackbarProvider maxSnack={3}>
-          <Routes />
+          <BrowserRouter>
+            <Routes />
+          </BrowserRouter>
         </SnackbarProvider>
       </ThemeProvider>
     </ReduxProvider>
