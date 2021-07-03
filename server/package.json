@@ -1,0 +1,22 @@
+{
+  "name": "video_chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node index.js",
+    "dev": "nodemon --exec 'ts-node server/index.js'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nodemailer": "^6.6.2",
+    "nodemon": "^2.0.7",
+    "peer": "^0.6.1",
+    "socket.io": "^4.0.1",
+    "ts-node": "^10.0.0"
+  }
+}
