@@ -58,7 +58,10 @@ const App: React.FC = () => {
           videoController.current.srcObject = stream;
         }
       });
-  }, [isVideo]);
+    if (videoController.current) {
+      videoController.current.muted = !isAudio;
+    }
+  }, [isVideo, isAudio]);
 
   return (
     <>

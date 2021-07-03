@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   root: {},
 }));
 
-const App: React.FC<Props> = () => {
+const WaitingRoom: React.FC<Props> = () => {
   const classes = useStyles();
   return (
     <Container maxWidth="sm">
@@ -27,4 +27,4 @@ const App: React.FC<Props> = () => {
     </Container>
   );
 };
-export default App;
+export default WaitingRoom;
