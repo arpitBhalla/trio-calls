@@ -58,44 +58,40 @@ const App: React.FC = () => {
           videoController.current.srcObject = stream;
         }
       });
+  }, [isVideo]);
+
+  React.useEffect(() => {
     if (videoController.current) {
       videoController.current.muted = !isAudio;
     }
-  }, [isVideo, isAudio]);
+  }, [isAudio]);
 
   return (
-    <>
-      {JSON.stringify({ isAudio, isVideo })}
-      <Box className={classes.root}>
-        {isVideo ? (
-          <video className={classes.video} ref={videoController} autoPlay />
-        ) : (
-          <Typography
-            className={classes.text}
-            variant="h5"
-            color="textSecondary"
-          >
-            Camera is off
-          </Typography>
-        )}
-        <Box className={classes.controller}>
-          <ControlButton
-            title="Microphone"
-            isEnabled={isAudio}
-            IconOn={MicOutlined}
-            IconOff={MicOffOutlined}
-            onClick={() => dispatch(toggleAudio(null))}
-          />
-          <ControlButton
-            title="Video"
-            isEnabled={isVideo}
-            IconOn={VideocamOutlined}
-            IconOff={VideocamOffOutlined}
-            onClick={() => dispatch(toggleVideo(null))}
-          />
-        </Box>
+    <Box className={classes.root}>
+      {isVideo ? (
+        <video className={classes.video} ref={videoController} autoPlay />
+      ) : (
+        <Typography className={classes.text} variant="h5" color="textSecondary">
+          Camera is off
+        </Typography>
+      )}
+      <Box className={classes.controller}>
+        <ControlButton
+          title="Microphone"
+          isEnabled={isAudio}
+          IconOn={MicOutlined}
+          IconOff={MicOffOutlined}
+          onClick={() => dispatch(toggleAudio(null))}
+        />
+        <ControlButton
+          title="Video"
+          isEnabled={isVideo}
+          IconOn={VideocamOutlined}
+          IconOff={VideocamOffOutlined}
+          onClick={() => dispatch(toggleVideo(null))}
+        />
       </Box>
-    </>
+    </Box>
   );
 };
 export default App;
