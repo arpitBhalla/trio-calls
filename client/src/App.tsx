@@ -1,6 +1,7 @@
 import React from "react";
 import { ThemeProvider } from "@material-ui/core/styles";
-import Join from "./pages/Join";
+import { CssBaseline } from "@material-ui/core";
+import Join from "./pages/join/Join";
 import theme from "./core/theme";
 import { SnackbarProvider } from "notistack";
 import store from "core/store";
@@ -10,6 +11,7 @@ function App() {
   return (
     <ReduxProvider store={store}>
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <SnackbarProvider maxSnack={3}>
           <Join />
         </SnackbarProvider>
