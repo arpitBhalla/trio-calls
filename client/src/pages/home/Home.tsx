@@ -9,10 +9,9 @@ import NewMeet from "./components/NewMeet";
 import JoinMeet from "./components/JoinMeet";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
+// import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import { useAppSelector } from "core/hooks/redux";
-
-interface Props {}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   typo: { flexGrow: 1 },
 }));
 
-const App: React.FC<Props> = () => {
+const Home: React.FC = () => {
   const classes = useStyles();
   const { displayName } = useAppSelector(({ authReducer }) => authReducer);
 
@@ -55,10 +54,13 @@ const App: React.FC<Props> = () => {
               </Typography>
               <NewMeet />
             </Box>
+            {/* <Box textAlign="center">
+              <CircularProgress />
+            </Box> */}
           </Grid>
         </Grid>
       </Container>
     </>
   );
 };
-export default App;
+export default Home;
