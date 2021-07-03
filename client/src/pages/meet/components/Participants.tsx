@@ -11,7 +11,6 @@ import {
 } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import MicOffOutlinedIcon from "@material-ui/icons/MicOffOutlined";
 import MicNoneOutlinedIcon from "@material-ui/icons/MicNoneOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
@@ -42,7 +41,7 @@ const App: React.FC<Props> = () => {
         <ListItemText
           primary={
             <Typography variant="body1" color="textSecondary">
-              <b>Arpit (You)</b>
+              Arpit (You)
             </Typography>
           }
         />

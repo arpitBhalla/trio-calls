@@ -9,6 +9,14 @@ const theme = createMuiTheme({
       main: "#6264A7",
     },
   },
+  overrides: {
+    MuiCssBaseline: {
+      "@global": {
+        // @ts-ignore
+        "@font-face": ["Ubuntu"],
+      },
+    },
+  },
 });
 
 export default theme;

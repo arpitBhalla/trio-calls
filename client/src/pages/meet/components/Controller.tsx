@@ -2,7 +2,6 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
 import {
-  AudiotrackOutlined,
   VideoCallOutlined,
   ScreenShareOutlined,
   MicOffOutlined,
@@ -11,6 +10,8 @@ import {
   PresentToAllOutlined,
   PanToolOutlined,
   InfoOutlined,
+  AirplayOutlined,
+  CategoryOutlined,
 } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -30,11 +31,6 @@ const App: React.FC<Props> = ({}) => {
   const classes = useStyles();
   return (
     <Box className={classes.root}>
-      <Tooltip title="Meet Info">
-        <IconButton aria-label="">
-          <InfoOutlined />
-        </IconButton>
-      </Tooltip>
       <Tooltip title="Microphone">
         <IconButton style={{ backgroundColor: "red" }}>
           <MicOffOutlined htmlColor="white" />
@@ -53,6 +49,16 @@ const App: React.FC<Props> = ({}) => {
       <Tooltip title="Raise Hand">
         <IconButton>
           <PanToolOutlined />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="White Board">
+        <IconButton>
+          <CategoryOutlined />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="Meet Info">
+        <IconButton aria-label="">
+          <InfoOutlined />
         </IconButton>
       </Tooltip>
     </Box>

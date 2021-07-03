@@ -1,15 +1,8 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  Avatar,
-  List,
-  ListItem,
-  ListSubheader,
-  ListItemAvatar,
-  ListItemText,
-  ListItemSecondaryAction,
-} from "@material-ui/core";
+import { List, ListSubheader } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
+import ChatMessage from "./ChatMessage";
 
 interface Props {}
 
@@ -20,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const App: React.FC<Props> = () => {
+const ChatComponent: React.FC<Props> = () => {
   const classes = useStyles();
   return (
     <List>
@@ -29,30 +22,18 @@ const App: React.FC<Props> = () => {
           <b>In Call</b>
         </Typography>
       </ListSubheader>
-      <ListItem>
-        <ListItemText
-          primary={
-            <Typography variant="caption" color="textSecondary">
-              <b>Arpit (You)</b>
-            </Typography>
-          }
-          secondary={
-            <Typography variant="body1" color="textSecondary">
-              <b>Meow</b>
-            </Typography>
-          }
-        />
-        <ListItemSecondaryAction>
-          <ListItemText
-            secondary={
-              <Typography variant="caption" color="textSecondary">
-                <b>{new Date().toLocaleTimeString()}</b>
-              </Typography>
-            }
-          />
-        </ListItemSecondaryAction>
-      </ListItem>
+      <ChatMessage
+        name="Arpit"
+        message="Hii"
+        time={new Date().toLocaleTimeString()}
+      />
+      <ChatMessage
+        isMe
+        name="Rajiv"
+        message="Hello Arpit sadfdsjf sdafdsf hids dsifnsd fisdf sdf isda fias"
+        time={new Date().toLocaleTimeString()}
+      />
     </List>
   );
 };
-export default App;
+export default ChatComponent;

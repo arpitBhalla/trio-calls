@@ -6,8 +6,10 @@ import theme from "./core/theme";
 import { SnackbarProvider } from "notistack";
 import store from "core/store";
 import { Provider as ReduxProvider } from "react-redux";
+import { useTitle } from "core/hooks/common";
 
 function App() {
+  useTitle();
   return (
     <ReduxProvider store={store}>
       <ThemeProvider theme={theme}>
