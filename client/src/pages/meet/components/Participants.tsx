@@ -10,8 +10,12 @@ import {
   ListItemSecondaryAction,
 } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import { VideoCall } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import MicOffOutlinedIcon from "@material-ui/icons/MicOffOutlined";
+import MicNoneOutlinedIcon from "@material-ui/icons/MicNoneOutlined";
+import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
+import Tooltip from "@material-ui/core/Tooltip";
 
 interface Props {}
 
@@ -43,9 +47,16 @@ const App: React.FC<Props> = () => {
           }
         />
         <ListItemSecondaryAction>
-          <IconButton aria-label="">
-            <VideoCall />
-          </IconButton>
+          <Tooltip title={1 ? "Mute" : "Unmute"}>
+            <IconButton aria-label="">
+              {1 ? <MicNoneOutlinedIcon /> : <MicOffOutlinedIcon />}
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Remove">
+            <IconButton aria-label="">
+              <RemoveCircleOutlineOutlinedIcon />
+            </IconButton>
+          </Tooltip>
         </ListItemSecondaryAction>
       </ListItem>
     </List>

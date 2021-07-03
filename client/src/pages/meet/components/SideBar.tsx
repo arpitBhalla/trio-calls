@@ -3,8 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import Chat from "./Chat";
-import Controller from "./Controller";
-import Sketch from "./Sketch";
+import Participants from "./Participants";
 
 interface Props {}
 
@@ -14,16 +13,20 @@ const useStyles = makeStyles((theme) => ({
 
 const App: React.FC<Props> = ({}) => {
   const classes = useStyles();
+  const [index, setIndex] = React.useState(0);
   return (
     <>
-      <Tabs centered value={0} variant="fullWidth" aria-label="">
+      <Tabs
+        centered
+        value={index}
+        onChange={(e, i) => setIndex(i)}
+        variant="fullWidth"
+        aria-label=""
+      >
         <Tab label="Chat" />
         <Tab label="Participants" />
       </Tabs>
-      <Chat />
-      <Controller />
-      <Sketch />
-      {/* {1 ? <Chat /> : null} */}
+      {!index ? <Chat /> : <Participants />}
     </>
   );
 };

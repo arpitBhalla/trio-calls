@@ -15,6 +15,7 @@ const Canvas = () => {
       height="400"
       strokeWidth={4}
       strokeColor="red"
+      onUpdate={console.log}
     />
   );
 };
