@@ -10,6 +10,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
+import ChipInput from "material-ui-chip-input";
 
 const NewMeetComponent: React.FC = () => {
   const [meetingName, setMeetingName] = React.useState({ text: "", error: "" });
@@ -75,6 +76,11 @@ const NewMeetComponent: React.FC = () => {
               />
             </RadioGroup>
           </FormControl>
+          <ChipInput
+            fullWidth
+            label="Invite users by email"
+            placeholder="Type and press enter to add emails"
+          />
           <br />
           <br />
           <Button

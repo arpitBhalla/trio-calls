@@ -8,6 +8,7 @@
     "@material-ui/icons": "^4.11.2",
     "@reduxjs/toolkit": "^1.6.0",
     "@types/loadable__component": "^5.13.3",
+    "material-ui-chip-input": "^1.1.0",
     "material-ui-toggle-icon": "^1.1.2",
     "notistack": "^1.0.9",
     "peerjs": "^1.3.2",
