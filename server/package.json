@@ -1,15 +1,14 @@
 {
-  "name": "video_chat",
+  "name": "backend-server-ms-teams",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "MS Teams Backend",
+  "main": "index.ts",
   "scripts": {
     "start": "ts-node index.ts",
     "dev": "DEV=true nodemon --exec 'ts-node index.ts' -e .ts"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Arpit Bhalla <https://github.com/arpitBhalla>",
+  "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
