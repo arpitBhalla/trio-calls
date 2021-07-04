@@ -1,6 +1,6 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Box, ListItem, ListItemText } from "@material-ui/core";
+import { ListItem, ListItemText } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 
 type Props = {
@@ -23,16 +23,16 @@ const ChatComponent: React.FC<Props> = ({ name, message, time, isMe }) => {
     <ListItem>
       <ListItemText
         primary={
-          <Box className={classes.secondary}>
-            <Typography variant="caption" color="textSecondary">
-              <b>
-                {name} {isMe && "(You)"}
-              </b>
-            </Typography>
-            <Typography variant="caption" color="textSecondary">
-              <b>{time}</b>
-            </Typography>
-          </Box>
+          <Typography
+            className={classes.secondary}
+            variant="caption"
+            color="textSecondary"
+          >
+            <b>
+              {name} {isMe && "(You)"}
+            </b>
+            <b>{time}</b>
+          </Typography>
         }
         secondary={<Typography variant="body2">{message}</Typography>}
       />

@@ -9,8 +9,6 @@ import {
   CancelPresentationOutlined,
   PresentToAllOutlined,
   PanToolOutlined,
-  InfoOutlined,
-  CategoryOutlined,
 } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -24,8 +22,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     position: "absolute",
     bottom: 20,
-    transform: "translateX(-50%)",
-    left: "50%",
+    transform: "translateX(-100%)",
+    left: "40%",
   },
 }));
 
@@ -63,16 +61,6 @@ const App: React.FC<Props> = () => {
       <Tooltip title="Raise Hand">
         <IconButton>
           <PanToolOutlined />
-        </IconButton>
-      </Tooltip>
-      <Tooltip title="White Board">
-        <IconButton>
-          <CategoryOutlined />
-        </IconButton>
-      </Tooltip>
-      <Tooltip title="Meet Info">
-        <IconButton aria-label="">
-          <InfoOutlined />
         </IconButton>
       </Tooltip>
     </Box>
