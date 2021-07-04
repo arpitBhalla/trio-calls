@@ -30,7 +30,7 @@ export const NewMeetRoute = Router.post("/", async (req, res) => {
   if (invitees) {
     try {
       await sendMail({
-        from: '"MS Teams" <teams-invite@microsoft.com>', // sender address
+        from: '"MS Teams" <teams@arpitbhalla.me>', // sender address
         cc: invitees,
         subject: "You are invited for MS Teams meeting",
         html: `<h2>Microsoft Teams meeting</h2>
