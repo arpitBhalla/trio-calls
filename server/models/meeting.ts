@@ -6,6 +6,7 @@ export interface Meeting {
   hostID: User;
   invitees: string[];
   type: "public" | "private";
+  meetID: string;
 }
 
 const schema = new Schema<Meeting>({
@@ -13,6 +14,7 @@ const schema = new Schema<Meeting>({
   hostID: { type: Schema.Types.ObjectId, ref: "User" },
   invitees: [{ type: String }],
   type: { type: String, enum: ["public", "private"] },
+  meetID: String,
 });
 
 export const MeetModel = model<Meeting>("Meet", schema);

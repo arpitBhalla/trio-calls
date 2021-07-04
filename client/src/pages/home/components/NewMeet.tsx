@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import TextField from "@material-ui/core/TextField";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -11,17 +11,39 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
 import ChipInput from "material-ui-chip-input";
+import { newMeet } from "utils/functions";
+import { useAppDispatch, useAppSelector } from "core/hooks/redux";
+import { useSnackbar } from "notistack";
 
 const NewMeetComponent: React.FC = () => {
   const [meetingName, setMeetingName] = React.useState({ text: "", error: "" });
-  const [meetingType, setMeetingType] = React.useState("anyone");
+  const [meetingType, setMeetingType] =
+    React.useState<"public" | "private">("public");
   const [loading, setLoading] = React.useState(false);
   const [openDialog, setOpenDialog] = React.useState(false);
+  const dispatch = useAppDispatch();
+  const { enqueueSnackbar } = useSnackbar();
+  const { UID } = useAppSelector(({ authReducer }) => authReducer);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setLoading(true);
-  };
 
+    await newMeet({
+      title: meetingName,
+      type: meetingType,
+      hostID: UID,
+      invitees: [],
+    })
+      .then((userDetails) => {
+        // dispatch(updateAuth({ isAuth: true, ...userDetails }));
+      })
+      .catch((_) =>
+        enqueueSnackbar("SomeThing went wrong", { variant: "error" })
+      )
+      .finally(() => {
+        setLoading(false);
+      });
+  };
   return (
     <>
       <Button
@@ -64,13 +86,13 @@ const NewMeetComponent: React.FC = () => {
             >
               <FormControlLabel
                 disabled={loading}
-                value="anyone"
+                value="public"
                 label="Anyone can join"
                 control={<Radio />}
               />
               <FormControlLabel
                 disabled={loading}
-                value="invite"
+                value="private"
                 label="Restricted to invited users"
                 control={<Radio />}
               />

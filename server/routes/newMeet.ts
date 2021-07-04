@@ -2,6 +2,7 @@ import express from "express";
 import { sendMail } from "../utils/sendMail";
 import { createEvent } from "ics";
 import { MeetModel } from "../models/meeting";
+import { generateID } from "../utils/UID";
 
 const Router = express.Router();
 
@@ -26,6 +27,7 @@ export const NewMeetRoute = Router.post("/", async (req, res) => {
     invitees,
     hostID,
     type,
+    meetID: generateID(),
   });
   if (invitees) {
     try {
@@ -37,7 +39,7 @@ export const NewMeetRoute = Router.post("/", async (req, res) => {
 
       <h4>Join on your computer</h4>
   
-      <a href='https://ms-teams.vercel.app/${Meet._id}'>Click here to join</a>`,
+      <a href='https://ms-teams.vercel.app/${Meet.meetID}'>Click here to join</a>`,
         icalEvent: {
           filename: "invitation.ics",
           method: "request",
@@ -52,15 +54,11 @@ export const NewMeetRoute = Router.post("/", async (req, res) => {
   }
   try {
     await Meet.save();
+    return res.status(200).json(Meet);
   } catch (e) {
     console.log(e);
     return res.status(400).json({
       message: "Error while saving meeting",
     });
   }
-
-  return res.status(200).json({
-    message: "Done",
-    meetID: Meet._id,
-  });
 });
