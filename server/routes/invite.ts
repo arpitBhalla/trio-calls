@@ -23,33 +23,36 @@ export const InviteRoute = Router.post("/", async (req, res) => {
   const Meet = new MeetModel({
     title,
     invitees,
-    hostIDa,
+    // hostID,
     type,
   });
-  try {
-    await sendMail({
-      from: '"MS Teams" <teams-invite@microsoft.com>', // sender address
-      cc: invitees,
-      subject: "You are invited for MS Teams meeting",
-      html: `<h2>Microsoft Teams meeting</h2>
+  if (invitees) {
+    try {
+      await sendMail({
+        from: '"MS Teams" <teams-invite@microsoft.com>', // sender address
+        cc: invitees,
+        subject: "You are invited for MS Teams meeting",
+        html: `<h2>Microsoft Teams meeting</h2>
 
-      <h4>Join on your computer/h4>
+      <h4>Join on your computer</h4>
   
       <a href='${Meet._id}'>Click here to join</a>`,
-      icalEvent: {
-        filename: "invitation.ics",
-        method: "request",
-        content: value || "",
-      },
-    });
-  } catch {
-    return res.status(500).json({
-      message: "Error while sending email",
-    });
+        icalEvent: {
+          filename: "invitation.ics",
+          method: "request",
+          content: value || "",
+        },
+      });
+    } catch {
+      return res.status(500).json({
+        message: "Error while sending email",
+      });
+    }
   }
   try {
     await Meet.save();
-  } catch {
+  } catch (e) {
+    console.log(e);
     return res.status(500).json({
       message: "Error while saving meeting",
     });

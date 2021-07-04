@@ -5,7 +5,7 @@ import { ExpressPeerServer } from "peer";
 import { InviteRoute } from "./routes/invite";
 import mongoose from "mongoose";
 
-mongoose.connect("mongodb://localhost:27017/test", {
+mongoose.connect("mongodb://localhost:27017/teams", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -17,7 +17,8 @@ const PORT = process.env.PORT || 4000;
 
 app.use("/peerJs", peerServer);
 app.use(express.json());
-app.use("/invite", InviteRoute);
+app.use("/newMeet", InviteRoute);
+
 const io = new Server(server, {
   cors: {
     origin: "*",
