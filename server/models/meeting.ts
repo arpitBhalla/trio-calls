@@ -7,6 +7,7 @@ export interface Meeting {
   invitees: string[];
   type: "public" | "private";
   meetID: string;
+  time: string;
 }
 
 const schema = new Schema<Meeting>({
@@ -15,6 +16,7 @@ const schema = new Schema<Meeting>({
   invitees: [{ type: String }],
   type: { type: String, enum: ["public", "private"] },
   meetID: String,
+  time: String,
 });
 
 export const MeetModel = model<Meeting>("Meet", schema);

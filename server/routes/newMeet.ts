@@ -7,9 +7,9 @@ import { generateID } from "../utils/UID";
 const Router = express.Router();
 
 export const NewMeetRoute = Router.post("/", async (req, res) => {
-  const { title, invitees, hostID, type } = req.body;
+  const { title, invitees, hostID, type, time } = req.body;
 
-  const now = new Date();
+  const now = isNaN(Date.parse(time)) ? new Date() : new Date(time);
   const { value } = createEvent({
     title,
     description: "You are invited for MS Teams meeting",
@@ -27,8 +27,17 @@ export const NewMeetRoute = Router.post("/", async (req, res) => {
     invitees,
     hostID,
     type,
+    time,
     meetID: generateID(),
   });
+
+  try {
+    await Meet.save();
+  } catch (e) {
+    return res.status(400).json({
+      message: "Error while saving meeting",
+    });
+  }
   if (invitees) {
     try {
       await sendMail({
@@ -52,13 +61,5 @@ export const NewMeetRoute = Router.post("/", async (req, res) => {
       });
     }
   }
-  try {
-    await Meet.save();
-    return res.status(200).json(Meet);
-  } catch (e) {
-    console.log(e);
-    return res.status(400).json({
-      message: "Error while saving meeting",
-    });
-  }
+  res.status(200).json(Meet);
 });

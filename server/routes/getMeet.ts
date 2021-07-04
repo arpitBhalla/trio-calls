@@ -6,9 +6,9 @@ const Router = express.Router();
 export const GetMeetRoute = Router.post("/", async (req, res) => {
   const { meetID } = req.body;
 
-  const meet = await MeetModel.findById(meetID);
+  const meet = (await MeetModel.find({ meetID }))[0];
   if (meet) {
-    return res.status(200).json(meet);
+    return res.status(200).json({ meet });
   } else {
     return res.status(400).json({
       message: "Meeting Not found",
