@@ -4,6 +4,7 @@ export const authStore = createSlice({
   name: "counter",
   initialState: {
     displayName: "",
+    UID: "",
     isAuth: false,
   },
   reducers: {
