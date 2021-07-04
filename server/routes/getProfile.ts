@@ -3,7 +3,7 @@ import { UserModel } from "../models/user";
 
 const Router = express.Router();
 
-export const SignInRoute = Router.post("/", async (req, res) => {
+export const GetProfileRoute = Router.post("/", async (req, res) => {
   const { UID } = req.body;
 
   const user = await UserModel.findById(UID);

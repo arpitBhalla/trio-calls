@@ -37,7 +37,7 @@ export const NewMeetRoute = Router.post("/", async (req, res) => {
 
       <h4>Join on your computer</h4>
   
-      <a href='${Meet._id}'>Click here to join</a>`,
+      <a href='https://ms-teams.vercel.app/${Meet._id}'>Click here to join</a>`,
         icalEvent: {
           filename: "invitation.ics",
           method: "request",
