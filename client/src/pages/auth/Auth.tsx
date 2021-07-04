@@ -3,6 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useHistory, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { updateAuth } from "core/actions/auth";
+import { signIn } from "utils/auth";
+import { useSnackbar } from "notistack";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import FormControl from "@material-ui/core/FormControl";
@@ -28,15 +30,31 @@ const Auth: React.FC = () => {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useAppDispatch();
+  const { enqueueSnackbar } = useSnackbar();
   const { search } = useLocation();
   const { isAuth } = useAppSelector(({ authReducer }) => authReducer);
 
   const redirect_url = new URLSearchParams(search).get("redirect_url") || "/";
 
-  const [email, setEmail] = React.useState(INITIAL_STATE);
   const [emailExist, setEmailExist] = React.useState(false);
+
+  const [email, setEmail] = React.useState(INITIAL_STATE);
   const [password, setPassword] = React.useState(INITIAL_STATE);
   const [loading, setLoading] = React.useState(false);
+
+  const handleLogin = async () => {
+    setLoading(true);
+    await signIn(email.text, password.text)
+      .then((userDetails) => {
+        dispatch(updateAuth({ isAuth: true, ...userDetails }));
+      })
+      .catch((_) =>
+        enqueueSnackbar("SomeThing went wrong", { variant: "error" })
+      )
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   React.useEffect(() => {
     if (isAuth) {
@@ -137,16 +155,11 @@ const Auth: React.FC = () => {
         </Box>
         <Button
           fullWidth
-          // className={classes.button}
           size="large"
           color="primary"
           variant="contained"
           disabled={loading}
-          onClick={() =>
-            !emailExist
-              ? setEmailExist(true)
-              : dispatch(updateAuth({ isAuth: true, displayName: "Arpit" }))
-          }
+          onClick={() => (!emailExist ? setEmailExist(true) : handleLogin())}
         >
           {emailExist ? "Login" : "Next"}
         </Button>

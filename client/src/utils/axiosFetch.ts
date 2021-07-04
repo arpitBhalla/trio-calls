@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosFetch = axios.create({
-  url: "localhost:4000",
+  url: "http://localhost:4000",
 });
 
 export default axiosFetch;

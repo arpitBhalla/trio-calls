@@ -6,6 +6,7 @@ export const authStore = createSlice({
     displayName: "",
     UID: "",
     isAuth: false,
+    email: "",
   },
   reducers: {
     updateAuth: (state, action: PayloadAction<typeof state>) => {
