@@ -44,16 +44,25 @@ const Auth: React.FC = () => {
 
   const handleLogin = async () => {
     setLoading(true);
-    await signIn(email.text, password.text)
-      .then((userDetails) => {
-        dispatch(updateAuth({ isAuth: true, ...userDetails }));
+    dispatch(
+      updateAuth({
+        isAuth: true,
+        UID: "",
+        displayName: "Arpit bhalla",
+        email: "arpitBhalla2001@gmail.com",
       })
-      .catch((_) =>
-        enqueueSnackbar("SomeThing went wrong", { variant: "error" })
-      )
-      .finally(() => {
-        setLoading(false);
-      });
+    );
+
+    // await signIn(email.text, password.text)
+    //   .then((userDetails) => {
+    // dispatch(updateAuth({ isAuth: true, ...userDetails }));
+    // })
+    // .catch((_) =>
+    //   enqueueSnackbar("SomeThing went wrong", { variant: "error" })
+    // )
+    // .finally(() => {
+    //   setLoading(false);
+    // });
   };
 
   React.useEffect(() => {
@@ -76,7 +85,7 @@ const Auth: React.FC = () => {
           Sign in
         </Typography>
         <Typography variant="body1" align="center" color="primary">
-          Use your MT Account
+          Use your teams account
         </Typography>
         <Box py={2}>
           <Collapse in={!emailExist} timeout={200}>

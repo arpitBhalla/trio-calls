@@ -5,8 +5,8 @@ import VideoCallOutlined from "@material-ui/icons/VideoCallOutlined";
 import VideoPreview from "./components/VideoPreview";
 import Toolbar from "@material-ui/core/Toolbar";
 import Box from "@material-ui/core/Box";
-import Link from "@material-ui/core/Link";
 import ActiveUser from "components/ActiveUser";
+import Logo from "components/Logo";
 
 type Props = {};
 
@@ -25,13 +25,7 @@ const WaitingRoom: React.FC<Props> = () => {
   return (
     <>
       <Toolbar className={classes.toolbar}>
-        <Link href="/">
-          <img
-            alt="MS Teams"
-            className={classes.logo}
-            src="https://heliocentrix.co.uk/wp-content/uploads/2020/04/microsoft-teams-logo-png_480-480.png"
-          />
-        </Link>
+        <Logo />
         <ActiveUser color="primary" />
       </Toolbar>
       <Container maxWidth="sm">

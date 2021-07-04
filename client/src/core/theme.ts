@@ -16,6 +16,11 @@ const theme = createMuiTheme({
         "@font-face": ["Open Sans"],
       },
     },
+    MuiButton: {
+      root: {
+        textTransform: "none",
+      },
+    },
   },
   typography: {
     fontFamily: ["Open Sans", "Ubuntu", '"Segoe UI"', "Roboto"].join(","),

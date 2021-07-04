@@ -14,35 +14,39 @@ import ChipInput from "material-ui-chip-input";
 import { newMeet } from "utils/functions";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { useSnackbar } from "notistack";
+import { useHistory } from "react-router-dom";
 
 const NewMeetComponent: React.FC = () => {
   const [meetingName, setMeetingName] = React.useState({ text: "", error: "" });
   const [meetingType, setMeetingType] =
     React.useState<"public" | "private">("public");
+  const [time, setTime] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [openDialog, setOpenDialog] = React.useState(false);
   const dispatch = useAppDispatch();
+  const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
   const { UID } = useAppSelector(({ authReducer }) => authReducer);
 
   const handleSubmit = async () => {
     setLoading(true);
-
-    await newMeet({
-      title: meetingName,
-      type: meetingType,
-      hostID: UID,
-      invitees: [],
-    })
-      .then((userDetails) => {
-        // dispatch(updateAuth({ isAuth: true, ...userDetails }));
-      })
-      .catch((_) =>
-        enqueueSnackbar("SomeThing went wrong", { variant: "error" })
-      )
-      .finally(() => {
-        setLoading(false);
-      });
+    history.push("/meetID");
+    // await newMeet({
+    //   title: meetingName.text,
+    //   type: meetingType,
+    //   hostID: UID,
+    //   invitees: [],
+    //   time: "",
+    // })
+    //   .then((meetDetails) => {
+    //     // dispatch(updateAuth({ isAuth: true, ...userDetails }));
+    //   })
+    //   .catch((_) =>
+    //     enqueueSnackbar("SomeThing went wrong", { variant: "error" })
+    //   )
+    //   .finally(() => {
+    //     setLoading(false);
+    //   });
   };
   return (
     <>
@@ -82,7 +86,9 @@ const NewMeetComponent: React.FC = () => {
             <RadioGroup
               aria-label="meeting type"
               value={meetingType}
-              onChange={(_event, value) => setMeetingType(value)}
+              onChange={(_event, value) =>
+                setMeetingType(value as "public" | "private")
+              }
             >
               <FormControlLabel
                 disabled={loading}

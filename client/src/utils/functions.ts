@@ -10,6 +10,7 @@ export interface Meeting {
   hostID: string;
   invitees: string[];
   type: "public" | "private";
+  time: string;
 }
 
 export const signIn = (email: string, password: string): Promise<UserDetails> =>
@@ -62,6 +63,7 @@ export const newMeet = ({
   invitees,
   title,
   type,
+  time,
 }: Meeting): Promise<Meeting> =>
   new Promise(async (resolve, reject) => {
     let res = await axiosFetch.post<Meeting>("/newMeet", {
@@ -69,8 +71,13 @@ export const newMeet = ({
       invitees,
       title,
       type,
+      time,
     });
     if (res.status === 200) {
       resolve(res.data);
     } else reject();
   });
+
+export const stringToID = (str: string) => str.match(/.{1,4}/g)?.join("-");
+
+export const isID = (str: string) => /(\w+){4}-(\w+){4}-(\w+){4}/.test(str);

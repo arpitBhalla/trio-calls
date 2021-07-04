@@ -33,13 +33,13 @@ const Home: React.FC = () => {
       </AppBar>
       <Container maxWidth="md" className={classes.root}>
         <Grid container spacing={1} alignItems="center">
-          <Grid item xs={7}>
+          <Grid item xs={false} sm={7}>
             <img
               alt="Meeting"
               src="https://www.gstatic.com/meet/user_edu_brady_bunch_light_81fa864771e5c1dd6c75abe020c61345.svg"
             />
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={12} sm={5}>
             <Fade in timeout={500} unmountOnExit>
               <Box boxShadow="0px 0px 30px 1px rgb(214, 214, 214)" p={4} py={5}>
                 <JoinMeet />

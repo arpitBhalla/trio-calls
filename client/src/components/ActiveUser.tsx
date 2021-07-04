@@ -16,7 +16,9 @@ const ActiveUserComponent: React.FC<ActiveUserComponentProps> = ({
   const dispatch = useAppDispatch();
 
   const handleClick = () => {
-    dispatch(updateAuth({ isAuth: false, displayName: "" }));
+    dispatch(
+      updateAuth({ isAuth: false, displayName: "", UID: "", email: "" })
+    );
   };
 
   return (
