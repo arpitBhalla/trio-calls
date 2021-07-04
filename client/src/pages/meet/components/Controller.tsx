@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     position: "absolute",
     bottom: 20,
-    transform: "translateX(-100%)",
+    transform: "translateX(-50%)",
     left: "50%",
   },
 }));

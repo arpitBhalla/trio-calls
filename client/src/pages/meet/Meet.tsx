@@ -36,8 +36,6 @@ const App: React.FC<Props> = () => {
       </Box>
       <SideBar open={open} setOpen={setOpen} />
       <Controller />
-      <button onClick={() => setOpen(!open)}>Open</button>
-      {JSON.stringify({ open })}
     </>
   );
 };

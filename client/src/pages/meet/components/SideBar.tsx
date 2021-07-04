@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   controller: {
     position: "absolute",
     bottom: 20,
-    left: "75%",
+    left: "80%",
   },
 }));
 
@@ -72,13 +72,13 @@ const SideBar: React.FC<Props> = ({ open, setOpen }) => {
           [classes.sideBarClose]: open,
         })}
       >
-        {[null, <Chat />, <Participants />][index]}
+        {[<Chat />, <Participants />][index]}
       </Box>
       <Box className={classes.controller}>
         {(
           [
-            ["Participants", PeopleOutlineOutlined],
             ["Chat", ChatOutlined],
+            ["Participants", PeopleOutlineOutlined],
             ["White Board", CategoryOutlined],
             ["Meet Info", InfoOutlined],
           ] as [string, typeof PeopleOutlineOutlined][]
