@@ -4,18 +4,19 @@ export const sendMail = async (options: SendMailOptions = {}) => {
   let testAccount = await nodemailer.createTestAccount();
 
   let transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
+    host: process.env.EMAIL_SERVER || "smtp.ethereal.email",
     port: 587,
     secure: false,
     auth: {
-      user: testAccount.user,
-      pass: testAccount.pass,
+      user: process.env.EMAIL_USERNAME || testAccount.user,
+      pass: process.env.EMAIL_PASSWORD || testAccount.pass,
     },
   });
 
   let info = await transporter.sendMail(options);
+  if (process.env.DEV) {
+    console.log("Message sent: %s", info.messageId);
 
-  console.log("Message sent: %s", info.messageId);
-
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  }
 };

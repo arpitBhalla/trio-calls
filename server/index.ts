@@ -9,7 +9,9 @@ import { SignInRoute } from "./routes/signIn";
 import { GetProfileRoute } from "./routes/getProfile";
 import mongoose from "mongoose";
 
-mongoose.connect("mongodb://localhost:27017/teams", {
+const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/teams";
+
+mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

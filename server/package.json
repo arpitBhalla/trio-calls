@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node index.ts",
-    "dev": "nodemon --exec 'ts-node index.ts' -e .ts"
+    "dev": "DEV=true nodemon --exec 'ts-node index.ts' -e .ts"
   },
   "keywords": [],
   "author": "",
