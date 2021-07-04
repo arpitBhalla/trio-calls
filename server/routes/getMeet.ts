@@ -7,11 +7,11 @@ export const GetMeetRoute = Router.post("/", async (req, res) => {
   const { meetID } = req.body;
 
   const meet = await MeetModel.findById(meetID);
-
-  return res.json({
-    status: 200,
-    message: "Done",
-    meet: meet,
-  });
+  if (meet) {
+    return res.status(200).json(meet);
+  } else {
+    return res.status(400).json({
+      message: "Meeting Not found",
+    });
+  }
 });
-//60e18ef5a0acf8419cb0147f

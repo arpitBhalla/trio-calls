@@ -54,13 +54,12 @@ export const NewMeetRoute = Router.post("/", async (req, res) => {
     await Meet.save();
   } catch (e) {
     console.log(e);
-    return res.status(500).json({
+    return res.status(400).json({
       message: "Error while saving meeting",
     });
   }
 
-  return res.json({
-    status: 200,
+  return res.status(200).json({
     message: "Done",
     meetID: Meet._id,
   });

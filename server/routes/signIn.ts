@@ -8,16 +8,14 @@ export const SignInRoute = Router.post("/", async (req, res) => {
 
   const user = await UserModel.findOne({ email, password });
   if (user) {
-    return res.json({
-      status: 200,
-      message: "Done",
+    return res.status(200).json({
+      message: "Logged in",
       UID: user._id,
       displayName: user.displayName,
       email,
     });
   } else {
-    return res.json({
-      status: 400,
+    return res.status(400).json({
       message: "Invalid Email or Password",
     });
   }
