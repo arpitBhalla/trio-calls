@@ -1,12 +1,13 @@
 import express from "express";
-import { sendMail } from "./../utils/sendMail";
+import { sendMail } from "../utils/sendMail";
 import { createEvent } from "ics";
 import { MeetModel } from "../models/meeting";
 
 const Router = express.Router();
 
-export const InviteRoute = Router.post("/", async (req, res) => {
+export const NewMeetRoute = Router.post("/", async (req, res) => {
   const { title, invitees, hostID, type } = req.body;
+
   const now = new Date();
   const { value } = createEvent({
     title,
@@ -23,7 +24,7 @@ export const InviteRoute = Router.post("/", async (req, res) => {
   const Meet = new MeetModel({
     title,
     invitees,
-    // hostID,
+    hostID,
     type,
   });
   if (invitees) {
@@ -61,6 +62,6 @@ export const InviteRoute = Router.post("/", async (req, res) => {
   return res.json({
     status: 200,
     message: "Done",
-    meetLink: Meet._id,
+    meetID: Meet._id,
   });
 });

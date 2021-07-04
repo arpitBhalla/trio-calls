@@ -2,7 +2,9 @@ import express from "express";
 import http from "http";
 import { Socket, Server } from "socket.io";
 import { ExpressPeerServer } from "peer";
-import { InviteRoute } from "./routes/invite";
+import { NewMeetRoute } from "./routes/newMeet";
+import { GetMeetRoute } from "./routes/getMeet";
+import { SignUpRoute } from "./routes/signUp";
 import mongoose from "mongoose";
 
 mongoose.connect("mongodb://localhost:27017/teams", {
@@ -17,7 +19,12 @@ const PORT = process.env.PORT || 4000;
 
 app.use("/peerJs", peerServer);
 app.use(express.json());
-app.use("/newMeet", InviteRoute);
+app.use("/newMeet", NewMeetRoute);
+app.use("/getMeet", GetMeetRoute);
+
+// app.use("/getProfile", NewMeetRoute);
+// app.use("/signin", NewMeetRoute);
+app.use("/signup", SignUpRoute);
 
 const io = new Server(server, {
   cors: {
