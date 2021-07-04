@@ -10,7 +10,7 @@ import loadable from "@loadable/component";
 import { useAppSelector } from "core/hooks/redux";
 
 const Home = loadable(() => import("./home/Home"));
-const Meet = loadable(() => import("./meet/WaitRoom"));
+const Meet = loadable(() => import("./meet/Meet"));
 const Auth = loadable(() => import("./auth/Auth"));
 
 const AuthRoute: React.FC<RouteProps> = (props) => {
