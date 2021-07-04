@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const mediaStore = createSlice({
-  name: "counter",
+  name: "mediaDevices",
   initialState: {
     isAudio: false,
     isVideo: false,

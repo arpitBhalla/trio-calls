@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export const authStore = createSlice({
-  name: "counter",
+  name: "auth",
   initialState: {
     displayName: "",
     UID: "",
