@@ -4,16 +4,17 @@ import { UserModel } from "../models/user";
 const Router = express.Router();
 
 export const SignInRoute = Router.post("/", async (req, res) => {
-  const { email, password } = req.body;
+  const { UID } = req.body;
 
-  const user = await UserModel.findOne({ email, password });
+  const user = await UserModel.findById(UID);
+
   if (user) {
     return res.json({
       status: 200,
       message: "Done",
       UID: user._id,
       displayName: user.displayName,
-      email,
+      email: user.email,
     });
   } else {
     return res.json({

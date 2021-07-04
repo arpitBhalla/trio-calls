@@ -5,6 +5,7 @@ import { ExpressPeerServer } from "peer";
 import { NewMeetRoute } from "./routes/newMeet";
 import { GetMeetRoute } from "./routes/getMeet";
 import { SignUpRoute } from "./routes/signUp";
+import { SignInRoute } from "./routes/signIn";
 import mongoose from "mongoose";
 
 mongoose.connect("mongodb://localhost:27017/teams", {
@@ -23,7 +24,7 @@ app.use("/newMeet", NewMeetRoute);
 app.use("/getMeet", GetMeetRoute);
 
 // app.use("/getProfile", NewMeetRoute);
-// app.use("/signin", NewMeetRoute);
+app.use("/signin", SignInRoute);
 app.use("/signup", SignUpRoute);
 
 const io = new Server(server, {
