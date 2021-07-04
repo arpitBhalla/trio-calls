@@ -55,39 +55,43 @@ const SideBar: React.FC<Props> = ({ open, setOpen }) => {
   const classes = useStyles();
   const [index, setIndex] = React.useState(0);
 
+  const handleIconPress = (key: number) => () => {
+    if (!open) {
+      setOpen(true);
+    } else if (open && key === index) {
+      setOpen(false);
+    }
+    setIndex(key);
+  };
+
   return (
     <>
       <Box
         className={clsx(classes.sideBarContent, {
-          [classes.sideBarOpen]: open,
-          [classes.sideBarClose]: !open,
+          [classes.sideBarOpen]: !open,
+          [classes.sideBarClose]: open,
         })}
       >
         {[null, <Chat />, <Participants />][index]}
       </Box>
-      <button onClick={() => setOpen(!open)}>Open</button>
-      {JSON.stringify({ open })}
       <Box className={classes.controller}>
-        <Tooltip title="Participants">
-          <IconButton onClick={() => setIndex(1)}>
-            <PeopleOutlineOutlined />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Chat">
-          <IconButton onClick={() => setIndex(2)}>
-            <ChatOutlined />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="White Board">
-          <IconButton onClick={() => setIndex(3)}>
-            <CategoryOutlined />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Meet Info">
-          <IconButton aria-label="">
-            <InfoOutlined />
-          </IconButton>
-        </Tooltip>
+        {(
+          [
+            ["Participants", PeopleOutlineOutlined],
+            ["Chat", ChatOutlined],
+            ["White Board", CategoryOutlined],
+            ["Meet Info", InfoOutlined],
+          ] as [string, typeof PeopleOutlineOutlined][]
+        ).map(([name, Icon], key) => (
+          <Tooltip title={name} key={key}>
+            <IconButton
+              onClick={handleIconPress(key)}
+              style={open && key === index ? { backgroundColor: "red" } : {}}
+            >
+              <Icon />
+            </IconButton>
+          </Tooltip>
+        ))}
       </Box>
     </>
   );

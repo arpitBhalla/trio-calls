@@ -29,7 +29,7 @@ const App: React.FC<Props> = () => {
       <Box display="flex" height="88vh">
         <Box
           bgcolor="pink"
-          className={clsx(classes.content, !open && classes.contentOff)}
+          className={clsx(classes.content, open && classes.contentOff)}
         >
           Left
         </Box>
