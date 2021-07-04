@@ -1,12 +1,6 @@
-import nodemailer from "nodemailer";
-import { createEvent, EventAttributes } from "ics";
+import nodemailer, { SendMailOptions } from "nodemailer";
 
-export const sendInvite = async (
-  to: string = "",
-  subject: string = "",
-  body: string = "",
-  event: EventAttributes
-) => {
+export const sendMail = async (options: SendMailOptions = {}) => {
   let testAccount = await nodemailer.createTestAccount();
 
   let transporter = nodemailer.createTransport({
@@ -18,19 +12,8 @@ export const sendInvite = async (
       pass: testAccount.pass,
     },
   });
-  const { value } = createEvent(event);
 
-  let info = await transporter.sendMail({
-    from: '"You are invited for MS Teams meeting" <teams-invite@microsoft.com>', // sender address
-    to,
-    subject,
-    html: body,
-    icalEvent: {
-      filename: "invitation.ics",
-      method: "request",
-      content: value || "",
-    },
-  });
+  let info = await transporter.sendMail(options);
 
   console.log("Message sent: %s", info.messageId);
 

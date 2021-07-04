@@ -3,6 +3,12 @@ import http from "http";
 import { Socket, Server } from "socket.io";
 import { ExpressPeerServer } from "peer";
 import { InviteRoute } from "./routes/invite";
+import mongoose from "mongoose";
+
+mongoose.connect("mongodb://localhost:27017/test", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const app = express();
 const server = http.createServer(app);
