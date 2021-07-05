@@ -27,3 +27,13 @@ export const signUp = (
       resolve(res.data);
     } else reject();
   });
+
+export const getProfile = (UID: string): Promise<UserDetails> =>
+  new Promise(async (resolve, reject) => {
+    let res = await axiosFetch.post<UserDetails>("/getProfile", {
+      UID,
+    });
+    if (res.status === 200) {
+      resolve(res.data);
+    } else reject();
+  });

@@ -14,16 +14,6 @@ export interface Meeting {
   chat: [];
 }
 
-export const getProfile = (UID: string): Promise<UserDetails> =>
-  new Promise(async (resolve, reject) => {
-    let res = await axiosFetch.post<UserDetails>("/getProfile", {
-      UID,
-    });
-    if (res.status === 200) {
-      resolve(res.data);
-    } else reject();
-  });
-
 export const getMeet = (meetID: string): Promise<Meeting> =>
   new Promise(async (resolve, reject) => {
     let res = await axiosFetch.post<Meeting>("/getMeet", {
