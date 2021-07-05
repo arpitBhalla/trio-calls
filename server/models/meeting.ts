@@ -1,13 +1,14 @@
 import { Schema, model } from "mongoose";
-import { User } from "./user";
+import { Chat } from "./chat";
 
 export interface Meeting {
   title: string;
-  hostID: User;
-  invitees: string[];
   type: "public" | "private";
-  meetID: string;
   time: string;
+  hostID: string;
+  meetID: string;
+  invitees: string[];
+  chat: Chat[];
 }
 
 const schema = new Schema<Meeting>({
@@ -17,6 +18,7 @@ const schema = new Schema<Meeting>({
   type: { type: String, enum: ["public", "private"] },
   meetID: String,
   time: String,
+  chat: [{ type: Schema.Types.ObjectId, ref: "Chat" }],
 });
 
 export const MeetModel = model<Meeting>("Meet", schema);
