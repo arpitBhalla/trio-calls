@@ -1,6 +1,7 @@
 {
-  "name": "client",
-  "version": "0.1.0",
+  "name": "teams-client",
+  "version": "0.1.2",
+  "author": "Arpit Bhalla <https://github.com/arpitBhalla>",
   "private": true,
   "dependencies": {
     "@loadable/component": "^5.15.0",
@@ -29,7 +30,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

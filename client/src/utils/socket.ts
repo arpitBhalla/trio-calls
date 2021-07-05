@@ -1,3 +1,5 @@
-import { io } from "socket.io-client";
+import { ServerURL } from "core/const";
+// import { io } from "socket.io-client";
 
-const socket = io("https://server-domain.com");
+// const socket = io(ServerURL);
+export {};
