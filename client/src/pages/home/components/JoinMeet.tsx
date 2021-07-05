@@ -1,11 +1,12 @@
-import * as React from "react";
+import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import KeyboardIcon from "@material-ui/icons/Keyboard";
-import { isValidMeetID, stringToMeetID } from "utils/functions";
+import { isValidMeetID, stringToMeetID, setStateHandler } from "utils/common";
 import { useHistory } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 interface Props {}
 
@@ -19,9 +20,16 @@ const useStyles = makeStyles((theme) => ({
 const JoinMeet: React.FC<Props> = ({}) => {
   const classes = useStyles();
   const history = useHistory();
+  const { enqueueSnackbar } = useSnackbar();
+  const [meetID, setMeetID] = useState("");
 
-  const handleJoinMeet = async () => {};
-  const [meetID, setMeetID] = React.useState("");
+  const handleJoinMeet = async () => {
+    if (!isValidMeetID(stringToMeetID(meetID))) {
+      enqueueSnackbar("Meet ID is invalid", {
+        variant: "error",
+      });
+    }
+  };
 
   return (
     <>
@@ -30,7 +38,7 @@ const JoinMeet: React.FC<Props> = ({}) => {
         placeholder="Enter meeting code or link"
         variant="outlined"
         value={meetID}
-        onChange={}
+        onChange={setStateHandler(setMeetID)}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">

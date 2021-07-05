@@ -1,6 +1,3 @@
-export const CopyToClipboard = function (text: string) {
-  return navigator.clipboard.writeText(text);
-};
 // // audioToggle: function(e) {
 // //     e.stopPropagation();
 // //     localMediaStream.getAudioTracks()[0].enabled = !localMediaStream.getAudioTracks()[0].enabled;
