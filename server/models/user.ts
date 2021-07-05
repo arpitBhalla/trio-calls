@@ -6,10 +6,15 @@ export interface User {
   password: string;
 }
 
-const schema = new Schema<User>({
-  displayName: { type: String, required: true },
-  email: { type: String, required: true },
-  password: { type: String, required: true },
-});
+const schema = new Schema<User>(
+  {
+    displayName: { type: String, required: true },
+    email: { type: String, required: true },
+    password: { type: String, required: true },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 export const UserModel = model<User>("User", schema);

@@ -1,27 +1,26 @@
 import express from "express";
 import { MeetModel } from "../models/meeting";
-import { UserModel, User } from "../models/user";
+import { UserModel } from "../models/user";
+import { ChatModel } from "../models/chat";
 
 const Router = express.Router();
 
 export const GetMeetRoute = Router.post("/", async (req, res) => {
   const { meetID, UID } = req.body;
-
+  ChatModel.find();
   // get Logged in User
   const user = await UserModel.findById(UID);
   if (!user) {
-    return res.status(400).json({
+    return res.status(201).json({
       message: "User Not found",
     });
   }
 
   // get meet from meeting id xxxx-xxxx-xxxx
-  const meet = (
-    await MeetModel.find({ meetID }).populate(["hostID", "chat"])
-  )[0];
+  const meet = (await MeetModel.find({ meetID }).populate(["chat"]))[0];
 
   if (!meet) {
-    return res.status(400).json({
+    return res.status(201).json({
       message: "Meeting Not found",
     });
   }
@@ -35,8 +34,8 @@ export const GetMeetRoute = Router.post("/", async (req, res) => {
   if (isInvited) {
     return res.status(200).json(meet);
   } else {
-    return res.status(400).json({
-      message: "User not Invited",
+    return res.status(201).json({
+      message: "You are not Invited",
     });
   }
 });

@@ -1,10 +1,11 @@
 import axiosFetch from "./axiosFetch";
 import { Meeting } from "./types";
 
-export const getMeet = (meetID: string): Promise<Meeting> =>
+export const getMeet = (meetID: string, UID: string): Promise<Meeting> =>
   new Promise(async (resolve, reject) => {
     let res = await axiosFetch.post<Meeting>("/getMeet", {
       meetID,
+      UID,
     });
     if (res.status === 200) {
       resolve(res.data);

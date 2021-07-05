@@ -12,7 +12,6 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
 import ChipInput from "material-ui-chip-input";
 import { newMeet } from "utils/meetingFetch";
-// import { setStateHandler } from "utils/common";
 import { useAppSelector } from "core/hooks/redux";
 import { useSnackbar } from "notistack";
 import { useHistory } from "react-router-dom";

@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     bottom: 10,
     left: "50%",
     transform: "translateX(-50%)",
-    backgroundColor: "#dddbdb",
+    backgroundColor: "#dddbdbc8",
     borderRadius: 10,
   },
   text: {
@@ -69,7 +69,7 @@ const App: React.FC = () => {
   return (
     <Box className={classes.root}>
       {isVideo ? (
-        <video className={classes.video} ref={videoController} autoPlay />
+        <video muted className={classes.video} ref={videoController} autoPlay />
       ) : (
         <Typography className={classes.text} variant="h5" color="textSecondary">
           Camera is off
