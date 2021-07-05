@@ -6,7 +6,7 @@ type MeetParticipants = {
   isSharing: boolean;
   isAudio: boolean;
   isHost: boolean;
-  videoStream: any;
+  videoStream: MediaStream;
 };
 
 export const meetStore = createSlice({
