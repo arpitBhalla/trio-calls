@@ -9,5 +9,5 @@ export interface Meeting {
   invitees: string[];
   type: "public" | "private";
   time: string;
-  chat: [];
+  chat?: [];
 }

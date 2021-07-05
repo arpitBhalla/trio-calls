@@ -7,13 +7,7 @@ import { generateID } from "../utils/UID";
 const Router = express.Router();
 
 export const NewMeetRoute = Router.post("/", async (req, res) => {
-  const {
-    title,
-    invitees,
-    hostID,
-    type,
-    time = new Date().getTime(),
-  } = req.body;
+  const { title, invitees, hostID, type, time } = req.body;
 
   const Meet = new MeetModel({
     title,
@@ -32,7 +26,7 @@ export const NewMeetRoute = Router.post("/", async (req, res) => {
     });
   }
 
-  if (invitees) {
+  if (invitees && invitees.length) {
     const now = new Date(time);
     /**
      * Create a calender event sent as attachment

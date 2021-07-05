@@ -11,16 +11,19 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
 import ChipInput from "material-ui-chip-input";
-import { newMeet } from "utils/functions";
+import { newMeet } from "utils/meetingFetch";
+import { setStateHandler } from "utils/common";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { useSnackbar } from "notistack";
 import { useHistory } from "react-router-dom";
 
+type MeetType = "public" | "private";
+
 const NewMeetComponent: React.FC = () => {
   const [meetingName, setMeetingName] = React.useState({ text: "", error: "" });
-  const [meetingType, setMeetingType] =
-    React.useState<"public" | "private">("public");
-  const [time, setTime] = React.useState("");
+  const [meetingType, setMeetingType] = React.useState<MeetType>("public");
+  const [meetingTime, setMeetingTime] = React.useState(new Date());
+  const [meetingInvitees, setMeetingInvitees] = React.useState<string[]>([]);
   const [loading, setLoading] = React.useState(false);
   const [openDialog, setOpenDialog] = React.useState(false);
   const dispatch = useAppDispatch();
@@ -30,23 +33,24 @@ const NewMeetComponent: React.FC = () => {
 
   const handleSubmit = async () => {
     setLoading(true);
-    history.push("/meetID");
-    // await newMeet({
-    //   title: meetingName.text,
-    //   type: meetingType,
-    //   hostID: UID,
-    //   invitees: [],
-    //   time: "",
-    // })
-    //   .then((meetDetails) => {
-    //     // dispatch(updateAuth({ isAuth: true, ...userDetails }));
-    //   })
-    //   .catch((_) =>
-    //     enqueueSnackbar("SomeThing went wrong", { variant: "error" })
-    //   )
-    //   .finally(() => {
-    //     setLoading(false);
-    //   });
+    await newMeet({
+      title: meetingName.text,
+      type: meetingType,
+      hostID: UID,
+      invitees: meetingInvitees,
+      time: meetingTime.getTime().toString(),
+    })
+      .then((meetDetails) => {
+        // meetingDetails;
+        // history.push("/meetID");
+        // dispatch(updateAuth({ isAuth: true, ...userDetails }));
+      })
+      .catch((_) =>
+        enqueueSnackbar("SomeThing went wrong", { variant: "error" })
+      )
+      .finally(() => {
+        setLoading(false);
+      });
   };
   return (
     <>
@@ -86,9 +90,7 @@ const NewMeetComponent: React.FC = () => {
             <RadioGroup
               aria-label="meeting type"
               value={meetingType}
-              onChange={(_event, value) =>
-                setMeetingType(value as "public" | "private")
-              }
+              onChange={(_event, value) => setMeetingType(value as MeetType)}
             >
               <FormControlLabel
                 disabled={loading}
