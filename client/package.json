@@ -1,5 +1,6 @@
 {
   "name": "teams-client",
+  "description": "Teams Web Client",
   "version": "0.1.2",
   "author": "Arpit Bhalla <https://github.com/arpitBhalla>",
   "private": true,
@@ -58,7 +59,7 @@
     "@types/jest": "^26.0.23",
     "@types/react-dom": "^17.0.8",
     "@types/react-router-dom": "^5.1.7",
-    "jest": "^27.0.6",
+    "jest": "^26.6.0",
     "ts-jest": "^27.0.3"
   }
 }

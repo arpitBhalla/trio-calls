@@ -5,7 +5,7 @@ import axios from "axios";
  * Creates axios instance for later use
  */
 const axiosFetch = axios.create({
-  url: ServerURL,
+  baseURL: ServerURL,
 });
 
 export default axiosFetch;

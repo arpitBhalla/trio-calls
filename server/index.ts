@@ -1,5 +1,6 @@
 import express from "express";
 import http from "http";
+import cors from "cors";
 import { Socket, Server } from "socket.io";
 import { ExpressPeerServer } from "peer";
 import { NewMeetRoute } from "./routes/newMeet";
@@ -24,6 +25,7 @@ const server = http.createServer(app);
 const peerServer = ExpressPeerServer(server, {});
 const PORT = process.env.PORT || 4000;
 
+app.use(cors());
 app.use("/peerJs", peerServer);
 app.use(express.json());
 

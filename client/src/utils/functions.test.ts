@@ -1,4 +1,4 @@
-import { stringToMeetID, isValidMeetID } from "./functions";
+import { stringToMeetID, isValidMeetID } from "./common";
 
 describe("Meet ID", () => {
   it("should convert xxxxxxxxxxxx to xxxx-xxxx-xxxx", () => {

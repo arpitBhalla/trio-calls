@@ -15,7 +15,7 @@ export const SignInRoute = Router.post("/", async (req, res) => {
       email,
     });
   } else {
-    return res.status(400).json({
+    return res.status(201).json({
       message: "Invalid Email or Password",
     });
   }

@@ -1,18 +1,5 @@
 import axiosFetch from "./axiosFetch";
-
-export type UserDetails = {
-  displayName: string;
-  email: string;
-  UID: string;
-};
-export interface Meeting {
-  title: string;
-  hostID: string;
-  invitees: string[];
-  type: "public" | "private";
-  time: string;
-  chat: [];
-}
+import { Meeting } from "./types";
 
 export const getMeet = (meetID: string): Promise<Meeting> =>
   new Promise(async (resolve, reject) => {
@@ -43,8 +30,3 @@ export const newMeet = ({
       resolve(res.data);
     } else reject();
   });
-
-export const stringToMeetID = (str: string) => str.match(/.{1,4}/g)?.join("-");
-
-export const isValidMeetID = (str: string) =>
-  /(\w+){4}-(\w+){4}-(\w+){4}/.test(str);
