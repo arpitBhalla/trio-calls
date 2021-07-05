@@ -10,7 +10,9 @@ export const sendMail = async (
 ): Promise<SentMessageInfo> => {
   let testAccount = await nodemailer.createTestAccount();
   console.log(
-    process.env.EMAIL_SERVER && chalk.red.bold("Using Prod EMail Service")
+    process.env.EMAIL_SERVER
+      ? chalk.red.bold("Using production email service")
+      : chalk.green.bold("Using development email service")
   );
 
   let transporter = nodemailer.createTransport({
@@ -27,7 +29,6 @@ export const sendMail = async (
 
   if (process.env.DEV) {
     console.log("Message sent: %s", info.messageId);
-
     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   }
   return info;

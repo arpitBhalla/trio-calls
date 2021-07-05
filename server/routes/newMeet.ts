@@ -21,13 +21,13 @@ export const NewMeetRoute = Router.post("/", async (req, res) => {
   try {
     await Meet.save();
   } catch (e) {
-    return res.status(400).json({
+    return res.status(201).json({
       message: "Error while saving meeting",
     });
   }
 
   if (invitees && invitees.length) {
-    const now = new Date(time);
+    const now = new Date(Number(time));
     /**
      * Create a calender event sent as attachment
      */
@@ -65,9 +65,9 @@ export const NewMeetRoute = Router.post("/", async (req, res) => {
       });
     } catch {
       return res.status(500).json({
-        message: "Error while sending email",
+        message: "Error while sending invite email",
       });
     }
   }
-  res.status(200).json(Meet);
+  res.status(200).json({ meetID: Meet.meetID });
 });

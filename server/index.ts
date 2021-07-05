@@ -13,7 +13,11 @@ import chalk from "chalk";
 
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/teams";
 
-console.log(process.env.MONGO_URI && chalk.red.bold("Using Prod DB"));
+console.log(
+  process.env.MONGO_URI
+    ? chalk.red.bold("Using production DB")
+    : chalk.yellow.bold("Using development DB")
+);
 
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,

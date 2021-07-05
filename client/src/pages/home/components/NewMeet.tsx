@@ -12,8 +12,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
 import ChipInput from "material-ui-chip-input";
 import { newMeet } from "utils/meetingFetch";
-import { setStateHandler } from "utils/common";
-import { useAppDispatch, useAppSelector } from "core/hooks/redux";
+// import { setStateHandler } from "utils/common";
+import { useAppSelector } from "core/hooks/redux";
 import { useSnackbar } from "notistack";
 import { useHistory } from "react-router-dom";
 
@@ -26,7 +26,6 @@ const NewMeetComponent: React.FC = () => {
   const [meetingInvitees, setMeetingInvitees] = React.useState<string[]>([]);
   const [loading, setLoading] = React.useState(false);
   const [openDialog, setOpenDialog] = React.useState(false);
-  const dispatch = useAppDispatch();
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
   const { UID } = useAppSelector(({ authReducer }) => authReducer);
@@ -40,10 +39,8 @@ const NewMeetComponent: React.FC = () => {
       invitees: meetingInvitees,
       time: meetingTime.getTime().toString(),
     })
-      .then((meetDetails) => {
-        // meetingDetails;
-        // history.push("/meetID");
-        // dispatch(updateAuth({ isAuth: true, ...userDetails }));
+      .then(({ meetID }) => {
+        history.push(`/${meetID}`);
       })
       .catch((_) =>
         enqueueSnackbar("SomeThing went wrong", { variant: "error" })

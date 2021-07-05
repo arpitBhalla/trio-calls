@@ -4,10 +4,12 @@ export type UserDetails = {
   UID: string;
 };
 export interface Meeting {
+  _id?: string;
   title: string;
   hostID: string;
   invitees: string[];
   type: "public" | "private";
   time: string;
   chat?: [];
+  meetID?: string;
 }
