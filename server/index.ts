@@ -8,10 +8,11 @@ import { SignUpRoute } from "./routes/signUp";
 import { SignInRoute } from "./routes/signIn";
 import { GetProfileRoute } from "./routes/getProfile";
 import mongoose from "mongoose";
+import chalk from "chalk";
 
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/teams";
 
-console.log(process.env.MONGO_URI);
+console.log(process.env.MONGO_URI && chalk.red.bold("Using Prod DB"));
 
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
