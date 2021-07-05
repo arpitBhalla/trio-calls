@@ -12,6 +12,8 @@ export const authStore = createSlice({
     updateAuth: (state, action: PayloadAction<typeof state>) => {
       state.isAuth = action.payload.isAuth;
       state.displayName = action.payload.displayName;
+      state.UID = action.payload.UID;
+      state.email = action.payload.email;
     },
   },
 });

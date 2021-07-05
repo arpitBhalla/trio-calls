@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useHistory, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { updateAuth } from "core/actions/auth";
-import { signIn } from "utils/auth";
+import { signIn } from "utils/authFetch";
 import { useSnackbar } from "notistack";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";

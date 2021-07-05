@@ -14,7 +14,7 @@ export const stringToMeetID = (str: string): string =>
  * Check if str is in form xxxx-xxxx-xxxx
  */
 export const isValidMeetID = (str: string) =>
-  /(\w+){4}-(\w+){4}-(\w+){4}/.test(str);
+  /^(\w+){4}-(\w+){4}-(\w+){4}$/.test(str);
 
 /**
  * Copy to clipboard

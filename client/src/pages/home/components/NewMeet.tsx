@@ -40,11 +40,14 @@ const NewMeetComponent: React.FC = () => {
       time: meetingTime.getTime().toString(),
     })
       .then(({ meetID }) => {
+        enqueueSnackbar("Meet Generated", { variant: "info" });
         history.push(`/${meetID}`);
       })
-      .catch((_) =>
-        enqueueSnackbar("SomeThing went wrong", { variant: "error" })
-      )
+      .catch((error) => {
+        enqueueSnackbar(error?.message || "SomeThing went wrong", {
+          variant: "error",
+        });
+      })
       .finally(() => {
         setLoading(false);
       });
@@ -105,6 +108,7 @@ const NewMeetComponent: React.FC = () => {
           </FormControl>
           <ChipInput
             fullWidth
+            onChange={setMeetingInvitees}
             label="Invite users by email"
             placeholder="Type and press enter to add emails"
           />
