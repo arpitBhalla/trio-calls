@@ -11,11 +11,13 @@ import Logo from "./Logo";
 
 type HeaderComponentProps = {
   elevation?: number;
+  toolBarBottomMargin?: number;
 };
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    marginBottom: theme.spacing(10),
+    marginBottom: ({ toolBarBottomMargin }: { toolBarBottomMargin: number }) =>
+      theme.spacing(toolBarBottomMargin),
   },
   headerText: {
     flexGrow: 1,
@@ -26,8 +28,9 @@ const useStyles = makeStyles((theme) => ({
 
 const ActiveUserComponent: React.FC<HeaderComponentProps> = ({
   elevation = 5,
+  toolBarBottomMargin = 10,
 }) => {
-  const classes = useStyles();
+  const classes = useStyles({ toolBarBottomMargin });
   const dispatch = useAppDispatch();
   const { displayName } = useAppSelector(({ authReducer }) => authReducer);
 
