@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useHistory, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { updateAuth } from "core/actions/auth";
-import { signIn } from "utils/authFetch";
+import { signIn } from "utils/auth.fetch";
 import { useSnackbar } from "notistack";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
@@ -16,15 +16,11 @@ import EmailIcon from "@material-ui/icons/EmailOutlined";
 import PasswordIcon from "@material-ui/icons/LockOpen";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import Logo from "components/Logo";
 
 const INITIAL_STATE = { text: "", error: "" };
 
-const useStyles = makeStyles((theme) => ({
-  logo: {
-    width: theme.spacing(12),
-    height: theme.spacing(12),
-  },
-}));
+const useStyles = makeStyles((theme) => ({}));
 
 const Auth: React.FC = () => {
   const classes = useStyles();
@@ -82,11 +78,7 @@ const Auth: React.FC = () => {
     <Container maxWidth="xs">
       <Box boxShadow="0px 0px 30px 1px rgb(214, 214, 214)" p={4} py={5} mt={10}>
         <Typography align="center">
-          <img
-            alt="MS Teams"
-            className={classes.logo}
-            src="https://heliocentrix.co.uk/wp-content/uploads/2020/04/microsoft-teams-logo-png_480-480.png"
-          />
+          <Logo size={16} />
         </Typography>
         <Typography variant="h5" align="center" color="primary">
           Sign in

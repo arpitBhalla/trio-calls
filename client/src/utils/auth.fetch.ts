@@ -1,4 +1,4 @@
-import axiosFetch from "./axiosFetch";
+import axiosFetch from "./axios.fetch";
 import { UserDetails } from "./types";
 
 export const signIn = (email: string, password: string): Promise<UserDetails> =>

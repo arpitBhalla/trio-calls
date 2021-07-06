@@ -5,11 +5,9 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import VideoCallOutlined from "@material-ui/icons/VideoCallOutlined";
 import VideoPreview from "./components/VideoPreview";
-import Toolbar from "@material-ui/core/Toolbar";
 import Box from "@material-ui/core/Box";
-import ActiveUser from "components/ActiveUser";
-import Logo from "components/Logo";
-import { getMeet } from "utils/meetingFetch";
+import Header from "components/Header";
+import { getMeet } from "utils/meeting.fetch";
 import { useParams } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import { useAppSelector, useAppDispatch } from "core/hooks/redux";
@@ -33,7 +31,7 @@ const WaitingRoom: React.FC<Props> = () => {
   const { UID } = useAppSelector(({ authReducer }) => authReducer);
   const dispatch = useAppDispatch();
 
-  const [loading, setLoading] = React.useState(!true);
+  const [loading, setLoading] = React.useState(true);
 
   // React.useEffect(() => {
   //   getMeet(meetID, UID)
@@ -77,10 +75,7 @@ const WaitingRoom: React.FC<Props> = () => {
 
   return (
     <>
-      <Toolbar className={classes.toolbar}>
-        <Logo />
-        <ActiveUser color="default" />
-      </Toolbar>
+      <Header color="default" />
       <Container maxWidth="md">
         <Grid container alignItems="center" spacing={1}>
           <Grid item md={7}>

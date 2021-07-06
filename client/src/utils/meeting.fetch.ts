@@ -1,4 +1,4 @@
-import axiosFetch from "./axiosFetch";
+import axiosFetch from "./axios.fetch";
 import { Meeting } from "./types";
 
 export const getMeet = (meetID: string, UID: string): Promise<Meeting> =>

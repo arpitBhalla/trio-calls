@@ -4,33 +4,41 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import NewMeet from "./components/NewMeet";
 import JoinMeet from "./components/JoinMeet";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Fade from "@material-ui/core/Fade";
-import ActiveUser from "components/ActiveUser";
+import Header from "components/Header";
+import Fab from "@material-ui/core/Fab";
+import ChatOutlinedIcon from "@material-ui/icons/ChatOutlined";
+import Tooltip from "@material-ui/core/Tooltip";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(2),
     paddingTop: theme.spacing(10),
   },
-  typo: { flexGrow: 1 },
+  fab: {
+    position: "absolute",
+    right: theme.spacing(4),
+    bottom: theme.spacing(4),
+  },
 }));
 
 const Home: React.FC = () => {
   const classes = useStyles();
-
+  const history = useHistory();
   return (
     <>
-      <AppBar position="static" color="primary">
-        <Toolbar>
-          <Typography variant="h6" className={classes.typo}>
-            Microsoft Teams
-          </Typography>
-          <ActiveUser />
-        </Toolbar>
-      </AppBar>
+      <Header />
+      <Tooltip title="Chat">
+        <Fab
+          color="primary"
+          className={classes.fab}
+          onClick={() => history.push("/chat")}
+        >
+          <ChatOutlinedIcon />
+        </Fab>
+      </Tooltip>
       <Container maxWidth="md" className={classes.root}>
         <Grid container spacing={1} alignItems="center">
           <Grid item xs={false} sm={7}>
