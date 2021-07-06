@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ActiveUserComponent: React.FC<HeaderComponentProps> = ({
-  elevation = 2,
+  elevation = 5,
 }) => {
   const classes = useStyles();
   const dispatch = useAppDispatch();
@@ -41,11 +41,11 @@ const ActiveUserComponent: React.FC<HeaderComponentProps> = ({
     <AppBar
       elevation={elevation}
       position="static"
-      color="inherit"
+      color="transparent"
       className={classes.appBar}
     >
       <Toolbar>
-        <Logo size={4} />
+        <Logo size={5} />
         <Typography variant="h6" color="primary" className={classes.headerText}>
           Microsoft Teams
         </Typography>

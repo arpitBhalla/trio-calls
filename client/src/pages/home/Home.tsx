@@ -11,6 +11,7 @@ import Fab from "@material-ui/core/Fab";
 import ChatOutlinedIcon from "@material-ui/icons/ChatOutlined";
 import Tooltip from "@material-ui/core/Tooltip";
 import { useHistory } from "react-router-dom";
+import ShadowBox from "components/ShadowBox";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,13 +49,13 @@ const Home: React.FC = () => {
           </Grid>
           <Grid item xs={12} sm={5}>
             <Fade in timeout={500} unmountOnExit>
-              <Box boxShadow="0px 0px 20px 1px rgb(214, 214, 214)" p={4} py={5}>
+              <ShadowBox p={4} py={5}>
                 <JoinMeet />
                 <Typography align="center" variant="h6" color="textSecondary">
                   or
                 </Typography>
                 <NewMeet />
-              </Box>
+              </ShadowBox>
               {/* <Box textAlign="center">
               <CircularProgress />
             </Box> */}

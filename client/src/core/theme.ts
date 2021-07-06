@@ -1,13 +1,13 @@
 import { createMuiTheme } from "@material-ui/core/styles";
+import { deepPurple } from "@material-ui/core/colors";
 
 const theme = createMuiTheme({
   palette: {
-    primary: {
-      main: "#6264A7",
-    },
+    primary: deepPurple,
     secondary: {
       main: "#6264A7",
     },
+    // type: "dark",
   },
   overrides: {
     MuiCssBaseline: {

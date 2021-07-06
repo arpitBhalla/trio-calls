@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import {
   Route,
   RouteProps,
@@ -7,11 +7,21 @@ import {
   useLocation,
 } from "react-router-dom";
 import loadable from "@loadable/component";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import { useAppSelector } from "core/hooks/redux";
 
-const Home = loadable(() => import("./home/Home"));
-const Meet = loadable(() => import("./meet/WaitRoom"));
-const Auth = loadable(() => import("./auth/Auth"));
+const Home = loadable(() => import("./home/Home"), {
+  fallback: <LinearProgress />,
+});
+const Meet = loadable(() => import("./meet/Meet"), {
+  fallback: <LinearProgress />,
+});
+const Auth = loadable(() => import("./auth/Auth"), {
+  fallback: <LinearProgress />,
+});
+const Chat = loadable(() => import("./chat/Chat"), {
+  fallback: <LinearProgress />,
+});
 
 const AuthRoute: React.FC<RouteProps> = (props) => {
   const history = useHistory();
@@ -32,7 +42,7 @@ const Routes: React.FC = () => {
     <Switch>
       <AuthRoute path="/" exact component={Home} />
       <Route path="/auth" component={Auth} />
-      <Route path="/chat" component={() => <>safd</>} />
+      <AuthRoute path="/chat" component={Chat} />
       <AuthRoute path="/:meetID" component={Meet} />
     </Switch>
   );

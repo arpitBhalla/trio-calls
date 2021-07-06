@@ -17,6 +17,7 @@ import PasswordIcon from "@material-ui/icons/LockOpen";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Logo from "components/Logo";
+import ShadowBox from "components/ShadowBox";
 
 const INITIAL_STATE = { text: "", error: "" };
 
@@ -76,7 +77,7 @@ const Auth: React.FC = () => {
 
   return (
     <Container maxWidth="xs">
-      <Box boxShadow="0px 0px 30px 1px rgb(214, 214, 214)" p={4} py={5} mt={10}>
+      <ShadowBox p={4} py={5} mt={10}>
         <Typography align="center">
           <Logo size={16} />
         </Typography>
@@ -171,7 +172,7 @@ const Auth: React.FC = () => {
         >
           {emailExist ? "Login" : "Next"}
         </Button>
-      </Box>
+      </ShadowBox>
     </Container>
   );
 };
