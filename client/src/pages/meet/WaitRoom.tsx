@@ -75,7 +75,7 @@ const WaitingRoom: React.FC<Props> = () => {
 
   return (
     <>
-      <Header color="default" />
+      <Header elevation={0} />
       <Container maxWidth="md">
         <Grid container alignItems="center" spacing={1}>
           <Grid item md={7}>

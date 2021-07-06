@@ -15,7 +15,6 @@ import { useHistory } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(2),
-    paddingTop: theme.spacing(10),
   },
   fab: {
     position: "absolute",
@@ -49,7 +48,7 @@ const Home: React.FC = () => {
           </Grid>
           <Grid item xs={12} sm={5}>
             <Fade in timeout={500} unmountOnExit>
-              <Box boxShadow="0px 0px 30px 1px rgb(214, 214, 214)" p={4} py={5}>
+              <Box boxShadow="0px 0px 20px 1px rgb(214, 214, 214)" p={4} py={5}>
                 <JoinMeet />
                 <Typography align="center" variant="h6" color="textSecondary">
                   or

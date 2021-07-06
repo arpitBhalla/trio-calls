@@ -30,8 +30,9 @@ const AuthRoute: React.FC<RouteProps> = (props) => {
 const Routes: React.FC = () => {
   return (
     <Switch>
-      <Route path="/auth" exact component={Auth} />
       <AuthRoute path="/" exact component={Home} />
+      <Route path="/auth" component={Auth} />
+      <Route path="/chat" component={() => <>safd</>} />
       <AuthRoute path="/:meetID" component={Meet} />
     </Switch>
   );

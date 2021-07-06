@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import Chip, { ChipProps } from "@material-ui/core/Chip";
+import Chip from "@material-ui/core/Chip";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import { updateAuth } from "core/actions/auth";
@@ -9,11 +9,14 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Logo from "./Logo";
 
-type ActiveUserComponentProps = {
-  color?: ChipProps["color"];
+type HeaderComponentProps = {
+  elevation?: number;
 };
 
 const useStyles = makeStyles((theme) => ({
+  appBar: {
+    marginBottom: theme.spacing(10),
+  },
   headerText: {
     flexGrow: 1,
     marginLeft: theme.spacing(1),
@@ -21,8 +24,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ActiveUserComponent: React.FC<ActiveUserComponentProps> = ({
-  color = "default",
+const ActiveUserComponent: React.FC<HeaderComponentProps> = ({
+  elevation = 2,
 }) => {
   const classes = useStyles();
   const dispatch = useAppDispatch();
@@ -35,7 +38,12 @@ const ActiveUserComponent: React.FC<ActiveUserComponentProps> = ({
   };
 
   return (
-    <AppBar position="static" color="inherit">
+    <AppBar
+      elevation={elevation}
+      position="static"
+      color="inherit"
+      className={classes.appBar}
+    >
       <Toolbar>
         <Logo size={4} />
         <Typography variant="h6" color="primary" className={classes.headerText}>
@@ -44,10 +52,10 @@ const ActiveUserComponent: React.FC<ActiveUserComponentProps> = ({
         <Tooltip title="Logout">
           <Chip
             label={displayName}
-            color={color}
+            color={"default"}
             variant="outlined"
             onClick={handleClick}
-            avatar={<PowerSettingsNewIcon />}
+            avatar={<PowerSettingsNewIcon color="error" />}
           />
         </Tooltip>
       </Toolbar>

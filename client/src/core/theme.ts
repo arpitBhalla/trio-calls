@@ -13,7 +13,7 @@ const theme = createMuiTheme({
     MuiCssBaseline: {
       "@global": {
         // @ts-ignore
-        "@font-face": ["Open Sans"],
+        "@font-face": ["Ubuntu"],
       },
     },
     MuiButton: {
@@ -23,7 +23,7 @@ const theme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily: ["Open Sans", "Ubuntu", '"Segoe UI"', "Roboto"].join(","),
+    fontFamily: ["Ubuntu", '"Segoe UI"', "Roboto"].join(","),
   },
 });
 
