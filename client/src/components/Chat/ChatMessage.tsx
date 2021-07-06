@@ -2,12 +2,15 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemText } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
 
 type Props = {
   name?: string;
   message?: string;
   time?: string;
   isMe?: boolean;
+  hideAvatar?: boolean;
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -15,12 +18,26 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
   },
+  avatar: {},
 }));
 
-const ChatComponent: React.FC<Props> = ({ name, message, time, isMe }) => {
+const ChatMessage: React.FC<Props> = ({
+  name,
+  message,
+  time,
+  isMe,
+  hideAvatar,
+}) => {
   const classes = useStyles();
   return (
     <ListItem>
+      {!hideAvatar && (
+        <ListItemAvatar>
+          <Avatar className={classes.avatar}>
+            {String(name || "").toUpperCase()[0]}
+          </Avatar>
+        </ListItemAvatar>
+      )}
       <ListItemText
         primary={
           <Typography
@@ -40,4 +57,4 @@ const ChatComponent: React.FC<Props> = ({ name, message, time, isMe }) => {
   );
 };
 
-export default React.memo(ChatComponent);
+export default React.memo(ChatMessage);

@@ -1,6 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { List, Box } from "@material-ui/core";
+import List from "@material-ui/core/List";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -30,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
   selectedListItem: {
     backgroundColor: theme.palette.action.hover,
   },
+  avatar: {
+    backgroundColor: theme.palette.primary.main,
+  },
 }));
 
 const ChatComponent: React.FC<ChartParticipantsProps> = ({
@@ -52,6 +57,11 @@ const ChatComponent: React.FC<ChartParticipantsProps> = ({
               [classes.selectedListItem]: selectedMeetID === chat.meetID,
             })}
           >
+            <ListItemAvatar>
+              <Avatar className={classes.avatar}>
+                {String(chat.displayName || "").toUpperCase()[0]}
+              </Avatar>
+            </ListItemAvatar>
             <ListItemText
               primary={
                 <Typography

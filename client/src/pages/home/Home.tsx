@@ -12,6 +12,7 @@ import ChatOutlinedIcon from "@material-ui/icons/ChatOutlined";
 import Tooltip from "@material-ui/core/Tooltip";
 import { useHistory } from "react-router-dom";
 import ShadowBox from "components/ShadowBox";
+import { useTitle } from "core/hooks/common";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Home: React.FC = () => {
+  useTitle("Home");
   const classes = useStyles();
   const history = useHistory();
   return (
