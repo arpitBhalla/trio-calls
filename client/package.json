@@ -1,7 +1,7 @@
 {
   "name": "teams-client",
   "description": "Teams Web Client",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "author": "Arpit Bhalla <https://github.com/arpitBhalla>",
   "private": true,
   "dependencies": {
