@@ -9,7 +9,6 @@
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
     "@reduxjs/toolkit": "^1.6.0",
-    "@types/loadable__component": "^5.13.3",
     "axios": "^0.21.1",
     "material-auto-rotating-carousel": "^3.0.2",
     "material-ui-chip-input": "^1.1.0",
@@ -26,16 +25,14 @@
     "react-sketch-canvas": "^5.3.4",
     "redux": "^4.1.0",
     "socket.io-client": "^4.1.2",
-    "ts-jest": "^27.0.3",
-    "ts-loader": "^9.2.3",
-    "typescript": "^4.3.5",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "jest",
+    "eject": "react-scripts eject",
+    "lint": ""
   },
   "eslintConfig": {
     "extends": [
@@ -59,8 +56,18 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@types/jest": "^26.0.23",
+    "@types/loadable__component": "^5.13.3",
     "@types/react-dom": "^17.0.8",
     "@types/react-router-dom": "^5.1.7",
-    "jest": "^26.6.0"
+    "@typescript-eslint/eslint-plugin": "^4.28.2",
+    "@typescript-eslint/parser": "^4.28.2",
+    "eslint": "^7.30.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.24.0",
+    "jest": "^26.6.0",
+    "ts-jest": "^26.5.6",
+    "ts-loader": "^9.2.3",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.5"
   }
 }
