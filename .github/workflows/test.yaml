@@ -1,8 +1,7 @@
 name: Test
 on:
   push:
-    - main
-    
+    branches: main
 jobs:
   client:
     runs-on: ubuntu-latest
@@ -22,14 +21,13 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-client-${{ hashFiles('**/yarn.lock') }}
       - name: Install
-        if: steps.client.outputs.cache-hit != 'true' 
+        if: steps.client.outputs.cache-hit != 'true'
         run: |
           npm i
       - name: Testing
         run: |
           npm run lint
           npm run test
-jobs:
   server:
     runs-on: ubuntu-latest
     defaults:
@@ -48,7 +46,7 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-server-${{ hashFiles('**/yarn.lock') }}
       - name: Install
-        if: steps.server.outputs.cache-hit != 'true' 
+        if: steps.server.outputs.cache-hit != 'true'
         run: |
           npm i
       - name: Testing
