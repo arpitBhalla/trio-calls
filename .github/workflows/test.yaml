@@ -1,0 +1,57 @@
+name: Test
+on:
+  push:
+  pull_request:
+    - main
+jobs:
+  client:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js Env
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - name: Cache Dependencies
+        uses: actions/cache@v2
+        id: client
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-client-${{ hashFiles('**/yarn.lock') }}
+      - name: Install
+        if: steps.client.outputs.cache-hit != 'true' 
+        run: |
+          npm i
+      - name: Testing
+        run: |
+          npm run lint
+          npm run test
+jobs:
+  server:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js Env
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - name: Cache Dependencies
+        uses: actions/cache@v2
+        id: server
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-server-${{ hashFiles('**/yarn.lock') }}
+      - name: Install
+        if: steps.server.outputs.cache-hit != 'true' 
+        run: |
+          npm i
+      - name: Testing
+        run: |
+          npm run lint
+          npm run test
