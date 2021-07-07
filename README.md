@@ -1,3 +1,4 @@
+
 <div align="center">
   
 # Microsoft Teams
@@ -11,6 +12,7 @@ Video calls across the world for free with screensharing!
 ## 🧐 Feature list
 
 ## Key Features
+
 
 ###
 
@@ -99,7 +101,7 @@ Developed with ❤️ in India 🇮🇳
 
 ## Workflow
 
-<img src='/assets/workflow.jpg'/>
+![Workflow](https://user-images.githubusercontent.com/55053424/124763641-d42d0f80-df51-11eb-929d-b086a3552069.png)
 
 ## Maintainer
 
