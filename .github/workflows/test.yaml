@@ -1,8 +1,8 @@
 name: Test
 on:
   push:
-  pull_request:
     - main
+    
 jobs:
   client:
     runs-on: ubuntu-latest

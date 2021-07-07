@@ -46,30 +46,6 @@ app.use("/getProfile", GetProfileRoute);
 app.use("/signin", SignInRoute);
 app.use("/signup", SignUpRoute);
 
-const io = new Server(server, {
-  cors: {
-    origin: "*",
-  },
-});
-
-io.on("connection", (socket: Socket) => {
-  socket.on("join-room", (roomId, userId) => {
-    console.log(roomId, userId);
-    socket.join(roomId);
-    socket.broadcast.to(roomId).emit("user-connected", userId);
-
-    socket.on("message", ({ message, userId }) => {
-      console.log(message, userId);
-      io.to(roomId).emit("createMessage", message, userId);
-    });
-
-    // When User Disconnected
-    socket.on("disconnect", (userId) => {
-      socket.broadcast.to(roomId).emit("user-disconnected", userId);
-    });
-  });
-});
-
 server.listen(PORT, () => {
   console.log(`Running on Port: ${PORT}`);
 });

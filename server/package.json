@@ -4,8 +4,8 @@
   "description": "MS Teams Backend",
   "main": "index.ts",
   "scripts": {
-    "start": "ts-node index.ts",
-    "dev": "DEV=true nodemon --exec 'ts-node index.ts' -e .ts",
+    "start": "ts-node src/index.ts",
+    "dev": "DEV=true nodemon --exec 'ts-node src/index.ts' -e .ts",
     "test": "jest",
     "lint": "eslint .",
     "prettify": "prettier ."
