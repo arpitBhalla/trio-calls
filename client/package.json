@@ -32,7 +32,7 @@
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject",
-    "lint": ""
+    "lint": "eslint ."
   },
   "eslintConfig": {
     "extends": [
