@@ -10,6 +10,7 @@ import { SignInRoute } from "./routes/signIn";
 import { GetProfileRoute } from "./routes/getProfile";
 import mongoose from "mongoose";
 import chalk from "chalk";
+import { initializeSocket } from "./utils/socket";
 
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/teams";
 
@@ -28,6 +29,12 @@ const app = express();
 const server = http.createServer(app);
 const peerServer = ExpressPeerServer(server, {});
 const PORT = process.env.PORT || 4000;
+
+initializeSocket(server, {
+  cors: {
+    origin: "*",
+  },
+});
 
 app.use(cors());
 app.use("/peerJs", peerServer);
