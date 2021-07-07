@@ -35,6 +35,16 @@ Video calls across the world for free with screensharing!
 - [ ] Window Focus Spy
 - [ ] Attendance
 
+### Code Features
+- 100% sritct typescript 
+- Use of `eslint` and `prettier
+- Code Spliting using loadable components
+- use of `hooks` like React.useCallback React.memo which will increase performance
+- no use of `any` type 
+- Unit tested with jest
+- Client e2e tested with cypress
+- Proper use of comments and descriptions of functions
+
 ## 🚀 Getting started
 
 Guide for local deployment -
