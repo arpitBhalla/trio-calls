@@ -2,13 +2,12 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Header from "components/Header";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
 import { ChatLayout, ChatTextInput } from "components/Chat";
 import ChartParticipants from "./components/ChatParticipants";
 import { useTitle } from "core/hooks/common";
 import Container from "@material-ui/core/Container";
 
-type Props = {};
+type Props = { a?: unknown };
 
 const useStyles = makeStyles((theme) => ({
   root: {},

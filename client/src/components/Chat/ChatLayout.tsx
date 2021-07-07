@@ -3,9 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { List, Box } from "@material-ui/core";
 import ChatMessage from "./ChatMessage";
 
-interface Props {}
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   chatRoot: {
     maxHeight: "88%",
     overflowY: "scroll",
@@ -13,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ChatLayout: React.FC<Props> = () => {
+const ChatLayout: React.FC = () => {
   const classes = useStyles();
   return (
     <>
@@ -28,14 +26,14 @@ const ChatLayout: React.FC<Props> = () => {
               minute: "2-digit",
             })}
           />
-          {[...new Array(2)].map((v) => (
+          {/* {[...new Array(2)].map((v) => (
             <ChatMessage
               isMe
               name="Rajiv"
               message="Hello Arpit sadfdsjf sdafdsf hids dsifnsd fisdf sdf isda fias"
               time={new Date().toLocaleTimeString()}
             />
-          ))}
+          ))} */}
         </List>
       </Box>
     </>

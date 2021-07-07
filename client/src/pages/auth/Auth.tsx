@@ -107,9 +107,7 @@ const Auth: React.FC = () => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <EmailIcon
-                        color={!Boolean(email.error) ? "action" : "error"}
-                      />
+                      <EmailIcon color={!email.error ? "action" : "error"} />
                     </InputAdornment>
                   ),
                 }}
@@ -120,7 +118,7 @@ const Auth: React.FC = () => {
 
           <Collapse in={emailExist} timeout={200}>
             <>
-              <FormControl fullWidth error={Boolean(password.error)}>
+              <FormControl fullWidth>
                 <TextField
                   margin="normal"
                   placeholder="Password"
@@ -139,7 +137,7 @@ const Auth: React.FC = () => {
                     startAdornment: (
                       <InputAdornment position="start">
                         <PasswordIcon
-                          color={!Boolean(password.error) ? "primary" : "error"}
+                          color={!password.error ? "primary" : "error"}
                         />
                       </InputAdornment>
                     ),

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Avatar,
@@ -16,7 +16,9 @@ import MicNoneOutlinedIcon from "@material-ui/icons/MicNoneOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
 import Tooltip from "@material-ui/core/Tooltip";
 
-interface Props {}
+interface Props {
+  a?: unknown;
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -46,9 +48,9 @@ const App: React.FC<Props> = () => {
           }
         />
         <ListItemSecondaryAction>
-          <Tooltip title={1 ? "Mute" : "Unmute"}>
+          <Tooltip title={Math.random() ? "Mute" : "Unmute"}>
             <IconButton aria-label="">
-              {1 ? <MicNoneOutlinedIcon /> : <MicOffOutlinedIcon />}
+              {Math.random() ? <MicNoneOutlinedIcon /> : <MicOffOutlinedIcon />}
             </IconButton>
           </Tooltip>
           <Tooltip title="Remove">

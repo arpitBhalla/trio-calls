@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ChatTextInput: React.FC<ChatTextInputProps> = ({ onSend = () => {} }) => {
+const ChatTextInput: React.FC<ChatTextInputProps> = ({ onSend = (e) => e }) => {
   const classes = useStyles();
   return (
     <Box className={classes.rootBox}>

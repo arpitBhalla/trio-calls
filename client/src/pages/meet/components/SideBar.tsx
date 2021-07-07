@@ -72,7 +72,7 @@ const SideBar: React.FC<Props> = ({ open, setOpen }) => {
           [classes.sideBarClose]: open,
         })}
       >
-        {[<Chat />, <Participants />][index]}
+        {[<Chat key={0} />, <Participants key={1} />][index]}
       </Box>
       <Box className={classes.controller}>
         {(

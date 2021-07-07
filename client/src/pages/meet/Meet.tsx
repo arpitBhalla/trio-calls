@@ -5,7 +5,9 @@ import Box from "@material-ui/core/Box";
 import Controller from "./components/Controller";
 import clsx from "clsx";
 
-interface Props {}
+interface Props {
+  a?: unknown;
+}
 
 const useStyles = makeStyles((theme) => ({
   content: {

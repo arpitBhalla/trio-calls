@@ -47,8 +47,9 @@ const ChatComponent: React.FC<ChartParticipantsProps> = ({
   return (
     <List className={classes.chatRoot}>
       {React.Children.toArray(
-        chats?.map((chat) => (
+        chats?.map((chat, key) => (
           <ListItem
+            key={key}
             button
             onClick={() => {
               onClick?.(chat.meetID || "");

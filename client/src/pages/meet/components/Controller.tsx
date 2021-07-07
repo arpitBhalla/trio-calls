@@ -15,10 +15,9 @@ import Tooltip from "@material-ui/core/Tooltip";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { toggleAudio, toggleScreen, toggleVideo } from "core/actions/media";
 import ControlButton from "components/ControllerButton";
+import { HotKeys } from "react-hotkeys";
 
-interface Props {}
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     position: "absolute",
     bottom: 20,
@@ -27,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const App: React.FC<Props> = () => {
+const Controller: React.FC = () => {
   const classes = useStyles();
   const dispatch = useAppDispatch();
   const { isAudio, isVideo, isScreenShare } = useAppSelector(
@@ -66,4 +65,4 @@ const App: React.FC<Props> = () => {
     </Box>
   );
 };
-export default App;
+export default Controller;
