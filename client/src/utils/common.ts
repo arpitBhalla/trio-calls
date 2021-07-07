@@ -1,7 +1,3 @@
-/**
- * @author Arpit Bhalla
- */
-
 import React from "react";
 
 /**
@@ -23,10 +19,21 @@ export const CopyToClipboard = function (text: string): unknown {
   return navigator.clipboard.writeText(text);
 };
 
-// export const pipe = (funcs) => {};
+// export const pipe =
+//   (...funcs: unknown[]) =>
+//   (arg) => {
+//     funcs.reduce((val, func) => func(value), arg);
+//   };
+
+// pipe(
+//   (e) => e + 2,
+//   (e) => e - 3
+// );
 
 export const setStateHandler =
-  (setState: React.Dispatch<React.SetStateAction<string>>): unknown =>
+  (
+    setState: React.Dispatch<React.SetStateAction<string>>
+  ): React.ChangeEventHandler<unknown> =>
   (event: React.ChangeEvent<HTMLInputElement>) => {
     setState(event.target.value);
   };

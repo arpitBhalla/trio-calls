@@ -5,7 +5,7 @@ export const signIn = async (
   email: string,
   password: string
 ): Promise<UserDetails> => {
-  const res = await axiosFetch.post<UserDetails>("/signin", {
+  const res = await axiosFetch.post<UserDetails>("/signIn", {
     email,
     password,
   });
@@ -19,7 +19,7 @@ export const signUp = async (
   email: string,
   password: string
 ): Promise<UserDetails> => {
-  const res = await axiosFetch.post<UserDetails>("/signup", {
+  const res = await axiosFetch.post<UserDetails>("/signUp", {
     displayName,
     email,
     password,

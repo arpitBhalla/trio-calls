@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+// State for meeting & other participants
 
 type MeetParticipants = {
   UID: string; // _id of user
@@ -19,22 +20,54 @@ type Chat = {
 export const meetStore = createSlice({
   name: "meeting",
   initialState: {
-    MID: "", // _id of Meet
-    meetID: "", // xxxx-xxxx-xxxx
-    title: "",
-    hostID: "", // _id of host
-    type: "" as "private" | "public",
-    participants: [] as MeetParticipants[],
-    chat: [] as Chat[],
+    meetDetails: {
+      MID: "", // _id of Meet
+      meetID: "", // xxxx-xxxx-xxxx
+      title: "",
+      hostID: "", // _id of host
+      type: "" as "private" | "public",
+    },
+    participants: {} as Map<string, MeetParticipants>,
+    chat: {} as Set<Chat>,
   },
   reducers: {
-    updateAuth: (state, action: PayloadAction<typeof state>) => {
-      // state.isAuth = action.payload.isAuth;
-      // state.displayName = action.payload.displayName;
+    updateMeetDetails: (
+      state,
+      action: PayloadAction<typeof state.meetDetails>
+    ) => {
+      state.meetDetails = action.payload;
+    },
+    updateParticipant: (
+      state,
+      action: PayloadAction<{
+        UID: string;
+        participantDetails: MeetParticipants;
+      }>
+    ) => {
+      state.participants.set(
+        action.payload.UID,
+        action.payload.participantDetails
+      );
+    },
+    removeParticipant: (
+      state,
+      action: PayloadAction<{
+        UID: string;
+      }>
+    ) => {
+      state.participants.delete(action.payload.UID);
+    },
+    updateChat: (state, action: PayloadAction<Chat>) => {
+      state.chat.add(action.payload);
     },
   },
 });
 
-export const { updateAuth } = meetStore.actions;
+export const {
+  removeParticipant,
+  updateChat,
+  updateMeetDetails,
+  updateParticipant,
+} = meetStore.actions;
 
 export default meetStore.reducer;

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+// State for Active User
 export const mediaStore = createSlice({
   name: "mediaDevices",
   initialState: {
@@ -7,6 +7,7 @@ export const mediaStore = createSlice({
     isVideo: false,
     isHand: false,
     isScreenShare: false,
+    videoStream: undefined as MediaStream | undefined,
   },
   reducers: {
     toggleAudio: (state, action) => {

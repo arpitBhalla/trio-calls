@@ -15,7 +15,6 @@ import Tooltip from "@material-ui/core/Tooltip";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { toggleAudio, toggleScreen, toggleVideo } from "core/actions/media";
 import ControlButton from "components/ControllerButton";
-import { HotKeys } from "react-hotkeys";
 
 const useStyles = makeStyles(() => ({
   root: {
