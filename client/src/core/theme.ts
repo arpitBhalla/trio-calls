@@ -12,6 +12,7 @@ const theme = createMuiTheme({
   overrides: {
     MuiCssBaseline: {
       "@global": {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         "@font-face": ["Ubuntu"],
       },
@@ -23,7 +24,7 @@ const theme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily: ["Ubuntu", '"Segoe UI"', "Roboto"].join(","),
+    fontFamily: ["Ubuntu", "'Segoe UI'", "Roboto"].join(","),
   },
 });
 

@@ -1,4 +1,3 @@
-import * as React from "react";
 import { MicOffOutlined } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";

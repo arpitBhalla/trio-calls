@@ -9,7 +9,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Logo from "./Logo";
 
-type HeaderComponentProps = {
+type HeaderProps = {
   elevation?: number;
   toolBarBottomMargin?: number;
 };
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ActiveUserComponent: React.FC<HeaderComponentProps> = ({
+const Header: React.FC<HeaderProps> = ({
   elevation = 5,
   toolBarBottomMargin = 10,
 }) => {
@@ -65,4 +65,4 @@ const ActiveUserComponent: React.FC<HeaderComponentProps> = ({
     </AppBar>
   );
 };
-export default ActiveUserComponent;
+export default Header;
