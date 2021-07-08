@@ -4,6 +4,7 @@ import SideBar from "./components/SideBar";
 import Box from "@material-ui/core/Box";
 import Controller from "./components/Controller";
 import clsx from "clsx";
+import { useVideoConf } from "core/hooks/useVideoConf";
 
 interface Props {
   a?: unknown;
@@ -25,6 +26,8 @@ const useStyles = makeStyles((theme) => ({
 const App: React.FC<Props> = () => {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles({ open });
+  const { myStream, peerStream } = useVideoConf();
+  console.log(myStream);
 
   return (
     <>

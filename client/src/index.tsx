@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./Demo";
+import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
@@ -9,5 +9,6 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
-
-reportWebVitals(console.log);
+if (process.env.NODE_ENV === "production") {
+  reportWebVitals(console.log);
+}

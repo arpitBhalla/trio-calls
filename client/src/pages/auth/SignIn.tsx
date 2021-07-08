@@ -1,5 +1,4 @@
 import * as React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { useHistory, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { updateAuth } from "core/reducers/auth";
@@ -21,10 +20,7 @@ import ShadowBox from "components/ShadowBox";
 
 const INITIAL_STATE = { text: "", error: "" };
 
-const useStyles = makeStyles((theme) => ({}));
-
-const Auth: React.FC = () => {
-  const classes = useStyles();
+const SignIn: React.FC = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -33,11 +29,10 @@ const Auth: React.FC = () => {
 
   const redirect_url = new URLSearchParams(search).get("redirect_url") || "/";
 
-  const [emailExist, setEmailExist] = React.useState(false);
-
   const [email, setEmail] = React.useState(INITIAL_STATE);
   const [password, setPassword] = React.useState(INITIAL_STATE);
   const [loading, setLoading] = React.useState(false);
+  const [firstStepOver, setEmailExist] = React.useState(false);
 
   const handleLogin = async () => {
     setLoading(true);
@@ -60,7 +55,7 @@ const Auth: React.FC = () => {
         dispatch(updateAuth({ isAuth: true, ...userDetails }));
       })
       .catch((error) => {
-        enqueueSnackbar(error.message || "SomeThing went wrong", {
+        enqueueSnackbar(error || "SomeThing went wrong", {
           variant: "error",
         });
       })
@@ -68,7 +63,9 @@ const Auth: React.FC = () => {
         setLoading(false);
       });
   };
-
+  const redirectToSignUp = () => {
+    history.push("/auth/signUp?redirect_url=" + redirect_url);
+  };
   React.useEffect(() => {
     if (isAuth) {
       history.push(redirect_url);
@@ -88,7 +85,7 @@ const Auth: React.FC = () => {
           Use your teams account
         </Typography>
         <Box py={2}>
-          <Collapse in={!emailExist} timeout={200}>
+          <Collapse in={!firstStepOver} timeout={200}>
             <FormControl fullWidth>
               <TextField
                 fullWidth
@@ -116,7 +113,7 @@ const Auth: React.FC = () => {
             </FormControl>
           </Collapse>
 
-          <Collapse in={emailExist} timeout={200}>
+          <Collapse in={firstStepOver} timeout={200}>
             <>
               <FormControl fullWidth>
                 <TextField
@@ -130,7 +127,7 @@ const Auth: React.FC = () => {
                   }}
                   value={password.text}
                   onKeyDown={(e) => {
-                    // if (e.key === "Enter") checkEmail();
+                    if (e.key === "Enter") handleLogin();
                   }}
                   autoFocus
                   InputProps={{
@@ -166,13 +163,21 @@ const Auth: React.FC = () => {
           color="primary"
           variant="contained"
           disabled={loading}
-          onClick={() => (!emailExist ? setEmailExist(true) : handleLogin())}
+          onClick={() => (!firstStepOver ? setEmailExist(true) : handleLogin())}
         >
-          {emailExist ? "Login" : "Next"}
+          {firstStepOver ? "Login" : "Next"}
+        </Button>
+        <Button
+          variant="text"
+          color="primary"
+          fullWidth
+          onClick={redirectToSignUp}
+        >
+          Create new account
         </Button>
       </ShadowBox>
     </Container>
   );
 };
 
-export default Auth;
+export default SignIn;

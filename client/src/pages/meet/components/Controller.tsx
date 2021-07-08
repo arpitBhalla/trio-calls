@@ -16,10 +16,10 @@ import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { toggleAudio, toggleScreen, toggleVideo } from "core/reducers/media";
 import ControlButton from "components/ControllerButton";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     position: "absolute",
-    bottom: 20,
+    bottom: theme.spacing(3),
     transform: "translateX(-50%)",
     left: "50%",
   },

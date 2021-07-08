@@ -16,7 +16,7 @@ const Home = loadable(() => import("./home/Home"), {
 const Meet = loadable(() => import("./meet/Meet"), {
   fallback: <LinearProgress />,
 });
-const Auth = loadable(() => import("./auth/Auth"), {
+const Auth = loadable(() => import("./auth"), {
   fallback: <LinearProgress />,
 });
 const Chat = loadable(() => import("./chat/Chat"), {
@@ -30,7 +30,7 @@ const AuthRoute: React.FC<RouteProps> = (props) => {
 
   React.useEffect(() => {
     if (!isAuth) {
-      history.push("/auth?redirect_url=" + pathname);
+      history.push("/auth/signIn?redirect_url=" + pathname);
     }
   }, [isAuth, pathname, history]);
 

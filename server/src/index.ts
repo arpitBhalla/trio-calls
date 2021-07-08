@@ -30,7 +30,6 @@ const peerServer = ExpressPeerServer(server, {});
 const PORT = process.env.PORT || 4000;
 
 app.use(cors());
-app.use("/peerJs", peerServer);
 app.use(express.json());
 
 app.use("/newMeet", NewMeetRoute);
@@ -38,10 +37,7 @@ app.use("/getMeet", GetMeetRoute);
 app.use("/getProfile", GetProfileRoute);
 app.use("/signin", SignInRoute);
 app.use("/signup", SignUpRoute);
-
-server.listen(PORT, () => {
-  console.log(`Running on Port: ${PORT}`);
-});
+app.use("/peerjs", peerServer);
 
 const io = new Server(server, {
   cors: {
@@ -50,19 +46,22 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket: Socket) => {
-  socket.on("join-room", (roomId, userId) => {
-    console.log(roomId, userId);
-    socket.join(roomId);
-    socket.broadcast.to(roomId).emit("user-connected", userId);
+  socket.on("join-room", (meetID, userId) => {
+    socket.join(meetID);
 
-    socket.on("message", ({ message, userId }) => {
-      console.log(message, userId);
-      io.to(roomId).emit("createMessage", message, userId);
-    });
+    socket.broadcast.to(meetID).emit("user-connected", userId);
+
+    // socket.on("message", ({ message, userId }) => {
+    //   console.log(message, userId);
+    //   io.to(meetID).emit("createMessage", message, userId);
+    // });
 
     // When User Disconnected
     socket.on("disconnect", (userId) => {
-      socket.broadcast.to(roomId).emit("user-disconnected", userId);
+      socket.broadcast.to(meetID).emit("user-disconnected", userId);
     });
   });
+});
+server.listen(PORT, () => {
+  console.log(`Running on Port: ${PORT}`);
 });

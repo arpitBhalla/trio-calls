@@ -33,16 +33,16 @@ const WaitingRoom: React.FC<Props> = () => {
 
   const [loading, setLoading] = React.useState(true);
 
-  // React.useEffect(() => {
-  //   getMeet(meetID, UID)
-  //     .then((meetingDetails) => console.log)
-  //     .catch((error) => {
-  //       enqueueSnackbar(error.message || "Something went wrong", {
-  //         variant: "error",
-  //       });
-  //     })
-  //     .finally(() => setLoading(false));
-  // }, [meetID, enqueueSnackbar, UID]);
+  React.useEffect(() => {
+    getMeet(meetID, UID)
+      .then((meetingDetails) => console.log)
+      .catch((error) => {
+        enqueueSnackbar(error.message || "Something went wrong", {
+          variant: "error",
+        });
+      })
+      .finally(() => setLoading(false));
+  }, [meetID, enqueueSnackbar, UID]);
 
   const LoadingComponent = () => (
     <Box display="flex" flexDirection="column" alignItems="center">

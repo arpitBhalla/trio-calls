@@ -7,7 +7,6 @@ export const mediaStore = createSlice({
     isVideo: false,
     isHand: false,
     isScreenShare: false,
-    videoStream: undefined as MediaStream | undefined,
   },
   reducers: {
     toggleAudio: (state, action) => {

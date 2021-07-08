@@ -7,7 +7,6 @@ type MeetParticipants = {
   isSharing: boolean;
   isAudio: boolean;
   isHost: boolean;
-  videoStream: MediaStream;
 };
 
 type Chat = {

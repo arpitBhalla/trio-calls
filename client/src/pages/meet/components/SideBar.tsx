@@ -46,8 +46,8 @@ const useStyles = makeStyles((theme) => ({
   },
   controller: {
     position: "absolute",
-    bottom: 20,
-    left: "80%",
+    bottom: theme.spacing(3),
+    right: theme.spacing(2),
   },
 }));
 
