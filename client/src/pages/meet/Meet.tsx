@@ -5,7 +5,8 @@ import Box from "@material-ui/core/Box";
 import Controller from "./components/Controller";
 import clsx from "clsx";
 import { useVideoConf } from "core/hooks/useVideoConf";
-
+import VideoBox from "./components/VideoBox";
+import Grid, { GridSize } from "@material-ui/core/Grid";
 interface Props {
   a?: unknown;
 }
@@ -17,26 +18,33 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    padding: theme.spacing(1),
   },
   contentOff: {
-    marginRight: "440px",
+    marginRight: "320px",
   },
 }));
 
 const App: React.FC<Props> = () => {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles({ open });
-  const { myStream, peerStream } = useVideoConf();
-  console.log(myStream);
+  const { myStream } = useVideoConf();
+
+  const TOTAL_PARTICIPANTS = 1 + 1;
+  const GRID_SIZE = 12 / TOTAL_PARTICIPANTS;
 
   return (
     <>
       <Box display="flex" height="88vh">
-        <Box
-          bgcolor="pink"
-          className={clsx(classes.content, open && classes.contentOff)}
-        >
-          Left
+        <Box className={clsx(classes.content, open && classes.contentOff)}>
+          <Grid container spacing={1}>
+            <Grid item xs={GRID_SIZE as GridSize}>
+              <Box display="flex" bgcolor="red" flexGrow={1}>
+                sd
+              </Box>
+            </Grid>
+          </Grid>
+          {/* {myStream.current && <VideoBox stream={myStream.current} />} */}
         </Box>
       </Box>
       <SideBar open={open} setOpen={setOpen} />

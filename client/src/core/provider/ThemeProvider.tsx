@@ -3,7 +3,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { CssBaseline } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
-import { deepPurple } from "@material-ui/core/colors";
+import { deepPurple, lightBlue } from "@material-ui/core/colors";
 import { useAppSelector } from "core/hooks/redux";
 
 const App: React.FC = ({ children }) => {
@@ -13,7 +13,7 @@ const App: React.FC = ({ children }) => {
     () =>
       createMuiTheme({
         palette: {
-          primary: deepPurple,
+          primary: prefersDarkMode || useDark ? lightBlue : deepPurple,
           secondary: {
             main: "#6264A7",
           },
@@ -37,7 +37,7 @@ const App: React.FC = ({ children }) => {
           fontFamily: ["Ubuntu", "'Segoe UI'", "Roboto"].join(","),
         },
       }),
-    [prefersDarkMode]
+    [prefersDarkMode, useDark]
   );
 
   return (

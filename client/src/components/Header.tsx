@@ -8,6 +8,9 @@ import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Logo from "./Logo";
+import { toggleDarkMode } from "core/reducers/theme";
+import IconButton from "@material-ui/core/IconButton";
+import Brightness4Icon from "@material-ui/icons/Brightness4";
 
 type HeaderProps = {
   elevation?: number;
@@ -39,12 +42,14 @@ const Header: React.FC<HeaderProps> = ({
       updateAuth({ isAuth: false, displayName: "", UID: "", email: "" })
     );
   };
-
+  const handleToggleTheme = () => {
+    dispatch(toggleDarkMode(null));
+  };
   return (
     <AppBar
       elevation={elevation}
       position="static"
-      color="transparent"
+      color="inherit"
       className={classes.appBar}
     >
       <Toolbar>
@@ -52,6 +57,9 @@ const Header: React.FC<HeaderProps> = ({
         <Typography variant="h6" color="primary" className={classes.headerText}>
           Microsoft Teams
         </Typography>
+        <IconButton aria-label="toggle theme" onClick={handleToggleTheme}>
+          <Brightness4Icon />
+        </IconButton>
         <Tooltip title="Logout">
           <Chip
             label={displayName}

@@ -85,6 +85,18 @@ const NewMeetComponent: React.FC = () => {
             />
             <FormHelperText>{meetingName.error}</FormHelperText>
           </FormControl>
+          <TextField
+            id="datetime-local"
+            label="Schedule Meeting"
+            type="datetime-local"
+            defaultValue={new Date()}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
           <FormControl>
             <RadioGroup
               aria-label="meeting type"
@@ -107,6 +119,7 @@ const NewMeetComponent: React.FC = () => {
           </FormControl>
           <ChipInput
             fullWidth
+            variant="outlined"
             onChange={setMeetingInvitees}
             label="Invite users by email"
             placeholder="Type and press enter to add emails"

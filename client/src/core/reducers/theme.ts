@@ -8,6 +8,7 @@ export const themeStore = createSlice({
   reducers: {
     toggleDarkMode: (state, action) => {
       state.useDark = action.payload ?? !state.useDark;
+      console.log(state.useDark);
     },
   },
 });
