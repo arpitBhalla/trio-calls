@@ -20,13 +20,15 @@ const Canvas = () => {
   );
 };
 
-interface Props {}
+type SketchProps = {
+  open: boolean;
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {},
 }));
 
-const App: React.FC<Props> = ({}) => {
+const Sketch: React.FC<SketchProps> = ({ open }) => {
   const classes = useStyles();
   return (
     <>
@@ -34,4 +36,4 @@ const App: React.FC<Props> = ({}) => {
     </>
   );
 };
-export default App;
+export default Sketch;

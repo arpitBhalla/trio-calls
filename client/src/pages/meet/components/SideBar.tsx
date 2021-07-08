@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    top: 10,
+    top: theme.spacing(2),
   },
   sideBarOpen: {
     top: "-100vh",
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
   sideBarContent: {
     position: "absolute",
-    right: 10,
+    right: theme.spacing(2),
     minWidth: "300px",
     maxWidth: "300px",
     boxShadow: "0px 0px 30px 1px rgb(214, 214, 214)",

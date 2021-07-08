@@ -7,6 +7,7 @@ import clsx from "clsx";
 import { useVideoConf } from "core/hooks/useVideoConf";
 import VideoBox from "./components/VideoBox";
 import Grid, { GridSize } from "@material-ui/core/Grid";
+import LeftBar from "./components/LeftBar";
 interface Props {
   a?: unknown;
 }
@@ -43,12 +44,23 @@ const App: React.FC<Props> = () => {
                 sd
               </Box>
             </Grid>
+            <Grid item xs={GRID_SIZE as GridSize}>
+              <Box display="flex" bgcolor="red" flexGrow={1}>
+                sd
+              </Box>
+            </Grid>
+            <Grid item xs={GRID_SIZE as GridSize}>
+              <Box display="flex" bgcolor="red" flexGrow={1}>
+                sd
+              </Box>
+            </Grid>
           </Grid>
           {/* {myStream.current && <VideoBox stream={myStream.current} />} */}
         </Box>
       </Box>
       <SideBar open={open} setOpen={setOpen} />
       <Controller />
+      <LeftBar />
     </>
   );
 };
