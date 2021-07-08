@@ -53,6 +53,7 @@ const SignIn: React.FC = () => {
     await signIn(email.text, password.text)
       .then((userDetails) => {
         dispatch(updateAuth({ isAuth: true, ...userDetails }));
+        enqueueSnackbar("Welcome " + userDetails.displayName);
       })
       .catch((error) => {
         enqueueSnackbar(error || "SomeThing went wrong", {

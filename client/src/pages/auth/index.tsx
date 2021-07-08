@@ -1,5 +1,4 @@
 import * as React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   Switch,
   useHistory,
@@ -7,10 +6,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "core/hooks/redux";
-import { updateAuth } from "core/reducers/auth";
-import { signIn } from "utils/auth.fetch";
-import { useSnackbar } from "notistack";
+import { useAppSelector } from "core/hooks/redux";
 import loadable from "@loadable/component";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import NotFound from "components/NotFound";
@@ -22,15 +18,8 @@ const SignUp = loadable(() => import("./SignUp"), {
   fallback: <LinearProgress />,
 });
 
-const INITIAL_STATE = { text: "", error: "" };
-
-const useStyles = makeStyles((theme) => ({}));
-
 const Auth: React.FC = () => {
-  const classes = useStyles();
   const history = useHistory();
-  const dispatch = useAppDispatch();
-  const { enqueueSnackbar } = useSnackbar();
   const { search } = useLocation();
   const { isAuth } = useAppSelector(({ authReducer }) => authReducer);
 

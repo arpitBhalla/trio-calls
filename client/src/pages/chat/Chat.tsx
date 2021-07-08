@@ -15,9 +15,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(2),
   },
-  participantBox: {
-    boxShadow: "5px 20px 20px 1px red",
-  },
 }));
 
 const Chat: React.FC<Props> = () => {
