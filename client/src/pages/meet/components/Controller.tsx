@@ -13,7 +13,7 @@ import {
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
-import { toggleAudio, toggleScreen, toggleVideo } from "core/actions/media";
+import { toggleAudio, toggleScreen, toggleVideo } from "core/reducers/media";
 import ControlButton from "components/ControllerButton";
 
 const useStyles = makeStyles(() => ({

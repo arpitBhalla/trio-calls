@@ -2,7 +2,7 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
-import { updateAuth } from "core/actions/auth";
+import { updateAuth } from "core/reducers/auth";
 import { signIn } from "utils/auth.fetch";
 import { useSnackbar } from "notistack";
 import Container from "@material-ui/core/Container";

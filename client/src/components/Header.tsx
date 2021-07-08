@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Chip from "@material-ui/core/Chip";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
-import { updateAuth } from "core/actions/auth";
+import { updateAuth } from "core/reducers/auth";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";

@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import mediaReducer from "core/actions/media";
-import authReducer from "core/actions/auth";
-import themeReducer from "core/actions/theme";
-import meetReducer from "core/actions/meeting";
+import mediaReducer from "core/reducers/media";
+import authReducer from "core/reducers/auth";
+import themeReducer from "core/reducers/theme";
+import meetReducer from "core/reducers/meeting";
 
 const store = configureStore({
   reducer: {

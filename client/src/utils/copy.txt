@@ -9,13 +9,13 @@ import {
   updateChat,
   updateMeetDetails,
   updateParticipant,
-} from "core/actions/meeting";
+} from "core/reducers/meeting";
 import {
   toggleAudio,
   toggleHand,
   toggleScreen,
   toggleVideo,
-} from "core/actions/media";
+} from "core/reducers/media";
 
 const peers: never[] = [];
 
