@@ -1,7 +1,7 @@
 import React from "react";
 import io, { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
-import { ServerURL } from "core/const";
+import { ServerURL } from "core/config";
 
 const socket = io(ServerURL);
 
@@ -12,9 +12,4 @@ export const SocketProvider: React.FC = ({ children }) => {
   return (
     <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
   );
-};
-
-export const useSocket = (): Socket<DefaultEventsMap, DefaultEventsMap> => {
-  const socketConsumerContext = React.useContext(SocketContext);
-  return socketConsumerContext;
 };

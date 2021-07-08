@@ -1,4 +1,4 @@
-import { ServerURL } from "core/const";
+import { ServerURL } from "core/config";
 import axios from "axios";
 
 /**

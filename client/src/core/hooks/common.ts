@@ -8,22 +8,9 @@ export const useTitle = (title?: string): void => {
   }, [title]);
 };
 /**
- * Listens the document visibility
- */
-export const useDocVisible = (): boolean => {
-  const isVisible = () => document.visibilityState === "visible";
-  const [visible, setVisible] = React.useState(isVisible());
-  React.useEffect(() => {
-    const onVisible = () => setVisible(isVisible());
-    document.addEventListener("visibilitychange", onVisible);
-    return () => document.removeEventListener("visibilitychange", onVisible);
-  }, []);
-  return visible;
-};
-/**
  * Save & Load item to localStorage
  */
-export const useStateStorage = <TType>(
+export default <TType>(
   key: string,
   defaultValue: TType
 ): [TType, (newValue: TType) => void] => {
@@ -49,21 +36,4 @@ export const useStateStorage = <TType>(
   );
 
   return [value, setValue];
-};
-/**
- * Listens to window focus
- */
-export const useWndFocus = (): boolean => {
-  const [focus, setFocus] = React.useState(document.hasFocus());
-  React.useEffect(() => {
-    const onFocus = () => setFocus(true);
-    const onBlur = () => setFocus(false);
-    window.addEventListener("focus", onFocus);
-    window.addEventListener("blur", onBlur);
-    return () => {
-      window.removeEventListener("focus", onFocus);
-      window.removeEventListener("blur", onBlur);
-    };
-  }, []);
-  return focus;
 };

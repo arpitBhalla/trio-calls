@@ -1,7 +1,6 @@
 import express from "express";
 import http from "http";
 import cors from "cors";
-import { Socket, Server } from "socket.io";
 import { ExpressPeerServer } from "peer";
 import { NewMeetRoute } from "./routes/newMeet";
 import { GetMeetRoute } from "./routes/getMeet";
@@ -10,7 +9,7 @@ import { SignInRoute } from "./routes/signIn";
 import { GetProfileRoute } from "./routes/getProfile";
 import mongoose from "mongoose";
 import chalk from "chalk";
-import { initializeSocket } from "./utils/socket";
+import { Server, Socket } from "socket.io";
 
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/teams";
 
@@ -30,12 +29,6 @@ const server = http.createServer(app);
 const peerServer = ExpressPeerServer(server, {});
 const PORT = process.env.PORT || 4000;
 
-initializeSocket(server, {
-  cors: {
-    origin: "*",
-  },
-});
-
 app.use(cors());
 app.use("/peerJs", peerServer);
 app.use(express.json());
@@ -48,4 +41,28 @@ app.use("/signup", SignUpRoute);
 
 server.listen(PORT, () => {
   console.log(`Running on Port: ${PORT}`);
+});
+
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+  },
+});
+
+io.on("connection", (socket: Socket) => {
+  socket.on("join-room", (roomId, userId) => {
+    console.log(roomId, userId);
+    socket.join(roomId);
+    socket.broadcast.to(roomId).emit("user-connected", userId);
+
+    socket.on("message", ({ message, userId }) => {
+      console.log(message, userId);
+      io.to(roomId).emit("createMessage", message, userId);
+    });
+
+    // When User Disconnected
+    socket.on("disconnect", (userId) => {
+      socket.broadcast.to(roomId).emit("user-disconnected", userId);
+    });
+  });
 });

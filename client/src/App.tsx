@@ -8,7 +8,7 @@ import { Provider as ReduxProvider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import theme from "./core/theme";
 import Routes from "./pages";
-import { SocketProvider } from "core/hooks/ws";
+import { SocketProvider } from "core/provider/socket";
 
 const App: React.FC = () => {
   useTitle();
