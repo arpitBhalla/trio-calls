@@ -6,7 +6,7 @@ import { useTitle } from "core/hooks/common";
 import { SnackbarProvider } from "notistack";
 import { Provider as ReduxProvider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { SocketProvider } from "core/provider/socket";
+import { SocketProvider } from "core/provider/SocketProvider";
 
 const App: React.FC = () => {
   useTitle();

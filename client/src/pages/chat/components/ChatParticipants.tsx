@@ -7,6 +7,9 @@ import Typography from "@material-ui/core/Typography";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import clsx from "clsx";
+import TextField from "@material-ui/core/TextField";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
 
 type Participants = {
   lastMessage?: string;
@@ -46,45 +49,61 @@ const ChatComponent: React.FC<ChartParticipantsProps> = ({
   const classes = useStyles();
 
   return (
-    <List className={classes.chatRoot}>
-      {React.Children.toArray(
-        chats?.map((chat, key) => (
-          <ListItem
-            key={key}
-            button
-            onClick={() => {
-              onClick?.(chat.meetID || "");
-            }}
-            className={clsx({
-              [classes.selectedListItem]: selectedMeetID === chat.meetID,
-            })}
-          >
-            <ListItemAvatar>
-              <Avatar className={classes.avatar}>
-                {String(chat.displayName || "").toUpperCase()[0]}
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              primary={
-                <Typography
-                  className={classes.secondary}
-                  variant="subtitle2"
-                  color="textSecondary"
-                >
-                  <b>{chat.displayName}</b>
-                  <b>{chat.lastMessageTime}</b>
-                </Typography>
-              }
-              secondary={
-                <Typography variant="caption">
-                  {String(chat.lastMessage || "").slice(0, 35)}&nbsp;
-                </Typography>
-              }
-            />
-          </ListItem>
-        ))
-      )}
-    </List>
+    <>
+      <TextField
+        variant="outlined"
+        placeholder="Search"
+        margin="dense"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
+        // value={}
+        // onChange={}
+      />
+      <List className={classes.chatRoot}>
+        {React.Children.toArray(
+          chats?.map((chat, key) => (
+            <ListItem
+              key={key}
+              button
+              onClick={() => {
+                onClick?.(chat.meetID || "");
+              }}
+              className={clsx({
+                [classes.selectedListItem]: selectedMeetID === chat.meetID,
+              })}
+            >
+              <ListItemAvatar>
+                <Avatar className={classes.avatar}>
+                  {String(chat.displayName || "").toUpperCase()[0]}
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                primary={
+                  <Typography
+                    className={classes.secondary}
+                    variant="subtitle2"
+                    color="textSecondary"
+                  >
+                    <b>{chat.displayName}</b>
+                    <b>{chat.lastMessageTime}</b>
+                  </Typography>
+                }
+                secondary={
+                  <Typography variant="caption">
+                    {String(chat.lastMessage || "").slice(0, 35)}&nbsp;
+                  </Typography>
+                }
+              />
+            </ListItem>
+          ))
+        )}
+      </List>
+    </>
   );
 };
 export default ChatComponent;
