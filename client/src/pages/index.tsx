@@ -8,7 +8,11 @@ import {
 } from "react-router-dom";
 import loadable from "@loadable/component";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import { useAppSelector } from "core/hooks/redux";
+import { useAppDispatch, useAppSelector } from "core/hooks/redux";
+import { useLocalStorage } from "core/hooks/common";
+import { useSnackbar } from "notistack";
+import { updateAuth } from "core/reducers/auth";
+import LoadingPage from "components/LoadingPage";
 
 const Home = loadable(() => import("./home/Home"), {
   fallback: <LinearProgress />,
@@ -38,6 +42,25 @@ const AuthRoute: React.FC<RouteProps> = (props) => {
 };
 
 const Routes: React.FC = () => {
+  const [UID] = useLocalStorage("UID", "");
+  const [loading, setLoading] = React.useState(true);
+  const { enqueueSnackbar } = useSnackbar();
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {
+    if (UID) {
+      const userDetails = JSON.parse(UID);
+      dispatch(updateAuth({ isAuth: true, ...userDetails }));
+      enqueueSnackbar("Welcome " + userDetails.displayName);
+    }
+    const time = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => {
+      clearTimeout(time);
+    };
+  }, [UID]);
+  if (loading) return <LoadingPage />;
   return (
     <Switch>
       <AuthRoute path="/" exact component={Home} />

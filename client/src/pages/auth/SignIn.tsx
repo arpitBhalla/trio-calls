@@ -18,6 +18,7 @@ import Typography from "@material-ui/core/Typography";
 import Logo from "components/Logo";
 import ShadowBox from "components/ShadowBox";
 import { emailRegex } from "./SignUp";
+import { useLocalStorage } from "core/hooks/common";
 
 const INITIAL_STATE = { text: "", error: "" };
 
@@ -34,6 +35,7 @@ const SignIn: React.FC = () => {
   const [password, setPassword] = React.useState(INITIAL_STATE);
   const [loading, setLoading] = React.useState(false);
   const [firstStepOver, setEmailExist] = React.useState(false);
+  const [UID, setUID] = useLocalStorage("UID", "");
 
   const handleLogin = async () => {
     /**
@@ -49,6 +51,7 @@ const SignIn: React.FC = () => {
         })
       );
     }
+    UID;
     if (!emailRegex.test(email.text)) {
       return setEmail({ ...email, error: "Field is invalid" });
     } else if (!firstStepOver) {
@@ -63,6 +66,7 @@ const SignIn: React.FC = () => {
       .then((userDetails) => {
         dispatch(updateAuth({ isAuth: true, ...userDetails }));
         enqueueSnackbar("Welcome " + userDetails.displayName);
+        setUID(JSON.stringify(userDetails));
       })
       .catch((error) => {
         console.log({ error });

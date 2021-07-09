@@ -44,6 +44,7 @@ const Header: React.FC<HeaderProps> = ({
   );
 
   const handleClick = () => {
+    localStorage.clear();
     dispatch(
       updateAuth({ isAuth: false, displayName: "", UID: "", email: "" })
     );

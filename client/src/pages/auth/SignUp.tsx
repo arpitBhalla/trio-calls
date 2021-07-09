@@ -18,6 +18,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Logo from "components/Logo";
 import ShadowBox from "components/ShadowBox";
+import { useLocalStorage } from "core/hooks/common";
 
 const INITIAL_STATE = { text: "", error: "" };
 
@@ -34,9 +35,10 @@ const SignUp: React.FC = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
+  const [UID, setUID] = useLocalStorage("UID", "");
   const { search } = useLocation();
   const { isAuth } = useAppSelector(({ authReducer }) => authReducer);
-
+  console.log(UID);
   const redirect_url = new URLSearchParams(search).get("redirect_url") || "/";
 
   const [name, setName] = React.useState(INITIAL_STATE);
@@ -66,6 +68,7 @@ const SignUp: React.FC = () => {
       .then((userDetails) => {
         dispatch(updateAuth({ isAuth: true, ...userDetails }));
         enqueueSnackbar("Welcome " + userDetails.displayName);
+        setUID(JSON.stringify(userDetails));
       })
       .catch((error) => {
         enqueueSnackbar(error || "Something went wrong", {

@@ -10,7 +10,7 @@ export const useTitle = (title?: string): void => {
 /**
  * Save & Load item to localStorage
  */
-export default <TType>(
+export const useLocalStorage = <TType>(
   key: string,
   defaultValue: TType
 ): [TType, (newValue: TType) => void] => {
