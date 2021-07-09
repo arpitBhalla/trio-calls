@@ -15,6 +15,7 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Tooltip from "@material-ui/core/Tooltip";
 import clsx from "clsx";
+import ShadowBox from "components/ShadowBox";
 
 import BrushOutlinedIcon from "@material-ui/icons/BrushOutlined";
 import FormatPaintOutlinedIcon from "@material-ui/icons/FormatPaintOutlined";
@@ -22,7 +23,16 @@ import UndoOutlinedIcon from "@material-ui/icons/UndoOutlined";
 import RedoOutlinedIcon from "@material-ui/icons/RedoOutlined";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import GetAppOutlinedIcon from "@material-ui/icons/GetAppOutlined";
+import { useAppDispatch, useAppSelector } from "core/hooks/redux";
+import { toggleWhiteBoard } from "core/reducers/media";
 
+function downloadFile(fileName: string, data: string): void {
+  const linkSource = "data:jpg;base64" + data;
+  const downloadLink = document.createElement("a");
+  downloadLink.href = linkSource;
+  downloadLink.download = fileName;
+  downloadLink.click();
+}
 type SketchProps = {
   open: boolean;
   onClose: () => unknown;
@@ -37,7 +47,9 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     flex: 1,
   },
-  activeTool: { backgroundColor: "#e4e4e4" },
+  activeTool: {
+    backgroundColor: "#e4e4e4",
+  },
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -45,20 +57,18 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const Sketch: React.FC<SketchProps> = ({ open, onClose }) => {
+const Sketch: React.FC<SketchProps> = () => {
   const classes = useStyles();
   const [color, setColor] = React.useState("red");
   const [size, setSize] = React.useState(4);
   const [tool, setTool] = React.useState("");
   const sketchRef = React.useRef<ReactSketchCanvas | null>(null);
+  const dispatch = useAppDispatch();
+  const open = useAppSelector((state) => state.mediaReducer.isWhiteBoard);
 
-  function downloadFile(fileName: string, data: string): void {
-    const linkSource = "data:png;base64" + data;
-    const downloadLink = document.createElement("a");
-    downloadLink.href = linkSource;
-    downloadLink.download = fileName;
-    downloadLink.click();
-  }
+  const onClose = () => {
+    dispatch(toggleWhiteBoard(false));
+  };
 
   const tools: [
     string,
@@ -89,8 +99,8 @@ const Sketch: React.FC<SketchProps> = ({ open, onClose }) => {
       GetAppOutlinedIcon,
       () =>
         sketchRef.current
-          ?.exportImage("png")
-          .then((e) => downloadFile("Me.png", e)),
+          ?.exportImage("jpeg")
+          .then((e) => downloadFile("Me.jpg", e)),
     ],
   ];
 
@@ -133,14 +143,16 @@ const Sketch: React.FC<SketchProps> = ({ open, onClose }) => {
             ))}
           </Grid>
           <Grid item xs={11}>
-            <ReactSketchCanvas
-              ref={sketchRef}
-              height="400px"
-              strokeWidth={size}
-              eraserWidth={size}
-              strokeColor={color}
-              // onUpdate={console.log}
-            />
+            <ShadowBox>
+              <ReactSketchCanvas
+                ref={sketchRef}
+                style={{}}
+                height="450px"
+                strokeWidth={size}
+                eraserWidth={size}
+                strokeColor={color}
+              />
+            </ShadowBox>
           </Grid>
         </Grid>
         <Container maxWidth="sm">

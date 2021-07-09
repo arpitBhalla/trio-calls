@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     objectFit: "cover",
     borderRadius: 10,
+    aspectRatio: "16/9",
   },
   caption: {
     position: "absolute",

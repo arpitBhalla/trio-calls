@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import SideBar from "./components/SideBar";
+import SideBar from "./components/Sidebar/SideBar";
 import Box from "@material-ui/core/Box";
 import Controller from "./components/Controller";
 import clsx from "clsx";
@@ -62,7 +62,12 @@ const App: React.FC<Props> = () => {
       <SideBar open={open} setOpen={setOpen} />
       <Controller />
       <LeftBar />
-      <Sketch />
+      <Sketch
+        open
+        onClose={() => {
+          return "";
+        }}
+      />
     </>
   );
 };

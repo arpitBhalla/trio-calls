@@ -9,11 +9,18 @@ import {
   CancelPresentationOutlined,
   PresentToAllOutlined,
   PanToolOutlined,
+  CategoryOutlined,
+  Category,
 } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
-import { toggleAudio, toggleScreen, toggleVideo } from "core/reducers/media";
+import {
+  toggleAudio,
+  toggleScreen,
+  toggleVideo,
+  toggleWhiteBoard,
+} from "core/reducers/media";
 import ControlButton from "components/ControllerButton";
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 const Controller: React.FC = () => {
   const classes = useStyles();
   const dispatch = useAppDispatch();
-  const { isAudio, isVideo, isScreenShare } = useAppSelector(
+  const { isAudio, isVideo, isScreenShare, isWhiteBoard } = useAppSelector(
     ({ mediaReducer }) => mediaReducer
   );
 
@@ -55,7 +62,13 @@ const Controller: React.FC = () => {
         IconOff={CancelPresentationOutlined}
         onClick={() => dispatch(toggleScreen(null))}
       />
-
+      <ControlButton
+        title="White Board"
+        isEnabled={isWhiteBoard}
+        IconOn={Category}
+        IconOff={CategoryOutlined}
+        onClick={() => dispatch(toggleWhiteBoard(null))}
+      />
       <Tooltip title="Raise Hand">
         <IconButton>
           <PanToolOutlined />

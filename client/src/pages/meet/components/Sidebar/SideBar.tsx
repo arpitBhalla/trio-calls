@@ -4,14 +4,15 @@ import clsx from "clsx";
 import Box from "@material-ui/core/Box";
 import Chat from "components/Chat/ChatLayout";
 import Participants from "./Participants";
+import MeetInfo from "./Info";
 import {
   InfoOutlined,
-  CategoryOutlined,
   ChatOutlined,
   PeopleOutlineOutlined,
 } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
+import Typography from "@material-ui/core/Typography";
 
 interface Props {
   open: boolean;
@@ -36,11 +37,11 @@ const useStyles = makeStyles((theme) => ({
   sideBarContent: {
     position: "absolute",
     right: theme.spacing(2),
-    minWidth: "300px",
-    maxWidth: "300px",
+    minWidth: "350px",
+    maxWidth: "350px",
     boxShadow: "0px 0px 30px 1px rgb(214, 214, 214)",
     borderRadius: theme.spacing(1),
-    padding: theme.spacing(1),
+    padding: theme.spacing(3),
     height: "84%",
     backgroundColor: "#fff",
   },
@@ -72,15 +73,21 @@ const SideBar: React.FC<Props> = ({ open, setOpen }) => {
           [classes.sideBarClose]: open,
         })}
       >
-        {[<Chat key={0} />, <Participants key={1} />][index]}
+        <Typography variant="h6">
+          {["Meeting Details", "In-call messages", "People"][index]}
+        </Typography>
+        {
+          [<MeetInfo key={2} />, <Chat key={0} />, <Participants key={1} />][
+            index
+          ]
+        }
       </Box>
       <Box className={classes.controller}>
         {(
           [
+            ["Meet Info", InfoOutlined],
             ["Chat", ChatOutlined],
             ["Participants", PeopleOutlineOutlined],
-            ["White Board", CategoryOutlined],
-            ["Meet Info", InfoOutlined],
           ] as [string, typeof PeopleOutlineOutlined][]
         ).map(([name, Icon], key) => (
           <Tooltip title={name} key={key}>
