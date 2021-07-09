@@ -101,6 +101,11 @@ npm start # in server directory /server
 
 <img src='assets/workflow.png' />
 
+## Lighthouse 
+
+![Lighthouse](https://user-images.githubusercontent.com/55053424/125126171-51a27c80-e118-11eb-9aee-96787d5ea749.png)
+
+
 <div align="center">
 Developed with ❤️ in India 🇮🇳 by
 
