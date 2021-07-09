@@ -1,11 +1,11 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import SideBar from "./components/Sidebar/SideBar";
+import SideBar from "./components/SidePanel/SideBar";
 import Box from "@material-ui/core/Box";
 import Controller from "./components/Controller";
 import clsx from "clsx";
-import { useVideoConf } from "core/hooks/useVideoConf";
-import Video from "./components/Video";
+// import { useVideoConf } from "core/hooks/useVideoConf";
+// import Video from "./components/Video";
 import Grid, { GridSize } from "@material-ui/core/Grid";
 import LeftBar from "./components/LeftBar";
 import Sketch from "./components/Sketch";
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
   },
   contentOff: {
-    marginRight: "320px",
+    marginRight: "370px",
   },
 }));
 

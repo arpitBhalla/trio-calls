@@ -11,6 +11,8 @@ import {
   PanToolOutlined,
   CategoryOutlined,
   Category,
+  Brightness4,
+  Brightness7,
 } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -22,6 +24,7 @@ import {
   toggleWhiteBoard,
 } from "core/reducers/media";
 import ControlButton from "components/ControllerButton";
+import { toggleDarkMode } from "core/reducers/theme";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,6 +71,13 @@ const Controller: React.FC = () => {
         IconOn={Category}
         IconOff={CategoryOutlined}
         onClick={() => dispatch(toggleWhiteBoard(null))}
+      />
+      <ControlButton
+        title="Dark Mode"
+        isEnabled={isWhiteBoard}
+        IconOn={Brightness7}
+        IconOff={Brightness4}
+        onClick={() => dispatch(toggleDarkMode(null))}
       />
       <Tooltip title="Raise Hand">
         <IconButton>

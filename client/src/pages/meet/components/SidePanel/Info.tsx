@@ -1,44 +1,49 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MicOffOutlinedIcon from "@material-ui/icons/MicOffOutlined";
-import MicNoneOutlinedIcon from "@material-ui/icons/MicNoneOutlined";
-import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
-import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import FileCopyOutlinedIcon from "@material-ui/icons/FileCopyOutlined";
 import { useSnackbar } from "notistack";
+import { CopyToClipboard } from "utils/common";
 
-interface Props {
-  a?: unknown;
-}
+type Props = {
+  meetLink?: string;
+};
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
-  avatar: {
-    backgroundColor: theme.palette.primary.main,
+  root: {
+    backgroundColor: theme.palette.action.hover,
+  },
+  margin: {
+    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(2),
   },
 }));
 
-const App: React.FC<Props> = () => {
+const InfoPanel: React.FC<Props> = ({
+  meetLink = "https://ms-teams.vercel.app/my-meet-id",
+}) => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
   const handlePress = () => {
     enqueueSnackbar("Copied meeting link");
+    CopyToClipboard(meetLink);
   };
 
   return (
     <>
-      <Typography variant="subtitle1" color="textSecondary">
+      <Typography color="textPrimary" className={classes.margin}>
         Joining info
       </Typography>
       <Typography variant="caption" color="textSecondary">
-        https://ms-teams.vercel.app/my-meet-id
+        {meetLink}
       </Typography>
       <Button
+        className={classes.margin}
+        fullWidth
         variant="text"
         color="primary"
+        onClick={handlePress}
         startIcon={<FileCopyOutlinedIcon />}
       >
         Copy joining info
@@ -46,4 +51,4 @@ const App: React.FC<Props> = () => {
     </>
   );
 };
-export default App;
+export default InfoPanel;

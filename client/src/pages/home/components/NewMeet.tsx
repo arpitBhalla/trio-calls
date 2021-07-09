@@ -97,6 +97,14 @@ const NewMeetComponent: React.FC = () => {
               shrink: true,
             }}
           />
+
+          <ChipInput
+            fullWidth
+            variant="outlined"
+            onChange={setMeetingInvitees}
+            label="Invite users by email"
+            placeholder="Type and press enter to add emails"
+          />
           <FormControl>
             <RadioGroup
               aria-label="meeting type"
@@ -117,13 +125,6 @@ const NewMeetComponent: React.FC = () => {
               />
             </RadioGroup>
           </FormControl>
-          <ChipInput
-            fullWidth
-            variant="outlined"
-            onChange={setMeetingInvitees}
-            label="Invite users by email"
-            placeholder="Type and press enter to add emails"
-          />
           <br />
           <br />
           <Button

@@ -9,10 +9,14 @@ import {
   InfoOutlined,
   ChatOutlined,
   PeopleOutlineOutlined,
+  Close,
 } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
+import Badge from "@material-ui/core/Badge";
+import Paper from "@material-ui/core/Paper";
+import BoxShadow from "components/ShadowBox";
 
 interface Props {
   open: boolean;
@@ -39,11 +43,9 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(2),
     minWidth: "350px",
     maxWidth: "350px",
-    boxShadow: "0px 0px 30px 1px rgb(214, 214, 214)",
     borderRadius: theme.spacing(1),
-    padding: theme.spacing(3),
+    padding: theme.spacing(2),
     height: "84%",
-    backgroundColor: "#fff",
   },
   controller: {
     position: "absolute",
@@ -67,38 +69,63 @@ const SideBar: React.FC<Props> = ({ open, setOpen }) => {
 
   return (
     <>
-      <Box
+      <BoxShadow
+        component={Paper}
         className={clsx(classes.sideBarContent, {
           [classes.sideBarOpen]: !open,
           [classes.sideBarClose]: open,
         })}
       >
-        <Typography variant="h6">
-          {["Meeting Details", "In-call messages", "People"][index]}
-        </Typography>
-        {
-          [<MeetInfo key={2} />, <Chat key={0} />, <Participants key={1} />][
-            index
-          ]
-        }
-      </Box>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Typography variant="h6">
+            {["Meeting Details", "People", "In-call messages"][index]}
+          </Typography>
+          <IconButton aria-label="" onClick={() => setOpen(false)}>
+            <Close />
+          </IconButton>
+        </Box>
+        {(() => {
+          switch (index) {
+            case 0:
+              return <MeetInfo />;
+            case 1:
+              return <Participants />;
+            case 2:
+              return <Chat />;
+            default:
+              return null;
+          }
+        })()}
+      </BoxShadow>
       <Box className={classes.controller}>
-        {(
-          [
-            ["Meet Info", InfoOutlined],
-            ["Chat", ChatOutlined],
-            ["Participants", PeopleOutlineOutlined],
-          ] as [string, typeof PeopleOutlineOutlined][]
-        ).map(([name, Icon], key) => (
-          <Tooltip title={name} key={key}>
-            <IconButton
-              onClick={handleIconPress(key)}
-              style={open && key === index ? { backgroundColor: "red" } : {}}
-            >
-              <Icon />
-            </IconButton>
-          </Tooltip>
-        ))}
+        <Tooltip title="Meet Info">
+          <IconButton
+            onClick={handleIconPress(0)}
+            // style={open && key === index ? { backgroundColor: "red" } : {}}
+          >
+            <InfoOutlined />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Participants">
+          <IconButton
+            onClick={handleIconPress(1)}
+            // style={open && key === index ? { backgroundColor: "red" } : {}}
+          >
+            <Badge badgeContent={4} color="primary">
+              <PeopleOutlineOutlined />
+            </Badge>
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Chats">
+          <IconButton
+            onClick={handleIconPress(2)}
+            // style={open && key === index ? { backgroundColor: "red" } : {}}
+          >
+            <Badge color="primary" variant="dot">
+              <ChatOutlined />
+            </Badge>
+          </IconButton>
+        </Tooltip>
       </Box>
     </>
   );
