@@ -7,10 +7,11 @@ import Avatar from "@material-ui/core/Avatar";
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "relative",
-    height: 300,
+    // height: "400px",
     backgroundColor: "#333333",
-    width: "100%",
+    // width: "100%",
     borderRadius: 8,
+    aspectRatio: "16/9",
   },
   avatar: {
     position: "absolute",

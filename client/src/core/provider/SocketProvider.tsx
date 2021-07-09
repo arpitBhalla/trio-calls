@@ -3,7 +3,7 @@ import io, { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import { ServerURL } from "core/config";
 
-const socket = io(ServerURL);
+const socket = io("192.168.240.86:4000");
 
 export const SocketContext =
   React.createContext<Socket<DefaultEventsMap, DefaultEventsMap>>(socket);

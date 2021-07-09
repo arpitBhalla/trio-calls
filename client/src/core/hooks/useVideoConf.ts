@@ -1,6 +1,7 @@
 import React from "react";
 import Peer from "peerjs";
 import { useAppSelector } from "core/hooks/redux";
+import { iceServers } from "core/config";
 import { useSocket } from "./useSocket";
 
 type VideoConf = {
@@ -8,13 +9,15 @@ type VideoConf = {
   peerStream: Map<string, MediaStream> | undefined;
 };
 
-export const useVideoConf = (): VideoConf => {
+export const useVideoConf = () => {
   const peers = React.useRef<Record<string, Peer.MediaConnection>>();
   const myStream = React.useRef<MediaStream>();
   const peerStream = React.useRef<Map<string, MediaStream>>();
   const peerJs = React.useRef<Peer>();
   const socketClient = useSocket();
   const { mediaReducer } = useAppSelector((s) => s);
+
+  console.log(peers.current);
 
   React.useEffect(() => {
     if (myStream.current) {
@@ -29,11 +32,15 @@ export const useVideoConf = (): VideoConf => {
   }, [mediaReducer.isVideo]);
 
   React.useEffect(() => {
-    peerJs.current = new Peer(undefined, {
-      path: "/peerjs",
-      host: "localhost",
-      port: 4000,
-      debug: 3,
+    peers.current = {};
+    peerStream.current = new Map();
+    peerJs.current = new Peer({
+      path: "/",
+      host: "0.peerjs.com",
+      port: 443,
+      // secure: true,
+      // debug: 3,
+      config: { iceServers },
     });
     socketEvents();
     initializePeersEvents();
@@ -45,8 +52,7 @@ export const useVideoConf = (): VideoConf => {
     });
     socketClient.on("user-disconnected", (userID) => {
       console.log("user disconnected-- closing peers", userID);
-      peers.current?.[userID].close();
-      // this.removeVideo(userID);
+      peers.current?.[userID]?.close();
     });
     socketClient.on("disconnect", () => {
       console.log("socket disconnected --");
@@ -58,10 +64,9 @@ export const useVideoConf = (): VideoConf => {
 
   const initializePeersEvents = () => {
     peerJs.current?.on("open", (id) => {
-      const roomID = window.location.pathname.split("/")[2];
       const userData = {
         userID: id,
-        roomID,
+        meetID: "arpit-bhalla",
       };
       console.log("peers established and joined room", userData);
       socketClient.emit("join-room", userData);
@@ -75,6 +80,7 @@ export const useVideoConf = (): VideoConf => {
   const setNavigatorToStream = () => {
     getVideoAudioStream().then((stream) => {
       if (stream) {
+        myStream.current = stream;
         setPeersListeners(stream);
         newUserConnection(stream);
       }
@@ -84,14 +90,12 @@ export const useVideoConf = (): VideoConf => {
     const myNavigator = navigator.mediaDevices.getUserMedia;
 
     return myNavigator({
-      video: video
-        ? {
-            frameRate: 12,
-            noiseSuppression: true,
-            width: { min: 640, ideal: 1280, max: 1920 },
-            height: { min: 480, ideal: 720, max: 1080 },
-          }
-        : false,
+      video: {
+        frameRate: 12,
+        noiseSuppression: true,
+        width: { min: 640, ideal: 1280, max: 1920 },
+        height: { min: 480, ideal: 720, max: 1080 },
+      },
       audio: audio,
     });
   };
@@ -100,6 +104,7 @@ export const useVideoConf = (): VideoConf => {
       call.answer(stream);
       call.on("stream", (userVideoStream) => {
         console.log("user stream data", userVideoStream);
+
         peerStream.current?.set(call.metadata.id, userVideoStream);
       });
       call.on("close", () => {
@@ -124,6 +129,9 @@ export const useVideoConf = (): VideoConf => {
     stream: MediaStream
   ) => {
     const { userID } = userData;
+
+    const conn = peerJs.current?.connect(userID);
+
     const call = peerJs.current?.call(userID, stream, {
       metadata: { id: peerJs.current?.id },
     });
@@ -138,7 +146,7 @@ export const useVideoConf = (): VideoConf => {
       console.log("peer error ------");
       console.log("closing new user", userID);
     });
-    peers.current?.[userID] && call && (peers.current[userID] = call);
+    peers.current && call && (peers.current[userID] = call);
   };
   // const destoryConnection = () => {
   //   const myMediaTracks =
@@ -150,8 +158,8 @@ export const useVideoConf = (): VideoConf => {
   //   peerJs.current?.destroy();
   // };
   return {
-    myStream: myStream.current,
-    peerStream: peerStream.current,
+    myStream,
+    peerStream,
     // mediaReducer,
   };
 };

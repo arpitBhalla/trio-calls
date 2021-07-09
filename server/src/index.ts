@@ -45,23 +45,24 @@ const io = new Server(server, {
   },
 });
 
-io.on("connection", (socket: Socket) => {
-  socket.on("join-room", (meetID, userId) => {
+io.on("connection", (socket) => {
+  console.log("socket established");
+  socket.on("join-room", (userData) => {
+    const { meetID, userID } = userData;
+    console.log("Joined ", meetID, userID, userData);
     socket.join(meetID);
-
-    socket.broadcast.to(meetID).emit("user-connected", userId);
-
-    // socket.on("message", ({ message, userId }) => {
-    //   console.log(message, userId);
-    //   io.to(meetID).emit("createMessage", message, userId);
-    // });
-
-    // When User Disconnected
-    socket.on("disconnect", (userId) => {
-      socket.broadcast.to(meetID).emit("user-disconnected", userId);
+    socket.broadcast.to(meetID).emit("user-connected", userData);
+    socket.on("disconnect", () => {
+      socket.broadcast.to(meetID).emit("user-disconnected", userID);
     });
   });
 });
+
+// socket.on("message", ({ message, userId }) => {
+//   console.log(message, userId);
+//   io.to(meetID).emit("createMessage", message, userId);
+// });
+
 server.listen(PORT, () => {
   console.log(`Running on Port: ${PORT}`);
 });

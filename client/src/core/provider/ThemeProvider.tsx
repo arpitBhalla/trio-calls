@@ -21,7 +21,7 @@ const App: React.FC = ({ children }) => {
           // secondary: {
           //   main: "#6264A7",
           // },
-          type: prefersDarkMode || useDark ? "dark" : "light",
+          type: useDark ? "dark" : "light",
         },
         overrides: {
           MuiCssBaseline: {

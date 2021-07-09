@@ -128,7 +128,7 @@ const Sketch: React.FC<SketchProps> = () => {
       </AppBar>
       <Container maxWidth="lg">
         <Grid container spacing={1}>
-          <Grid item xs={1} direction="column">
+          <Grid item xs={1}>
             {tools.map(([title, Icon, handler]) => (
               <Tooltip placement="right" title={title} key={title}>
                 <IconButton
@@ -156,7 +156,7 @@ const Sketch: React.FC<SketchProps> = () => {
         </Grid>
         <Container maxWidth="sm">
           <Grid container spacing={1}>
-            <Grid item xs={6} justify="center">
+            <Grid item xs={6}>
               {["red", "green", "#e7e700", "blue", "purple", "orange"].map(
                 (item) => (
                   <IconButton

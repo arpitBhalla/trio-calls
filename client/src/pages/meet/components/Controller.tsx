@@ -12,7 +12,6 @@ import {
   CategoryOutlined,
   Category,
   Brightness4,
-  Brightness7,
   CallEnd,
 } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
@@ -87,13 +86,11 @@ const Controller: React.FC = () => {
         IconOff={CategoryOutlined}
         onClick={() => dispatch(toggleWhiteBoard(null))}
       />
-      <ControlButton
-        title="Dark Mode"
-        isEnabled={isWhiteBoard}
-        IconOn={Brightness7}
-        IconOff={Brightness4}
-        onClick={() => dispatch(toggleDarkMode(null))}
-      />
+      <Tooltip title="Dark Mode">
+        <IconButton onClick={() => dispatch(toggleDarkMode(null))}>
+          <Brightness4 />
+        </IconButton>
+      </Tooltip>
       <Tooltip title="Raise Hand">
         <IconButton>
           <PanToolOutlined />

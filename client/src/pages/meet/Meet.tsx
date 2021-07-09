@@ -31,9 +31,9 @@ const App: React.FC<Props> = () => {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles({ open });
   const { myStream, peerStream } = useVideoConf();
-  console.log(peerStream);
+  console.log(peerStream, myStream);
 
-  const TOTAL_PARTICIPANTS = 1 + 1;
+  const TOTAL_PARTICIPANTS = 2;
   const GRID_SIZE = 12 / TOTAL_PARTICIPANTS;
 
   return (
@@ -42,22 +42,24 @@ const App: React.FC<Props> = () => {
         <Box className={clsx(classes.content, open && classes.contentOff)}>
           <Grid container spacing={1}>
             <Grid item xs={GRID_SIZE as GridSize}>
-              <Box display="flex">
-                <Video stream={myStream} isVideo={true} displayName={"You"} />
+              <Box display="flex" height={"100%"}>
+                <Video
+                  stream={myStream.current}
+                  isVideo={true}
+                  displayName={"You"}
+                />
               </Box>
             </Grid>
-            <Grid item xs={GRID_SIZE as GridSize}>
-              <Box display="flex" bgcolor="red" flexGrow={1}>
-                sd
-              </Box>
-            </Grid>
-            <Grid item xs={GRID_SIZE as GridSize}>
-              <Box display="flex" bgcolor="red" flexGrow={1}>
-                sd
-              </Box>
-            </Grid>
+            {Array.from(peerStream.current || []).map(([key, stream]) => {
+              return (
+                <Grid key={key} item xs={GRID_SIZE as GridSize}>
+                  <Box display="flex" height={"100%"}>
+                    <Video stream={stream} isVideo={true} displayName={key} />
+                  </Box>
+                </Grid>
+              );
+            })}
           </Grid>
-          {/* {myStream.current && <VideoBox stream={myStream.current} />} */}
         </Box>
       </Box>
       <SideBar open={open} setOpen={setOpen} />
