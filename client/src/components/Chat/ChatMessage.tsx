@@ -2,8 +2,6 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemText } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
 
 type Props = {
   displayName?: string;
@@ -14,12 +12,11 @@ type Props = {
   hidePrimary?: boolean;
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   secondary: {
     display: "flex",
     justifyContent: "space-between",
   },
-  avatar: {},
 }));
 
 const ChatMessage: React.FC<Props> = ({
@@ -27,19 +24,11 @@ const ChatMessage: React.FC<Props> = ({
   message,
   time,
   isSelf,
-  hideAvatar,
   hidePrimary,
 }) => {
   const classes = useStyles();
   return (
     <ListItem style={{ padding: 2 }}>
-      {!hideAvatar && (
-        <ListItemAvatar>
-          <Avatar className={classes.avatar}>
-            {String(displayName || "").toUpperCase()[0]}
-          </Avatar>
-        </ListItemAvatar>
-      )}
       <ListItemText
         style={{ margin: 0 }}
         primary={

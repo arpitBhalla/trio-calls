@@ -24,6 +24,7 @@ type ChartParticipantsProps = {
 const useStyles = makeStyles((theme) => ({
   chatRoot: {
     overflowY: "auto",
+    height: "60vh",
   },
   secondary: {
     display: "flex",

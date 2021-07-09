@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -16,7 +15,7 @@ import Container from "@material-ui/core/Container";
 import Tooltip from "@material-ui/core/Tooltip";
 import clsx from "clsx";
 import ShadowBox from "components/ShadowBox";
-
+// Icon
 import BrushOutlinedIcon from "@material-ui/icons/BrushOutlined";
 import FormatPaintOutlinedIcon from "@material-ui/icons/FormatPaintOutlined";
 import UndoOutlinedIcon from "@material-ui/icons/UndoOutlined";

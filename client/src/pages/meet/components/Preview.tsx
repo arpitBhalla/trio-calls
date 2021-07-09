@@ -1,6 +1,5 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Box } from "@material-ui/core";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { toggleAudio, toggleVideo } from "core/reducers/media";
 import ControlButton from "components/ControllerButton";
@@ -11,22 +10,24 @@ import {
   VideocamOutlined,
 } from "@material-ui/icons";
 import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import ShadowBox from "components/ShadowBox";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "relative",
     height: 350,
     width: 550,
-    backgroundColor: "#333333",
     borderRadius: 10,
+    backgroundColor: "#333333",
   },
   controller: {
     position: "absolute",
-    bottom: 10,
+    bottom: theme.spacing(2),
     left: "50%",
     transform: "translateX(-50%)",
-    backgroundColor: "#dddbdbc8",
-    borderRadius: 10,
+    backgroundColor: "#dddbdba7",
+    borderRadius: theme.shape.borderRadius,
   },
   text: {
     position: "absolute",
@@ -67,7 +68,7 @@ const App: React.FC = () => {
   }, [isAudio]);
 
   return (
-    <Box className={classes.root}>
+    <ShadowBox className={classes.root}>
       {isVideo ? (
         <video muted className={classes.video} ref={videoController} autoPlay />
       ) : (
@@ -91,7 +92,7 @@ const App: React.FC = () => {
           onClick={() => dispatch(toggleVideo(null))}
         />
       </Box>
-    </Box>
+    </ShadowBox>
   );
 };
 export default App;

@@ -13,6 +13,7 @@ import { useSnackbar } from "notistack";
 import { useAppSelector, useAppDispatch } from "core/hooks/redux";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+import VoiceChatOutlinedIcon from "@material-ui/icons/VoiceChatOutlined";
 
 type Params = { meetID: string };
 
@@ -29,19 +30,22 @@ const WaitingRoom: React.FC = () => {
   const { enqueueSnackbar } = useSnackbar();
   const { UID } = useAppSelector(({ authReducer }) => authReducer);
   const dispatch = useAppDispatch();
+  const [loading, setLoading] = React.useState(false);
 
-  const [loading, setLoading] = React.useState(true);
+  // React.useEffect(() => {
+  //   getMeet(meetID, UID)
+  //     .then(console.log)
+  //     .catch((error) => {
+  //       enqueueSnackbar(error || "Something went wrong", {
+  //         variant: "error",
+  //       });
+  //     })
+  //     .finally(() => setLoading(false));
+  // }, [meetID, enqueueSnackbar, UID]);
 
-  React.useEffect(() => {
-    getMeet(meetID, UID)
-      .then(console.log)
-      .catch((error) => {
-        enqueueSnackbar(error || "Something went wrong", {
-          variant: "error",
-        });
-      })
-      .finally(() => setLoading(false));
-  }, [meetID, enqueueSnackbar, UID]);
+  const askToJoin = () => {
+    setLoading(true);
+  };
 
   const LoadingComponent = () => (
     <Box display="flex" flexDirection="column" alignItems="center">
@@ -65,7 +69,8 @@ const WaitingRoom: React.FC = () => {
         size="large"
         variant="contained"
         color="primary"
-        startIcon={<VideoCallOutlined />}
+        onClick={askToJoin}
+        startIcon={<VoiceChatOutlinedIcon />}
       >
         {Math.random() ? "Ask to Join" : "Join Now"}
       </Button>

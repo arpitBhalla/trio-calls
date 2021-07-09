@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import SideBar from "./components/SidePanel/SideBar";
+import SideBar from "./components/SidePanel";
 import Box from "@material-ui/core/Box";
 import Controller from "./components/Controller";
 import clsx from "clsx";

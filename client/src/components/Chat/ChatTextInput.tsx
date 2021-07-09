@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
   rootBox: {
     display: "flex",
     alignItems: "center",
-    position: "absolute",
     bottom: 0,
   },
   sendIcon: {
@@ -44,7 +43,7 @@ const ChatTextInput: React.FC<ChatTextInputProps> = ({
           className={classes.sendIcon}
           onClick={onSend}
         >
-          <SendOutlinedIcon fontSize={isSmall ? "small" : "large"} />
+          <SendOutlinedIcon fontSize={"small"} />
         </Fab>
       </div>
     </Box>

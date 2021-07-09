@@ -17,11 +17,20 @@ type Props = {
 
 const LeftBar: React.FC<Props> = ({ meetTitle = "My Title" }) => {
   const classes = useStyles();
+  const [time, setTime] = React.useState(new Date());
+  React.useEffect(() => {
+    const subs = setTimeout(() => {
+      setTime(new Date());
+    }, 60e3);
+    return () => {
+      clearInterval(subs);
+    };
+  }, []);
   return (
     <Box className={classes.root}>
       <Typography variant="h6" color="textSecondary">
         <b>
-          {new Date().toLocaleTimeString("en-IN", {
+          {time.toLocaleTimeString("en-IN", {
             hour12: true,
             hour: "numeric",
             minute: "2-digit",
