@@ -37,3 +37,12 @@ export const setStateHandler =
   (event: React.ChangeEvent<HTMLInputElement>) => {
     setState(event.target.value);
   };
+
+export const getRandomColor = (isDark?: boolean): string => {
+  const letters = (isDark ? "BCDEF" : "456789").split("");
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * letters.length)];
+  }
+  return color;
+};

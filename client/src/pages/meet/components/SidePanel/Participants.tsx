@@ -8,15 +8,7 @@ import MicOffOutlinedIcon from "@material-ui/icons/MicOffOutlined";
 import MicNoneOutlinedIcon from "@material-ui/icons/MicNoneOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
 import Tooltip from "@material-ui/core/Tooltip";
-
-function getRandomColor(isDark?: boolean) {
-  const letters = (isDark ? "BCDEF" : "456789").split("");
-  let color = "#";
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * letters.length)];
-  }
-  return color;
-}
+import { getRandomColor } from "utils/common";
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -65,15 +57,15 @@ const ParticipantBox: React.FC<ParticipantBoxProps> = React.memo(
               >
                 <IconButton aria-label="mute">
                   {Math.random() > 0.1 ? (
-                    <MicNoneOutlinedIcon />
+                    <MicNoneOutlinedIcon fontSize="small" />
                   ) : (
-                    <MicOffOutlinedIcon />
+                    <MicOffOutlinedIcon fontSize="small" />
                   )}
                 </IconButton>
               </Tooltip>
               <Tooltip title={"Remove " + displayName}>
                 <IconButton aria-label="remove from meeting">
-                  <RemoveCircleOutlineOutlinedIcon />
+                  <RemoveCircleOutlineOutlinedIcon fontSize="small" />
                 </IconButton>
               </Tooltip>
             </div>
@@ -83,9 +75,11 @@ const ParticipantBox: React.FC<ParticipantBoxProps> = React.memo(
     );
   }
 );
+
 type Props = {
   isHost?: boolean;
 };
+
 const Participants: React.FC<Props> = ({ isHost }) => {
   return (
     <>

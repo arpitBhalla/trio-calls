@@ -1,13 +1,15 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { List, Box } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
 import ChatMessage from "./ChatMessage";
+import ChatTextInput from "./ChatTextInput";
 
 const useStyles = makeStyles(() => ({
   chatRoot: {
-    maxHeight: "88%",
-    overflowY: "scroll",
+    height: "88%",
+    overflowY: "auto",
     margin: "10px 0px",
+    position: "relative",
   },
 }));
 
@@ -16,9 +18,23 @@ const ChatLayout: React.FC = () => {
   return (
     <>
       <Box className={classes.chatRoot}>
-        <List>
+        <ChatMessage
+          hideAvatar
+          displayName="Arpit"
+          message="Hii"
+          isSelf
+          time={new Date().toLocaleTimeString("en-IN", {
+            hour12: true,
+            hour: "numeric",
+            minute: "2-digit",
+          })}
+        />
+        {[...new Array(2)].map((v, i) => (
           <ChatMessage
-            name="Arpit"
+            key={i}
+            hideAvatar
+            hidePrimary
+            displayName="Arpit"
             message="Hii"
             time={new Date().toLocaleTimeString("en-IN", {
               hour12: true,
@@ -26,15 +42,8 @@ const ChatLayout: React.FC = () => {
               minute: "2-digit",
             })}
           />
-          {/* {[...new Array(2)].map((v) => (
-            <ChatMessage
-              isMe
-              name="Rajiv"
-              message="Hello Arpit sadfdsjf sdafdsf hids dsifnsd fisdf sdf isda fias"
-              time={new Date().toLocaleTimeString()}
-            />
-          ))} */}
-        </List>
+        ))}
+        <ChatTextInput isSmall />
       </Box>
     </>
   );

@@ -2,7 +2,7 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Box from "@material-ui/core/Box";
-import Chat from "components/Chat/ChatLayout";
+import Chat from "./ChatBox";
 import Participants from "./Participants";
 import MeetInfo from "./Info";
 import {

@@ -1,66 +1,60 @@
-import React from "react";
+import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  Avatar,
-  List,
-  ListItem,
-  ListSubheader,
-  ListItemAvatar,
-  ListItemText,
-  ListItemSecondaryAction,
-} from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MicOffOutlinedIcon from "@material-ui/icons/MicOffOutlined";
-import MicNoneOutlinedIcon from "@material-ui/icons/MicNoneOutlined";
-import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
-import Tooltip from "@material-ui/core/Tooltip";
+import Box from "@material-ui/core/Box";
+import { ChatMessage, ChatTextInput } from "components/Chat";
 
-interface Props {
-  a?: unknown;
-}
-
-const useStyles = makeStyles((theme) => ({
-  root: {},
-  avatar: {
-    backgroundColor: theme.palette.primary.main,
+const useStyles = makeStyles(() => ({
+  chatRoot: {
+    height: "88%",
+    overflowY: "auto",
+    margin: "10px 0px",
+    position: "relative",
   },
 }));
 
-const App: React.FC<Props> = () => {
+const ChatLayout: React.FC = () => {
   const classes = useStyles();
   return (
-    <List>
-      <ListSubheader>
-        <Typography variant="caption" color="textSecondary">
-          <b>In Call</b>
-        </Typography>
-      </ListSubheader>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar className={classes.avatar}>A</Avatar>
-        </ListItemAvatar>
-        <ListItemText
-          primary={
-            <Typography variant="body1" color="textSecondary">
-              <b>Arpit (You)</b>
-            </Typography>
-          }
+    <>
+      <Box className={classes.chatRoot}>
+        <ChatMessage
+          hideAvatar
+          displayName="Arpit"
+          message="Hii"
+          isSelf
+          time={new Date().toLocaleTimeString("en-IN", {
+            hour12: true,
+            hour: "numeric",
+            minute: "2-digit",
+          })}
         />
-        <ListItemSecondaryAction>
-          <Tooltip title={Math.random() ? "Mute" : "Unmute"}>
-            <IconButton aria-label="">
-              {Math.random() ? <MicNoneOutlinedIcon /> : <MicOffOutlinedIcon />}
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Remove">
-            <IconButton aria-label="">
-              <RemoveCircleOutlineOutlinedIcon />
-            </IconButton>
-          </Tooltip>
-        </ListItemSecondaryAction>
-      </ListItem>
-    </List>
+        {[...new Array(2)].map((v, i) => (
+          <ChatMessage
+            key={i}
+            hideAvatar
+            hidePrimary
+            displayName="Arpit"
+            message="Hii"
+            time={new Date().toLocaleTimeString("en-IN", {
+              hour12: true,
+              hour: "numeric",
+              minute: "2-digit",
+            })}
+          />
+        ))}
+        <ChatMessage
+          hideAvatar
+          displayName="Rajiv"
+          message="Ok No Problem"
+          time={new Date().toLocaleTimeString("en-IN", {
+            hour12: true,
+            hour: "numeric",
+            minute: "2-digit",
+          })}
+        />
+        <ChatTextInput isSmall />
+      </Box>
+    </>
   );
 };
-export default App;
+export default ChatLayout;

@@ -6,11 +6,12 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 
 type Props = {
-  name?: string;
+  displayName?: string;
   message?: string;
   time?: string;
-  isMe?: boolean;
+  isSelf?: boolean;
   hideAvatar?: boolean;
+  hidePrimary?: boolean;
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -22,34 +23,38 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ChatMessage: React.FC<Props> = ({
-  name,
+  displayName,
   message,
   time,
-  isMe,
+  isSelf,
   hideAvatar,
+  hidePrimary,
 }) => {
   const classes = useStyles();
   return (
-    <ListItem>
+    <ListItem style={{ padding: 2 }}>
       {!hideAvatar && (
         <ListItemAvatar>
           <Avatar className={classes.avatar}>
-            {String(name || "").toUpperCase()[0]}
+            {String(displayName || "").toUpperCase()[0]}
           </Avatar>
         </ListItemAvatar>
       )}
       <ListItemText
+        style={{ margin: 0 }}
         primary={
-          <Typography
-            className={classes.secondary}
-            variant="caption"
-            color="textSecondary"
-          >
-            <b>
-              {name} {isMe && "(You)"}
-            </b>
-            <b>{time}</b>
-          </Typography>
+          !hidePrimary && (
+            <Typography
+              className={classes.secondary}
+              variant="caption"
+              color="textSecondary"
+            >
+              <b>
+                {displayName} {isSelf && "(You)"}
+              </b>
+              <b>{time}</b>
+            </Typography>
+          )
         }
         secondary={<Typography variant="body2">{message}</Typography>}
       />

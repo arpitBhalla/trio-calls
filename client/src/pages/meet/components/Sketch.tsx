@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
   },
   activeTool: {
-    backgroundColor: "#e4e4e4",
+    backgroundColor: theme.palette.action.focus,
   },
 }));
 
