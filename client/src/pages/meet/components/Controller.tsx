@@ -13,6 +13,7 @@ import {
   Category,
   Brightness4,
   Brightness7,
+  CallEnd,
 } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -32,6 +33,10 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(3),
     transform: "translateX(-50%)",
     left: "50%",
+  },
+  callEnd: {
+    backgroundColor: "red",
+    color: "white",
   },
 }));
 
@@ -65,6 +70,16 @@ const Controller: React.FC = () => {
         IconOff={CancelPresentationOutlined}
         onClick={() => dispatch(toggleScreen(null))}
       />
+      <Tooltip title="End Call">
+        <IconButton
+          className={classes.callEnd}
+          aria-label="end call"
+          style={{ backgroundColor: "red" }}
+          onClick={console.log}
+        >
+          <CallEnd />
+        </IconButton>
+      </Tooltip>
       <ControlButton
         title="White Board"
         isEnabled={isWhiteBoard}

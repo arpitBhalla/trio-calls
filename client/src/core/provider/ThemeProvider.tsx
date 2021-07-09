@@ -13,12 +13,14 @@ const App: React.FC = ({ children }) => {
     () =>
       createMuiTheme({
         palette: {
-          primary: {
-            main: prefersDarkMode || useDark ? deepPurple[300] : indigo[800],
-          },
-          secondary: {
-            main: "#6264A7",
-          },
+          primary: deepPurple,
+          secondary: indigo,
+          // primary: {
+          //   main: prefersDarkMode || useDark ? deepPurple[300] : indigo[800],
+          // },
+          // secondary: {
+          //   main: "#6264A7",
+          // },
           type: prefersDarkMode || useDark ? "dark" : "light",
         },
         overrides: {

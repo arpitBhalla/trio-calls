@@ -26,6 +26,8 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(1),
   },
 }));
+export const emailRegex =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 const SignUp: React.FC = () => {
   const classes = useStyles();
@@ -37,14 +39,27 @@ const SignUp: React.FC = () => {
 
   const redirect_url = new URLSearchParams(search).get("redirect_url") || "/";
 
-  const [emailExist, setEmailExist] = React.useState(false);
-
   const [name, setName] = React.useState(INITIAL_STATE);
   const [email, setEmail] = React.useState(INITIAL_STATE);
   const [password, setPassword] = React.useState(INITIAL_STATE);
   const [loading, setLoading] = React.useState(false);
 
   const handleSignUp = async () => {
+    const inValid = (
+      [
+        [name.text, setName, /(\w+)/],
+        [email.text, setEmail, emailRegex],
+        [password.text, setPassword, /(\w+)/],
+      ] as [string, typeof setName, RegExp][]
+    ).filter((elem) => !elem[0] || !elem[2].test(elem[0]));
+
+    if (inValid.length) {
+      inValid.map(([text, setState]) =>
+        setState({ text, error: "Field is invalid" })
+      );
+      return;
+    }
+
     setLoading(true);
 
     await signUp(name.text, email.text, password.text)
@@ -80,11 +95,16 @@ const SignUp: React.FC = () => {
           Create your team account
         </Typography>
         <Box py={2}>
-          <FormControl fullWidth className={classes.formField}>
+          <FormControl
+            error={!!name.error}
+            fullWidth
+            className={classes.formField}
+          >
             <TextField
               fullWidth
               placeholder="Display Name"
               variant="outlined"
+              error={!!name.error}
               value={name.text}
               onChange={(e) => {
                 setName({ error: "", text: e.target.value });
@@ -103,17 +123,19 @@ const SignUp: React.FC = () => {
             />
             <FormHelperText>{name.error}</FormHelperText>
           </FormControl>
-          <FormControl fullWidth className={classes.formField}>
+          <FormControl
+            error={!!email.error}
+            fullWidth
+            className={classes.formField}
+          >
             <TextField
               fullWidth
               placeholder="Email"
               variant="outlined"
+              error={!!email.error}
               value={email.text}
               onChange={(e) => {
                 setEmail({ error: "", text: e.target.value });
-              }}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") setEmailExist(true);
               }}
               autoFocus
               type="email"
@@ -127,7 +149,11 @@ const SignUp: React.FC = () => {
             />
             <FormHelperText>{email.error}</FormHelperText>
           </FormControl>
-          <FormControl fullWidth className={classes.formField}>
+          <FormControl
+            error={!!password.error}
+            fullWidth
+            className={classes.formField}
+          >
             <TextField
               placeholder="Password"
               variant="outlined"
@@ -160,7 +186,7 @@ const SignUp: React.FC = () => {
           color="primary"
           variant="contained"
           disabled={loading}
-          onClick={() => (!emailExist ? setEmailExist(true) : handleSignUp())}
+          onClick={handleSignUp}
         >
           Register Now
         </Button>

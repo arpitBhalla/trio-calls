@@ -17,6 +17,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Logo from "components/Logo";
 import ShadowBox from "components/ShadowBox";
+import { emailRegex } from "./SignUp";
 
 const INITIAL_STATE = { text: "", error: "" };
 
@@ -35,7 +36,6 @@ const SignIn: React.FC = () => {
   const [firstStepOver, setEmailExist] = React.useState(false);
 
   const handleLogin = async () => {
-    setLoading(true);
     /**
      * For Development Purpose only
      */
@@ -45,10 +45,19 @@ const SignIn: React.FC = () => {
           isAuth: true,
           UID: "60e1a699a61fb074de6a4108",
           displayName: "Arpit Bhalla",
-          email: "Arpit@gs.",
+          email: "arpitbhalla2001@gmail.com",
         })
       );
     }
+    if (!emailRegex.test(email.text)) {
+      return setEmail({ ...email, error: "Field is invalid" });
+    } else if (!firstStepOver) {
+      return setEmailExist(true);
+    } else if (!password.text) {
+      return setPassword({ ...password, error: "Field is invalid" });
+    }
+
+    setLoading(true);
 
     await signIn(email.text, password.text)
       .then((userDetails) => {
@@ -56,6 +65,7 @@ const SignIn: React.FC = () => {
         enqueueSnackbar("Welcome " + userDetails.displayName);
       })
       .catch((error) => {
+        console.log({ error });
         enqueueSnackbar(error || "SomeThing went wrong", {
           variant: "error",
         });
@@ -87,9 +97,10 @@ const SignIn: React.FC = () => {
         </Typography>
         <Box py={2}>
           <Collapse in={!firstStepOver} timeout={200}>
-            <FormControl fullWidth>
+            <FormControl error={!!email.error} fullWidth>
               <TextField
                 fullWidth
+                error={!!email.error}
                 margin="normal"
                 placeholder="Email"
                 variant="outlined"
@@ -116,7 +127,7 @@ const SignIn: React.FC = () => {
 
           <Collapse in={firstStepOver} timeout={200}>
             <>
-              <FormControl fullWidth>
+              <FormControl error={!!password.error} fullWidth>
                 <TextField
                   margin="normal"
                   placeholder="Password"
@@ -164,7 +175,7 @@ const SignIn: React.FC = () => {
           color="primary"
           variant="contained"
           disabled={loading}
-          onClick={() => (!firstStepOver ? setEmailExist(true) : handleLogin())}
+          onClick={handleLogin}
         >
           {firstStepOver ? "Login" : "Next"}
         </Button>

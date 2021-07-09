@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 // State for meeting & other participants
 
-type MeetParticipants = {
+export type MeetParticipants = {
   UID: string; // _id of user
   displayName: string;
   isSharing: boolean;
@@ -9,8 +9,9 @@ type MeetParticipants = {
   isHost: boolean;
 };
 
-type Chat = {
+export type Chat = {
   MID: string;
+  UID: string;
   displayName: string;
   message: string;
   time: string;
