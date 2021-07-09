@@ -26,6 +26,7 @@
     "react-sketch-canvas": "^5.3.4",
     "redux": "^4.1.0",
     "socket.io-client": "^4.1.2",
+    "source-map-explorer": "^2.5.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
@@ -34,7 +35,9 @@
     "test": "jest",
     "eject": "react-scripts eject",
     "lint": "eslint .",
-    "prettify": "prettier ."
+    "prettify": "prettier .",
+    "preanalyze": "react-scripts build",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {
     "extends": [

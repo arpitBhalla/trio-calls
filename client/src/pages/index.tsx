@@ -55,7 +55,7 @@ const Routes: React.FC = () => {
     }
     const time = setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 200);
     return () => {
       clearTimeout(time);
     };

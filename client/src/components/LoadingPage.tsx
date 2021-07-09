@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
     color: "#fff",
     display: "flex",
+    backgroundColor: "#fff",
     flexDirection: "column",
   },
 }));
