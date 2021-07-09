@@ -5,9 +5,10 @@ import Box from "@material-ui/core/Box";
 import Controller from "./components/Controller";
 import clsx from "clsx";
 import { useVideoConf } from "core/hooks/useVideoConf";
-import VideoBox from "./components/VideoBox";
+import Video from "./components/Video";
 import Grid, { GridSize } from "@material-ui/core/Grid";
 import LeftBar from "./components/LeftBar";
+import Sketch from "./components/Sketch";
 interface Props {
   a?: unknown;
 }
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 const App: React.FC<Props> = () => {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles({ open });
-  const { myStream } = useVideoConf();
+  // const { myStream } = useVideoConf();
 
   const TOTAL_PARTICIPANTS = 1 + 1;
   const GRID_SIZE = 12 / TOTAL_PARTICIPANTS;
@@ -61,6 +62,7 @@ const App: React.FC<Props> = () => {
       <SideBar open={open} setOpen={setOpen} />
       <Controller />
       <LeftBar />
+      <Sketch />
     </>
   );
 };

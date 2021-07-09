@@ -11,6 +11,7 @@ import Logo from "./Logo";
 import { toggleDarkMode } from "core/reducers/theme";
 import IconButton from "@material-ui/core/IconButton";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
+import Brightness7Icon from "@material-ui/icons/Brightness7";
 
 type HeaderProps = {
   elevation?: number;
@@ -35,7 +36,12 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   const classes = useStyles({ toolBarBottomMargin });
   const dispatch = useAppDispatch();
-  const { displayName } = useAppSelector(({ authReducer }) => authReducer);
+  const { displayName, useDark } = useAppSelector(
+    ({ authReducer: { displayName }, themeReducer: { useDark } }) => ({
+      displayName,
+      useDark,
+    })
+  );
 
   const handleClick = () => {
     dispatch(
@@ -58,7 +64,7 @@ const Header: React.FC<HeaderProps> = ({
           Microsoft Teams
         </Typography>
         <IconButton aria-label="toggle theme" onClick={handleToggleTheme}>
-          <Brightness4Icon />
+          {!useDark ? <Brightness4Icon /> : <Brightness7Icon />}
         </IconButton>
         <Tooltip title="Logout">
           <Chip

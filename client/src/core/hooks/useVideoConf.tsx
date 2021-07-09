@@ -16,6 +16,7 @@ export const useVideoConf = () => {
       path: "/peerjs",
       host: "localhost",
       port: 4000,
+      debug: 3,
     });
     peerJs.current.on("open", (id) => {
       socketClient.emit("join-room", meetReducer.meetDetails.meetID, id);

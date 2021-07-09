@@ -32,9 +32,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-type VideoProps = { stream: MediaStream; displayName?: string };
+type VideoProps = React.VideoHTMLAttributes<HTMLVideoElement> & {
+  stream: MediaStream;
+  displayName?: string;
+};
 
-const Video: React.FC<VideoProps> = ({ stream, displayName = "You" }) => {
+const Video: React.FC<VideoProps> = ({
+  stream,
+  displayName = "You",
+  ...props
+}) => {
   const classes = useStyles();
   const videoController = React.useRef<HTMLVideoElement>(null);
   React.useEffect(() => {
@@ -46,7 +53,12 @@ const Video: React.FC<VideoProps> = ({ stream, displayName = "You" }) => {
   return (
     <Box className={classes.root}>
       {Math.random() ? (
-        <video className={classes.video} ref={videoController} autoPlay></video>
+        <video
+          className={classes.video}
+          ref={videoController}
+          autoPlay
+          {...props}
+        />
       ) : (
         <Typography className={classes.text} variant="h5" color="textSecondary">
           Camera is off

@@ -43,7 +43,7 @@ const NewMeetComponent: React.FC = () => {
         history.push(`/${meetID}`);
       })
       .catch((error) => {
-        enqueueSnackbar(error?.message || "SomeThing went wrong", {
+        enqueueSnackbar(error || "Something went wrong", {
           variant: "error",
         });
       })

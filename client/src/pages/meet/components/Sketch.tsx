@@ -1,39 +1,176 @@
-import * as React from "react";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import CloseIcon from "@material-ui/icons/Close";
+import Slide from "@material-ui/core/Slide";
 import { ReactSketchCanvas } from "react-sketch-canvas";
+import Slider from "@material-ui/core/Slider";
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+import Tooltip from "@material-ui/core/Tooltip";
+import clsx from "clsx";
 
-const styles = {
-  border: "0.0625rem solid #9c9c9c",
-  borderRadius: "0.25rem",
-};
-
-const Canvas = () => {
-  return (
-    <ReactSketchCanvas
-      style={styles}
-      width="600"
-      height="400"
-      strokeWidth={4}
-      strokeColor="red"
-      onUpdate={console.log}
-    />
-  );
-};
+import BrushOutlinedIcon from "@material-ui/icons/BrushOutlined";
+import FormatPaintOutlinedIcon from "@material-ui/icons/FormatPaintOutlined";
+import UndoOutlinedIcon from "@material-ui/icons/UndoOutlined";
+import RedoOutlinedIcon from "@material-ui/icons/RedoOutlined";
+import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import GetAppOutlinedIcon from "@material-ui/icons/GetAppOutlined";
 
 type SketchProps = {
   open: boolean;
+  onClose: () => unknown;
 };
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  appBar: {
+    position: "relative",
+    marginBottom: theme.spacing(3),
+  },
+  title: {
+    marginLeft: theme.spacing(2),
+    flex: 1,
+  },
+  activeTool: { backgroundColor: "#e4e4e4" },
 }));
 
-const Sketch: React.FC<SketchProps> = ({ open }) => {
+const Transition = React.forwardRef(function Transition(props, ref) {
+  //@ts-ignore
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+const Sketch: React.FC<SketchProps> = ({ open, onClose }) => {
   const classes = useStyles();
+  const [color, setColor] = React.useState("red");
+  const [size, setSize] = React.useState(4);
+  const [tool, setTool] = React.useState("");
+  const sketchRef = React.useRef<ReactSketchCanvas | null>(null);
+
+  function downloadFile(fileName: string, data: string): void {
+    const linkSource = "data:png;base64" + data;
+    const downloadLink = document.createElement("a");
+    downloadLink.href = linkSource;
+    downloadLink.download = fileName;
+    downloadLink.click();
+  }
+
+  const tools: [
+    string,
+    typeof BrushOutlinedIcon,
+    React.MouseEventHandler<HTMLButtonElement>
+  ][] = [
+    [
+      "Draw",
+      BrushOutlinedIcon,
+      () => {
+        setTool("Draw");
+        sketchRef.current?.eraseMode(false);
+      },
+    ],
+    [
+      "Erase",
+      FormatPaintOutlinedIcon,
+      () => {
+        setTool("Erase");
+        sketchRef.current?.eraseMode(true);
+      },
+    ],
+    ["Undo", UndoOutlinedIcon, () => sketchRef.current?.undo()],
+    ["Redo", RedoOutlinedIcon, () => sketchRef.current?.redo()],
+    ["Clean", DeleteOutlineIcon, () => sketchRef.current?.clearCanvas()],
+    [
+      "Download",
+      GetAppOutlinedIcon,
+      () =>
+        sketchRef.current
+          ?.exportImage("png")
+          .then((e) => downloadFile("Me.png", e)),
+    ],
+  ];
+
   return (
-    <>
-      <Canvas />
-    </>
+    <Dialog
+      fullScreen
+      open={open}
+      onClose={onClose}
+      // @ts-ignore
+      TransitionComponent={Transition}
+    >
+      <AppBar className={classes.appBar}>
+        <Toolbar>
+          <IconButton
+            edge="start"
+            color="inherit"
+            onClick={onClose}
+            aria-label="close"
+          >
+            <CloseIcon />
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            White Board
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Container maxWidth="lg">
+        <Grid container spacing={1}>
+          <Grid item xs={1} direction="column">
+            {tools.map(([title, Icon, handler]) => (
+              <Tooltip placement="right" title={title} key={title}>
+                <IconButton
+                  aria-label={title}
+                  onClick={handler}
+                  className={clsx(title === tool && classes.activeTool)}
+                >
+                  <Icon color="action" />
+                </IconButton>
+              </Tooltip>
+            ))}
+          </Grid>
+          <Grid item xs={11}>
+            <ReactSketchCanvas
+              ref={sketchRef}
+              height="400px"
+              strokeWidth={size}
+              eraserWidth={size}
+              strokeColor={color}
+              // onUpdate={console.log}
+            />
+          </Grid>
+        </Grid>
+        <Container maxWidth="sm">
+          <Grid container spacing={1}>
+            <Grid item xs={6} justify="center">
+              {["red", "green", "#e7e700", "blue", "purple", "orange"].map(
+                (item) => (
+                  <IconButton
+                    style={{ backgroundColor: item, margin: 5 }}
+                    key={item}
+                    onClick={() => {
+                      setColor(item);
+                    }}
+                  />
+                )
+              )}
+            </Grid>
+            <Grid item xs={6}>
+              <Slider
+                value={size}
+                onChange={(_event, value) => setSize(value as number)}
+                aria-labelledby="pencil size"
+                min={2}
+                max={40}
+              />
+            </Grid>
+          </Grid>
+        </Container>
+      </Container>
+    </Dialog>
   );
 };
 export default Sketch;

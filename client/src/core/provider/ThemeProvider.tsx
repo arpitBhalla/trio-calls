@@ -3,7 +3,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { CssBaseline } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
-import { deepPurple, lightBlue } from "@material-ui/core/colors";
+import { deepPurple, purple } from "@material-ui/core/colors";
 import { useAppSelector } from "core/hooks/redux";
 
 const App: React.FC = ({ children }) => {
@@ -13,7 +13,10 @@ const App: React.FC = ({ children }) => {
     () =>
       createMuiTheme({
         palette: {
-          primary: prefersDarkMode || useDark ? lightBlue : deepPurple,
+          primary: {
+            main:
+              prefersDarkMode || useDark ? deepPurple[300] : deepPurple[500],
+          },
           secondary: {
             main: "#6264A7",
           },
