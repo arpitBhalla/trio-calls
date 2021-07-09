@@ -4,8 +4,8 @@ import SideBar from "./components/SidePanel";
 import Box from "@material-ui/core/Box";
 import Controller from "./components/Controller";
 import clsx from "clsx";
-// import { useVideoConf } from "core/hooks/useVideoConf";
-// import Video from "./components/Video";
+import { useVideoConf } from "core/hooks/useVideoConf";
+import Video from "./components/Video";
 import Grid, { GridSize } from "@material-ui/core/Grid";
 import LeftBar from "./components/LeftBar";
 import Sketch from "./components/Sketch";
@@ -30,7 +30,8 @@ const useStyles = makeStyles((theme) => ({
 const App: React.FC<Props> = () => {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles({ open });
-  // const { myStream } = useVideoConf();
+  const { myStream, peerStream } = useVideoConf();
+  console.log(peerStream);
 
   const TOTAL_PARTICIPANTS = 1 + 1;
   const GRID_SIZE = 12 / TOTAL_PARTICIPANTS;
@@ -41,8 +42,8 @@ const App: React.FC<Props> = () => {
         <Box className={clsx(classes.content, open && classes.contentOff)}>
           <Grid container spacing={1}>
             <Grid item xs={GRID_SIZE as GridSize}>
-              <Box display="flex" bgcolor="red" flexGrow={1}>
-                sd
+              <Box display="flex">
+                <Video stream={myStream} isVideo={true} displayName={"You"} />
               </Box>
             </Grid>
             <Grid item xs={GRID_SIZE as GridSize}>

@@ -7,7 +7,6 @@ import {
   useLocation,
 } from "react-router-dom";
 import loadable from "@loadable/component";
-import LinearProgress from "@material-ui/core/LinearProgress";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { useLocalStorage } from "core/hooks/common";
 import { useSnackbar } from "notistack";
@@ -15,16 +14,16 @@ import { updateAuth } from "core/reducers/auth";
 import LoadingPage from "components/LoadingPage";
 
 const Home = loadable(() => import("./home/Home"), {
-  fallback: <LinearProgress />,
+  fallback: <LoadingPage />,
 });
 const Meet = loadable(() => import("./meet/Meet"), {
-  fallback: <LinearProgress />,
+  fallback: <LoadingPage />,
 });
 const Auth = loadable(() => import("./auth"), {
-  fallback: <LinearProgress />,
+  fallback: <LoadingPage />,
 });
 const Chat = loadable(() => import("./chat/Chat"), {
-  fallback: <LinearProgress />,
+  fallback: <LoadingPage />,
 });
 
 const AuthRoute: React.FC<RouteProps> = (props) => {

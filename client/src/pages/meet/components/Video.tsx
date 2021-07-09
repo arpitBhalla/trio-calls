@@ -2,27 +2,30 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
+import Avatar from "@material-ui/core/Avatar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "relative",
-    height: "90%",
-    width: 550,
+    height: 300,
     backgroundColor: "#333333",
+    width: "100%",
     borderRadius: 8,
   },
-  text: {
+  avatar: {
     position: "absolute",
-    top: "45%",
+    top: "35%",
     left: "50%",
     transform: "translateX(-50%)",
     color: "white",
+    width: theme.spacing(10),
+    height: theme.spacing(10),
   },
   video: {
     height: "100%",
     width: "100%",
     objectFit: "cover",
-    borderRadius: 10,
+    borderRadius: 8,
     aspectRatio: "16/9",
   },
   caption: {
@@ -34,26 +37,28 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 type VideoProps = React.VideoHTMLAttributes<HTMLVideoElement> & {
-  stream: MediaStream;
+  stream: MediaStream | undefined;
   displayName?: string;
+  isVideo?: boolean;
 };
 
 const Video: React.FC<VideoProps> = ({
   stream,
   displayName = "You",
+  isVideo,
   ...props
 }) => {
   const classes = useStyles();
   const videoController = React.useRef<HTMLVideoElement>(null);
   React.useEffect(() => {
-    if (videoController.current) {
+    if (videoController.current && stream) {
       videoController.current.srcObject = stream;
     }
   }, [stream]);
 
   return (
     <Box className={classes.root}>
-      {Math.random() ? (
+      {isVideo ? (
         <video
           className={classes.video}
           ref={videoController}
@@ -61,9 +66,7 @@ const Video: React.FC<VideoProps> = ({
           {...props}
         />
       ) : (
-        <Typography className={classes.text} variant="h5" color="textSecondary">
-          Camera is off
-        </Typography>
+        <Avatar className={classes.avatar}>A</Avatar>
       )}
       <Typography
         className={classes.caption}

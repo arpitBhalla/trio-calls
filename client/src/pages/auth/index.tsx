@@ -8,14 +8,14 @@ import {
 } from "react-router-dom";
 import { useAppSelector } from "core/hooks/redux";
 import loadable from "@loadable/component";
-import LinearProgress from "@material-ui/core/LinearProgress";
 import NotFound from "components/NotFound";
+import LoadingPage from "components/LoadingPage";
 
 const SignIn = loadable(() => import("./SignIn"), {
-  fallback: <LinearProgress />,
+  fallback: <LoadingPage />,
 });
 const SignUp = loadable(() => import("./SignUp"), {
-  fallback: <LinearProgress />,
+  fallback: <LoadingPage />,
 });
 
 const Auth: React.FC = () => {

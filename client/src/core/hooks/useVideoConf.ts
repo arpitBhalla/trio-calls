@@ -1,93 +1,20 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Peer from "peerjs";
 import { useAppSelector } from "core/hooks/redux";
 import { useSocket } from "./useSocket";
 
-export const useVideoConf = () => {
+type VideoConf = {
+  myStream: MediaStream | undefined;
+  peerStream: Map<string, MediaStream> | undefined;
+};
+
+export const useVideoConf = (): VideoConf => {
   const peers = React.useRef<Record<string, Peer.MediaConnection>>();
   const myStream = React.useRef<MediaStream>();
   const peerStream = React.useRef<Map<string, MediaStream>>();
   const peerJs = React.useRef<Peer>();
   const socketClient = useSocket();
-  const { mediaReducer, meetReducer } = useAppSelector((s) => s);
-
-  useEffect(() => {
-    peerJs.current = new Peer(undefined, {
-      path: "/peerjs",
-      host: "localhost",
-      port: 4000,
-      debug: 3,
-    });
-    peerJs.current.on("open", (id) => {
-      socketClient.emit("join-room", meetReducer.meetDetails.meetID, id);
-    });
-    navigator.mediaDevices
-      .getUserMedia({
-        video: true,
-        audio: true,
-      })
-      .then((stream) => {
-        myStream.current = stream;
-        // handleAddVideoStream(myVideo, stream);
-        handleAnswerCall(stream);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
-    socketClient.on("user-disconnected", (userId: string) => {
-      if (peers.current) {
-        peers.current[userId].close();
-      }
-      socketClient.disconnect();
-    });
-
-    handleNewUserJoin();
-
-    return () => {
-      socketClient.off();
-    };
-  }, []);
-  const handleAnswerCall = (stream: MediaStream) => {
-    peerJs.current?.on("call", (call) => {
-      call.answer(stream);
-      // call.on("stream", (userVideoStream) => {
-      //   // peerStream.current?.add(userVideoStream);
-      // });
-    });
-  };
-
-  const handleNewUserJoin = () => {
-    socketClient.on("user-connected", (userId) => {
-      navigator.mediaDevices
-        .getUserMedia({
-          video: true,
-          //audio: true, // For Testing Purpose
-        })
-        .then((stream) => {
-          const call = peerJs.current?.call(userId, stream);
-          const video = document.createElement("video");
-
-          call?.on("stream", (userVideoStream) => {
-            // handleAddVideoStream(video, userVideoStream);
-            if (userVideoStream) {
-              peerStream.current?.set(userId, userVideoStream);
-            }
-          });
-
-          call?.on("close", () => {
-            video.remove();
-          });
-
-          if (peers.current) {
-            call && (peers.current[userId] = call);
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    });
-  };
+  const { mediaReducer } = useAppSelector((s) => s);
 
   React.useEffect(() => {
     if (myStream.current) {
@@ -101,23 +28,130 @@ export const useVideoConf = () => {
     }
   }, [mediaReducer.isVideo]);
 
-  return { myStream, peerStream };
-  // MESSAGE PART
-  // const handleMessage = (event) => {
-  //   setMessage(event.target.value);
-  // };
+  React.useEffect(() => {
+    peerJs.current = new Peer(undefined, {
+      path: "/peerjs",
+      host: "localhost",
+      port: 4000,
+      debug: 3,
+    });
+    socketEvents();
+    initializePeersEvents();
+  }, []);
 
-  // const handleSendMessage = (event) => {
-  //   event.preventDefault();
-  //   socketClient.current?.emit("message", {
-  //     message: message,
-  //     userId: peerJs.current?.id,
-  //   });
-  //   setMessage("");
-  //   event.target.reset();
-  // };
+  const socketEvents = () => {
+    socketClient.on("connect", () => {
+      console.log("socket connected");
+    });
+    socketClient.on("user-disconnected", (userID) => {
+      console.log("user disconnected-- closing peers", userID);
+      peers.current?.[userID].close();
+      // this.removeVideo(userID);
+    });
+    socketClient.on("disconnect", () => {
+      console.log("socket disconnected --");
+    });
+    socketClient.on("error", (err) => {
+      console.log("socket error --", err);
+    });
+  };
 
-  // const handleLeaveMeet = () => {
-  //   window.location.href = "/";
+  const initializePeersEvents = () => {
+    peerJs.current?.on("open", (id) => {
+      const roomID = window.location.pathname.split("/")[2];
+      const userData = {
+        userID: id,
+        roomID,
+      };
+      console.log("peers established and joined room", userData);
+      socketClient.emit("join-room", userData);
+      setNavigatorToStream();
+    });
+    peerJs.current?.on("error", (err) => {
+      console.log("peer connection error", err);
+      peerJs.current?.reconnect();
+    });
+  };
+  const setNavigatorToStream = () => {
+    getVideoAudioStream().then((stream) => {
+      if (stream) {
+        setPeersListeners(stream);
+        newUserConnection(stream);
+      }
+    });
+  };
+  const getVideoAudioStream = (video = true, audio = true) => {
+    const myNavigator = navigator.mediaDevices.getUserMedia;
+
+    return myNavigator({
+      video: video
+        ? {
+            frameRate: 12,
+            noiseSuppression: true,
+            width: { min: 640, ideal: 1280, max: 1920 },
+            height: { min: 480, ideal: 720, max: 1080 },
+          }
+        : false,
+      audio: audio,
+    });
+  };
+  const setPeersListeners = (stream: MediaStream) => {
+    peerJs.current?.on("call", (call) => {
+      call.answer(stream);
+      call.on("stream", (userVideoStream) => {
+        console.log("user stream data", userVideoStream);
+        peerStream.current?.set(call.metadata.id, userVideoStream);
+      });
+      call.on("close", () => {
+        console.log("closing peers listeners", call.metadata.id);
+        peerStream.current?.delete(call.metadata.id);
+      });
+      call.on("error", () => {
+        console.log("peer error ------");
+        peerStream.current?.delete(call.metadata.id);
+      });
+      peers.current && (peers.current[call.metadata.id] = call);
+    });
+  };
+  const newUserConnection = (stream: MediaStream) => {
+    socketClient.on("user-connected", (userData) => {
+      console.log("New User Connected", userData);
+      connectToNewUser(userData, stream);
+    });
+  };
+  const connectToNewUser = (
+    userData: { userID: string },
+    stream: MediaStream
+  ) => {
+    const { userID } = userData;
+    const call = peerJs.current?.call(userID, stream, {
+      metadata: { id: peerJs.current?.id },
+    });
+    call?.on("stream", (userVideoStream) => {
+      peerStream.current?.set(userID, userVideoStream);
+    });
+    call?.on("close", () => {
+      console.log("closing new user", userID);
+      peerStream.current?.delete(userID);
+    });
+    call?.on("error", () => {
+      console.log("peer error ------");
+      console.log("closing new user", userID);
+    });
+    peers.current?.[userID] && call && (peers.current[userID] = call);
+  };
+  // const destoryConnection = () => {
+  //   const myMediaTracks =
+  //     // this.videoContainer[peerJs.current?.id]?.stream.getTracks();
+  //     myMediaTracks?.forEach((track: any) => {
+  //       track.stop();
+  //     });
+  //   socketClient.disconnect();
+  //   peerJs.current?.destroy();
   // };
+  return {
+    myStream: myStream.current,
+    peerStream: peerStream.current,
+    // mediaReducer,
+  };
 };
