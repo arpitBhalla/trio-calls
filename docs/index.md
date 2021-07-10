@@ -16,7 +16,7 @@
 ### Classroom specific features
 
 - Realtime whiteboard 📋 with multiple tools.
-- Take attendance <u>`anytime`</u> during lecture (Non attentive students will miss theirs 😈).
+- Take attendance <i>anytime</i> during lecture (Non attentive students will miss theirs 😈).
 - Get notified if student changes tab or doing other activities during lectures. 😹 (Yet they can do it on mobile phones)
 
 ### Code features
@@ -82,7 +82,8 @@ npm start # in server directory /server
 
 ## Workflow
 
-<img src='../assets/workflow.png' />
+![Workflow](https://user-images.githubusercontent.com/55053424/125153081-1a12ef00-e16f-11eb-9da1-1f4481af451d.png)
+
 
 ## Lighthouse
 
