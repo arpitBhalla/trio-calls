@@ -11,6 +11,7 @@ import mongoose from "mongoose";
 import chalk from "chalk";
 import { Server } from "socket.io";
 import { ChatModel } from "./models/chat";
+import { MeetModel } from "./models/meeting";
 
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/teams";
 
@@ -23,6 +24,7 @@ console.log(
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: true,
 });
 
 const app = express();
@@ -55,14 +57,34 @@ io.on("connection", (socket) => {
     const { meetID, userID } = userData;
     console.log("Joined ", meetID, userID, userData);
     socket.join(meetID);
-    socket.broadcast.to(meetID).emit("user-connected", userData);
+
+    // Broadcast only if user is connected to video call, userID is not available for chats only
+    if (userID) {
+      socket.broadcast.to(meetID).emit("user-connected", userData);
+    }
+
+    socket.on("sendMessage", async (incomingData) => {
+      console.log("message", incomingData);
+      const msgData = await new ChatModel(incomingData).save();
+      await MeetModel.findOneAndUpdate(
+        { meetID },
+        { $push: { chat: msgData } }
+      );
+      io.to(meetID).emit("newMessage", msgData);
+    });
+
+    socket.on("raiseHand", async (incomingData) => {
+      console.log("raiseHand", incomingData);
+      io.to(meetID).emit("raiseHand", incomingData);
+    });
+
+    socket.on("changeTab", async (incomingData) => {
+      console.log("changeTab", incomingData);
+      io.to(meetID).emit("changeTab", incomingData);
+    });
+
     socket.on("disconnect", () => {
       socket.broadcast.to(meetID).emit("user-disconnected", userID);
-    });
-    socket.on("message", async (msgData) => {
-      console.log("message", msgData);
-      await new ChatModel(msgData).save();
-      io.to(meetID).emit("createMessage", msgData);
     });
   });
 });

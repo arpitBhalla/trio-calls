@@ -31,17 +31,20 @@ const App: React.FC<Props> = () => {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles({ open });
   const { myStream, peerStream, destroyConnection } = useVideoConf();
-  console.log(peerStream, myStream);
+  const [gridSize, setGridSize] = React.useState(1);
 
-  const TOTAL_PARTICIPANTS = 2;
-  const GRID_SIZE = 12 / TOTAL_PARTICIPANTS;
+  React.useEffect(() => {
+    const TOTAL_PARTICIPANTS = 2;
+    const GRID_SIZE = 12 / TOTAL_PARTICIPANTS;
+    setGridSize(GRID_SIZE);
+  }, [peerStream.current, myStream.current]);
 
   return (
     <>
       <Box display="flex" height="88vh">
         <Box className={clsx(classes.content, open && classes.contentOff)}>
           <Grid container spacing={1}>
-            <Grid item xs={GRID_SIZE as GridSize}>
+            <Grid item xs={gridSize as GridSize} justify="center">
               <Box display="flex" height={"100%"}>
                 <Video
                   stream={myStream.current}
@@ -52,7 +55,7 @@ const App: React.FC<Props> = () => {
             </Grid>
             {Array.from(peerStream.current || []).map(([key, stream]) => {
               return (
-                <Grid key={key} item xs={GRID_SIZE as GridSize}>
+                <Grid key={key} item xs={gridSize as GridSize}>
                   <Box display="flex" height={"100%"}>
                     <Video stream={stream} isVideo={true} displayName={key} />
                   </Box>

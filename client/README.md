@@ -1,36 +1,53 @@
-```tree
-.
+# Front End
+
+## Directory Structure
+
+````dir
 ├── assets
 │   └── teams.png
 ├── components
 │   ├── Chat
-│   │   ├── ChatLayout.tsx
 │   │   ├── ChatMessage.tsx
 │   │   ├── ChatTextInput.tsx
 │   │   └── index.tsx
 │   ├── ControllerButton.tsx
 │   ├── Header.tsx
+│   ├── LoadingPage.tsx
 │   ├── Logo.tsx
+│   ├── NotFound.tsx
 │   └── ShadowBox.tsx
 ├── core
-│   ├── actions
+│   ├── hooks
+│   │   ├── common.ts
+│   │   ├── redux.ts
+│   │   ├── useDocVisible.ts
+│   │   ├── useMsgs.ts
+│   │   ├── useSocket.ts
+│   │   ├── useVideoConf.ts
+│   │   └── useWndFocus.ts
+│   ├── provider
+│   │   ├── SocketProvider.tsx
+│   │   └── ThemeProvider.tsx
+│   ├── reducers
 │   │   ├── auth.ts
 │   │   ├── media.ts
 │   │   ├── meeting.ts
 │   │   └── theme.ts
-│   ├── hooks
-│   │   ├── common.ts
-│   │   └── redux.ts
-│   ├── const.ts
+│   ├── config.ts
 │   ├── store.ts
 │   └── theme.ts
 ├── pages
 │   ├── auth
-│   │   └── Auth.tsx
+│   │   ├── index.tsx
+│   │   ├── SignIn.tsx
+│   │   └── SignUp.tsx
 │   ├── chat
 │   │   ├── components
+│   │   │   ├── ChatHeader.tsx
+│   │   │   ├── ChatMsgs.tsx
 │   │   │   └── ChatParticipants.tsx
-│   │   └── Chat.tsx
+│   │   ├── Chat.tsx
+│   │   └── index.tsx
 │   ├── home
 │   │   ├── components
 │   │   │   ├── JoinMeet.tsx
@@ -38,11 +55,17 @@
 │   │   └── Home.tsx
 │   ├── meet
 │   │   ├── components
+│   │   │   ├── SidePanel
+│   │   │   │   ├── ChatBox.tsx
+│   │   │   │   ├── index.tsx
+│   │   │   │   ├── Info.tsx
+│   │   │   │   └── Participants.tsx
 │   │   │   ├── Controller.tsx
-│   │   │   ├── Participants.tsx
-│   │   │   ├── SideBar.tsx
+│   │   │   ├── LeftBar.tsx
+│   │   │   ├── Preview.tsx
 │   │   │   ├── Sketch.tsx
-│   │   │   └── VideoPreview.tsx
+│   │   │   └── Video.tsx
+│   │   ├── index.tsx
 │   │   ├── Meet.tsx
 │   │   └── WaitRoom.tsx
 │   └── index.tsx
@@ -51,17 +74,13 @@
 │   ├── axios.fetch.ts
 │   ├── common.test.ts
 │   ├── common.ts
-│   ├── media.ts
 │   ├── meeting.fetch.ts
-│   ├── socket.ts
 │   └── types.ts
-├── App.css
-├── App.test.js
+├── App.test.tsx
 ├── App.tsx
-├── Home.js
 ├── index.tsx
 ├── react-app-env.d.ts
 ├── reportWebVitals.ts
-├── setupTests.ts
-└── Video.js
-```
+├── serviceWorker.ts
+└── setupTests.ts```
+````

@@ -3,6 +3,7 @@ import Peer from "peerjs";
 import { useAppSelector } from "core/hooks/redux";
 import { iceServers } from "core/config";
 import { useSocket } from "./useSocket";
+import { useHistory } from "react-router-dom";
 
 export const useVideoConf = () => {
   const peers = React.useRef<Record<string, Peer.MediaConnection>>();
@@ -10,6 +11,7 @@ export const useVideoConf = () => {
   const peerStream = React.useRef<Map<string, MediaStream>>();
   const peerJs = React.useRef<Peer>();
   const socketClient = useSocket();
+  const history = useHistory();
   const { mediaReducer, meetReducer } = useAppSelector((s) => s);
 
   React.useEffect(() => {
@@ -28,9 +30,9 @@ export const useVideoConf = () => {
     peers.current = {};
     peerStream.current = new Map();
     peerJs.current = new Peer({
-      path: "/peerjs",
-      host: "imersify.el.r.appspot.com",
-      port: 80,
+      path: "/",
+      host: "0.peerjs.com",
+      port: 443,
       config: { iceServers },
     });
     socketEvents();
@@ -144,6 +146,7 @@ export const useVideoConf = () => {
     });
     socketClient.disconnect();
     peerJs.current?.destroy();
+    history.push("/");
   };
   return {
     myStream,

@@ -9,11 +9,9 @@ import Container from "@material-ui/core/Container";
 import Fab from "@material-ui/core/Fab";
 import VoiceChatOutlinedIcon from "@material-ui/icons/VoiceChatOutlined";
 import Tooltip from "@material-ui/core/Tooltip";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import loadable from "@loadable/component";
 import LinearProgress from "@material-ui/core/LinearProgress";
-
-type Props = { a?: unknown };
 
 const ChatParticipants = loadable(
   () => import("./components/ChatParticipants"),
@@ -36,11 +34,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Chat: React.FC<Props> = () => {
+const Chat: React.FC = () => {
   useTitle("Chats");
   const history = useHistory();
   const classes = useStyles();
+  const { meetID } = useParams<{ meetID: string }>();
   const [activeMeetID, setActiveMeetID] = React.useState("");
+  console.log(meetID);
   return (
     <>
       <Tooltip title="Video Calls">
@@ -55,49 +55,14 @@ const Chat: React.FC<Props> = () => {
       <Header toolBarBottomMargin={2} />
       <Container maxWidth="md">
         <ShadowBox>
+          {meetID}
           <ChatHeader />
           <Grid container>
             <Grid item sm={4} className={classes.chatList}>
-              <ChatParticipants
+              {/* <ChatParticipants
                 onClick={setActiveMeetID}
                 selectedMeetID={activeMeetID}
                 chats={[
-                  {
-                    displayName: "Arpit Bhalla",
-                    lastMessage: "Hello World",
-                    meetID: "2a",
-                    lastMessageTime: "Now",
-                  },
-                  {
-                    displayName: "Arpit Bhalla",
-                    lastMessage: "Hello World",
-                    meetID: "2",
-                    lastMessageTime: "Now",
-                  },
-                  {
-                    displayName: "Arpit Bhalla",
-                    lastMessage: "Hello World",
-                    meetID: "2",
-                    lastMessageTime: "Now",
-                  },
-                  {
-                    displayName: "Arpit Bhalla",
-                    lastMessage: "Hello World",
-                    meetID: "2",
-                    lastMessageTime: "Now",
-                  },
-                  {
-                    displayName: "Arpit Bhalla",
-                    lastMessage: "Hello World",
-                    meetID: "2",
-                    lastMessageTime: "Now",
-                  },
-                  {
-                    displayName: "Arpit Bhalla",
-                    lastMessage: "Hello World",
-                    meetID: "2",
-                    lastMessageTime: "Now",
-                  },
                   {
                     displayName: "Arpit Bhalla",
                     lastMessage: "Hello World",
@@ -105,10 +70,10 @@ const Chat: React.FC<Props> = () => {
                     lastMessageTime: "Now",
                   },
                 ]}
-              />
+              /> */}
             </Grid>
             <Grid item sm={8}>
-              <ChatMsgs />
+              {/* <ChatMsgs /> */}
             </Grid>
           </Grid>
         </ShadowBox>

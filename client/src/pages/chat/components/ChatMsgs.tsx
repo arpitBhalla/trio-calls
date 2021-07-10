@@ -1,8 +1,9 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-import Paper from "@material-ui/core/Paper";
 import { ChatMessage, ChatTextInput } from "components/Chat";
+import { useMsgs } from "core/hooks/useMsgs";
+import { useSocket } from "core/hooks/useSocket";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,30 +21,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ChatMsgs: React.FC = () => {
+type ChatMsgsProps = {
+  meetID: string;
+};
+
+const ChatMsgs: React.FC<ChatMsgsProps> = ({ meetID }) => {
   const classes = useStyles();
+  const { chat, sendMessage, UID: userID } = useMsgs();
+  const socketClient = useSocket();
+
+  React.useEffect(() => {
+    socketClient.emit("join-room", {
+      meetID,
+    });
+    return () => {
+      socketClient.off();
+    };
+  }, []);
   return (
     <Box className={classes.root}>
       <Box className={classes.chatRoot}>
-        <ChatMessage
-          hideAvatar
-          displayName="Arpit"
-          message="Hii"
-          isSelf
-          time={new Date().toLocaleTimeString("en-IN", {
-            hour12: true,
-            hour: "numeric",
-            minute: "2-digit",
-          })}
-        />
-        {[...new Array(20)].map((v, i) => (
+        {chat?.map(({ message, displayName, time, UID }, i) => (
           <ChatMessage
             key={i}
             hideAvatar
-            hidePrimary={i % 3 === 0}
-            displayName="Arpit"
-            message="Hii"
-            time={new Date().toLocaleTimeString("en-IN", {
+            // hidePrimary={i % 3 === 0}
+            displayName={displayName}
+            isSelf={UID === userID}
+            message={message}
+            time={new Date(time).toLocaleTimeString("en-IN", {
               hour12: true,
               hour: "numeric",
               minute: "2-digit",
@@ -52,7 +58,7 @@ const ChatMsgs: React.FC = () => {
         ))}
       </Box>
       <Box className={classes.textBox}>
-        <ChatTextInput />
+        <ChatTextInput onSend={sendMessage} />
       </Box>
     </Box>
   );

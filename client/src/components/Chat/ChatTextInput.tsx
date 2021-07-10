@@ -6,7 +6,7 @@ import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
 import Fab from "@material-ui/core/Fab";
 
 type ChatTextInputProps = {
-  onSend?: React.MouseEventHandler<HTMLButtonElement>;
+  onSend?: (message: string) => unknown;
   isSmall?: boolean;
 };
 
@@ -22,11 +22,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ChatTextInput: React.FC<ChatTextInputProps> = ({
-  onSend = (e) => e,
-  isSmall,
-}) => {
+const ChatTextInput: React.FC<ChatTextInputProps> = ({ onSend, isSmall }) => {
   const classes = useStyles();
+  const [text, setText] = React.useState("");
+
   return (
     <Box className={classes.rootBox}>
       <TextField
@@ -34,6 +33,7 @@ const ChatTextInput: React.FC<ChatTextInputProps> = ({
         placeholder="Send a message to everyone"
         variant="outlined"
         margin={isSmall ? "dense" : "none"}
+        onChange={(e) => setText(e.target.value)}
       />
       <div>
         <Fab
@@ -41,7 +41,7 @@ const ChatTextInput: React.FC<ChatTextInputProps> = ({
           color="primary"
           aria-label="send message"
           className={classes.sendIcon}
-          onClick={onSend}
+          onClick={() => onSend?.(text)}
         >
           <SendOutlinedIcon fontSize={"small"} />
         </Fab>
