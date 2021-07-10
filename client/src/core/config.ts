@@ -1,7 +1,10 @@
 /**
  * URL for hosted Server
  */
-export const ServerURL = process.env.ServerURL || "http://localhost:4000";
+export const ServerURL =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:4000"
+    : "https://imersify.el.r.appspot.com";
 
 /**
  * URLs for ICE Server
