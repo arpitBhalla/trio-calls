@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import VoiceChatOutlinedIcon from "@material-ui/icons/VoiceChatOutlined";
 import { updateMeetDetails } from "core/reducers/meeting";
+import { useTitle } from "core/hooks/common";
 
 type Params = { meetID: string };
 
@@ -28,6 +29,9 @@ const WaitingRoom: React.FC<WaitingRoomProps> = ({ joinMeetHandler }) => {
   const [loading, setLoading] = React.useState(true);
   const [meetOk, setMeetOk] = React.useState<boolean | null>(null);
   const history = useHistory();
+
+  useTitle("Join Meet");
+
   React.useEffect(() => {
     getMeet(meetID, UID)
       .then((details) => {

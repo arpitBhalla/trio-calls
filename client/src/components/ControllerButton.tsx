@@ -18,10 +18,9 @@ const ControlButton: React.FC<ControlButtonProps> = ({
   IconOff,
   onClick,
 }) => (
-  <Tooltip title={title + " " + (isEnabled ? "off" : "on")}>
+  <Tooltip title={title + " " + (!isEnabled ? "off" : "on")}>
     <IconButton onClick={onClick}>
       <ToggleIcon on={isEnabled} onIcon={<IconOn />} offIcon={<IconOff />} />
-      {/* {isEnabled ? <IconOn htmlColor="red" /> : <IconOff />} */}
     </IconButton>
   </Tooltip>
 );

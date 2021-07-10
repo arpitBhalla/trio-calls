@@ -2,10 +2,12 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { useSocket } from "./useSocket";
 import { Chat, updateChat } from "core/reducers/meeting";
+import React from "react";
 
 export const useMsgs = (): {
   sendMessage: (message: string) => void;
-  chat: Set<Chat>;
+  chat: Chat[];
+  UID: string;
 } => {
   const socketClient = useSocket();
   const { chat, UID, displayName } = useAppSelector((state) => ({
@@ -16,30 +18,31 @@ export const useMsgs = (): {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    socketClient.on("getMessage", () => {
+    socketEvents();
+  }, []);
+
+  const socketEvents = () => {
+    socketClient.on("newMessage", (d) => {
+      console.log(d);
       dispatch(
         updateChat({
-          MID: "6as",
-          UID: "76",
-          displayName: "Arpit Bhalla",
-          message: "Hello world",
-          time: "",
+          MID: d._id,
+          UID: d.UID,
+          displayName: d.displayName || "",
+          message: d.message || "",
+          time: d.createdAt || "",
         })
       );
     });
-    return () => {
-      socketClient.off();
-    };
-  }, []);
+  };
 
-  const sendMessage = (message: string) => {
+  const sendMessage = React.useCallback((message: string) => {
     socketClient.emit("sendMessage", {
       displayName,
       message,
       UID,
-      time: new Date().getTime(),
     });
-  };
+  }, []);
 
-  return { sendMessage, chat };
+  return { sendMessage, chat, UID };
 };

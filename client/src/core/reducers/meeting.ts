@@ -29,7 +29,7 @@ export const meetStore = createSlice({
       isHost: false,
     },
     participants: {} as Map<string, MeetParticipants>,
-    chat: {} as Set<Chat>,
+    chat: [] as Chat[],
   },
   reducers: {
     updateMeetDetails: (
@@ -59,7 +59,7 @@ export const meetStore = createSlice({
       state.participants.delete(action.payload.UID);
     },
     updateChat: (state, action: PayloadAction<Chat>) => {
-      state.chat.add(action.payload);
+      state.chat.push(action.payload);
     },
   },
 });

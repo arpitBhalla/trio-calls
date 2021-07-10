@@ -10,6 +10,7 @@ import clsx from "clsx";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
+import { useHistory, useParams } from "react-router-dom";
 
 type Participants = {
   lastMessage?: string;
@@ -20,8 +21,7 @@ type Participants = {
 
 type ChartParticipantsProps = {
   chats?: Participants[];
-  selectedMeetID?: string;
-  onClick?: (meetID: string) => unknown;
+  meetID?: string;
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -41,12 +41,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ChatComponent: React.FC<ChartParticipantsProps> = ({
-  chats,
-  selectedMeetID,
-  onClick,
-}) => {
+const ChatComponent: React.FC<ChartParticipantsProps> = ({ chats, meetID }) => {
   const classes = useStyles();
+  const history = useHistory();
 
   return (
     <>
@@ -71,10 +68,10 @@ const ChatComponent: React.FC<ChartParticipantsProps> = ({
               key={key}
               button
               onClick={() => {
-                onClick?.(chat.meetID || "");
+                history.push(`/chat/${chat.meetID}`);
               }}
               className={clsx({
-                [classes.selectedListItem]: selectedMeetID === chat.meetID,
+                [classes.selectedListItem]: meetID === chat.meetID,
               })}
             >
               <ListItemAvatar>

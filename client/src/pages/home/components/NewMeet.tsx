@@ -36,7 +36,7 @@ const NewMeetComponent: React.FC = () => {
       type: meetingType,
       hostID: UID,
       invitees: meetingInvitees,
-      time: meetingTime.text,
+      time: meetingTime.text || new Date().getTime().toString(),
     })
       .then(({ meetID }) => {
         enqueueSnackbar("New meet created");

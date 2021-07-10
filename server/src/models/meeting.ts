@@ -18,7 +18,7 @@ const schema = new Schema<Meeting>(
     hostID: { type: Schema.Types.ObjectId, ref: "User" },
     invitees: [{ type: String }],
     type: { type: String, enum: ["public", "private"] },
-    meetID: String,
+    meetID: { type: String, required: true, unique: true },
     time: String,
     chat: [{ type: Schema.Types.ObjectId, ref: "Chat" }],
   },

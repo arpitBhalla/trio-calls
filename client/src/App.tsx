@@ -13,7 +13,7 @@ const App: React.FC = () => {
   return (
     <ReduxProvider store={store}>
       <ThemeProvider>
-        <SnackbarProvider maxSnack={3}>
+        <SnackbarProvider preventDuplicate maxSnack={3}>
           <BrowserRouter>
             <SocketProvider>
               <Routes />

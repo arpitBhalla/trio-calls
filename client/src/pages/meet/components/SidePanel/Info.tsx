@@ -20,9 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const InfoPanel: React.FC<Props> = ({
-  meetLink = "https://ms-teams.vercel.app/my-meet-id",
-}) => {
+const InfoPanel: React.FC<Props> = ({ meetLink = window.location.href }) => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
   const handlePress = () => {

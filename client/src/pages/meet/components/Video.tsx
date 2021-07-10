@@ -2,20 +2,20 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import Avatar from "@material-ui/core/Avatar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "relative",
-    // height: "400px",
+    height: "30rem",
+    width: "40rem",
     backgroundColor: "#333333",
-    // width: "100%",
+    maxWidth: "800px",
+    maxHeight: "900px",
     borderRadius: 8,
-    aspectRatio: "16/9",
   },
   avatar: {
     position: "absolute",
-    top: "35%",
+    top: "40%",
     left: "50%",
     transform: "translateX(-50%)",
     color: "white",
@@ -40,13 +40,11 @@ const useStyles = makeStyles((theme) => ({
 type VideoProps = React.VideoHTMLAttributes<HTMLVideoElement> & {
   stream: MediaStream | undefined;
   displayName?: string;
-  isVideo?: boolean;
 };
 
 const Video: React.FC<VideoProps> = ({
   stream,
   displayName = "You",
-  isVideo,
   ...props
 }) => {
   const classes = useStyles();
@@ -59,16 +57,12 @@ const Video: React.FC<VideoProps> = ({
 
   return (
     <Box className={classes.root}>
-      {isVideo ? (
-        <video
-          className={classes.video}
-          ref={videoController}
-          autoPlay
-          {...props}
-        />
-      ) : (
-        <Avatar className={classes.avatar}>A</Avatar>
-      )}
+      <video
+        className={classes.video}
+        ref={videoController}
+        autoPlay
+        {...props}
+      />
       <Typography
         className={classes.caption}
         variant="subtitle1"

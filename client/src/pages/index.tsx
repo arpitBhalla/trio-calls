@@ -22,7 +22,7 @@ const Meet = loadable(() => import("./meet"), {
 const Auth = loadable(() => import("./auth"), {
   fallback: <LoadingPage />,
 });
-const Chat = loadable(() => import("./chat/Chat"), {
+const Chat = loadable(() => import("./chat"), {
   fallback: <LoadingPage />,
 });
 

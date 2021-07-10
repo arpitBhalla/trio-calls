@@ -9,9 +9,6 @@ import Video from "./components/Video";
 import Grid, { GridSize } from "@material-ui/core/Grid";
 import LeftBar from "./components/LeftBar";
 import Sketch from "./components/Sketch";
-interface Props {
-  a?: unknown;
-}
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -27,46 +24,53 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const App: React.FC<Props> = () => {
+const Meet: React.FC = () => {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles({ open });
-  const { myStream, peerStream, destroyConnection } = useVideoConf();
-  console.log(peerStream, myStream);
+  const { myStream, peerStream, destroyConnection, raiseHand, reRender } =
+    useVideoConf();
+  const [gridSize, setGridSize] = React.useState(1);
 
-  const TOTAL_PARTICIPANTS = 2;
-  const GRID_SIZE = 12 / TOTAL_PARTICIPANTS;
+  React.useEffect(() => {
+    const TOTAL_PARTICIPANTS = peerStream.current?.size || 0;
+    const GRID_SIZE = [12, 6, 4, 3, 3, 3, 3][TOTAL_PARTICIPANTS];
+    setGridSize(GRID_SIZE);
+  }, [peerStream.current?.size, myStream.current?.active, reRender]);
 
+  console.log(gridSize, peerStream.current?.size);
   return (
     <>
-      <Box display="flex" height="88vh">
+      <Box display="flex" height="88vh" alignItems="center">
         <Box className={clsx(classes.content, open && classes.contentOff)}>
-          <Grid container spacing={1}>
-            <Grid item xs={GRID_SIZE as GridSize}>
-              <Box display="flex" height={"100%"}>
-                <Video
-                  stream={myStream.current}
-                  isVideo={true}
-                  displayName={"You"}
-                />
+          <Grid container spacing={1} direction="row" alignItems="center">
+            <Grid item xs={gridSize as GridSize}>
+              <Box display="flex" justifyContent="center">
+                <Video stream={myStream.current} displayName={"You"} />
               </Box>
             </Grid>
-            {Array.from(peerStream.current || []).map(([key, stream]) => {
-              return (
-                <Grid key={key} item xs={GRID_SIZE as GridSize}>
-                  <Box display="flex" height={"100%"}>
-                    <Video stream={stream} isVideo={true} displayName={key} />
-                  </Box>
-                </Grid>
-              );
-            })}
+
+            {Array.from(peerStream.current || []).map(
+              ([key, { displayName, stream }]) => {
+                return (
+                  <Grid key={key} item xs={gridSize as GridSize}>
+                    <Box display="flex" justifyContent="center">
+                      <Video stream={stream} displayName={displayName} />
+                    </Box>
+                  </Grid>
+                );
+              }
+            )}
           </Grid>
         </Box>
       </Box>
       <SideBar open={open} setOpen={setOpen} />
-      <Controller endCallHandler={destroyConnection} />
+      <Controller
+        endCallHandler={destroyConnection}
+        raiseHandHandler={raiseHand}
+      />
       <LeftBar />
       <Sketch />
     </>
   );
 };
-export default App;
+export default Meet;

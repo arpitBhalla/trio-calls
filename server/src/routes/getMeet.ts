@@ -7,7 +7,7 @@ const Router = express.Router();
 
 export const GetMeetRoute = Router.post("/", async (req, res) => {
   const { meetID, UID } = req.body;
-  ChatModel.find();
+
   // get Logged in User
   const user = await UserModel.findById(UID);
   if (!user) {

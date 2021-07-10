@@ -41,9 +41,13 @@ const useStyles = makeStyles((theme) => ({
 
 type ControllerProps = {
   endCallHandler: () => unknown;
+  raiseHandHandler: () => unknown;
 };
 
-const Controller: React.FC<ControllerProps> = ({ endCallHandler }) => {
+const Controller: React.FC<ControllerProps> = ({
+  endCallHandler,
+  raiseHandHandler,
+}) => {
   const classes = useStyles();
   const dispatch = useAppDispatch();
   const { isAudio, isVideo, isScreenShare, isWhiteBoard } = useAppSelector(
@@ -69,8 +73,8 @@ const Controller: React.FC<ControllerProps> = ({ endCallHandler }) => {
       <ControlButton
         title="ScreenShare"
         isEnabled={isScreenShare}
-        IconOn={PresentToAllOutlined}
-        IconOff={CancelPresentationOutlined}
+        IconOn={CancelPresentationOutlined}
+        IconOff={PresentToAllOutlined}
         onClick={() => dispatch(toggleScreen(null))}
       />
       <Tooltip title="End Call">
@@ -91,12 +95,15 @@ const Controller: React.FC<ControllerProps> = ({ endCallHandler }) => {
         onClick={() => dispatch(toggleWhiteBoard(null))}
       />
       <Tooltip title="Dark Mode">
-        <IconButton onClick={() => dispatch(toggleDarkMode(null))}>
+        <IconButton
+          aria-label="toggle dark/light mode"
+          onClick={() => dispatch(toggleDarkMode(null))}
+        >
           <Brightness4 />
         </IconButton>
       </Tooltip>
-      <Tooltip title="Raise Hand">
-        <IconButton>
+      <Tooltip title="Raise Hand" aria-label="raise hand">
+        <IconButton onClick={raiseHandHandler}>
           <PanToolOutlined />
         </IconButton>
       </Tooltip>

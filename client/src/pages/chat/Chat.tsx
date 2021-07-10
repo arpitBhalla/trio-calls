@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Header from "components/Header";
 import ShadowBox from "components/ShadowBox";
@@ -9,11 +9,10 @@ import Container from "@material-ui/core/Container";
 import Fab from "@material-ui/core/Fab";
 import VoiceChatOutlinedIcon from "@material-ui/icons/VoiceChatOutlined";
 import Tooltip from "@material-ui/core/Tooltip";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import loadable from "@loadable/component";
 import LinearProgress from "@material-ui/core/LinearProgress";
-
-type Props = { a?: unknown };
+import Typography from "@material-ui/core/Typography";
 
 const ChatParticipants = loadable(
   () => import("./components/ChatParticipants"),
@@ -36,13 +35,44 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Chat: React.FC<Props> = () => {
+const Chat: React.FC = () => {
   useTitle("Chats");
   const history = useHistory();
   const classes = useStyles();
-  const [activeMeetID, setActiveMeetID] = React.useState("");
+  const { meetID } = useParams<{ meetID: string }>();
+
   return (
     <>
+      <Header toolBarBottomMargin={2} />
+      <Container maxWidth="md">
+        <ShadowBox>
+          <ChatHeader title={meetID} />
+          <Grid container>
+            <Grid item sm={4} className={classes.chatList}>
+              <ChatParticipants
+                meetID={meetID}
+                chats={[
+                  {
+                    displayName: "Arpit Bhalla",
+                    lastMessage: "Hello World",
+                    meetID: "1enb-bqag-azj3",
+                    lastMessageTime: "Now",
+                  },
+                ]}
+              />
+            </Grid>
+            <Grid item sm={8}>
+              {meetID ? (
+                <ChatMsgs meetID={meetID} />
+              ) : (
+                <Typography variant="h5" align="center" color="primary">
+                  Select someone to chat.
+                </Typography>
+              )}
+            </Grid>
+          </Grid>
+        </ShadowBox>
+      </Container>
       <Tooltip title="Video Calls">
         <Fab
           color="primary"
@@ -52,67 +82,6 @@ const Chat: React.FC<Props> = () => {
           <VoiceChatOutlinedIcon />
         </Fab>
       </Tooltip>
-      <Header toolBarBottomMargin={2} />
-      <Container maxWidth="md">
-        <ShadowBox>
-          <ChatHeader />
-          <Grid container>
-            <Grid item sm={4} className={classes.chatList}>
-              <ChatParticipants
-                onClick={setActiveMeetID}
-                selectedMeetID={activeMeetID}
-                chats={[
-                  {
-                    displayName: "Arpit Bhalla",
-                    lastMessage: "Hello World",
-                    meetID: "2a",
-                    lastMessageTime: "Now",
-                  },
-                  {
-                    displayName: "Arpit Bhalla",
-                    lastMessage: "Hello World",
-                    meetID: "2",
-                    lastMessageTime: "Now",
-                  },
-                  {
-                    displayName: "Arpit Bhalla",
-                    lastMessage: "Hello World",
-                    meetID: "2",
-                    lastMessageTime: "Now",
-                  },
-                  {
-                    displayName: "Arpit Bhalla",
-                    lastMessage: "Hello World",
-                    meetID: "2",
-                    lastMessageTime: "Now",
-                  },
-                  {
-                    displayName: "Arpit Bhalla",
-                    lastMessage: "Hello World",
-                    meetID: "2",
-                    lastMessageTime: "Now",
-                  },
-                  {
-                    displayName: "Arpit Bhalla",
-                    lastMessage: "Hello World",
-                    meetID: "2",
-                    lastMessageTime: "Now",
-                  },
-                  {
-                    displayName: "Arpit Bhalla",
-                    lastMessage: "Hello World",
-                    meetID: "20",
-                    lastMessageTime: "Now",
-                  },
-                ]}
-              />
-            </Grid>
-            <Grid item sm={8}>
-              <ChatMsgs />
-            </Grid>
-          </Grid>
-        </ShadowBox>
-      </Container>
     </>
   );
 };
