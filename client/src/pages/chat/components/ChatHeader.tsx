@@ -4,10 +4,15 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
+import VoiceChatOutlinedIcon from "@material-ui/icons/VoiceChatOutlined";
+import IconButton from "@material-ui/core/IconButton";
+import { useHistory } from "react-router-dom";
 
 type Props = { title?: string };
 
 const ChatHeader: React.FC<Props> = ({ title }) => {
+  const history = useHistory();
+
   return (
     <AppBar elevation={0} position="static" color="primary">
       <Toolbar>
@@ -17,12 +22,24 @@ const ChatHeader: React.FC<Props> = ({ title }) => {
               <b>Messages</b>
             </Typography>
           </Grid>
-          <Grid item sm={8} style={{ display: "flex", alignItems: "center" }}>
-            <Avatar style={{ margin: 10 }}>
-              {(title || " ")[0].toUpperCase()}
-            </Avatar>
-            <Typography variant="h6">{title}</Typography>
-          </Grid>
+          {title && (
+            <Grid item sm={8} style={{ display: "flex", alignItems: "center" }}>
+              <Avatar style={{ margin: 10 }}>
+                {(title || " ")[0].toUpperCase()}
+              </Avatar>
+              <Typography variant="h6" style={{ flexGrow: 1 }}>
+                {title}
+              </Typography>
+              <IconButton
+                aria-label="call"
+                onClick={() => {
+                  history.push("/" + title);
+                }}
+              >
+                <VoiceChatOutlinedIcon style={{ color: "white" }} />
+              </IconButton>
+            </Grid>
+          )}
         </Grid>
       </Toolbar>
     </AppBar>

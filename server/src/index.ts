@@ -75,7 +75,7 @@ io.on("connection", (socket) => {
 
     socket.on("raiseHand", async (incomingData) => {
       console.log("raiseHand", incomingData);
-      io.to(meetID).emit("raiseHand", incomingData);
+      io.to(meetID).emit("onRaiseHand", incomingData);
     });
 
     socket.on("changeTab", async (incomingData) => {

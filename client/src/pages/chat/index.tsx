@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Switch, Route, useLocation } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import loadable from "@loadable/component";
 import LinearProgress from "@material-ui/core/LinearProgress";
 

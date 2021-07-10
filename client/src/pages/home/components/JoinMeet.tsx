@@ -8,6 +8,8 @@ import { useHistory } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import Chip from "@material-ui/core/Chip";
+import Typography from "@material-ui/core/Typography";
 
 const JoinMeet: React.FC = () => {
   const history = useHistory();
@@ -57,6 +59,21 @@ const JoinMeet: React.FC = () => {
       >
         Join Meeting
       </Button>
+      <br />
+      <br />
+      <Typography variant="caption" color="textSecondary">
+        Recently joined meetings
+      </Typography>
+      <br />
+      {["my1enb-bqag-azj3", "another-meet-id"].map((v) => (
+        <Chip
+          style={{ margin: 2 }}
+          key={v}
+          label={v}
+          variant="outlined"
+          onClick={() => setMeetID({ text: v, error: "" })}
+        />
+      ))}
     </>
   );
 };

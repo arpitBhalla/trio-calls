@@ -1,5 +1,4 @@
 import { makeStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import NewMeet from "./components/NewMeet";
@@ -32,15 +31,7 @@ const Home: React.FC = () => {
   return (
     <>
       <Header />
-      <Tooltip title="Chat">
-        <Fab
-          color="primary"
-          className={classes.fab}
-          onClick={() => history.push("/chat")}
-        >
-          <ChatOutlinedIcon />
-        </Fab>
-      </Tooltip>
+
       <Container maxWidth="md" className={classes.root}>
         <Grid container spacing={1} alignItems="center">
           <Grid item xs={false} sm={7}>
@@ -53,18 +44,23 @@ const Home: React.FC = () => {
             <Fade in timeout={500} unmountOnExit>
               <ShadowBox p={4} py={5}>
                 <JoinMeet />
-                <Typography align="center" variant="h6" color="textSecondary">
-                  or
-                </Typography>
+                <br />
+                <br />
                 <NewMeet />
               </ShadowBox>
-              {/* <Box textAlign="center">
-              <CircularProgress />
-            </Box> */}
             </Fade>
           </Grid>
         </Grid>
       </Container>
+      <Tooltip title="Chat">
+        <Fab
+          color="primary"
+          className={classes.fab}
+          onClick={() => history.push("/chat")}
+        >
+          <ChatOutlinedIcon />
+        </Fab>
+      </Tooltip>
     </>
   );
 };

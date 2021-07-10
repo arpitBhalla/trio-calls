@@ -2,59 +2,44 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import { ChatMessage, ChatTextInput } from "components/Chat";
+import { useMsgs } from "core/hooks/useMsgs";
 
 const useStyles = makeStyles(() => ({
   chatRoot: {
-    height: "88%",
-    overflowY: "auto",
     margin: "10px 0px",
     position: "relative",
+  },
+  chatBox: {
+    height: "60vh",
+    overflowY: "auto",
   },
 }));
 
 const ChatLayout: React.FC = () => {
   const classes = useStyles();
+  const { chat, sendMessage, UID: userID } = useMsgs();
+
   return (
-    <>
-      <Box className={classes.chatRoot}>
-        <ChatMessage
-          hideAvatar
-          displayName="Arpit"
-          message="Hii"
-          isSelf
-          time={new Date().toLocaleTimeString("en-IN", {
-            hour12: true,
-            hour: "numeric",
-            minute: "2-digit",
-          })}
-        />
-        {[...new Array(2)].map((v, i) => (
+    <Box className={classes.chatRoot}>
+      <Box className={classes.chatBox}>
+        {chat.map(({ displayName, UID, message, time }, i) => (
           <ChatMessage
             key={i}
             hideAvatar
             hidePrimary
-            displayName="Arpit"
-            message="Hii"
-            time={new Date().toLocaleTimeString("en-IN", {
+            isSelf={UID === userID}
+            displayName={displayName}
+            message={message}
+            time={new Date(time).toLocaleTimeString("en-IN", {
               hour12: true,
               hour: "numeric",
               minute: "2-digit",
             })}
           />
         ))}
-        <ChatMessage
-          hideAvatar
-          displayName="Rajiv"
-          message="Ok No Problem"
-          time={new Date().toLocaleTimeString("en-IN", {
-            hour12: true,
-            hour: "numeric",
-            minute: "2-digit",
-          })}
-        />
-        <ChatTextInput isSmall />
       </Box>
-    </>
+      <ChatTextInput isSmall onSend={sendMessage} />
+    </Box>
   );
 };
 export default ChatLayout;

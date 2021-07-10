@@ -4,6 +4,8 @@ import Box from "@material-ui/core/Box";
 import { ChatMessage, ChatTextInput } from "components/Chat";
 import { useMsgs } from "core/hooks/useMsgs";
 import { useSocket } from "core/hooks/useSocket";
+import { useParams } from "react-router-dom";
+import { ChatBubbleOutlineRounded } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 type ChatMsgsProps = {
-  meetID: string;
+  meetID?: string;
 };
 
 const ChatMsgs: React.FC<ChatMsgsProps> = ({ meetID }) => {
@@ -38,6 +40,8 @@ const ChatMsgs: React.FC<ChatMsgsProps> = ({ meetID }) => {
       socketClient.off();
     };
   }, []);
+  let prev = "";
+
   return (
     <Box className={classes.root}>
       <Box className={classes.chatRoot}>
@@ -45,7 +49,7 @@ const ChatMsgs: React.FC<ChatMsgsProps> = ({ meetID }) => {
           <ChatMessage
             key={i}
             hideAvatar
-            // hidePrimary={i % 3 === 0}
+            hidePrimary={prev === (prev = UID)}
             displayName={displayName}
             isSelf={UID === userID}
             message={message}

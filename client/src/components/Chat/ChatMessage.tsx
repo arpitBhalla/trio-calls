@@ -28,7 +28,12 @@ const ChatMessage: React.FC<Props> = ({
 }) => {
   const classes = useStyles();
   return (
-    <ListItem style={{ padding: 2 }}>
+    <ListItem
+      style={{
+        padding: 2,
+        marginBottom: hidePrimary ? 0 : 4,
+      }}
+    >
       <ListItemText
         style={{ margin: 0 }}
         primary={
@@ -36,7 +41,7 @@ const ChatMessage: React.FC<Props> = ({
             <Typography
               className={classes.secondary}
               variant="caption"
-              color="textSecondary"
+              color="primary"
             >
               <b>
                 {displayName} {isSelf && "(You)"}

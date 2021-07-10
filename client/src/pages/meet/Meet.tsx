@@ -44,7 +44,7 @@ const App: React.FC<Props> = () => {
       <Box display="flex" height="88vh">
         <Box className={clsx(classes.content, open && classes.contentOff)}>
           <Grid container spacing={1}>
-            <Grid item xs={gridSize as GridSize} justify="center">
+            <Grid item xs={gridSize as GridSize}>
               <Box display="flex" height={"100%"}>
                 <Video
                   stream={myStream.current}
