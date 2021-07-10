@@ -77,7 +77,7 @@ export const useVideoConf = () => {
       }
     });
   };
-  const getVideoAudioStream = (video = true, audio = true) => {
+  const getVideoAudioStream = () => {
     const myNavigator = navigator.mediaDevices.getUserMedia;
 
     return myNavigator({
@@ -87,7 +87,7 @@ export const useVideoConf = () => {
         width: { min: 640, ideal: 1280, max: 1920 },
         height: { min: 480, ideal: 720, max: 1080 },
       },
-      audio: audio,
+      audio: true,
     });
   };
   const setPeersListeners = (stream: MediaStream) => {
