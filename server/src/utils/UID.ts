@@ -13,14 +13,4 @@ const randomID = () =>
 /**
  * Generate Meeting ID xxxx-xxxx-xxxx
  */
-export const generateID = () => [...Array(3)].map(randomID).join("-");
-
-/**
- * Convert xxxxxxxxxxxx to xxxx-xxxx-xxxx
- */
-export const stringToID = (str: string) => str.match(/.{1,4}/g)?.join("-");
-
-/**
- * Check if str is in form xxxx-xxxx-xxxx
- */
-export const isID = (str: string) => /(\w+){4}-(\w+){4}-(\w+){4}/.test(str);
+export const generateID = (): string => [...Array(3)].map(randomID).join("-");

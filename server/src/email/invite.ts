@@ -9,7 +9,7 @@ export const InviteTemplate = ({
   displayName,
   email,
   meetLink,
-}: InviteTemplateType) => `<!DOCTYPE html
+}: InviteTemplateType): string => `<!DOCTYPE html
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -178,14 +178,14 @@ export const InviteTemplate = ({
 											<div align="center" class="img-container center fixedwidth"
 												style="padding-right: 15px;padding-left: 15px;">
 												<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr style="line-height:0px"><td style="padding-right: 15px;padding-left: 15px;" align="center"><![endif]-->
-												<div style="font-size:1px;line-height:15px"> </div><a
+												<div style="font-size:1px;line-height:15px"></div><a
 													href="ms-teams.vercel.app" style="outline:none" tabindex="-1"
 													target="_blank"><img align="center" alt=" Teams Logo" border="0"
 														class="center fixedwidth"
 														src="images/91dc7174-56fc-4d68-9c5f-2c15637f9e58.png"
 														style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; width: 116px; max-width: 100%; display: block;"
 														title=" Teams Logo" width="116" /></a>
-												<div style="font-size:1px;line-height:15px"> </div>
+												<div style="font-size:1px;line-height:15px"></div>
 												<!--[if mso]></td></tr></table><![endif]-->
 											</div>
 											<!--[if (!mso)&(!IE)]><!-->

@@ -2,6 +2,7 @@ import { Schema, model } from "mongoose";
 import { Chat } from "./chat";
 
 export interface Meeting {
+  _id?: string;
   title: string;
   type: "public" | "private";
   time: string;

@@ -27,7 +27,7 @@ export const GetMeetRoute = Router.post("/", async (req, res) => {
 
   // respond if user is the host or invited by host or meeting is public
   const isInvited =
-    String((meet.hostID as any)._id) === UID ||
+    String(meet.hostID) === UID ||
     meet.invitees?.includes(user.email) ||
     meet.type === "public";
 

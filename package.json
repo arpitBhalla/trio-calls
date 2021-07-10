@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Microsoft Teams ",
   "scripts": {
-    "start": "echo 'cd client'"
+    "start:client": "cd client && npm start",
+    "start:server": "cd server && npm start"
   },
   "repository": {
     "type": "git",

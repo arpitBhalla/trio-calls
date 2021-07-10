@@ -9,7 +9,7 @@ import { SignInRoute } from "./routes/signIn";
 import { GetProfileRoute } from "./routes/getProfile";
 import mongoose from "mongoose";
 import chalk from "chalk";
-import { Server, Socket } from "socket.io";
+import { Server } from "socket.io";
 
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/teams";
 
@@ -28,7 +28,7 @@ const app = express();
 const server = http.createServer(app);
 const peerServer = ExpressPeerServer(server, {});
 const PORT = process.env.PORT || 4000;
-
+app.set("trust proxy", true);
 app.use(cors());
 app.use(express.json());
 

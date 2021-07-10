@@ -8,14 +8,14 @@ import chalk from "chalk";
 export const sendMail = async (
   options: SendMailOptions = {}
 ): Promise<SentMessageInfo> => {
-  let testAccount = await nodemailer.createTestAccount();
+  const testAccount = await nodemailer.createTestAccount();
   console.log(
     process.env.EMAIL_SERVER
       ? chalk.red.bold("Using production email service")
       : chalk.green.bold("Using development email service")
   );
 
-  let transporter = nodemailer.createTransport({
+  const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_SERVER || "smtp.ethereal.email",
     port: 587,
     secure: false,
@@ -25,7 +25,7 @@ export const sendMail = async (
     },
   });
 
-  let info = await transporter.sendMail(options);
+  const info = await transporter.sendMail(options);
 
   if (process.env.DEV) {
     console.log("Message sent: %s", info.messageId);
