@@ -3,12 +3,20 @@ import { sendMail } from "../utils/sendMail";
 import { createEvent } from "ics";
 import { MeetModel } from "../models/meeting";
 import { generateID } from "../utils/UID";
+import { InviteTemplate } from "../email/invite";
+import { UserModel } from "../models/user";
 
 const Router = express.Router();
 
 export const NewMeetRoute = Router.post("/", async (req, res) => {
   const { title, invitees, hostID, type, time } = req.body;
 
+  const user = await UserModel.findById(hostID);
+  if (!user) {
+    return res.status(400).json({
+      message: "User not found",
+    });
+  }
   const Meet = new MeetModel({
     title,
     invitees,
@@ -29,6 +37,21 @@ export const NewMeetRoute = Router.post("/", async (req, res) => {
 
   if (invitees && invitees.length) {
     const now = new Date(Number(time));
+
+    /**
+     * Send Invitation to invited User
+     */
+    const hostedURL = process.env.DEV
+      ? "http://localhost:3000/"
+      : "http://ms-teams.vercel.app/";
+    const chatLink = hostedURL + "chat/" + Meet.meetID;
+    const meetLink = hostedURL + Meet.meetID;
+    const html = InviteTemplate({
+      chatLink,
+      meetLink,
+      displayName: user.displayName,
+      email: user.email,
+    });
     /**
      * Create a calender event sent as attachment
      */
@@ -42,22 +65,17 @@ export const NewMeetRoute = Router.post("/", async (req, res) => {
         now.getHours(),
         now.getMinutes(),
       ],
+      url: meetLink,
+      organizer: { name: user.displayName, email: user.email },
       duration: { minutes: 50 },
     });
 
-    /**
-     * Send Invitation to invited User
-     */
     try {
       await sendMail({
         from: '"MS Teams" <teams@arpitbhalla.me>', // sender address
         cc: invitees,
         subject: "You are invited for MS Teams meeting",
-        html: `<h2>Microsoft Teams meeting</h2>
-
-      <h4>Join on your computer</h4>
-  
-      <a href='https://ms-teams.vercel.app/${Meet.meetID}'>Click here to join</a>`,
+        html,
         icalEvent: {
           filename: "invitation.ics",
           method: "request",

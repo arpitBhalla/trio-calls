@@ -130,8 +130,6 @@ export const useVideoConf = () => {
   ) => {
     const { userID } = userData;
 
-    const conn = peerJs.current?.connect(userID);
-
     const call = peerJs.current?.call(userID, stream, {
       metadata: { id: peerJs.current?.id },
     });

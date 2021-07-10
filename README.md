@@ -1,5 +1,7 @@
 # <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Microsoft_Office_Teams_%282018%E2%80%93present%29.svg/1200px-Microsoft_Office_Teams_%282018%E2%80%93present%29.svg.png' width='25'> Teams
 
+[![DeepSource](https://deepsource.io/gh/arpitBhalla/MicrosoftEngageMentorship2021.svg/?label=resolved+issues&show_trend=true&token=qkGeZPDLrtbe0wdM5TdpQsLV)](https://deepsource.io/gh/arpitBhalla/MicrosoftEngageMentorship2021/?ref=repository-badge) [![Test](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/test.yaml/badge.svg)](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/test.yaml)
+
 A multi-participant video call platform for calling across the world for free with screen sharing!
 
 ---
@@ -24,23 +26,23 @@ A multi-participant video call platform for calling across the world for free wi
 - Connect with multiple users via meeting link or code.
 - Toggle dark 🌑 or light 🌕 mode anytime.
 - Realtime chat 💬, connect before or after the meeting.
-- [ ] Audio notification 🔔 for chat and new user connect
-- [x] Screen Sharing 💻
-- [ ] Select camera 📷 & audio 🎙️ sources.
-- [ ] Mute 🔇 Other Participants (only host)
-- [ ] Remove ⛔ Other Participants (only host)
+- Audio notification 🔔 for chat and new user connect
+- Screen Sharing 💻
+- Select camera 📷 & audio 🎙️ sources.
+- Mute 🔇 Other Participants (only host)
+- Remove ⛔ Other Participants (only host)
 
 ### Classroom specific features
 
-- [ ] Realtime whiteboard 📋 with multiple tools.
-- [ ] Take attendance <u>`anytime`</u> during lecture (Non attentive students will miss theirs 😈).
-- [ ] Get notified if student changes tab or doing other activities during lectures. 😹 (Yet they can do it on mobile phones)
+- Realtime whiteboard 📋 with multiple tools.
+- Take attendance <u>`anytime`</u> during lecture (Non attentive students will miss theirs 😈).
+- Get notified if student changes tab or doing other activities during lectures. 😹 (Yet they can do it on mobile phones)
 
 ### Code features
 
 - 100% strict typescript
 - `eslint` and `prettier` friendly code
-- Code splitting using "@loadable/component
+- Code splitting using `@loadable/component`
 - Hooks like `React.useCallback` `React.memo` which will increase performance.
 - Unit tested with `jest` & `e2e` tested with `cypress`.
 - Proper use of `/** comments */` and descriptions for functions.
@@ -101,10 +103,9 @@ npm start # in server directory /server
 
 <img src='assets/workflow.png' />
 
-## Lighthouse 
+## Lighthouse
 
 ![Lighthouse](https://user-images.githubusercontent.com/55053424/125126171-51a27c80-e118-11eb-9aee-96787d5ea749.png)
-
 
 <div align="center">
 Developed with ❤️ in India 🇮🇳 by

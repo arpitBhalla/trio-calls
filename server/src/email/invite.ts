@@ -179,10 +179,10 @@ export const InviteTemplate = ({
 												style="padding-right: 15px;padding-left: 15px;">
 												<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr style="line-height:0px"><td style="padding-right: 15px;padding-left: 15px;" align="center"><![endif]-->
 												<div style="font-size:1px;line-height:15px"> </div><a
-													href="https://ms-teams.vercel.app" style="outline:none"
-													tabindex="-1" target="_blank"><img align="center" alt=" Teams Logo"
-														border="0" class="center fixedwidth"
-														src="http://assets.stickpng.com/images/5e8cdf0a664eae000408545b.png"
+													href="ms-teams.vercel.app" style="outline:none" tabindex="-1"
+													target="_blank"><img align="center" alt=" Teams Logo" border="0"
+														class="center fixedwidth"
+														src="images/91dc7174-56fc-4d68-9c5f-2c15637f9e58.png"
 														style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; width: 116px; max-width: 100%; display: block;"
 														title=" Teams Logo" width="116" /></a>
 												<div style="font-size:1px;line-height:15px"> </div>
@@ -203,13 +203,13 @@ export const InviteTemplate = ({
 							style="min-width: 320px; max-width: 700px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; Margin: 0 auto; background-color: #ffffff;">
 							<div style="border-collapse: collapse;display: table;width: 100%;background-color:#ffffff;">
 								<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#eeeeee;"><tr><td align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:700px"><tr class="layout-full-width" style="background-color:#ffffff"><![endif]-->
-								<!--[if (mso)|(IE)]><td align="center" width="700" style="background-color:#ffffff;width:700px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;" valign="top"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 0px; padding-left: 0px; padding-top:25px; padding-bottom:30px;"><![endif]-->
+								<!--[if (mso)|(IE)]><td align="center" width="700" style="background-color:#ffffff;width:700px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;" valign="top"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 0px; padding-left: 0px; padding-top:25px; padding-bottom:10px;"><![endif]-->
 								<div class="col num12"
 									style="min-width: 320px; max-width: 700px; display: table-cell; vertical-align: top; width: 700px;">
 									<div class="col_cont" style="width:100% !important;">
 										<!--[if (!mso)&(!IE)]><!-->
 										<div
-											style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:25px; padding-bottom:30px; padding-right: 0px; padding-left: 0px;">
+											style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:25px; padding-bottom:10px; padding-right: 0px; padding-left: 0px;">
 											<!--<![endif]-->
 											<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px; font-family: Tahoma, Verdana, sans-serif"><![endif]-->
 											<div
@@ -219,8 +219,7 @@ export const InviteTemplate = ({
 													<p
 														style="margin: 0; font-size: 14px; line-height: 1.2; text-align: center; word-break: break-word; mso-line-height-alt: 17px; margin-top: 0; margin-bottom: 0;">
 														<strong>${displayName}</strong> ${email} is inviting you to join
-														a video meeting.
-													</p>
+														a video meeting.</p>
 												</div>
 											</div>
 											<!--[if mso]></td></tr></table><![endif]-->
@@ -268,6 +267,18 @@ export const InviteTemplate = ({
 															chat before meeting</span></span></a>
 												<!--[if mso]></center></v:textbox></v:roundrect></td></tr></table><![endif]-->
 											</div>
+											<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px; font-family: Tahoma, Verdana, sans-serif"><![endif]-->
+											<div
+												style="color:#555555;font-family:Ubuntu, Tahoma, Verdana, Segoe, sans-serif;line-height:1.2;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
+												<div class="txtTinyMce-wrapper"
+													style="font-size: 14px; line-height: 1.2; color: #555555; font-family: Ubuntu, Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 17px;">
+													<p
+														style="margin: 0; font-size: 11px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 13px; margin-top: 0; margin-bottom: 0;">
+														<span style="font-size: 11px;">Please create account with same
+															email to access chat if you are new to Teams</span></p>
+												</div>
+											</div>
+											<!--[if mso]></td></tr></table><![endif]-->
 											<!--[if (!mso)&(!IE)]><!-->
 										</div>
 										<!--<![endif]-->
@@ -299,7 +310,7 @@ export const InviteTemplate = ({
 													style="font-size: 14px; line-height: 1.2; font-family: 'Ubuntu', Tahoma, Verdana, Segoe, sans-serif; color: #555555; mso-line-height-alt: 17px;">
 													<p
 														style="margin: 0; font-size: 14px; line-height: 1.2; text-align: center; word-break: break-word; mso-line-height-alt: 17px; margin-top: 0; margin-bottom: 0;">
-														by Arpit Bhalla</p>
+														Teams by Arpit Bhalla</p>
 												</div>
 											</div>
 											<!--[if mso]></td></tr></table><![endif]-->
@@ -334,8 +345,6 @@ export const InviteTemplate = ({
 													<td align="center"
 														style="word-break: break-word; vertical-align: top; padding-top: 5px; padding-right: 0px; padding-bottom: 5px; padding-left: 0px; text-align: center;"
 														valign="top">
-														<!--[if vml]><table align="left" cellpadding="0" cellspacing="0" role="presentation" style="display:inline-block;padding-left:0px;padding-right:0px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"><![endif]-->
-														<!--[if !vml]><!-->
 
 													</td>
 												</tr>
