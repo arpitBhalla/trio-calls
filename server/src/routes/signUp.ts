@@ -1,12 +1,19 @@
 import express from "express";
-import { UserModel } from "../models/user";
+import { UserModel as User } from "../models/user";
+import bcrypt from "bcryptjs";
 
 const Router = express.Router();
 
 export const SignUpRoute = Router.post("/", async (req, res) => {
   const { displayName, email, password } = req.body;
-
-  const user = new UserModel({ displayName, email, password });
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    return res.status(201).json({
+      message: "User already Exists",
+    });
+  }
+  const hashedPw = await bcrypt.hash(password, 12);
+  const user = new User({ displayName, email, password: hashedPw });
   try {
     await user.save();
     return res.status(200).json({
@@ -16,11 +23,8 @@ export const SignUpRoute = Router.post("/", async (req, res) => {
       email,
     });
   } catch {
-    return res.status(400).json({
-      message: "Error",
-      UID: user._id,
-      displayName,
-      email,
+    return res.status(201).json({
+      message: "Unable to create user",
     });
   }
 });
