@@ -1,24 +1,19 @@
 {
-  "name": "video_chat",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "ms-teams",
+  "version": "1.1.0",
+  "description": "Microsoft Teams ",
   "scripts": {
-    "start": "node server/index.js",
-    "server": "nodemon server/index.js",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client&& npm run build --prefix client"
+    "start:client": "cd client && npm start",
+    "start:server": "cd server && npm start"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "concurrently": "^6.0.2",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "nodemon": "^2.0.7",
-    "peer": "^0.6.1",
-    "socket.io": "^4.0.1"
-  }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arpitBhalla/MicrosoftEngageMentorship2021.git"
+  },
+  "author": "Arpit Bhalla <https://github.com/arpitBhalla>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/issues"
+  },
+  "homepage": "https://github.com/arpitBhalla/MicrosoftEngageMentorship2021#readme"
 }

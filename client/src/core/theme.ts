@@ -1,24 +1,30 @@
 import { createMuiTheme } from "@material-ui/core/styles";
+import { deepPurple } from "@material-ui/core/colors";
 
 const theme = createMuiTheme({
   palette: {
-    primary: {
-      main: "#6264A7",
-    },
+    primary: deepPurple,
     secondary: {
       main: "#6264A7",
     },
+    // type: "dark",
   },
   overrides: {
     MuiCssBaseline: {
       "@global": {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        "@font-face": ["Open Sans"],
+        "@font-face": ["Ubuntu"],
+      },
+    },
+    MuiButton: {
+      root: {
+        textTransform: "none",
       },
     },
   },
   typography: {
-    fontFamily: ["Open Sans", "Ubuntu", '"Segoe UI"', "Roboto"].join(","),
+    fontFamily: ["Ubuntu", "'Segoe UI'", "Roboto"].join(","),
   },
 });
 

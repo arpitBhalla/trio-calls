@@ -2,48 +2,97 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
 import {
-  VideoCallOutlined,
-  ScreenShareOutlined,
+  MicOutlined,
   MicOffOutlined,
   VideocamOffOutlined,
+  VideocamOutlined,
   CancelPresentationOutlined,
   PresentToAllOutlined,
   PanToolOutlined,
-  InfoOutlined,
-  AirplayOutlined,
   CategoryOutlined,
+  Category,
+  Brightness4,
+  CallEnd,
 } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
-
-interface Props {}
+import { useAppDispatch, useAppSelector } from "core/hooks/redux";
+import {
+  toggleAudio,
+  toggleScreen,
+  toggleVideo,
+  toggleWhiteBoard,
+} from "core/reducers/media";
+import ControlButton from "components/ControllerButton";
+import { toggleDarkMode } from "core/reducers/theme";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "absolute",
-    bottom: 20,
+    bottom: theme.spacing(3),
     transform: "translateX(-50%)",
     left: "50%",
   },
+  callEnd: {
+    backgroundColor: "red",
+    color: "white",
+  },
 }));
 
-const App: React.FC<Props> = ({}) => {
+type ControllerProps = {
+  endCallHandler: () => unknown;
+};
+
+const Controller: React.FC<ControllerProps> = ({ endCallHandler }) => {
   const classes = useStyles();
+  const dispatch = useAppDispatch();
+  const { isAudio, isVideo, isScreenShare, isWhiteBoard } = useAppSelector(
+    ({ mediaReducer }) => mediaReducer
+  );
+
   return (
     <Box className={classes.root}>
-      <Tooltip title="Microphone">
-        <IconButton style={{ backgroundColor: "red" }}>
-          <MicOffOutlined htmlColor="white" />
+      <ControlButton
+        title="Microphone"
+        isEnabled={isAudio}
+        IconOn={MicOutlined}
+        IconOff={MicOffOutlined}
+        onClick={() => dispatch(toggleAudio(null))}
+      />
+      <ControlButton
+        title="Video"
+        isEnabled={isVideo}
+        IconOn={VideocamOutlined}
+        IconOff={VideocamOffOutlined}
+        onClick={() => dispatch(toggleVideo(null))}
+      />
+      <ControlButton
+        title="ScreenShare"
+        isEnabled={isScreenShare}
+        IconOn={PresentToAllOutlined}
+        IconOff={CancelPresentationOutlined}
+        onClick={() => dispatch(toggleScreen(null))}
+      />
+      <Tooltip title="End Call">
+        <IconButton
+          className={classes.callEnd}
+          aria-label="end call"
+          style={{ backgroundColor: "red" }}
+          onClick={endCallHandler}
+        >
+          <CallEnd />
         </IconButton>
       </Tooltip>
-      <Tooltip title="Video">
-        <IconButton>
-          <VideocamOffOutlined />
-        </IconButton>
-      </Tooltip>
-      <Tooltip title="Screen Share">
-        <IconButton>
-          <ScreenShareOutlined />
+      <ControlButton
+        title="White Board"
+        isEnabled={isWhiteBoard}
+        IconOn={Category}
+        IconOff={CategoryOutlined}
+        onClick={() => dispatch(toggleWhiteBoard(null))}
+      />
+      <Tooltip title="Dark Mode">
+        <IconButton onClick={() => dispatch(toggleDarkMode(null))}>
+          <Brightness4 />
         </IconButton>
       </Tooltip>
       <Tooltip title="Raise Hand">
@@ -51,17 +100,7 @@ const App: React.FC<Props> = ({}) => {
           <PanToolOutlined />
         </IconButton>
       </Tooltip>
-      <Tooltip title="White Board">
-        <IconButton>
-          <CategoryOutlined />
-        </IconButton>
-      </Tooltip>
-      <Tooltip title="Meet Info">
-        <IconButton aria-label="">
-          <InfoOutlined />
-        </IconButton>
-      </Tooltip>
     </Box>
   );
 };
-export default App;
+export default Controller;

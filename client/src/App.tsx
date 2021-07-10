@@ -1,24 +1,27 @@
 import React from "react";
-import { ThemeProvider } from "@material-ui/core/styles";
-import { CssBaseline } from "@material-ui/core";
-import Join from "./pages/meet/Meet";
-import theme from "./core/theme";
-import { SnackbarProvider } from "notistack";
 import store from "core/store";
-import { Provider as ReduxProvider } from "react-redux";
+import Routes from "pages";
+import ThemeProvider from "core/provider/ThemeProvider";
 import { useTitle } from "core/hooks/common";
+import { SnackbarProvider } from "notistack";
+import { Provider as ReduxProvider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { SocketProvider } from "core/provider/SocketProvider";
 
-function App() {
+const App: React.FC = () => {
   useTitle();
   return (
     <ReduxProvider store={store}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
+      <ThemeProvider>
         <SnackbarProvider maxSnack={3}>
-          <Join />
+          <BrowserRouter>
+            <SocketProvider>
+              <Routes />
+            </SocketProvider>
+          </BrowserRouter>
         </SnackbarProvider>
       </ThemeProvider>
     </ReduxProvider>
   );
-}
+};
 export default App;

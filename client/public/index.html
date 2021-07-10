@@ -3,25 +3,105 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" href="./favicon.ico" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
-  <meta name="description" content="Web site created using create-react-app" />
-  <link rel="apple-touch-icon" href="./logo192.png" />
+  <meta name="description"
+    content="A multi-participant video call platform for calling across the world for free with screen sharing!" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;600;700&display=swap" rel="stylesheet">
 
+  <meta name="title" content="Meeting with Microsoft Teams" />
+  <meta name="description"
+    content="A multi-participant video call platform for calling across the world for free with screen sharing!" />
 
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ms-teams.vercel.app/" />
+  <meta property="og:title" content="Meeting with Microsoft Teams" />
+  <meta property="og:description"
+    content="A multi-participant video call platform for calling across the world for free with screen sharing!" />
 
-  <link rel="manifest" href="./manifest.json" />
-  <title>Meeting</title>
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <title>Microsoft Teams</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    /* width */
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: rgb(189, 189, 189);
+      border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgb(144, 143, 143);
+    }
+
+    .loadingRoot {
+      display: flex;
+      height: 100vh;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loader {
+      margin-top: 4em;
+      position: relative;
+      width: 100px;
+      height: 3px;
+      background-color: lightgray;
+    }
+
+    .loader::after {
+      content: "";
+      position: absolute;
+      background-color: #6264A7;
+      height: 100%;
+      width: 20%;
+      animation: loading 1s ease-in-out infinite alternate;
+    }
+
+    @keyframes loading {
+      0% {
+        left: 0%;
+      }
+
+      50% {
+        width: 40%;
+      }
+
+      100% {
+        left: 80%;
+      }
+    }
+  </style>
+
 </head>
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
+  <div id="root">
+    <div class="loadingRoot">
+      <img src='%PUBLIC_URL%/icon-192x192.png' width="120" height="120" />
+      <div class="loader"></div>
+    </div>
+  </div>
 </body>
 
 </html>
