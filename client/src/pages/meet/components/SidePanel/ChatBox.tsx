@@ -19,14 +19,14 @@ const ChatLayout: React.FC = () => {
   const classes = useStyles();
   const { chat, sendMessage, UID: userID } = useMsgs();
 
+  console.log(chat);
   return (
     <Box className={classes.chatRoot}>
       <Box className={classes.chatBox}>
         {chat.map(({ displayName, UID, message, time }, i) => (
           <ChatMessage
             key={i}
-            hideAvatar
-            hidePrimary
+            // hidePrimary
             isSelf={UID === userID}
             displayName={displayName}
             message={message}

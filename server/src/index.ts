@@ -60,6 +60,7 @@ io.on("connection", (socket) => {
 
     // Broadcast only if user is connected to video call, userID is not available for chats only
     if (userID) {
+      console.log("Video");
       socket.broadcast.to(meetID).emit("user-connected", userData);
     }
 

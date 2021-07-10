@@ -30,7 +30,7 @@ const WaitingRoom: React.FC<WaitingRoomProps> = ({ joinMeetHandler }) => {
   const [meetOk, setMeetOk] = React.useState<boolean | null>(null);
   const history = useHistory();
 
-  useTitle(meetID);
+  useTitle("Join Meet");
 
   React.useEffect(() => {
     getMeet(meetID, UID)

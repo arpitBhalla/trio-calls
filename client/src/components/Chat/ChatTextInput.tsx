@@ -26,11 +26,11 @@ const ChatTextInput: React.FC<ChatTextInputProps> = ({ onSend, isSmall }) => {
   const classes = useStyles();
   const [text, setText] = React.useState("");
 
-  const handleSubmit = React.useCallback(() => {
+  const handleSubmit = () => {
     if (!text) return;
     onSend?.(text);
     setText("");
-  }, []);
+  };
 
   return (
     <Box className={classes.rootBox}>

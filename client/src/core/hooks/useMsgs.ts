@@ -19,12 +19,9 @@ export const useMsgs = (): {
 
   useEffect(() => {
     socketEvents();
-    return () => {
-      socketClient.off();
-    };
   }, []);
 
-  const socketEvents = React.useCallback(() => {
+  const socketEvents = () => {
     socketClient.on("newMessage", (d) => {
       console.log(d);
       dispatch(
@@ -37,7 +34,7 @@ export const useMsgs = (): {
         })
       );
     });
-  }, []);
+  };
 
   const sendMessage = React.useCallback((message: string) => {
     socketClient.emit("sendMessage", {
