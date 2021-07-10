@@ -39,7 +39,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Controller: React.FC = () => {
+type ControllerProps = {
+  endCallHandler: () => unknown;
+};
+
+const Controller: React.FC<ControllerProps> = ({ endCallHandler }) => {
   const classes = useStyles();
   const dispatch = useAppDispatch();
   const { isAudio, isVideo, isScreenShare, isWhiteBoard } = useAppSelector(
@@ -74,7 +78,7 @@ const Controller: React.FC = () => {
           className={classes.callEnd}
           aria-label="end call"
           style={{ backgroundColor: "red" }}
-          onClick={console.log}
+          onClick={endCallHandler}
         >
           <CallEnd />
         </IconButton>

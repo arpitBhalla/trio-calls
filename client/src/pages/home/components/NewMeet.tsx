@@ -21,7 +21,7 @@ type MeetType = "public" | "private";
 const NewMeetComponent: React.FC = () => {
   const [meetingName, setMeetingName] = React.useState({ text: "", error: "" });
   const [meetingType, setMeetingType] = React.useState<MeetType>("public");
-  const [meetingTime, setMeetingTime] = React.useState(new Date());
+  const [meetingTime, setMeetingTime] = React.useState({ text: "", error: "" });
   const [meetingInvitees, setMeetingInvitees] = React.useState<string[]>([]);
   const [loading, setLoading] = React.useState(false);
   const [openDialog, setOpenDialog] = React.useState(false);
@@ -36,18 +36,16 @@ const NewMeetComponent: React.FC = () => {
       type: meetingType,
       hostID: UID,
       invitees: meetingInvitees,
-      time: meetingTime.getTime().toString(),
+      time: meetingTime.text,
     })
       .then(({ meetID }) => {
-        enqueueSnackbar("Meet Generated", { variant: "info" });
+        enqueueSnackbar("New meet created");
         history.push(`/${meetID}`);
       })
       .catch((error) => {
         enqueueSnackbar(error || "Something went wrong", {
           variant: "error",
         });
-      })
-      .finally(() => {
         setLoading(false);
       });
   };
@@ -89,9 +87,14 @@ const NewMeetComponent: React.FC = () => {
             id="datetime-local"
             label="Schedule Meeting"
             type="datetime-local"
-            defaultValue={new Date()}
             variant="outlined"
             fullWidth
+            onChange={(event) => {
+              setMeetingTime({
+                text: Date.parse(event.target.value).toString(),
+                error: "",
+              });
+            }}
             margin="normal"
             InputLabelProps={{
               shrink: true,

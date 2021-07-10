@@ -32,10 +32,6 @@ function downloadFile(fileName: string, data: string): void {
   downloadLink.download = fileName;
   downloadLink.click();
 }
-type SketchProps = {
-  open: boolean;
-  onClose: () => unknown;
-};
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -56,7 +52,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const Sketch: React.FC<SketchProps> = () => {
+const Sketch: React.FC = () => {
   const classes = useStyles();
   const [color, setColor] = React.useState("red");
   const [size, setSize] = React.useState(4);

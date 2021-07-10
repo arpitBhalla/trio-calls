@@ -10,6 +10,7 @@ import { GetProfileRoute } from "./routes/getProfile";
 import mongoose from "mongoose";
 import chalk from "chalk";
 import { Server } from "socket.io";
+import { ChatModel } from "./models/chat";
 
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/teams";
 
@@ -32,6 +33,9 @@ app.set("trust proxy", true);
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("MS Teams");
+});
 app.use("/newMeet", NewMeetRoute);
 app.use("/getMeet", GetMeetRoute);
 app.use("/getProfile", GetProfileRoute);
@@ -55,13 +59,13 @@ io.on("connection", (socket) => {
     socket.on("disconnect", () => {
       socket.broadcast.to(meetID).emit("user-disconnected", userID);
     });
+    socket.on("message", async (msgData) => {
+      console.log("message", msgData);
+      await new ChatModel(msgData).save();
+      io.to(meetID).emit("createMessage", msgData);
+    });
   });
 });
-
-// socket.on("message", ({ message, userId }) => {
-//   console.log(message, userId);
-//   io.to(meetID).emit("createMessage", message, userId);
-// });
 
 server.listen(PORT, () => {
   console.log(`Running on Port: ${PORT}`);

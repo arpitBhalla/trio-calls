@@ -16,7 +16,7 @@ import LoadingPage from "components/LoadingPage";
 const Home = loadable(() => import("./home/Home"), {
   fallback: <LoadingPage />,
 });
-const Meet = loadable(() => import("./meet/Meet"), {
+const Meet = loadable(() => import("./meet"), {
   fallback: <LoadingPage />,
 });
 const Auth = loadable(() => import("./auth"), {

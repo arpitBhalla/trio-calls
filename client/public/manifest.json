@@ -1,7 +1,7 @@
 {
   "theme_color": "#3f34ee",
   "background_color": "#ffffff",
-  "display": "browser",
+  "display": "standalone",
   "scope": "/",
   "start_url": "/",
   "name": "Microsoft Teams",

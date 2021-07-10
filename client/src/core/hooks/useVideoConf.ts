@@ -4,20 +4,13 @@ import { useAppSelector } from "core/hooks/redux";
 import { iceServers } from "core/config";
 import { useSocket } from "./useSocket";
 
-type VideoConf = {
-  myStream: MediaStream | undefined;
-  peerStream: Map<string, MediaStream> | undefined;
-};
-
 export const useVideoConf = () => {
   const peers = React.useRef<Record<string, Peer.MediaConnection>>();
   const myStream = React.useRef<MediaStream>();
   const peerStream = React.useRef<Map<string, MediaStream>>();
   const peerJs = React.useRef<Peer>();
   const socketClient = useSocket();
-  const { mediaReducer } = useAppSelector((s) => s);
-
-  console.log(peers.current);
+  const { mediaReducer, meetReducer } = useAppSelector((s) => s);
 
   React.useEffect(() => {
     if (myStream.current) {
@@ -35,11 +28,9 @@ export const useVideoConf = () => {
     peers.current = {};
     peerStream.current = new Map();
     peerJs.current = new Peer({
-      path: "/",
-      host: "0.peerjs.com",
-      port: 443,
-      // secure: true,
-      // debug: 3,
+      path: "/peerjs",
+      host: "imersify.el.r.appspot.com",
+      port: 80,
       config: { iceServers },
     });
     socketEvents();
@@ -66,7 +57,7 @@ export const useVideoConf = () => {
     peerJs.current?.on("open", (id) => {
       const userData = {
         userID: id,
-        meetID: "arpit-bhalla",
+        meetID: meetReducer.meetDetails.meetID,
       };
       console.log("peers established and joined room", userData);
       socketClient.emit("join-room", userData);
@@ -74,7 +65,7 @@ export const useVideoConf = () => {
     });
     peerJs.current?.on("error", (err) => {
       console.log("peer connection error", err);
-      peerJs.current?.reconnect();
+      // peerJs.current?.reconnect();
     });
   };
   const setNavigatorToStream = () => {
@@ -146,18 +137,17 @@ export const useVideoConf = () => {
     });
     peers.current && call && (peers.current[userID] = call);
   };
-  // const destoryConnection = () => {
-  //   const myMediaTracks =
-  //     // this.videoContainer[peerJs.current?.id]?.stream.getTracks();
-  //     myMediaTracks?.forEach((track: any) => {
-  //       track.stop();
-  //     });
-  //   socketClient.disconnect();
-  //   peerJs.current?.destroy();
-  // };
+  const destroyConnection = () => {
+    const myMediaTracks = myStream.current?.getTracks();
+    myMediaTracks?.forEach((track) => {
+      track.stop();
+    });
+    socketClient.disconnect();
+    peerJs.current?.destroy();
+  };
   return {
     myStream,
     peerStream,
-    // mediaReducer,
+    destroyConnection,
   };
 };

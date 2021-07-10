@@ -55,7 +55,21 @@ export const NewMeetRoute = Router.post("/", async (req, res) => {
     /**
      * Create a calender event sent as attachment
      */
-    const { value } = createEvent({
+    const { value, error } = createEvent({
+      title: title || "Teams Meet",
+      description: "You are invited for MS Teams meeting",
+      start: [
+        now.getFullYear(),
+        now.getMonth() + 1,
+        now.getDate(),
+        now.getHours(),
+        now.getMinutes(),
+      ],
+      url: meetLink,
+      organizer: { name: user.displayName, email: user.email },
+      duration: { minutes: 50 },
+    });
+    console.log(error, {
       title,
       description: "You are invited for MS Teams meeting",
       start: [
@@ -69,7 +83,6 @@ export const NewMeetRoute = Router.post("/", async (req, res) => {
       organizer: { name: user.displayName, email: user.email },
       duration: { minutes: 50 },
     });
-
     try {
       await sendMail({
         from: "'MS Teams' <teams@arpitbhalla.me>", // sender address

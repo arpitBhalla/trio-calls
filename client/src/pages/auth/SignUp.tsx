@@ -71,12 +71,10 @@ const SignUp: React.FC = () => {
         setUID(JSON.stringify(userDetails));
       })
       .catch((error) => {
+        setLoading(false);
         enqueueSnackbar(error || "Something went wrong", {
           variant: "error",
         });
-      })
-      .finally(() => {
-        setLoading(false);
       });
   };
   const redirectToSignIn = () => {

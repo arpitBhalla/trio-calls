@@ -180,9 +180,9 @@ export const InviteTemplate = ({
 												<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr style="line-height:0px"><td style="padding-right: 15px;padding-left: 15px;" align="center"><![endif]-->
 												<div style="font-size:1px;line-height:15px"></div><a
 													href="ms-teams.vercel.app" style="outline:none" tabindex="-1"
-													target="_blank"><img align="center" alt=" Teams Logo" border="0"
+													target="_blank"><img align="center" alt="Teams Logo" border="0"
 														class="center fixedwidth"
-														src="images/91dc7174-56fc-4d68-9c5f-2c15637f9e58.png"
+														src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Microsoft_Office_Teams_%282018%E2%80%93present%29.svg/1200px-Microsoft_Office_Teams_%282018%E2%80%93present%29.svg.png"
 														style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; width: 116px; max-width: 100%; display: block;"
 														title=" Teams Logo" width="116" /></a>
 												<div style="font-size:1px;line-height:15px"></div>

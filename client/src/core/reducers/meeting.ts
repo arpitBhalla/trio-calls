@@ -26,6 +26,7 @@ export const meetStore = createSlice({
       title: "",
       hostID: "", // _id of host
       type: "" as "private" | "public",
+      isHost: false,
     },
     participants: {} as Map<string, MeetParticipants>,
     chat: {} as Set<Chat>,

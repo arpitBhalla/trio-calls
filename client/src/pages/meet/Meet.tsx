@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 const App: React.FC<Props> = () => {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles({ open });
-  const { myStream, peerStream } = useVideoConf();
+  const { myStream, peerStream, destroyConnection } = useVideoConf();
   console.log(peerStream, myStream);
 
   const TOTAL_PARTICIPANTS = 2;
@@ -63,14 +63,9 @@ const App: React.FC<Props> = () => {
         </Box>
       </Box>
       <SideBar open={open} setOpen={setOpen} />
-      <Controller />
+      <Controller endCallHandler={destroyConnection} />
       <LeftBar />
-      <Sketch
-        open
-        onClose={() => {
-          return "";
-        }}
-      />
+      <Sketch />
     </>
   );
 };
