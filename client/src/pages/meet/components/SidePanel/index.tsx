@@ -5,14 +5,16 @@ import Box from "@material-ui/core/Box";
 import Chat from "./ChatBox";
 import Participants from "./Participants";
 import MeetInfo from "./Info";
+import Polls from "./Polls";
+
 import {
   InfoOutlined,
   ChatOutlined,
   PeopleOutlineOutlined,
   Close,
   AssessmentOutlined,
-  QuestionAnswerOutlined,
-  RecordVoiceOverOutlined,
+  // QuestionAnswerOutlined,
+  // RecordVoiceOverOutlined,
 } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -90,7 +92,11 @@ const SideBar: React.FC<Props> = ({ open, setOpen }) => {
             alignItems="center"
           >
             <Typography variant="h6">
-              {["Meeting Details", "People", "In-call messages"][index]}
+              {
+                ["Meeting Details", "People", "In-call messages", "Polls"][
+                  index
+                ]
+              }
             </Typography>
             <IconButton aria-label="" onClick={() => setOpen(false)}>
               <Close />
@@ -105,6 +111,8 @@ const SideBar: React.FC<Props> = ({ open, setOpen }) => {
                   return <Participants />;
                 case 2:
                   return <Chat />;
+                case 3:
+                  return <Polls />;
                 default:
                   return null;
               }
@@ -143,7 +151,7 @@ const SideBar: React.FC<Props> = ({ open, setOpen }) => {
           </IconButton>
         </Tooltip>
 
-        <Tooltip title="Record Call">
+        {/* <Tooltip title="Record Call">
           <IconButton
             onClick={handleIconPress(2)}
             className={clsx(open && index === 3 && classes.selected)}
@@ -152,10 +160,10 @@ const SideBar: React.FC<Props> = ({ open, setOpen }) => {
               <RecordVoiceOverOutlined />
             </Badge>
           </IconButton>
-        </Tooltip>
+        </Tooltip> */}
         <Tooltip title="Polls">
           <IconButton
-            onClick={handleIconPress(2)}
+            onClick={handleIconPress(3)}
             className={clsx(open && index === 3 && classes.selected)}
           >
             <Badge color="primary" variant="dot">
@@ -163,7 +171,7 @@ const SideBar: React.FC<Props> = ({ open, setOpen }) => {
             </Badge>
           </IconButton>
         </Tooltip>
-        <Tooltip title="Q&A">
+        {/* <Tooltip title="Q&A">
           <IconButton
             onClick={handleIconPress(2)}
             className={clsx(open && index === 4 && classes.selected)}
@@ -172,7 +180,7 @@ const SideBar: React.FC<Props> = ({ open, setOpen }) => {
               <QuestionAnswerOutlined />
             </Badge>
           </IconButton>
-        </Tooltip>
+        </Tooltip> */}
       </Box>
     </>
   );

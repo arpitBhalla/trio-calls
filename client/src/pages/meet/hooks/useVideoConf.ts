@@ -1,24 +1,26 @@
-import { useTitle } from "./common";
-import { useSnackbar } from "notistack";
 import React from "react";
 import Peer from "peerjs";
+import { useTitle } from "core/hooks/common";
+import { useSnackbar } from "notistack";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { iceServers } from "core/config";
-import { useSocket } from "./useSocket";
+import { useSocket } from "core/hooks/useSocket";
+import { useAudio } from "core/hooks/useAudio";
 import { useHistory } from "react-router-dom";
-import { useDocVisible } from "./useDocVisible";
+import { useDocVisible } from "core/hooks/useDocVisible";
 
 export const useVideoConf = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const socketClient = useSocket();
   const { enqueueSnackbar } = useSnackbar();
+  const { playAudio } = useAudio();
+  const changeTab = useDocVisible();
   const peers = React.useRef<Record<string, Peer.MediaConnection>>();
   const myStream = React.useRef<MediaStream>();
   const peerStream =
     React.useRef<Map<string, { displayName: string; stream: MediaStream }>>();
   const peerJs = React.useRef<Peer>();
-  const changeTab = useDocVisible();
   const { mediaReducer, meetReducer, authReducer } = useAppSelector((s) => s);
   const [reRender, setReRender] = React.useState(0);
   useTitle(meetReducer.meetDetails.title);
@@ -68,6 +70,7 @@ export const useVideoConf = () => {
       console.log("user raised hand", displayName);
       if (UID != authReducer.UID) {
         console.log(UID, authReducer.UID);
+        playAudio?.();
         enqueueSnackbar(displayName + " raised hand");
       }
     });
@@ -129,6 +132,7 @@ export const useVideoConf = () => {
       call.answer(stream);
       call.on("stream", (userVideoStream) => {
         console.log("user stream data", userVideoStream);
+        playAudio?.();
         peerStream.current?.set(call.metadata.id, {
           stream: userVideoStream,
           displayName: call.metadata.displayName,
@@ -209,7 +213,6 @@ export const useVideoConf = () => {
   return {
     myStream,
     peerStream,
-    mediaReducer,
     destroyConnection,
     raiseHand,
     reRender,

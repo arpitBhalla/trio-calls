@@ -39,7 +39,9 @@ const NewMeetComponent: React.FC = () => {
       time: meetingTime.text || new Date().getTime().toString(),
     })
       .then(({ meetID }) => {
-        enqueueSnackbar("New meet created");
+        enqueueSnackbar("New meet created", {
+          variant: "success",
+        });
         history.push(`/${meetID}`);
       })
       .catch((error) => {

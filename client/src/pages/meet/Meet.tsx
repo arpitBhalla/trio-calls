@@ -1,11 +1,11 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
 import Box from "@material-ui/core/Box";
 import Controller from "./components/Controller";
-import clsx from "clsx";
-import { useVideoConf } from "core/hooks/useVideoConf";
-import Grid, { GridSize } from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
+import { useVideoConf } from "./hooks/useVideoConf";
 import { LeftBar, SidePanel, Sketch, Video } from "./components";
+import Grid, { GridSize } from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
   content: {

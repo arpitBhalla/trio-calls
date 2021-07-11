@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { useParams } from "react-router-dom";
-
+import ReactMarkdown from "react-markdown";
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "absolute",
@@ -27,6 +27,10 @@ const LeftBar: React.FC = () => {
   }, []);
   return (
     <Box className={classes.root}>
+      <ReactMarkdown>
+        A paragraph with *emphasis* and **strong importance**. Just a link:
+        https://reactjs.com.
+      </ReactMarkdown>
       <Typography variant="h6" color="textSecondary">
         <b>
           {time.toLocaleTimeString("en-IN", {

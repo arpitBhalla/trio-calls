@@ -53,6 +53,8 @@ const ChatTextInput: React.FC<ChatTextInputProps> = ({ onSend, isSmall }) => {
       </Popper>
       <TextField
         fullWidth
+        multiline
+        rowsMax={4}
         placeholder="Send a message to everyone"
         variant="outlined"
         value={text}
