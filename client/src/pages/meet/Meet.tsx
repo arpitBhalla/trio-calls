@@ -1,14 +1,11 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import SideBar from "./components/SidePanel";
 import Box from "@material-ui/core/Box";
 import Controller from "./components/Controller";
 import clsx from "clsx";
 import { useVideoConf } from "core/hooks/useVideoConf";
-import Video from "./components/Video";
 import Grid, { GridSize } from "@material-ui/core/Grid";
-import LeftBar from "./components/LeftBar";
-import Sketch from "./components/Sketch";
+import { LeftBar, SidePanel, Sketch, Video } from "./components";
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -63,7 +60,7 @@ const Meet: React.FC = () => {
           </Grid>
         </Box>
       </Box>
-      <SideBar open={open} setOpen={setOpen} />
+      <SidePanel open={open} setOpen={setOpen} />
       <Controller
         endCallHandler={destroyConnection}
         raiseHandHandler={raiseHand}

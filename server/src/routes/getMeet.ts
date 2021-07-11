@@ -1,7 +1,6 @@
 import express from "express";
 import { Meet } from "../models/meet";
 import { User } from "../models/user";
-import { ChatType } from "../models/chat";
 
 const Router = express.Router();
 

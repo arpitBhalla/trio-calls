@@ -1,12 +1,22 @@
 import React from "react";
 import store from "core/store";
-import Routes from "pages";
-import ThemeProvider from "core/provider/ThemeProvider";
 import { useTitle } from "core/hooks/common";
 import { SnackbarProvider } from "notistack";
 import { Provider as ReduxProvider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { SocketProvider } from "core/provider/SocketProvider";
+import loadable from "@loadable/component";
+import LinearProgress from "@material-ui/core/LinearProgress";
+
+export const Routes = loadable(() => import("pages"), {
+  fallback: <LinearProgress />,
+});
+export const ThemeProvider = loadable(
+  () => import("core/provider/ThemeProvider"),
+  {
+    fallback: <LinearProgress />,
+  }
+);
 
 const App: React.FC = () => {
   useTitle();

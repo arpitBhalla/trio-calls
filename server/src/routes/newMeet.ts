@@ -1,7 +1,7 @@
 import express from "express";
 import { sendMail } from "../utils/sendMail";
 import { createEvent } from "ics";
-import { Meet } from "../models/meet";
+import { Meet } from "../models";
 import { generateID } from "../utils/UID";
 import { InviteTemplate } from "../email/invite";
 import { User } from "../models/user";
@@ -19,7 +19,7 @@ export const NewMeet = Router.post("/", async (req, res) => {
   }
 
   const meetID = generateID();
-  const Meet = new Meet({
+  const meet = new Meet({
     title: title || meetID,
     invitees,
     hostID,
@@ -29,7 +29,7 @@ export const NewMeet = Router.post("/", async (req, res) => {
   });
 
   try {
-    await Meet.save();
+    await meet.save();
   } catch (e) {
     console.trace(e);
     return res.status(201).json({
@@ -46,8 +46,8 @@ export const NewMeet = Router.post("/", async (req, res) => {
     const hostedURL = process.env.DEV
       ? "http://localhost:3000/"
       : "http://ms-teams.vercel.app/";
-    const chatLink = hostedURL + "chat/" + Meet.meetID;
-    const meetLink = hostedURL + Meet.meetID;
+    const chatLink = hostedURL + "chat/" + meet.meetID;
+    const meetLink = hostedURL + meet.meetID;
     const html = InviteTemplate({
       chatLink,
       meetLink,
@@ -103,5 +103,5 @@ export const NewMeet = Router.post("/", async (req, res) => {
       });
     }
   }
-  res.status(200).json({ meetID: Meet.meetID });
+  res.status(200).json({ meetID: meet.meetID });
 });
