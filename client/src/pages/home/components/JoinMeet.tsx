@@ -10,11 +10,16 @@ import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Chip from "@material-ui/core/Chip";
 import Typography from "@material-ui/core/Typography";
+import { useLocalStorage } from "core/hooks/common";
 
 const JoinMeet: React.FC = () => {
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
   const [meetID, setMeetID] = useState({ text: "", error: "" });
+  const [recentCalls, setRecentCalls] = useLocalStorage(
+    "recentCalls",
+    [] as string[]
+  );
 
   const handleJoinMeet = async () => {
     const parsedMeetID = stringToMeetID(meetID.text);
@@ -24,6 +29,7 @@ const JoinMeet: React.FC = () => {
         variant: "error",
       });
     }
+    setRecentCalls([parsedMeetID, ...recentCalls.slice(0, 3)]);
     history.push(`/${parsedMeetID}`);
   };
 
@@ -60,20 +66,24 @@ const JoinMeet: React.FC = () => {
         Join Meeting
       </Button>
       <br />
-      <br />
-      <Typography variant="caption" color="textSecondary">
-        Recently joined meetings
-      </Typography>
-      <br />
-      {["my1enb-bqag-azj3", "another-meet-id"].map((v) => (
-        <Chip
-          style={{ margin: 2 }}
-          key={v}
-          label={v}
-          variant="outlined"
-          onClick={() => setMeetID({ text: v, error: "" })}
-        />
-      ))}
+      {!!recentCalls.length && (
+        <>
+          <br />
+          <Typography variant="caption" color="textSecondary">
+            Recently joined meetings
+          </Typography>
+          <br />
+          {recentCalls?.map((v) => (
+            <Chip
+              style={{ margin: 2 }}
+              key={v}
+              label={v}
+              variant="outlined"
+              onClick={() => setMeetID({ text: v, error: "" })}
+            />
+          ))}
+        </>
+      )}
     </>
   );
 };

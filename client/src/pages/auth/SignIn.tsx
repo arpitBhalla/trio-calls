@@ -41,16 +41,16 @@ const SignIn: React.FC = () => {
     /**
      * For Development Purpose only
      */
-    // if (process.env.NODE_ENV === "development") {
-    //   return dispatch(
-    //     updateAuth({
-    //       isAuth: true,
-    //       UID: "60e1a699a61fb074de6a4108",
-    //       displayName: "Arpit Bhalla",
-    //       email: "arpitbhalla2001@gmail.com",
-    //     })
-    //   );
-    // }
+    if (process.env.NODE_ENV === "development") {
+      return dispatch(
+        updateAuth({
+          isAuth: true,
+          UID: "60e1a699a61fb074de6a4108",
+          displayName: "Arpit Bhalla",
+          email: "arpitbhalla2001@gmail.com",
+        })
+      );
+    }
     UID;
     if (!emailRegex.test(email.text)) {
       return setEmail({ ...email, error: "Field is invalid" });

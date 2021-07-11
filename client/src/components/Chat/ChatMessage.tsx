@@ -2,6 +2,7 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemText } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
+import Linkify from "react-linkify";
 
 type Props = {
   displayName?: string;
@@ -50,7 +51,11 @@ const ChatMessage: React.FC<Props> = ({
             </Typography>
           )
         }
-        secondary={<Typography variant="body2">{message}</Typography>}
+        secondary={
+          <Linkify>
+            <Typography variant="body2">{message}</Typography>
+          </Linkify>
+        }
       />
     </ListItem>
   );

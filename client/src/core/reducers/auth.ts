@@ -15,9 +15,12 @@ export const authStore = createSlice({
       state.UID = action.payload.UID;
       state.email = action.payload.email;
     },
+    updateDisplayName: (state, action: PayloadAction<string>) => {
+      state.displayName = action.payload;
+    },
   },
 });
 
-export const { updateAuth } = authStore.actions;
+export const { updateAuth, updateDisplayName } = authStore.actions;
 
 export default authStore.reducer;
