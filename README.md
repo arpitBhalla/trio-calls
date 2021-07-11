@@ -21,6 +21,7 @@ A multi-participant video call platform for calling across the world for free wi
 
 ### Basic features
 
+- Chat in github flavoured markdown insert tables, code snippets.
 - Schedule 📅 meets, send invite via email 📩 & save to calender.
 - Create public 🌐 or restricted ☢️ meeting.
 - Connect with multiple users via meeting link or code.
