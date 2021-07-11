@@ -28,12 +28,13 @@ A multi-participant video call platform for calling across the world for free wi
 - Realtime chat 💬, connect before or after the meeting.
 - Audio notification 🔔 for chat and new user connect
 - Screen Sharing 💻
-- Select camera 📷 & audio 🎙️ sources.
 - Mute 🔇 Other Participants (only host)
 - Remove ⛔ Other Participants (only host)
 
 ### Classroom specific features
 
+- Q&A Panel
+- Poll / Voting
 - Realtime whiteboard 📋 with multiple tools.
 - Take attendance <u>`anytime`</u> during lecture (Non attentive students will miss theirs 😈).
 - Get notified if student changes tab or doing other activities during lectures. 😹 (Yet they can do it on mobile phones)
