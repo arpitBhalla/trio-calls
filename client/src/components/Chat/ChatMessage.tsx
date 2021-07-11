@@ -33,8 +33,8 @@ const ChatMessage: React.FC<Props> = ({
   return (
     <ListItem
       style={{
-        padding: 2,
-        marginBottom: hidePrimary ? 0 : 4,
+        padding: 0,
+        marginBottom: 0,
       }}
     >
       <ListItemText
@@ -54,9 +54,9 @@ const ChatMessage: React.FC<Props> = ({
           )
         }
         secondary={
-          <Typography variant="body2">
-            <ReactMarkdown remarkPlugins={[gfm]}>{message || ""}</ReactMarkdown>
-          </Typography>
+          // <Typography variant="body2">
+          <ReactMarkdown remarkPlugins={[gfm]}>{message || ""}</ReactMarkdown>
+          // </Typography>
         }
       />
     </ListItem>

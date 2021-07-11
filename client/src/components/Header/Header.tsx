@@ -136,7 +136,7 @@ const Header: React.FC<HeaderProps> = ({
               label="Display Name"
               variant="outlined"
               defaultValue={displayName}
-              value={newDisplayName || displayName}
+              value={newDisplayName}
               onChange={(e) => setNewDisplayName(e.target.value)}
             />
           </DialogContentText>

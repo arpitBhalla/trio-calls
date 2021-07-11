@@ -6,6 +6,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useVideoConf } from "./hooks/useVideoConf";
 import { LeftBar, SidePanel, Sketch, Video } from "./components";
 import Grid, { GridSize } from "@material-ui/core/Grid";
+import { useSnackbar } from "notistack";
+import A from "./components/PollAlert";
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -24,20 +26,21 @@ const useStyles = makeStyles((theme) => ({
 const Meet: React.FC = () => {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles({ open });
-  // const { myStream, peerStream, destroyConnection, raiseHand, reRender } =
-  //   useVideoConf();
-  // const [gridSize, setGridSize] = React.useState(1);
 
-  // React.useEffect(() => {
-  //   const TOTAL_PARTICIPANTS = peerStream.current?.size || 0;
-  //   const GRID_SIZE = [12, 6, 4, 3, 3, 3, 3][TOTAL_PARTICIPANTS];
-  //   setGridSize(GRID_SIZE);
-  // }, [peerStream.current?.size, myStream.current?.active, reRender]);
+  const { myStream, peerStream, destroyConnection, raiseHand, reRender } =
+    useVideoConf();
+  const [gridSize, setGridSize] = React.useState(1);
+
+  React.useEffect(() => {
+    const TOTAL_PARTICIPANTS = peerStream.current?.size || 0;
+    const GRID_SIZE = [12, 6, 4, 3, 3, 3, 3][TOTAL_PARTICIPANTS];
+    setGridSize(GRID_SIZE);
+  }, [peerStream.current?.size, myStream.current?.active, reRender]);
 
   // console.log(gridSize, peerStream.current?.size);
   return (
     <>
-      {/* <Box display="flex" height="88vh" alignItems="center">
+      <Box display="flex" height="88vh" alignItems="center">
         <Box className={clsx(classes.content, open && classes.contentOff)}>
           <Grid container spacing={1} direction="row" alignItems="center">
             <Grid item xs={gridSize as GridSize}>
@@ -45,7 +48,6 @@ const Meet: React.FC = () => {
                 <Video stream={myStream.current} displayName={"You"} />
               </Box>
             </Grid>
-
             {Array.from(peerStream.current || []).map(
               ([key, { displayName, stream }]) => {
                 return (
@@ -59,12 +61,12 @@ const Meet: React.FC = () => {
             )}
           </Grid>
         </Box>
-      </Box> */}
+      </Box>
       <SidePanel open={open} setOpen={setOpen} />
-      {/* <Controller
+      <Controller
         endCallHandler={destroyConnection}
         raiseHandHandler={raiseHand}
-      /> */}
+      />
       <LeftBar />
       <Sketch />
     </>

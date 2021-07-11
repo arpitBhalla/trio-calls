@@ -1,7 +1,7 @@
 import React from "react";
-import { LinearProgress } from "@material-ui/core";
-import loadable from "@loadable/component";
 import { AudioProvider } from "core/provider/AudioProvider";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import loadable from "@loadable/component";
 
 const WaitRoom = loadable(() => import("./WaitRoom"), {
   fallback: <LinearProgress />,

@@ -2,11 +2,6 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Box from "@material-ui/core/Box";
-import Chat from "./ChatBox";
-import Participants from "./Participants";
-import MeetInfo from "./Info";
-import Polls from "./Polls";
-
 import {
   InfoOutlined,
   ChatOutlined,
@@ -23,6 +18,21 @@ import Badge from "@material-ui/core/Badge";
 import Paper from "@material-ui/core/Paper";
 import BoxShadow from "components/ShadowBox";
 import Drawer from "@material-ui/core/Drawer";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import loadable from "@loadable/component";
+
+const Chat = loadable(() => import("./ChatBox"), {
+  fallback: <LinearProgress />,
+});
+const Participants = loadable(() => import("./Participants"), {
+  fallback: <LinearProgress />,
+});
+const MeetInfo = loadable(() => import("./Info"), {
+  fallback: <LinearProgress />,
+});
+const Polls = loadable(() => import("./Polls"), {
+  fallback: <LinearProgress />,
+});
 
 interface Props {
   open: boolean;
@@ -30,19 +40,16 @@ interface Props {
 }
 
 const useStyles = makeStyles((theme) => ({
-  sideBarContent: {
-    minWidth: "350px",
-    maxWidth: "350px",
-    padding: theme.spacing(2),
-    height: "100%",
-  },
+  sideBarContent: {},
   controller: {
     position: "absolute",
     bottom: theme.spacing(3),
     right: theme.spacing(2),
   },
   drawerPaper: {
-    backgroundColor: "pink",
+    minWidth: "350px",
+    maxWidth: "350px",
+    padding: theme.spacing(2),
     height: "84%",
     top: theme.spacing(2),
     right: theme.spacing(2),
@@ -85,40 +92,30 @@ const SideBar: React.FC<Props> = ({ open, setOpen }) => {
           hideBackdrop: true,
         }}
       >
-        <BoxShadow component={Paper} className={clsx(classes.sideBarContent)}>
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Typography variant="h6">
-              {
-                ["Meeting Details", "People", "In-call messages", "Polls"][
-                  index
-                ]
-              }
-            </Typography>
-            <IconButton aria-label="" onClick={() => setOpen(false)}>
-              <Close />
-            </IconButton>
-          </Box>
-          <Box p={1}>
-            {(() => {
-              switch (index) {
-                case 0:
-                  return <MeetInfo />;
-                case 1:
-                  return <Participants />;
-                case 2:
-                  return <Chat />;
-                case 3:
-                  return <Polls />;
-                default:
-                  return null;
-              }
-            })()}
-          </Box>
-        </BoxShadow>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Typography variant="h6">
+            {["Meeting Details", "People", "In-call messages", "Polls"][index]}
+          </Typography>
+          <IconButton aria-label="" onClick={() => setOpen(false)}>
+            <Close />
+          </IconButton>
+        </Box>
+        <Box p={1}>
+          {(() => {
+            switch (index) {
+              case 0:
+                return <MeetInfo />;
+              case 1:
+                return <Participants />;
+              case 2:
+                return <Chat />;
+              case 3:
+                return <Polls />;
+              default:
+                return null;
+            }
+          })()}
+        </Box>
       </Drawer>
 
       <Box className={classes.controller}>
