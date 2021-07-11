@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { useLocalStorage } from "core/hooks/common";
 import { useSnackbar } from "notistack";
 import { updateAuth } from "core/reducers/auth";
+import { useConnection } from "core/hooks/useConnection";
 import LoadingPage from "components/LoadingPage";
 
 const Home = loadable(() => import("./home/Home"), {
@@ -27,6 +28,7 @@ const Chat = loadable(() => import("./chat"), {
 });
 
 const AuthRoute: React.FC<RouteProps> = (props) => {
+  useConnection();
   const history = useHistory();
   const { pathname } = useLocation();
   const { isAuth } = useAppSelector(({ authReducer }) => authReducer);

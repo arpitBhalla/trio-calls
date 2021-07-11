@@ -4,6 +4,7 @@ import { ListItem, ListItemText } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 // import Linkify from "react-linkify";
 import ReactMarkdown from "react-markdown";
+import gfm from "remark-gfm";
 
 type Props = {
   displayName?: string;
@@ -54,7 +55,7 @@ const ChatMessage: React.FC<Props> = ({
         }
         secondary={
           <Typography variant="body2">
-            <ReactMarkdown>{message || ""}</ReactMarkdown>
+            <ReactMarkdown remarkPlugins={[gfm]}>{message || ""}</ReactMarkdown>
           </Typography>
         }
       />

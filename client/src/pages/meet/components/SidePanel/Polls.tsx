@@ -9,7 +9,7 @@ import AddIcon from "@material-ui/icons/Add";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Box from "@material-ui/core/Box";
 import Chip from "@material-ui/core/Chip";
-import A from "./PollForm";
+import PollModal from "./PollModal";
 
 type Props = {
   meetLink?: string;
@@ -28,14 +28,15 @@ const useStyles = makeStyles((theme) => ({
 const InfoPanel: React.FC<Props> = ({ meetLink = window.location.href }) => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
+  const [openModal, setOpenModal] = React.useState(false);
+
   const handlePress = () => {
-    enqueueSnackbar("Copied meeting link");
-    CopyToClipboard(meetLink);
+    setOpenModal(true);
   };
 
   return (
     <>
-      <A />
+      <PollModal open={openModal} onClose={() => setOpenModal(false)} />
       <Box p={2} borderRadius={3} border="1px solid #e2e2e2">
         <Box display="flex" justifyContent="space-between">
           <Typography variant="subtitle1" color="textPrimary">
@@ -67,6 +68,7 @@ const InfoPanel: React.FC<Props> = ({ meetLink = window.location.href }) => {
         startIcon={<AddIcon />}
         variant="text"
         color="secondary"
+        onClick={handlePress}
       >
         Create a poll
       </Button>
