@@ -2,6 +2,7 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,13 +12,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-type Props = {
-  meetTitle?: string;
-};
-
-const LeftBar: React.FC<Props> = ({ meetTitle = "My Title" }) => {
+const LeftBar: React.FC = () => {
   const classes = useStyles();
   const [time, setTime] = React.useState(new Date());
+  const { meetID } = useParams<{ meetID: string }>();
+
   React.useEffect(() => {
     const subs = setTimeout(() => {
       setTime(new Date());
@@ -35,7 +34,7 @@ const LeftBar: React.FC<Props> = ({ meetTitle = "My Title" }) => {
             hour: "numeric",
             minute: "2-digit",
           })}{" "}
-          | {meetTitle}
+          | {meetID}
         </b>
       </Typography>
     </Box>

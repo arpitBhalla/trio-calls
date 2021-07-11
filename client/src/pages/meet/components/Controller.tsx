@@ -9,10 +9,12 @@ import {
   CancelPresentationOutlined,
   PresentToAllOutlined,
   PanToolOutlined,
+  PanTool,
   CategoryOutlined,
   Category,
   Brightness4,
   CallEnd,
+  BrushOutlined,
 } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -58,6 +60,7 @@ const Controller: React.FC<ControllerProps> = ({
     <Box className={classes.root}>
       <ControlButton
         title="Microphone"
+        shortCut="m"
         isEnabled={isAudio}
         IconOn={MicOutlined}
         IconOff={MicOffOutlined}
@@ -65,6 +68,7 @@ const Controller: React.FC<ControllerProps> = ({
       />
       <ControlButton
         title="Video"
+        shortCut="v"
         isEnabled={isVideo}
         IconOn={VideocamOutlined}
         IconOff={VideocamOffOutlined}
@@ -72,13 +76,15 @@ const Controller: React.FC<ControllerProps> = ({
       />
       <ControlButton
         title="ScreenShare"
+        shortCut="s"
         isEnabled={isScreenShare}
         IconOn={CancelPresentationOutlined}
         IconOff={PresentToAllOutlined}
         onClick={() => dispatch(toggleScreen(null))}
       />
-      <Tooltip title="End Call">
+      <Tooltip title="End Call (Alt+e)">
         <IconButton
+          accessKey="e"
           className={classes.callEnd}
           aria-label="end call"
           style={{ backgroundColor: "red" }}
@@ -90,23 +96,27 @@ const Controller: React.FC<ControllerProps> = ({
       <ControlButton
         title="White Board"
         isEnabled={isWhiteBoard}
-        IconOn={Category}
-        IconOff={CategoryOutlined}
+        shortCut="w"
+        IconOn={BrushOutlined}
+        IconOff={BrushOutlined}
         onClick={() => dispatch(toggleWhiteBoard(null))}
       />
-      <Tooltip title="Dark Mode">
-        <IconButton
-          aria-label="toggle dark/light mode"
-          onClick={() => dispatch(toggleDarkMode(null))}
-        >
-          <Brightness4 />
-        </IconButton>
-      </Tooltip>
-      <Tooltip title="Raise Hand" aria-label="raise hand">
-        <IconButton onClick={raiseHandHandler}>
-          <PanToolOutlined />
-        </IconButton>
-      </Tooltip>
+      <ControlButton
+        title="Theme Mode"
+        isEnabled={isWhiteBoard}
+        shortCut="t"
+        IconOn={Brightness4}
+        IconOff={Brightness4}
+        onClick={() => dispatch(toggleDarkMode(null))}
+      />
+      <ControlButton
+        title="Raise Hand"
+        isEnabled={false}
+        shortCut="r"
+        IconOn={PanTool}
+        IconOff={PanToolOutlined}
+        onClick={raiseHandHandler}
+      />
     </Box>
   );
 };

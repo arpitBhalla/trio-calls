@@ -12,10 +12,10 @@ const App: React.FC = () => {
   const [meetStarted, setMeetStarted] = React.useState(false);
   const joinMeet = () => setMeetStarted(true);
 
-  return <Meet />;
-  // if (meetStarted) {
-  // } else {
-  //   return <WaitRoom joinMeetHandler={joinMeet} />;
-  // }
+  if (meetStarted) {
+    return <Meet />;
+  } else {
+    return <WaitRoom joinMeetHandler={joinMeet} />;
+  }
 };
 export default App;

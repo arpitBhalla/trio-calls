@@ -9,6 +9,7 @@ type ControlButtonProps = {
   IconOn: typeof MicOffOutlined;
   IconOff: typeof MicOffOutlined;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
+  shortCut?: string;
 };
 
 const ControlButton: React.FC<ControlButtonProps> = ({
@@ -17,9 +18,14 @@ const ControlButton: React.FC<ControlButtonProps> = ({
   IconOn,
   IconOff,
   onClick,
+  shortCut,
 }) => (
-  <Tooltip title={title + " " + (!isEnabled ? "off" : "on")}>
-    <IconButton onClick={onClick}>
+  <Tooltip
+    title={`${title} ${!isEnabled ? "off" : "on"} ${
+      shortCut ? `(Alt+${shortCut})` : ""
+    }`}
+  >
+    <IconButton accessKey={shortCut || ""} onClick={onClick}>
       <ToggleIcon on={isEnabled} onIcon={<IconOn />} offIcon={<IconOff />} />
     </IconButton>
   </Tooltip>

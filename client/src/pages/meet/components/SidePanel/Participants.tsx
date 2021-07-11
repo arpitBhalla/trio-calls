@@ -12,8 +12,8 @@ import { getRandomColor } from "utils/common";
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
-    backgroundColor: (props: { bgColor: string; lightBgColor: string }) =>
-      theme.palette.type === "dark" ? props.lightBgColor : props.bgColor,
+    // backgroundColor: (props: { bgColor: string; lightBgColor: string }) =>
+    //   theme.palette.type === "dark" ? props.lightBgColor : props.bgColor,
     marginRight: 8,
   },
 }));

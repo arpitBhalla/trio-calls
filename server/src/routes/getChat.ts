@@ -1,11 +1,11 @@
 import express from "express";
 import { Meet } from "../models/meet";
 import { User } from "../models/user";
-import { ChatType } from "../models/chat";
+import { ChatModel } from "../models/chat";
 
 const Router = express.Router();
 
-export const GetMeet = Router.post("/", async (req, res) => {
+export const GetChat = Router.post("/", async (req, res) => {
   const { meetID, UID } = req.body;
 
   // get Logged in User
@@ -17,7 +17,16 @@ export const GetMeet = Router.post("/", async (req, res) => {
   }
 
   // get meet from meeting id xxxx-xxxx-xxxx
-  const meet = (await Meet.find({ meetID }))[0];
+  const meet = (
+    await Meet.find({ meetID }).populate({
+      path: "chat",
+      options: {
+        limit: 20,
+        sort: { created: -1 },
+        // skip:  * 2,
+      },
+    })
+  )[0];
 
   if (!meet) {
     return res.status(201).json({
@@ -32,7 +41,7 @@ export const GetMeet = Router.post("/", async (req, res) => {
     meet.type === "public";
 
   if (isInvited) {
-    return res.status(200).json(meet);
+    return res.status(200).json({ meetTitle: meet.title, chat: meet.chat });
   } else {
     return res.status(201).json({
       message: "You are not Invited",

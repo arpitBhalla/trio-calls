@@ -73,8 +73,9 @@ const Chat: React.FC = () => {
           </Grid>
         </ShadowBox>
       </Container>
-      <Tooltip title="Video Calls">
+      <Tooltip title="Video Calls (Alt+v)">
         <Fab
+          accessKey="v"
           color="primary"
           className={classes.fab}
           onClick={() => history.push("/")}

@@ -1,29 +1,31 @@
 import express from "express";
 import { sendMail } from "../utils/sendMail";
 import { createEvent } from "ics";
-import { MeetModel } from "../models/meeting";
+import { Meet } from "../models/meet";
 import { generateID } from "../utils/UID";
 import { InviteTemplate } from "../email/invite";
-import { UserModel } from "../models/user";
+import { User } from "../models/user";
 
 const Router = express.Router();
 
-export const NewMeetRoute = Router.post("/", async (req, res) => {
+export const NewMeet = Router.post("/", async (req, res) => {
   const { title, invitees, hostID, type, time } = req.body;
 
-  const user = await UserModel.findById(hostID);
+  const user = await User.findById(hostID);
   if (!user) {
-    return res.status(400).json({
+    return res.status(201).json({
       message: "User not found",
     });
   }
-  const Meet = new MeetModel({
-    title,
+
+  const meetID = generateID();
+  const Meet = new Meet({
+    title: title || meetID,
     invitees,
     hostID,
     type,
     time,
-    meetID: generateID(),
+    meetID,
   });
 
   try {
@@ -96,7 +98,7 @@ export const NewMeetRoute = Router.post("/", async (req, res) => {
         },
       });
     } catch {
-      return res.status(500).json({
+      return res.status(201).json({
         message: "Error while sending invite email",
       });
     }

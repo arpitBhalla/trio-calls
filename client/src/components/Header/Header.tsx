@@ -8,7 +8,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Logo from "./Logo";
+import Logo from "../Logo";
 import { toggleDarkMode } from "core/reducers/theme";
 import IconButton from "@material-ui/core/IconButton";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
@@ -87,10 +87,16 @@ const Header: React.FC<HeaderProps> = ({
         <Typography variant="h6" color="primary" className={classes.headerText}>
           Microsoft Teams
         </Typography>
-        <IconButton aria-label="toggle theme" onClick={handleToggleTheme}>
-          {!useDark ? <Brightness4Icon /> : <Brightness7Icon />}
-        </IconButton>
-        <Tooltip title="Logout">
+        <Tooltip title="Toggle Theme (Alt+t)">
+          <IconButton
+            accessKey="t"
+            aria-label="toggle theme"
+            onClick={handleToggleTheme}
+          >
+            {!useDark ? <Brightness4Icon /> : <Brightness7Icon />}
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="My Account">
           <Chip
             label={displayName}
             color={"default"}

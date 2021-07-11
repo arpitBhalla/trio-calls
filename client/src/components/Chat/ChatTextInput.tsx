@@ -64,7 +64,7 @@ const ChatTextInput: React.FC<ChatTextInputProps> = ({ onSend, isSmall }) => {
           }
         }}
         InputProps={{
-          startAdornment: (
+          startAdornment: !isSmall && (
             <InputAdornment style={{ margin: 0, padding: 0 }} position="start">
               <IconButton aria-label="" onClick={handleClick}>
                 <TagFacesIcon color="action" />

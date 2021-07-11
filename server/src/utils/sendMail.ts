@@ -1,7 +1,3 @@
-/**
- * @author Arpit Bhalla
- */
-
 import nodemailer, { SendMailOptions, SentMessageInfo } from "nodemailer";
 import chalk from "chalk";
 

@@ -28,14 +28,19 @@ export const newMeet = async ({
   type,
   time,
 }: Meeting): Promise<Meeting> => {
-  const res = await axiosFetch.post<Meeting>("/newMeet", {
-    hostID,
-    invitees,
-    title,
-    type,
-    time,
+  return new Promise((resolve, reject) => {
+    return axiosFetch
+      .post<Response>("/newMeet", {
+        hostID,
+        invitees,
+        title,
+        type,
+        time,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          resolve(res.data);
+        } else reject(res.data.message);
+      });
   });
-  if (res.status === 200) {
-    return res.data;
-  } else throw new Error("");
 };
