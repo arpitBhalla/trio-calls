@@ -17,7 +17,9 @@ jobs:
           version: "347.0.0"
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
-      - run: ls 
+      - name: Testing
+        run: |
+          ls -a
       - id: Deploy
         uses: google-github-actions/deploy-appengine@main
         with:
