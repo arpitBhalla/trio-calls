@@ -3,10 +3,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import { ChatMessage, ChatTextInput } from "components/Chat";
 import { useMsgs } from "core/hooks/useMsgs";
+import { useAppSelector } from "core/hooks/redux";
+import { dateToTime } from "utils/common";
+import { useParams } from "react-router-dom";
+import { LinearProgress } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   chatRoot: {
-    margin: "10px 0px",
     position: "relative",
   },
   chatBox: {
@@ -17,26 +20,33 @@ const useStyles = makeStyles(() => ({
 
 const ChatLayout: React.FC = () => {
   const classes = useStyles();
-  const { chat, sendMessage, UID: userID } = useMsgs();
+  const { userID, chat } = useAppSelector((state) => ({
+    userID: state.authReducer.UID,
+    chat: state.chatReducer.chat,
+  }));
+  const { meetID } = useParams<{ meetID: string }>();
+  const { sendMessage, loading } = useMsgs(meetID);
 
   console.log(chat);
+  let prev = "";
   return (
     <Box className={classes.chatRoot}>
       <Box className={classes.chatBox}>
-        {chat.map(({ displayName, UID, message, time }, i) => (
-          <ChatMessage
-            key={i}
-            // hidePrimary
-            isSelf={UID === userID}
-            displayName={displayName}
-            message={message}
-            time={new Date(time).toLocaleTimeString("en-IN", {
-              hour12: true,
-              hour: "numeric",
-              minute: "2-digit",
-            })}
-          />
-        ))}
+        {loading ? (
+          <LinearProgress />
+        ) : (
+          chat?.map(({ message, displayName, createdAt, UID }, i) => (
+            <ChatMessage
+              key={i}
+              hideAvatar
+              hidePrimary={prev === (prev = UID)}
+              displayName={displayName}
+              isSelf={UID === userID}
+              message={message}
+              time={dateToTime(createdAt)}
+            />
+          ))
+        )}
       </Box>
       <ChatTextInput isSmall onSend={sendMessage} />
     </Box>

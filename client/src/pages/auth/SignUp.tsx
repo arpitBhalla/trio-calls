@@ -35,12 +35,10 @@ const SignUp: React.FC = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
-  const [UID, setUID] = useLocalStorage("UID", "");
+  const setUID = useLocalStorage("UID", "")[1];
   const { search } = useLocation();
   const { isAuth } = useAppSelector(({ authReducer }) => authReducer);
-  console.log(UID);
   const redirect_url = new URLSearchParams(search).get("redirect_url") || "/";
-
   const [name, setName] = React.useState(INITIAL_STATE);
   const [email, setEmail] = React.useState(INITIAL_STATE);
   const [password, setPassword] = React.useState(INITIAL_STATE);

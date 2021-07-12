@@ -53,18 +53,15 @@ const ChatTextInput: React.FC<ChatTextInputProps> = ({ onSend, isSmall }) => {
       </Popper>
       <TextField
         fullWidth
+        multiline
+        rowsMax={2}
         placeholder="Send a message to everyone"
         variant="outlined"
         value={text}
         margin={isSmall ? "dense" : "none"}
         onChange={(e) => setText(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            handleSubmit();
-          }
-        }}
         InputProps={{
-          startAdornment: (
+          startAdornment: !isSmall && (
             <InputAdornment style={{ margin: 0, padding: 0 }} position="start">
               <IconButton aria-label="" onClick={handleClick}>
                 <TagFacesIcon color="action" />

@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Header from "components/Header";
 import ShadowBox from "components/ShadowBox";
+import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import ChatHeader from "./components/ChatHeader";
 import { useTitle } from "core/hooks/common";
@@ -36,45 +37,53 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Chat: React.FC = () => {
-  useTitle("Chats");
   const history = useHistory();
   const classes = useStyles();
   const { meetID } = useParams<{ meetID: string }>();
+  const [title, setTitle] = React.useState("");
+
+  useTitle(title || "Chats");
 
   return (
     <>
       <Header toolBarBottomMargin={2} />
       <Container maxWidth="md">
         <ShadowBox>
-          <ChatHeader title={meetID} />
+          <ChatHeader title={title} meetID={meetID} />
           <Grid container>
             <Grid item sm={4} className={classes.chatList}>
-              <ChatParticipants
-                meetID={meetID}
-                chats={[
-                  {
-                    displayName: "Arpit Bhalla",
-                    lastMessage: "Hello World",
-                    meetID: "1enb-bqag-azj3",
-                    lastMessageTime: "Now",
-                  },
-                ]}
-              />
+              <ChatParticipants />
             </Grid>
             <Grid item sm={8}>
               {meetID ? (
-                <ChatMsgs meetID={meetID} />
+                <ChatMsgs handleTitle={setTitle} />
               ) : (
-                <Typography variant="h5" align="center" color="primary">
-                  Select someone to chat.
-                </Typography>
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  flexDirection="column"
+                  py={8}
+                >
+                  <img
+                    alt="Start new chat"
+                    width={180}
+                    style={{ alignSelf: "center", margin: 20 }}
+                    src={
+                      "https://www.gstatic.com/meet/user_edu_get_a_link_light_90698cd7b4ca04d3005c962a3756c42d.svg"
+                    }
+                  />
+                  <Typography variant="h5" align="center">
+                    Select someone to chat.
+                  </Typography>
+                </Box>
               )}
             </Grid>
           </Grid>
         </ShadowBox>
       </Container>
-      <Tooltip title="Video Calls">
+      <Tooltip title="Video Calls (Alt+v)">
         <Fab
+          accessKey="v"
           color="primary"
           className={classes.fab}
           onClick={() => history.push("/")}

@@ -1,10 +1,10 @@
 import express from "express";
-import { UserModel as User } from "../models/user";
+import { User as User } from "../models/user";
 import bcrypt from "bcryptjs";
 
 const Router = express.Router();
 
-export const SignUpRoute = Router.post("/", async (req, res) => {
+export const SignUp = Router.use("/", async (req, res) => {
   const { displayName, email, password } = req.body;
   const existingUser = await User.findOne({ email });
   if (existingUser) {

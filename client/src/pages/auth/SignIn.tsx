@@ -35,23 +35,9 @@ const SignIn: React.FC = () => {
   const [password, setPassword] = React.useState(INITIAL_STATE);
   const [loading, setLoading] = React.useState(false);
   const [firstStepOver, setEmailExist] = React.useState(false);
-  const [UID, setUID] = useLocalStorage("UID", "");
+  const setUID = useLocalStorage("UID", "")[1];
 
   const handleLogin = async () => {
-    /**
-     * For Development Purpose only
-     */
-    if (process.env.NODE_ENV === "development") {
-      return dispatch(
-        updateAuth({
-          isAuth: true,
-          UID: "60e1a699a61fb074de6a4108",
-          displayName: "Arpit Bhalla",
-          email: "arpitbhalla2001@gmail.com",
-        })
-      );
-    }
-    UID;
     if (!emailRegex.test(email.text)) {
       return setEmail({ ...email, error: "Field is invalid" });
     } else if (!firstStepOver) {
@@ -69,13 +55,10 @@ const SignIn: React.FC = () => {
         setUID(JSON.stringify(userDetails));
       })
       .catch((error) => {
-        console.log({ error });
+        setLoading(false);
         enqueueSnackbar(error || "SomeThing went wrong", {
           variant: "error",
         });
-      })
-      .finally(() => {
-        setLoading(false);
       });
   };
   const redirectToSignUp = () => {

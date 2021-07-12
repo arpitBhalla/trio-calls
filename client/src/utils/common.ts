@@ -19,17 +19,6 @@ export const CopyToClipboard = function (text: string): unknown {
   return navigator.clipboard.writeText(text);
 };
 
-// export const pipe =
-//   (...funcs: unknown[]) =>
-//   (arg) => {
-//     funcs.reduce((val, func) => func(value), arg);
-//   };
-
-// pipe(
-//   (e) => e + 2,
-//   (e) => e - 3
-// );
-
 export const setStateHandler =
   (
     setState: React.Dispatch<React.SetStateAction<string>>
@@ -46,3 +35,10 @@ export const getRandomColor = (isDark?: boolean): string => {
   }
   return color;
 };
+
+export const dateToTime = (str?: string): string =>
+  new Date(str || Date.now()).toLocaleTimeString("en-IN", {
+    hour12: true,
+    hour: "numeric",
+    minute: "2-digit",
+  });

@@ -1,12 +1,12 @@
 import express from "express";
-import { UserModel } from "../models/user";
+import { User } from "../models/user";
 
 const Router = express.Router();
 
-export const GetProfileRoute = Router.post("/", async (req, res) => {
+export const GetProfile = Router.use("/", async (req, res) => {
   const { UID } = req.body;
 
-  const user = await UserModel.findById(UID);
+  const user = await User.findById(UID);
 
   if (user) {
     return res.status(200).json({

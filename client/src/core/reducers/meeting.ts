@@ -1,20 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-// State for meeting & other participants
 
 export type MeetParticipants = {
-  UID: string; // _id of user
   displayName: string;
-  isSharing: boolean;
-  isAudio: boolean;
-  isHost: boolean;
-};
-
-export type Chat = {
-  MID: string;
-  UID: string;
-  displayName: string;
-  message: string;
-  time: string;
+  isAvail?: boolean;
 };
 
 export const meetStore = createSlice({
@@ -28,8 +16,7 @@ export const meetStore = createSlice({
       type: "" as "private" | "public",
       isHost: false,
     },
-    participants: {} as Map<string, MeetParticipants>,
-    chat: [] as Chat[],
+    participants: {} as Record<string, MeetParticipants>,
   },
   reducers: {
     updateMeetDetails: (
@@ -42,13 +29,13 @@ export const meetStore = createSlice({
       state,
       action: PayloadAction<{
         UID: string;
-        participantDetails: MeetParticipants;
+        displayName: string;
       }>
     ) => {
-      state.participants.set(
-        action.payload.UID,
-        action.payload.participantDetails
-      );
+      state.participants[action.payload.UID] = {
+        displayName: action.payload.displayName,
+        isAvail: true,
+      };
     },
     removeParticipant: (
       state,
@@ -56,19 +43,12 @@ export const meetStore = createSlice({
         UID: string;
       }>
     ) => {
-      state.participants.delete(action.payload.UID);
-    },
-    updateChat: (state, action: PayloadAction<Chat>) => {
-      state.chat.push(action.payload);
+      state.participants[action.payload.UID].isAvail = false;
     },
   },
 });
 
-export const {
-  removeParticipant,
-  updateChat,
-  updateMeetDetails,
-  updateParticipant,
-} = meetStore.actions;
+export const { removeParticipant, updateMeetDetails, updateParticipant } =
+  meetStore.actions;
 
 export default meetStore.reducer;

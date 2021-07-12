@@ -1,24 +1,26 @@
-import { useTitle } from "./common";
-import { useSnackbar } from "notistack";
 import React from "react";
 import Peer from "peerjs";
+import { useTitle } from "core/hooks/common";
+import { useSnackbar } from "notistack";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { iceServers } from "core/config";
-import { useSocket } from "./useSocket";
-import { useHistory } from "react-router-dom";
-import { useDocVisible } from "./useDocVisible";
+import { useSocket } from "core/hooks/useSocket";
+import { useAudio } from "core/hooks/useAudio";
+import { useDocVisible } from "core/hooks/useDocVisible";
+import { removeParticipant, updateParticipant } from "core/reducers/meeting";
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useVideoConf = () => {
-  const history = useHistory();
   const dispatch = useAppDispatch();
   const socketClient = useSocket();
   const { enqueueSnackbar } = useSnackbar();
+  const { playAudio } = useAudio();
+  const changeTab = useDocVisible();
   const peers = React.useRef<Record<string, Peer.MediaConnection>>();
   const myStream = React.useRef<MediaStream>();
   const peerStream =
     React.useRef<Map<string, { displayName: string; stream: MediaStream }>>();
   const peerJs = React.useRef<Peer>();
-  const changeTab = useDocVisible();
   const { mediaReducer, meetReducer, authReducer } = useAppSelector((s) => s);
   const [reRender, setReRender] = React.useState(0);
   useTitle(meetReducer.meetDetails.title);
@@ -68,6 +70,7 @@ export const useVideoConf = () => {
       console.log("user raised hand", displayName);
       if (UID != authReducer.UID) {
         console.log(UID, authReducer.UID);
+        playAudio?.();
         enqueueSnackbar(displayName + " raised hand");
       }
     });
@@ -129,10 +132,17 @@ export const useVideoConf = () => {
       call.answer(stream);
       call.on("stream", (userVideoStream) => {
         console.log("user stream data", userVideoStream);
+        playAudio?.();
         peerStream.current?.set(call.metadata.id, {
           stream: userVideoStream,
           displayName: call.metadata.displayName,
         });
+        dispatch(
+          updateParticipant({
+            UID: call.metadata.id,
+            displayName: call.metadata.displayName,
+          })
+        );
         setReRender(12);
       });
       call.on("close", () => {
@@ -140,6 +150,11 @@ export const useVideoConf = () => {
         enqueueSnackbar(call.metadata.displayName + " left", {
           variant: "info",
         });
+        dispatch(
+          removeParticipant({
+            UID: call.metadata.id,
+          })
+        );
         setReRender(2);
 
         peerStream.current?.delete(call.metadata.id);
@@ -158,6 +173,12 @@ export const useVideoConf = () => {
       enqueueSnackbar(userData.displayName + " joined", {
         variant: "info",
       });
+      dispatch(
+        updateParticipant({
+          UID: userData.userID,
+          displayName: userData.displayName,
+        })
+      );
       setReRender(16);
     });
   };
@@ -184,6 +205,11 @@ export const useVideoConf = () => {
     call?.on("close", () => {
       console.log("closing new user", userID);
       peerStream.current?.delete(userID);
+      dispatch(
+        removeParticipant({
+          UID: userID,
+        })
+      );
       setReRender(16);
     });
     call?.on("error", () => {
@@ -204,12 +230,12 @@ export const useVideoConf = () => {
       track.stop();
     });
     peerJs.current?.destroy();
-    history.push("/");
+    socketClient.disconnect();
+    window.location.href = "/";
   };
   return {
     myStream,
     peerStream,
-    mediaReducer,
     destroyConnection,
     raiseHand,
     reRender,

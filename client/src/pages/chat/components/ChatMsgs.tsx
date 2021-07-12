@@ -5,7 +5,9 @@ import { ChatMessage, ChatTextInput } from "components/Chat";
 import { useMsgs } from "core/hooks/useMsgs";
 import { useSocket } from "core/hooks/useSocket";
 import { useParams } from "react-router-dom";
-import { ChatBubbleOutlineRounded } from "@material-ui/icons";
+import { useAppSelector } from "core/hooks/redux";
+import { ChatMsgSkeleton } from "components/Chat/ChatSkeleton";
+import { dateToTime } from "utils/common";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,42 +26,45 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 type ChatMsgsProps = {
-  meetID?: string;
+  handleTitle?: (title: string) => unknown;
 };
 
-const ChatMsgs: React.FC<ChatMsgsProps> = ({ meetID }) => {
+const ChatMsgs: React.FC<ChatMsgsProps> = ({ handleTitle }) => {
   const classes = useStyles();
-  const { chat, sendMessage, UID: userID } = useMsgs();
+  const { meetID } = useParams<{ meetID: string }>();
+  const { sendMessage, loading, meetTitle } = useMsgs(meetID);
+  const { UID: userID } = useAppSelector((state) => state.authReducer);
+  const { chat } = useAppSelector((state) => state.chatReducer);
   const socketClient = useSocket();
+
+  React.useEffect(() => {
+    handleTitle?.(meetTitle);
+  }, [meetTitle]);
 
   React.useEffect(() => {
     socketClient.emit("join-room", {
       meetID,
     });
-    return () => {
-      socketClient.off();
-    };
   }, []);
+
   let prev = "";
 
   return (
     <Box className={classes.root}>
       <Box className={classes.chatRoot}>
-        {chat?.map(({ message, displayName, time, UID }, i) => (
-          <ChatMessage
-            key={i}
-            hideAvatar
-            hidePrimary={prev === (prev = UID)}
-            displayName={displayName}
-            isSelf={UID === userID}
-            message={message}
-            time={new Date(time).toLocaleTimeString("en-IN", {
-              hour12: true,
-              hour: "numeric",
-              minute: "2-digit",
-            })}
-          />
-        ))}
+        {loading
+          ? [...new Array(5)].map((e, i) => <ChatMsgSkeleton key={i} />)
+          : chat?.map(({ message, displayName, createdAt, UID }, i) => (
+              <ChatMessage
+                key={i}
+                hideAvatar
+                hidePrimary={prev === (prev = UID)}
+                displayName={displayName}
+                isSelf={UID === userID}
+                message={message}
+                time={dateToTime(createdAt)}
+              />
+            ))}
       </Box>
       <Box className={classes.textBox}>
         <ChatTextInput onSend={sendMessage} />
@@ -67,4 +72,5 @@ const ChatMsgs: React.FC<ChatMsgsProps> = ({ meetID }) => {
     </Box>
   );
 };
+
 export default ChatMsgs;

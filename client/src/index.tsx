@@ -1,10 +1,24 @@
+if (process.env.NODE_ENV === "production") {
+  console.log = function () {
+    return;
+  };
+  console.warn = function () {
+    return;
+  };
+  console.error = function () {
+    return;
+  };
+}
+import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { register } from "./serviceWorker";
 
-ReactDOM.render(<App />, document.getElementById("root"));
-if (process.env.NODE_ENV === "production") {
-  reportWebVitals(console.log);
-  register({});
-}
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("root")
+);
+
+reportWebVitals(console.log);

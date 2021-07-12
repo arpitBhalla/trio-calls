@@ -11,7 +11,7 @@ export interface Meeting {
   invitees: string[];
   type: "public" | "private";
   time: string;
-  chat?: [];
+  chat?: Chat[];
   meetID?: string;
 }
 
@@ -20,5 +20,7 @@ export interface Chat {
   createdAt?: string;
   message: string;
   MID: string | Meeting;
-  UID: string | UserDetails;
+  UID: string;
+  displayName: string;
+  time: string;
 }

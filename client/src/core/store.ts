@@ -3,6 +3,7 @@ import mediaReducer from "core/reducers/media";
 import authReducer from "core/reducers/auth";
 import themeReducer from "core/reducers/theme";
 import meetReducer from "core/reducers/meeting";
+import chatReducer from "core/reducers/chat";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     authReducer,
     themeReducer,
     meetReducer,
+    chatReducer,
   },
   devTools: true,
 });

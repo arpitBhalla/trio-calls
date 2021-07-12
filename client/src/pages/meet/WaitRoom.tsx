@@ -2,7 +2,7 @@ import React from "react";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import VideoPreview from "./components/Preview";
+import { Preview } from "./components";
 import Box from "@material-ui/core/Box";
 import Header from "components/Header";
 import { getMeet } from "utils/meeting.fetch";
@@ -111,7 +111,7 @@ const WaitingRoom: React.FC<WaitingRoomProps> = ({ joinMeetHandler }) => {
         ) : (
           <Grid container alignItems="center" spacing={1}>
             <Grid item md={7}>
-              <VideoPreview />
+              <Preview />
             </Grid>
             <Grid item md={5}>
               {loading ? <LoadingComponent /> : <ReadyComponent />}

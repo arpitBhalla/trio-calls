@@ -2,17 +2,23 @@
 
 ## Directory Structure
 
-````dir
+```dir.
 ├── assets
+│   ├── audio.d.ts
+│   ├── notification.mp3
 │   └── teams.png
 ├── components
 │   ├── Chat
 │   │   ├── ChatMessage.tsx
+│   │   ├── ChatSkeleton.tsx
 │   │   ├── ChatTextInput.tsx
 │   │   └── index.tsx
+│   ├── Header
+│   │   ├── Header.tsx
+│   │   └── index.tsx
 │   ├── ControllerButton.tsx
-│   ├── Header.tsx
 │   ├── LoadingPage.tsx
+│   ├── Logo.test.tsx
 │   ├── Logo.tsx
 │   ├── NotFound.tsx
 │   └── ShadowBox.tsx
@@ -20,16 +26,20 @@
 │   ├── hooks
 │   │   ├── common.ts
 │   │   ├── redux.ts
+│   │   ├── useAudio.ts
+│   │   ├── useConnection.ts
 │   │   ├── useDocVisible.ts
-│   │   ├── useMsgs.ts
+│   │   ├── useMsgs.tsx
 │   │   ├── useSocket.ts
-│   │   ├── useVideoConf.ts
 │   │   └── useWndFocus.ts
 │   ├── provider
+│   │   ├── AudioProvider.tsx
+│   │   ├── index.tsx
 │   │   ├── SocketProvider.tsx
 │   │   └── ThemeProvider.tsx
 │   ├── reducers
 │   │   ├── auth.ts
+│   │   ├── chat.ts
 │   │   ├── media.ts
 │   │   ├── meeting.ts
 │   │   └── theme.ts
@@ -43,6 +53,8 @@
 │   │   └── SignUp.tsx
 │   ├── chat
 │   │   ├── components
+│   │   │   ├── styles
+│   │   │   │   └── ChatParticipants.ts
 │   │   │   ├── ChatHeader.tsx
 │   │   │   ├── ChatMsgs.tsx
 │   │   │   └── ChatParticipants.tsx
@@ -59,12 +71,18 @@
 │   │   │   │   ├── ChatBox.tsx
 │   │   │   │   ├── index.tsx
 │   │   │   │   ├── Info.tsx
-│   │   │   │   └── Participants.tsx
+│   │   │   │   ├── Participants.tsx
+│   │   │   │   ├── PollModal.tsx
+│   │   │   │   └── Polls.tsx
 │   │   │   ├── Controller.tsx
+│   │   │   ├── index.tsx
 │   │   │   ├── LeftBar.tsx
+│   │   │   ├── PollAlert.tsx
 │   │   │   ├── Preview.tsx
 │   │   │   ├── Sketch.tsx
 │   │   │   └── Video.tsx
+│   │   ├── hooks
+│   │   │   └── useVideoConf.ts
 │   │   ├── index.tsx
 │   │   ├── Meet.tsx
 │   │   └── WaitRoom.tsx
@@ -72,15 +90,14 @@
 ├── utils
 │   ├── auth.fetch.ts
 │   ├── axios.fetch.ts
+│   ├── chat.fetch.ts
 │   ├── common.test.ts
 │   ├── common.ts
 │   ├── meeting.fetch.ts
 │   └── types.ts
-├── App.test.tsx
 ├── App.tsx
 ├── index.tsx
 ├── react-app-env.d.ts
 ├── reportWebVitals.ts
-├── serviceWorker.ts
-└── setupTests.ts```
-````
+└── setupTests.ts
+```

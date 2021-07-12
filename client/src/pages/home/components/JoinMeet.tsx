@@ -9,6 +9,7 @@ import { useSnackbar } from "notistack";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Chip from "@material-ui/core/Chip";
+import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { useLocalStorage } from "core/hooks/common";
 
@@ -55,34 +56,38 @@ const JoinMeet: React.FC = () => {
         />
         <FormHelperText>{meetID.error}</FormHelperText>
       </FormControl>
-      <br />
-      <br />
-      <Button
-        fullWidth
-        onClick={handleJoinMeet}
-        variant="contained"
-        color="primary"
-      >
-        Join Meeting
-      </Button>
-      <br />
-      {!!recentCalls.length && (
-        <>
-          <br />
+      <Box pt={2}>
+        <Button
+          fullWidth
+          onClick={handleJoinMeet}
+          variant="contained"
+          color="primary"
+        >
+          Join Meeting
+        </Button>
+      </Box>
+      {recentCalls.length ? (
+        <Box py={2}>
           <Typography variant="caption" color="textSecondary">
             Recently joined meetings
           </Typography>
           <br />
-          {recentCalls?.map((v) => (
+          {recentCalls?.map((callName) => (
             <Chip
               style={{ margin: 2 }}
-              key={v}
-              label={v}
+              key={callName}
+              label={callName}
               variant="outlined"
-              onClick={() => setMeetID({ text: v, error: "" })}
+              onClick={() => setMeetID({ text: callName, error: "" })}
             />
           ))}
-        </>
+        </Box>
+      ) : (
+        <Box py={"15px"}>
+          <Typography align="center" variant="subtitle2" color="textSecondary">
+            or
+          </Typography>
+        </Box>
       )}
     </>
   );

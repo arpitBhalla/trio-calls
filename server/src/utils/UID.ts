@@ -1,8 +1,4 @@
 /**
- * @author Arpit Bhalla
- */
-
-/**
  * Generate Random ID of 4 digits
  */
 const randomID = () =>

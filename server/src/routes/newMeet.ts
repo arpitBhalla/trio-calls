@@ -1,35 +1,36 @@
 import express from "express";
 import { sendMail } from "../utils/sendMail";
 import { createEvent } from "ics";
-import { MeetModel } from "../models/meeting";
+import { Meet } from "../models";
 import { generateID } from "../utils/UID";
 import { InviteTemplate } from "../email/invite";
-import { UserModel } from "../models/user";
+import { User } from "../models/user";
 
 const Router = express.Router();
 
-export const NewMeetRoute = Router.post("/", async (req, res) => {
+export const NewMeet = Router.use("/", async (req, res) => {
   const { title, invitees, hostID, type, time } = req.body;
 
-  const user = await UserModel.findById(hostID);
+  const user = await User.findById(hostID);
   if (!user) {
-    return res.status(400).json({
+    return res.status(201).json({
       message: "User not found",
     });
   }
-  const Meet = new MeetModel({
-    title,
+
+  const meetID = generateID();
+  const meet = new Meet({
+    title: title || meetID,
     invitees,
     hostID,
     type,
     time,
-    meetID: generateID(),
+    meetID,
   });
 
   try {
-    await Meet.save();
+    await meet.save();
   } catch (e) {
-    console.trace(e);
     return res.status(201).json({
       message: "Error while saving meeting",
     });
@@ -44,8 +45,8 @@ export const NewMeetRoute = Router.post("/", async (req, res) => {
     const hostedURL = process.env.DEV
       ? "http://localhost:3000/"
       : "http://ms-teams.vercel.app/";
-    const chatLink = hostedURL + "chat/" + Meet.meetID;
-    const meetLink = hostedURL + Meet.meetID;
+    const chatLink = hostedURL + "chat/" + meet.meetID;
+    const meetLink = hostedURL + meet.meetID;
     const html = InviteTemplate({
       chatLink,
       meetLink,
@@ -55,7 +56,7 @@ export const NewMeetRoute = Router.post("/", async (req, res) => {
     /**
      * Create a calender event sent as attachment
      */
-    const { value, error } = createEvent({
+    const { value } = createEvent({
       title: title || "Teams Meet",
       description: "You are invited for MS Teams meeting",
       start: [
@@ -69,20 +70,7 @@ export const NewMeetRoute = Router.post("/", async (req, res) => {
       organizer: { name: user.displayName, email: user.email },
       duration: { minutes: 50 },
     });
-    console.log(error, {
-      title,
-      description: "You are invited for MS Teams meeting",
-      start: [
-        now.getFullYear(),
-        now.getMonth() + 1,
-        now.getDate(),
-        now.getHours(),
-        now.getMinutes(),
-      ],
-      url: meetLink,
-      organizer: { name: user.displayName, email: user.email },
-      duration: { minutes: 50 },
-    });
+
     try {
       await sendMail({
         from: "'MS Teams' <teams@arpitbhalla.me>", // sender address
@@ -96,10 +84,10 @@ export const NewMeetRoute = Router.post("/", async (req, res) => {
         },
       });
     } catch {
-      return res.status(500).json({
+      return res.status(201).json({
         message: "Error while sending invite email",
       });
     }
   }
-  res.status(200).json({ meetID: Meet.meetID });
+  res.status(200).json({ meetID: meet.meetID });
 });

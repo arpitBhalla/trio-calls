@@ -95,7 +95,7 @@ const Sketch: React.FC = () => {
       () =>
         sketchRef.current
           ?.exportImage("jpeg")
-          .then((e) => downloadFile("Me.jpg", e)),
+          .then((e) => downloadFile("MicroSoft Teams.jpg", e)),
     ],
   ];
 

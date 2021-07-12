@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
-import { Chat } from "./chat";
+import { ChatType } from "./chat";
 
-export interface Meeting {
+export type MeetType = {
   _id?: string;
   title: string;
   type: "public" | "private";
@@ -9,10 +9,11 @@ export interface Meeting {
   hostID: string;
   meetID: string;
   invitees: string[];
-  chat: Chat[];
-}
+  chat: ChatType[];
+  locked?: boolean;
+};
 
-const schema = new Schema<Meeting>(
+const schema = new Schema<MeetType>(
   {
     title: String,
     hostID: { type: Schema.Types.ObjectId, ref: "User" },
@@ -21,10 +22,11 @@ const schema = new Schema<Meeting>(
     meetID: { type: String, required: true, unique: true },
     time: String,
     chat: [{ type: Schema.Types.ObjectId, ref: "Chat" }],
+    locked: { type: Boolean, default: false },
   },
   {
     timestamps: true,
   }
 );
 
-export const MeetModel = model<Meeting>("Meet", schema);
+export const Meet = model<MeetType>("Meet", schema);

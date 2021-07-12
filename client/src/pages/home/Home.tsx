@@ -3,7 +3,6 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import NewMeet from "./components/NewMeet";
 import JoinMeet from "./components/JoinMeet";
-import Typography from "@material-ui/core/Typography";
 import Fade from "@material-ui/core/Fade";
 import Header from "components/Header";
 import Fab from "@material-ui/core/Fab";
@@ -31,7 +30,6 @@ const Home: React.FC = () => {
   return (
     <>
       <Header />
-
       <Container maxWidth="md" className={classes.root}>
         <Grid container spacing={1} alignItems="center">
           <Grid item xs={false} sm={7}>
@@ -44,16 +42,15 @@ const Home: React.FC = () => {
             <Fade in timeout={500} unmountOnExit>
               <ShadowBox p={4} py={5}>
                 <JoinMeet />
-                <br />
-                <br />
                 <NewMeet />
               </ShadowBox>
             </Fade>
           </Grid>
         </Grid>
       </Container>
-      <Tooltip title="Chat">
+      <Tooltip title="Chat (Alt+c)">
         <Fab
+          accessKey="c"
           color="primary"
           className={classes.fab}
           onClick={() => history.push("/chat")}
