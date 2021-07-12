@@ -21,3 +21,4 @@ jobs:
         uses: google-github-actions/deploy-appengine@main
         with:
           project_id: ${{ secrets.project_id }}
+          working_directory: server
