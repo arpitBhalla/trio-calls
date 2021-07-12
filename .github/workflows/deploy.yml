@@ -11,7 +11,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: config
-        run: cd server && echo ${{ secrets.APP_YAML }} > app.yaml && ls && cat app.yaml
+        run: |
+            cd server 
+            cat <<EOT >>  app.yaml
+            ${{ secrets.APP_YAML }} 
+            EOT  
+            ls
+            cat app.yaml
 #       - id: Deploy
 #         uses: google-github-actions/deploy-appengine@main
 #         with:
