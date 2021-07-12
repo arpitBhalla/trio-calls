@@ -3,8 +3,8 @@ import http from "http";
 import cors from "cors";
 import { ExpressPeerServer } from "peer";
 import { Chat, Meet } from "./models";
-import * as Routes from "./routes";
 import { Server } from "socket.io";
+import Routes from "./routes";
 import mongoose from "mongoose";
 import chalk from "chalk";
 
@@ -30,25 +30,22 @@ const PORT = process.env.PORT || 4000;
 
 // for google app engine
 app.set("trust proxy", true);
+// cors
 app.use(cors());
+// POST request body json parser
 app.use(express.json());
-
-app.get("/", (req, res) => {
-  res.send("MS Teams");
-});
-app.use("/newMeet", Routes.NewMeet);
-app.use("/getMeet", Routes.GetMeet);
-app.use("/getProfile", Routes.GetProfile);
-app.use("/signIn", Routes.SignIn);
-app.use("/signUp", Routes.SignUp);
+// routes for REST API
+app.use(Routes);
+// Peer js endpoint
 app.use("/peerjs", peerServer);
-
+// Initialize Socket Server
 const io = new Server(server, {
   cors: {
     origin: "*",
   },
 });
 
+// Listens to socket events
 io.on("connection", (socket) => {
   socket.on("join-room", (userData) => {
     const { meetID, userID } = userData;
@@ -70,10 +67,23 @@ io.on("connection", (socket) => {
       io.to(meetID).emit("newMessage", msgData);
     });
 
+    // Lock meeting
+    socket.on("lockMeeting", async (incomingData) => {
+      console.log("lockMeeting", incomingData);
+      await Meet.findOneAndUpdate({ meetID }, { chat: incomingData });
+      io.to(meetID).emit("lockMeeting", incomingData);
+    });
+
     // someone raises hand
     socket.on("raiseHand", async (incomingData) => {
       console.log("raiseHand", incomingData);
       io.to(meetID).emit("onRaiseHand", incomingData);
+    });
+
+    // someone raises hand
+    socket.on("newPoll", async (incomingData) => {
+      console.log("newPoll", incomingData);
+      io.to(meetID).emit("onNewPoll", incomingData);
     });
 
     // someone changes the tab

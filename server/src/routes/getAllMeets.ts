@@ -4,7 +4,7 @@ import { User } from "../models/user";
 
 const Router = express.Router();
 
-export const GetMeetAll = Router.post("/", async (req, res) => {
+export const GetMeetAll = Router.use("/", async (req, res) => {
   const { UID } = req.body;
 
   // get Logged in User
@@ -15,8 +15,10 @@ export const GetMeetAll = Router.post("/", async (req, res) => {
     });
   }
 
-  // get all meets that user was invited
-  const meets = await Meet.find({ invitees: user.email });
+  // get all meets that user was invited or is host
+  const meets = await Meet.find({
+    $or: [{ invitees: user.email }, { hostID: UID }],
+  }).select("title meetID time");
 
   if (!meets.length) {
     return res.status(201).json({

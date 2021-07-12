@@ -10,6 +10,7 @@ export type MeetType = {
   meetID: string;
   invitees: string[];
   chat: ChatType[];
+  locked?: boolean;
 };
 
 const schema = new Schema<MeetType>(
@@ -21,6 +22,7 @@ const schema = new Schema<MeetType>(
     meetID: { type: String, required: true, unique: true },
     time: String,
     chat: [{ type: Schema.Types.ObjectId, ref: "Chat" }],
+    locked: { type: Boolean, default: false },
   },
   {
     timestamps: true,

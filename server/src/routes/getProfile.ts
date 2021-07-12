@@ -3,7 +3,7 @@ import { User } from "../models/user";
 
 const Router = express.Router();
 
-export const GetProfile = Router.post("/", async (req, res) => {
+export const GetProfile = Router.use("/", async (req, res) => {
   const { UID } = req.body;
 
   const user = await User.findById(UID);

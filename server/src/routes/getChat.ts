@@ -4,7 +4,7 @@ import { User } from "../models/user";
 
 const Router = express.Router();
 
-export const GetChat = Router.post("/", async (req, res) => {
+export const GetChat = Router.use("/", async (req, res) => {
   const { meetID, UID } = req.body;
 
   // get Logged in User

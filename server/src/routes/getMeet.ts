@@ -4,7 +4,7 @@ import { User } from "../models/user";
 
 const Router = express.Router();
 
-export const GetMeet = Router.post("/", async (req, res) => {
+export const GetMeet = Router.use("/", async (req, res) => {
   const { meetID, UID } = req.body;
 
   // get Logged in User

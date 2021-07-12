@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 
 const Router = express.Router();
 
-export const SignIn = Router.post("/", async (req, res) => {
+export const SignIn = Router.use("/", async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
