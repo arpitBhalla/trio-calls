@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { getChat } from "../../utils/chat.fetch";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { useSocket } from "./useSocket";
 import { addChat, clearChat, initialChat } from "core/reducers/chat";
 import React from "react";
-import { Chat } from "utils/types";
 import { useSnackbar } from "notistack";
 
 export const useMsgs = (meetID?: string) => {
@@ -43,6 +43,7 @@ export const useMsgs = (meetID?: string) => {
 
   const socketEvents = () => {
     socketClient.on("newMessage", (messageData) => {
+      console.log(messageData);
       dispatch(
         addChat({
           MID: messageData._id,

@@ -22,7 +22,6 @@ export const GetChat = Router.use("/", async (req, res) => {
       options: {
         limit: 20,
         sort: { created: -1 },
-        // skip:  * 2,
       },
     })
   )[0];

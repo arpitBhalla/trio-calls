@@ -9,6 +9,7 @@ import { useAudio } from "core/hooks/useAudio";
 import { useHistory } from "react-router-dom";
 import { useDocVisible } from "core/hooks/useDocVisible";
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useVideoConf = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();

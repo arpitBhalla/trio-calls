@@ -31,5 +31,21 @@ export const ChatParticipantSkeleton: React.FC = () => (
 );
 
 export const ChatMsgSkeleton: React.FC = () => {
-  return <>sad</>;
+  return (
+    <ListItem>
+      <ListItemText
+        primary={
+          <Typography
+            style={{ display: "flex", justifyContent: "space-between" }}
+            variant="caption"
+            color="primary"
+          >
+            <Skeleton width={70} />
+            <Skeleton width={50} />
+          </Typography>
+        }
+        secondary={<Skeleton variant="rect" height={30} />}
+      />
+    </ListItem>
+  );
 };

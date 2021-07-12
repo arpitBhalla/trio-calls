@@ -11,7 +11,6 @@ import Tooltip from "@material-ui/core/Tooltip";
 import { useHistory } from "react-router-dom";
 import ShadowBox from "components/ShadowBox";
 import { useTitle } from "core/hooks/common";
-import { HotKeys } from "react-hotkeys";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,11 +22,6 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(4),
   },
 }));
-
-const keyMap = {
-  SNAP_LEFT: "command+left",
-  DELETE_NODE: ["del", "backspace"],
-};
 
 const Home: React.FC = () => {
   useTitle("Home");

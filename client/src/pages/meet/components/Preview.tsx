@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { toggleAudio, toggleVideo } from "core/reducers/media";

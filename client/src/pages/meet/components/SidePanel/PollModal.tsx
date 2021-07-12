@@ -15,7 +15,7 @@ type PollCreatorProps = {
   onClose?: () => unknown;
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {},
 }));
 

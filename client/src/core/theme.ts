@@ -7,7 +7,6 @@ const theme = createMuiTheme({
     secondary: {
       main: "#6264A7",
     },
-    // type: "dark",
   },
   overrides: {
     MuiCssBaseline: {

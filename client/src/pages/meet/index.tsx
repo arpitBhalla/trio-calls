@@ -13,14 +13,14 @@ const App: React.FC = () => {
   const [meetStarted, setMeetStarted] = React.useState(false);
   const joinMeet = () => setMeetStarted(true);
 
-  return (
-    <AudioProvider>
-      <Meet />
-    </AudioProvider>
-  );
-  // if (meetStarted) {
-  // } else {
-  //   return <WaitRoom joinMeetHandler={joinMeet} />;
-  // }
+  if (meetStarted) {
+    return (
+      <AudioProvider>
+        <Meet />
+      </AudioProvider>
+    );
+  } else {
+    return <WaitRoom joinMeetHandler={joinMeet} />;
+  }
 };
 export default App;

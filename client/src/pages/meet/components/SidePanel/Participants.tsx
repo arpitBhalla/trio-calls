@@ -10,9 +10,9 @@ import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutl
 import Tooltip from "@material-ui/core/Tooltip";
 import GetAppOutlinedIcon from "@material-ui/icons/GetAppOutlined";
 import Button from "@material-ui/core/Button";
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink } from "react-csv";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   avatar: {
     // backgroundColor: (props: { bgColor: string; lightBgColor: string }) =>
     //   theme.palette.type === "dark" ? props.lightBgColor : props.bgColor,

@@ -8,9 +8,9 @@ import VoiceChatOutlinedIcon from "@material-ui/icons/VoiceChatOutlined";
 import IconButton from "@material-ui/core/IconButton";
 import { useHistory } from "react-router-dom";
 
-type Props = { title?: string };
+type Props = { title?: string; meetID: string };
 
-const ChatHeader: React.FC<Props> = ({ title }) => {
+const ChatHeader: React.FC<Props> = ({ title, meetID }) => {
   const history = useHistory();
 
   return (
@@ -33,7 +33,7 @@ const ChatHeader: React.FC<Props> = ({ title }) => {
               <IconButton
                 aria-label="call"
                 onClick={() => {
-                  history.push("/" + title);
+                  history.push("/" + meetID);
                 }}
               >
                 <VoiceChatOutlinedIcon style={{ color: "white" }} />

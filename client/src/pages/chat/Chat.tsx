@@ -41,20 +41,21 @@ const Chat: React.FC = () => {
   const history = useHistory();
   const classes = useStyles();
   const { meetID } = useParams<{ meetID: string }>();
+  const [title, setTitle] = React.useState("");
 
   return (
     <>
       <Header toolBarBottomMargin={2} />
       <Container maxWidth="md">
         <ShadowBox>
-          <ChatHeader title={meetID} />
+          <ChatHeader title={title} meetID={meetID} />
           <Grid container>
             <Grid item sm={4} className={classes.chatList}>
-              <ChatParticipants />
+              <ChatParticipants handleTitle={setTitle} />
             </Grid>
             <Grid item sm={8}>
               {meetID ? (
-                <ChatMsgs meetID={meetID} />
+                <ChatMsgs />
               ) : (
                 <Box
                   display="flex"

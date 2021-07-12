@@ -18,13 +18,21 @@ export const GetMeetAll = Router.use("/", async (req, res) => {
   // get all meets that user was invited or is host
   const meets = await Meet.find({
     $or: [{ invitees: user.email }, { hostID: UID }],
-  }).select("title meetID time");
+  })
+    .populate({
+      path: "chat",
+      options: {
+        limit: 1,
+        sort: { createdAt: -1 },
+      },
+    })
+    .select("title meetID time chat");
 
   if (!meets.length) {
     return res.status(201).json({
       message: "Meeting Not found",
     });
   }
-
+  console.log(JSON.stringify(meets));
   return res.status(200).json({ meets });
 });

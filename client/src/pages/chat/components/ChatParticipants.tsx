@@ -17,27 +17,23 @@ import { Meeting } from "utils/types";
 import { useStyles } from "./styles/ChatParticipants";
 import { useAppSelector } from "core/hooks/redux";
 
-// type Participants = {
-//   lastMessage?: string;
-//   lastMessageTime?: string;
-//   displayName: string;
-//   meetID?: string;
-// };
-
-const ChatParticipants: React.FC = () => {
+type Props = {
+  handleTitle?: (title: string) => unknown;
+};
+const ChatParticipants: React.FC<Props> = ({ handleTitle }) => {
   const classes = useStyles();
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
   const { meetID } = useParams<{ meetID: string }>();
   const [loading, setLoading] = React.useState(true);
-  const [users, setUsers] = React.useState<Meeting[]>([]);
+  const [meets, setMeets] = React.useState<Meeting[]>([]);
   const [search, setSearch] = React.useState("");
   const UID = useAppSelector((state) => state.authReducer.UID);
 
   React.useEffect(() => {
     getAllMeets(UID)
-      .then((users) => {
-        setUsers(users);
+      .then((meets) => {
+        setMeets(meets);
         setLoading(false);
       })
       .catch((err) => {
@@ -50,7 +46,7 @@ const ChatParticipants: React.FC = () => {
   const filterChats = (chat: Meeting) => {
     return search ? chat.title?.includes(search) : true;
   };
-  console.log(users);
+  console.log(meets);
 
   return (
     <div>
@@ -71,21 +67,22 @@ const ChatParticipants: React.FC = () => {
       <List className={classes.chatRoot}>
         {loading
           ? [...new Array(5)].map((e, i) => <ChatParticipantSkeleton key={i} />)
-          : users.length &&
-            users?.filter(filterChats)?.map((chat, key) => (
+          : meets.length &&
+            meets?.filter(filterChats)?.map((meet, key) => (
               <ListItem
                 key={key}
                 button
                 onClick={() => {
-                  history.push(`/chat/${chat.meetID}`);
+                  history.push(`/chat/${meet.meetID}`);
+                  handleTitle?.(meet.title);
                 }}
                 className={clsx({
-                  [classes.selectedListItem]: meetID === chat.meetID,
+                  [classes.selectedListItem]: meetID === meet.meetID,
                 })}
               >
                 <ListItemAvatar>
                   <Avatar className={classes.avatar}>
-                    {String(chat.title || "").toUpperCase()[0]}
+                    {String(meet.title || "").toUpperCase()[0]}
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
@@ -95,13 +92,22 @@ const ChatParticipants: React.FC = () => {
                       variant="subtitle2"
                       color="textSecondary"
                     >
-                      <b>{chat.title}</b>
-                      {/* <b>{chat.}</b> */}
+                      <b>{meet.title}</b>
+                      <b>
+                        {new Date(
+                          meet?.chat?.[0]?.createdAt || Date.now()
+                        ).toLocaleTimeString("en-IN", {
+                          hour12: true,
+                          hour: "numeric",
+                          minute: "2-digit",
+                        })}
+                      </b>
                     </Typography>
                   }
                   secondary={
                     <Typography variant="caption">
-                      {/* {String(chat.lastMessage || "").slice(0, 35)}&nbsp; */}
+                      {String(meet.chat?.[0]?.message || "").slice(0, 35)}
+                      &nbsp;
                     </Typography>
                   }
                 />

@@ -19,17 +19,6 @@ export const CopyToClipboard = function (text: string): unknown {
   return navigator.clipboard.writeText(text);
 };
 
-// export const pipe =
-//   (...funcs: unknown[]) =>
-//   (arg) => {
-//     funcs.reduce((val, func) => func(value), arg);
-//   };
-
-// pipe(
-//   (e) => e + 2,
-//   (e) => e - 3
-// );
-
 export const setStateHandler =
   (
     setState: React.Dispatch<React.SetStateAction<string>>

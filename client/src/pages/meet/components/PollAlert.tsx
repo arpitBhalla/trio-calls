@@ -1,6 +1,6 @@
-import React, { forwardRef, useCallback } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { useSnackbar, SnackbarContent } from "notistack";
+import { useSnackbar } from "notistack";
 import Typography from "@material-ui/core/Typography";
 import FormControl from "@material-ui/core/FormControl";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
 
 const SnackMessage: React.FC = (props) => {
   const classes = useStyles();
-  const { closeSnackbar } = useSnackbar();
 
   return (
     <Box bgcolor="red">

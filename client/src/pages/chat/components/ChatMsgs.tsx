@@ -34,7 +34,6 @@ const ChatMsgs: React.FC<ChatMsgsProps> = () => {
   const { sendMessage, loading } = useMsgs(meetID);
   const { UID: userID } = useAppSelector((state) => state.authReducer);
   const { chat } = useAppSelector((state) => state.chatReducer);
-
   const socketClient = useSocket();
 
   React.useEffect(() => {
@@ -42,27 +41,32 @@ const ChatMsgs: React.FC<ChatMsgsProps> = () => {
       meetID,
     });
   }, []);
+
   let prev = "";
 
   return (
     <Box className={classes.root}>
-      {loading}
       <Box className={classes.chatRoot}>
-        {chat?.map(({ message, displayName, time, UID }, i) => (
-          <ChatMessage
-            key={i}
-            hideAvatar
-            hidePrimary={prev === (prev = UID)}
-            displayName={displayName}
-            isSelf={UID === userID}
-            message={message}
-            time={new Date(time).toLocaleTimeString("en-IN", {
-              hour12: true,
-              hour: "numeric",
-              minute: "2-digit",
-            })}
-          />
-        ))}
+        {loading
+          ? [...new Array(5)].map((e, i) => <ChatMsgSkeleton key={i} />)
+          : chat?.map(({ message, displayName, createdAt, UID }, i) => (
+              <ChatMessage
+                key={i}
+                hideAvatar
+                hidePrimary={prev === (prev = UID)}
+                displayName={displayName}
+                isSelf={UID === userID}
+                message={message}
+                time={new Date(createdAt || Date.now()).toLocaleTimeString(
+                  "en-IN",
+                  {
+                    hour12: true,
+                    hour: "numeric",
+                    minute: "2-digit",
+                  }
+                )}
+              />
+            ))}
       </Box>
       <Box className={classes.textBox}>
         <ChatTextInput onSend={sendMessage} />

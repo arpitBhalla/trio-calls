@@ -10,8 +10,6 @@ import {
   PresentToAllOutlined,
   PanToolOutlined,
   PanTool,
-  CategoryOutlined,
-  Category,
   Brightness4,
   CallEnd,
   BrushOutlined,
