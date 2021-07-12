@@ -21,4 +21,3 @@ jobs:
         uses: google-github-actions/deploy-appengine@main
         with:
           project_id: ${{ secrets.project_id }}
-          working_directory: /home/runner/work/MicrosoftEngageMentorship2021/server
