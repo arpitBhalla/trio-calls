@@ -20,5 +20,7 @@ export interface Chat {
   createdAt?: string;
   message: string;
   MID: string | Meeting;
-  UID: string | UserDetails;
+  UID: string;
+  displayName: string;
+  time: string;
 }

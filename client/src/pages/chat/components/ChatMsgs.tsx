@@ -5,7 +5,8 @@ import { ChatMessage, ChatTextInput } from "components/Chat";
 import { useMsgs } from "core/hooks/useMsgs";
 import { useSocket } from "core/hooks/useSocket";
 import { useParams } from "react-router-dom";
-import { ChatBubbleOutlineRounded } from "@material-ui/icons";
+import { useAppSelector } from "core/hooks/redux";
+import { ChatMsgSkeleton } from "components/Chat/ChatSkeleton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,23 +28,25 @@ type ChatMsgsProps = {
   meetID?: string;
 };
 
-const ChatMsgs: React.FC<ChatMsgsProps> = ({ meetID }) => {
+const ChatMsgs: React.FC<ChatMsgsProps> = () => {
   const classes = useStyles();
-  const { chat, sendMessage, UID: userID } = useMsgs();
+  const { meetID } = useParams<{ meetID: string }>();
+  const { sendMessage, loading } = useMsgs(meetID);
+  const { UID: userID } = useAppSelector((state) => state.authReducer);
+  const { chat } = useAppSelector((state) => state.chatReducer);
+
   const socketClient = useSocket();
 
   React.useEffect(() => {
     socketClient.emit("join-room", {
       meetID,
     });
-    return () => {
-      socketClient.off();
-    };
   }, []);
   let prev = "";
 
   return (
     <Box className={classes.root}>
+      {loading}
       <Box className={classes.chatRoot}>
         {chat?.map(({ message, displayName, time, UID }, i) => (
           <ChatMessage

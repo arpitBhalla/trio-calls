@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-// State for meeting & other participants
 
 export type MeetParticipants = {
   UID: string; // _id of user
@@ -7,14 +6,6 @@ export type MeetParticipants = {
   isSharing: boolean;
   isAudio: boolean;
   isHost: boolean;
-};
-
-export type Chat = {
-  MID: string;
-  UID: string;
-  displayName: string;
-  message: string;
-  time: string;
 };
 
 export const meetStore = createSlice({
@@ -29,7 +20,6 @@ export const meetStore = createSlice({
       isHost: false,
     },
     participants: {} as Map<string, MeetParticipants>,
-    chat: [] as Chat[],
   },
   reducers: {
     updateMeetDetails: (
@@ -58,17 +48,10 @@ export const meetStore = createSlice({
     ) => {
       state.participants.delete(action.payload.UID);
     },
-    updateChat: (state, action: PayloadAction<Chat>) => {
-      state.chat.push(action.payload);
-    },
   },
 });
 
-export const {
-  removeParticipant,
-  updateChat,
-  updateMeetDetails,
-  updateParticipant,
-} = meetStore.actions;
+export const { removeParticipant, updateMeetDetails, updateParticipant } =
+  meetStore.actions;
 
 export default meetStore.reducer;
