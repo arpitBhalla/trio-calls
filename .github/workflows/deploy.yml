@@ -6,9 +6,10 @@ on:
     paths-ignore:
       - "client/**"
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - id: Deploy
         uses: google-github-actions/deploy-appengine@main
         with:
