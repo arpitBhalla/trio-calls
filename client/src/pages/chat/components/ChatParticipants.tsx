@@ -50,6 +50,7 @@ const ChatParticipants: React.FC = () => {
   const filterChats = (chat: Meeting) => {
     return search ? chat.title?.includes(search) : true;
   };
+  console.log(users);
 
   return (
     <div>
@@ -70,7 +71,8 @@ const ChatParticipants: React.FC = () => {
       <List className={classes.chatRoot}>
         {loading
           ? [...new Array(5)].map((e, i) => <ChatParticipantSkeleton key={i} />)
-          : users?.filter(filterChats).map((chat, key) => (
+          : users.length &&
+            users?.filter(filterChats)?.map((chat, key) => (
               <ListItem
                 key={key}
                 button
@@ -109,4 +111,4 @@ const ChatParticipants: React.FC = () => {
     </div>
   );
 };
-export default ChatParticipants;
+export default React.memo(ChatParticipants);

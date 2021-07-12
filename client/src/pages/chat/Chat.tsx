@@ -50,17 +50,7 @@ const Chat: React.FC = () => {
           <ChatHeader title={meetID} />
           <Grid container>
             <Grid item sm={4} className={classes.chatList}>
-              <ChatParticipants
-                meetID={meetID}
-                chats={[
-                  {
-                    displayName: "Arpit Bhalla",
-                    lastMessage: "Hello World",
-                    meetID: "1enb-bqag-azj3",
-                    lastMessageTime: "Now",
-                  },
-                ]}
-              />
+              <ChatParticipants />
             </Grid>
             <Grid item sm={8}>
               {meetID ? (

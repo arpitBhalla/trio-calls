@@ -4,12 +4,12 @@ import { Meeting, Chat } from "./types";
 export const getAllMeets = async (UID: string): Promise<Meeting[]> => {
   return new Promise((resolve, reject) => {
     return axiosFetch
-      .post<Meeting[] & { message?: string }>("/getAllMeet", {
+      .post<{ message?: string; meets: Meeting[] }>("/getAllMeet", {
         UID,
       })
       .then((res) => {
         if (res.status === 200) {
-          resolve(res.data);
+          resolve(res.data.meets);
         } else reject(res.data.message);
       });
   });

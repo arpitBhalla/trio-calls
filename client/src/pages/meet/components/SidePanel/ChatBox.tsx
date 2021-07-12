@@ -17,13 +17,13 @@ const useStyles = makeStyles(() => ({
 
 const ChatLayout: React.FC = () => {
   const classes = useStyles();
-  const { chat, sendMessage, UID: userID } = useMsgs();
+  // const { chat, sendMessage, UID: userID } = useMsgs();
 
-  console.log(chat);
+  // console.log(chat);
   return (
     <Box className={classes.chatRoot}>
       <Box className={classes.chatBox}>
-        {chat.map(({ displayName, UID, message, time }, i) => (
+        {/* {chat.map(({ displayName, UID, message, time }, i) => (
           <ChatMessage
             key={i}
             // hidePrimary
@@ -36,9 +36,9 @@ const ChatLayout: React.FC = () => {
               minute: "2-digit",
             })}
           />
-        ))}
+        ))} */}
       </Box>
-      <ChatTextInput isSmall onSend={sendMessage} />
+      {/* <ChatTextInput isSmall onSend={sendMessage} /> */}
     </Box>
   );
 };

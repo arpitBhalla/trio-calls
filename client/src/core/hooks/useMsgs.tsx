@@ -25,6 +25,7 @@ export const useMsgs = (meetID?: string) => {
     setLoading(true);
     getChat(UID, meetID)
       .then((chats) => {
+        console.log(chats);
         dispatch(initialChat(chats));
         setLoading(false);
       })

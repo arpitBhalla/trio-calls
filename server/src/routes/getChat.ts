@@ -40,7 +40,7 @@ export const GetChat = Router.use("/", async (req, res) => {
     meet.type === "public";
 
   if (isInvited) {
-    return res.status(200).json({ meetTitle: meet.title, chat: meet.chat });
+    return res.status(200).json(meet.chat);
   } else {
     return res.status(201).json({
       message: "You are not Invited",
