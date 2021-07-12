@@ -1,11 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type MeetParticipants = {
-  UID: string; // _id of user
   displayName: string;
-  isSharing: boolean;
-  isAudio: boolean;
-  isHost: boolean;
+  isAvail?: boolean;
 };
 
 export const meetStore = createSlice({
@@ -19,7 +16,7 @@ export const meetStore = createSlice({
       type: "" as "private" | "public",
       isHost: false,
     },
-    participants: {} as Map<string, MeetParticipants>,
+    participants: {} as Record<string, MeetParticipants>,
   },
   reducers: {
     updateMeetDetails: (
@@ -32,13 +29,13 @@ export const meetStore = createSlice({
       state,
       action: PayloadAction<{
         UID: string;
-        participantDetails: MeetParticipants;
+        displayName: string;
       }>
     ) => {
-      state.participants.set(
-        action.payload.UID,
-        action.payload.participantDetails
-      );
+      state.participants[action.payload.UID] = {
+        displayName: action.payload.displayName,
+        isAvail: true,
+      };
     },
     removeParticipant: (
       state,
@@ -46,7 +43,7 @@ export const meetStore = createSlice({
         UID: string;
       }>
     ) => {
-      state.participants.delete(action.payload.UID);
+      state.participants[action.payload.UID].isAvail = false;
     },
   },
 });

@@ -15,13 +15,19 @@ export const getAllMeets = async (UID: string): Promise<Meeting[]> => {
   });
 };
 
-export const getChat = async (UID: string, meetID: string): Promise<Chat[]> => {
+export const getChat = async (
+  UID: string,
+  meetID: string
+): Promise<{ meetTitle: string; chats: Chat[] }> => {
   return new Promise((resolve, reject) => {
     return axiosFetch
-      .post<Chat[] & { message?: string }>("/getChat", {
-        UID,
-        meetID,
-      })
+      .post<{ message?: string; meetTitle: string; chats: Chat[] }>(
+        "/getChat",
+        {
+          UID,
+          meetID,
+        }
+      )
       .then((res) => {
         if (res.status === 200) {
           resolve(res.data);

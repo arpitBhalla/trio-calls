@@ -37,11 +37,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Chat: React.FC = () => {
-  useTitle("Chats");
   const history = useHistory();
   const classes = useStyles();
   const { meetID } = useParams<{ meetID: string }>();
   const [title, setTitle] = React.useState("");
+
+  useTitle(title || "Chats");
 
   return (
     <>
@@ -51,11 +52,11 @@ const Chat: React.FC = () => {
           <ChatHeader title={title} meetID={meetID} />
           <Grid container>
             <Grid item sm={4} className={classes.chatList}>
-              <ChatParticipants handleTitle={setTitle} />
+              <ChatParticipants />
             </Grid>
             <Grid item sm={8}>
               {meetID ? (
-                <ChatMsgs />
+                <ChatMsgs handleTitle={setTitle} />
               ) : (
                 <Box
                   display="flex"

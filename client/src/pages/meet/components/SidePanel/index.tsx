@@ -8,6 +8,7 @@ import {
   PeopleOutlineOutlined,
   Close,
   AssessmentOutlined,
+  NoEncryptionOutlined,
 } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -16,6 +17,7 @@ import Badge from "@material-ui/core/Badge";
 import Drawer from "@material-ui/core/Drawer";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import loadable from "@loadable/component";
+import { useAppSelector } from "core/hooks/redux";
 
 const Chat = loadable(() => import("./ChatBox"), {
   fallback: <LinearProgress />,
@@ -62,6 +64,9 @@ const useStyles = makeStyles((theme) => ({
 const SideBar: React.FC<Props> = ({ open, setOpen }) => {
   const classes = useStyles();
   const [index, setIndex] = React.useState(0);
+  const { participants, meetDetails } = useAppSelector(
+    (state) => state.meetReducer
+  );
 
   const handleIconPress = (key: number) => () => {
     if (!open) {
@@ -102,7 +107,12 @@ const SideBar: React.FC<Props> = ({ open, setOpen }) => {
               case 0:
                 return <MeetInfo />;
               case 1:
-                return <Participants />;
+                return (
+                  <Participants
+                    isHost={meetDetails.isHost}
+                    participants={participants}
+                  />
+                );
               case 2:
                 return <Chat />;
               case 3:
@@ -128,7 +138,13 @@ const SideBar: React.FC<Props> = ({ open, setOpen }) => {
             onClick={handleIconPress(1)}
             className={clsx(open && index === 1 && classes.selected)}
           >
-            <Badge badgeContent={4} color="primary">
+            <Badge
+              badgeContent={
+                Object.values(participants).filter(({ isAvail }) => isAvail)
+                  .length + 1
+              }
+              color="primary"
+            >
               <PeopleOutlineOutlined />
             </Badge>
           </IconButton>
@@ -143,6 +159,17 @@ const SideBar: React.FC<Props> = ({ open, setOpen }) => {
             </Badge>
           </IconButton>
         </Tooltip>
+
+        {meetDetails.isHost && (
+          <Tooltip title="Lock Meet">
+            <IconButton
+              onClick={handleIconPress(3)}
+              className={clsx(open && index === 3 && classes.selected)}
+            >
+              <NoEncryptionOutlined />
+            </IconButton>
+          </Tooltip>
+        )}
 
         <Tooltip title="Polls">
           <IconButton

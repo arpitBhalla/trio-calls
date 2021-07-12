@@ -1,16 +1,17 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import React from "react";
 import { getChat } from "../../utils/chat.fetch";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { useSocket } from "./useSocket";
 import { addChat, clearChat, initialChat } from "core/reducers/chat";
-import React from "react";
 import { useSnackbar } from "notistack";
 
 export const useMsgs = (meetID?: string) => {
   const socketClient = useSocket();
   const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false);
+  const [meetTitle, setMeetTitle] = useState("");
   const { UID, displayName } = useAppSelector(
     ({ authReducer: { UID, displayName } }) => ({
       UID,
@@ -24,9 +25,9 @@ export const useMsgs = (meetID?: string) => {
     resetChat();
     setLoading(true);
     getChat(UID, meetID)
-      .then((chats) => {
-        console.log(chats);
-        dispatch(initialChat(chats));
+      .then((response) => {
+        dispatch(initialChat(response.chats));
+        setMeetTitle(response.meetTitle);
         setLoading(false);
       })
       .catch((err) => {
@@ -68,5 +69,5 @@ export const useMsgs = (meetID?: string) => {
     dispatch(clearChat());
   };
 
-  return { sendMessage, resetChat, loading };
+  return { sendMessage, resetChat, loading, meetTitle };
 };

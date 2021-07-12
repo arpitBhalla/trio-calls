@@ -66,7 +66,9 @@ const PollCreator: React.FC<PollCreatorProps> = ({
         <Button size="small" variant="contained" color="primary">
           Create
         </Button>
-        <Button color="default">Cancel</Button>
+        <Button onClick={onClose} color="default">
+          Cancel
+        </Button>
       </DialogActions>
     </Dialog>
   );

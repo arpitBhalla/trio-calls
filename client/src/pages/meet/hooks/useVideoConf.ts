@@ -6,12 +6,11 @@ import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { iceServers } from "core/config";
 import { useSocket } from "core/hooks/useSocket";
 import { useAudio } from "core/hooks/useAudio";
-import { useHistory } from "react-router-dom";
 import { useDocVisible } from "core/hooks/useDocVisible";
+import { removeParticipant, updateParticipant } from "core/reducers/meeting";
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useVideoConf = () => {
-  const history = useHistory();
   const dispatch = useAppDispatch();
   const socketClient = useSocket();
   const { enqueueSnackbar } = useSnackbar();
@@ -138,6 +137,12 @@ export const useVideoConf = () => {
           stream: userVideoStream,
           displayName: call.metadata.displayName,
         });
+        dispatch(
+          updateParticipant({
+            UID: call.metadata.id,
+            displayName: call.metadata.displayName,
+          })
+        );
         setReRender(12);
       });
       call.on("close", () => {
@@ -145,6 +150,11 @@ export const useVideoConf = () => {
         enqueueSnackbar(call.metadata.displayName + " left", {
           variant: "info",
         });
+        dispatch(
+          removeParticipant({
+            UID: call.metadata.id,
+          })
+        );
         setReRender(2);
 
         peerStream.current?.delete(call.metadata.id);
@@ -163,6 +173,12 @@ export const useVideoConf = () => {
       enqueueSnackbar(userData.displayName + " joined", {
         variant: "info",
       });
+      dispatch(
+        updateParticipant({
+          UID: userData.userID,
+          displayName: userData.displayName,
+        })
+      );
       setReRender(16);
     });
   };
@@ -189,6 +205,11 @@ export const useVideoConf = () => {
     call?.on("close", () => {
       console.log("closing new user", userID);
       peerStream.current?.delete(userID);
+      dispatch(
+        removeParticipant({
+          UID: userID,
+        })
+      );
       setReRender(16);
     });
     call?.on("error", () => {
@@ -209,7 +230,8 @@ export const useVideoConf = () => {
       track.stop();
     });
     peerJs.current?.destroy();
-    history.push("/");
+    socketClient.disconnect();
+    window.location.href = "/";
   };
   return {
     myStream,

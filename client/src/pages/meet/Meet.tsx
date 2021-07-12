@@ -34,7 +34,11 @@ const Meet: React.FC = () => {
   React.useEffect(() => {
     const TOTAL_PARTICIPANTS = peerStream.current?.size || 0;
     const GRID_SIZE = [12, 6, 4, 3, 3, 3, 3][TOTAL_PARTICIPANTS];
-    setGridSize(GRID_SIZE);
+    let mount = true;
+    if (mount) setGridSize(GRID_SIZE);
+    return () => {
+      mount = false;
+    };
   }, [peerStream.current?.size, myStream.current?.active, reRender]);
 
   // console.log(gridSize, peerStream.current?.size);

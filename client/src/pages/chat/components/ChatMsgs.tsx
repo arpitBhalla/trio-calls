@@ -7,6 +7,7 @@ import { useSocket } from "core/hooks/useSocket";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "core/hooks/redux";
 import { ChatMsgSkeleton } from "components/Chat/ChatSkeleton";
+import { dateToTime } from "utils/common";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,16 +26,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 type ChatMsgsProps = {
-  meetID?: string;
+  handleTitle?: (title: string) => unknown;
 };
 
-const ChatMsgs: React.FC<ChatMsgsProps> = () => {
+const ChatMsgs: React.FC<ChatMsgsProps> = ({ handleTitle }) => {
   const classes = useStyles();
   const { meetID } = useParams<{ meetID: string }>();
-  const { sendMessage, loading } = useMsgs(meetID);
+  const { sendMessage, loading, meetTitle } = useMsgs(meetID);
   const { UID: userID } = useAppSelector((state) => state.authReducer);
   const { chat } = useAppSelector((state) => state.chatReducer);
   const socketClient = useSocket();
+
+  React.useEffect(() => {
+    handleTitle?.(meetTitle);
+  }, [meetTitle]);
 
   React.useEffect(() => {
     socketClient.emit("join-room", {
@@ -57,14 +62,7 @@ const ChatMsgs: React.FC<ChatMsgsProps> = () => {
                 displayName={displayName}
                 isSelf={UID === userID}
                 message={message}
-                time={new Date(createdAt || Date.now()).toLocaleTimeString(
-                  "en-IN",
-                  {
-                    hour12: true,
-                    hour: "numeric",
-                    minute: "2-digit",
-                  }
-                )}
+                time={dateToTime(createdAt)}
               />
             ))}
       </Box>
@@ -74,4 +72,5 @@ const ChatMsgs: React.FC<ChatMsgsProps> = () => {
     </Box>
   );
 };
+
 export default ChatMsgs;

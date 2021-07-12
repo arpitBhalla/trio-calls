@@ -15,6 +15,7 @@ import { newMeet } from "utils/meeting.fetch";
 import { useAppSelector } from "core/hooks/redux";
 import { useSnackbar } from "notistack";
 import { useHistory } from "react-router-dom";
+import { useLocalStorage } from "core/hooks/common";
 
 type MeetType = "public" | "private";
 
@@ -28,6 +29,10 @@ const NewMeetComponent: React.FC = () => {
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
   const { UID } = useAppSelector(({ authReducer }) => authReducer);
+  const [recentCalls, setRecentCalls] = useLocalStorage(
+    "recentCalls",
+    [] as string[]
+  );
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -42,6 +47,7 @@ const NewMeetComponent: React.FC = () => {
         enqueueSnackbar("New meet created", {
           variant: "success",
         });
+        meetID && setRecentCalls([meetID, ...recentCalls.slice(0, 3)]);
         history.push(`/${meetID}`);
       })
       .catch((error) => {

@@ -7,7 +7,8 @@ import { deepPurple } from "@material-ui/core/colors";
 import { useAppSelector } from "core/hooks/redux";
 
 const App: React.FC = ({ children }) => {
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const prefersDarkMode =
+    useMediaQuery("(prefers-color-scheme: dark)") || false;
   const useDark = useAppSelector((state) => state.themeReducer.useDark);
   const theme = React.useMemo(
     () =>

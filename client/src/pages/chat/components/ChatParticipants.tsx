@@ -16,6 +16,7 @@ import { useSnackbar } from "notistack";
 import { Meeting } from "utils/types";
 import { useStyles } from "./styles/ChatParticipants";
 import { useAppSelector } from "core/hooks/redux";
+import { dateToTime } from "utils/common";
 
 type Props = {
   handleTitle?: (title: string) => unknown;
@@ -46,7 +47,6 @@ const ChatParticipants: React.FC<Props> = ({ handleTitle }) => {
   const filterChats = (chat: Meeting) => {
     return search ? chat.title?.includes(search) : true;
   };
-  console.log(meets);
 
   return (
     <div>
@@ -93,15 +93,7 @@ const ChatParticipants: React.FC<Props> = ({ handleTitle }) => {
                       color="textSecondary"
                     >
                       <b>{meet.title}</b>
-                      <b>
-                        {new Date(
-                          meet?.chat?.[0]?.createdAt || Date.now()
-                        ).toLocaleTimeString("en-IN", {
-                          hour12: true,
-                          hour: "numeric",
-                          minute: "2-digit",
-                        })}
-                      </b>
+                      <b>{dateToTime(meet?.chat?.[0]?.createdAt)}</b>
                     </Typography>
                   }
                   secondary={
