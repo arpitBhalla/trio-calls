@@ -10,8 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - id: Deploy
-        uses: google-github-actions/deploy-appengine@main
-        with:
-          credentials: ${{ secrets.GCP_SA_KEY }}
-          working_directory: ./server
+      - name: config
+        run: cd server && echo ${{ secrets.APP_YAML }} > app.yaml && ls && cat app.yaml
+#       - id: Deploy
+#         uses: google-github-actions/deploy-appengine@main
+#         with:
+#           credentials: ${{ secrets.GCP_SA_KEY }}
+#           working_directory: ./server
