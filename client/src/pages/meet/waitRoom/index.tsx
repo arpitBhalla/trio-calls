@@ -1,19 +1,19 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import { Preview } from "./components";
+import Preview from "./Preview";
 import Box from "@material-ui/core/Box";
 import Header from "components/Header";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 import { getMeet } from "utils/meeting.fetch";
 import { useHistory, useParams } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import { useAppSelector, useAppDispatch } from "core/hooks/redux";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import VoiceChatOutlinedIcon from "@material-ui/icons/VoiceChatOutlined";
 import { updateMeetDetails } from "core/reducers/meeting";
 import { useTitle } from "core/hooks/common";
+import { LoadingComponent } from "./LoadingComponent";
+import { ReadyComponent } from "./ReadyComponent";
 
 type Params = { meetID: string };
 
@@ -22,10 +22,10 @@ type WaitingRoomProps = {
 };
 
 const WaitingRoom: React.FC<WaitingRoomProps> = ({ joinMeetHandler }) => {
+  const dispatch = useAppDispatch();
   const { meetID } = useParams<Params>();
   const { enqueueSnackbar } = useSnackbar();
   const { UID } = useAppSelector(({ authReducer }) => authReducer);
-  const dispatch = useAppDispatch();
   const [loading, setLoading] = React.useState(true);
   const [meetOk, setMeetOk] = React.useState<boolean | null>(null);
   const history = useHistory();
@@ -58,36 +58,6 @@ const WaitingRoom: React.FC<WaitingRoomProps> = ({ joinMeetHandler }) => {
       });
   }, [meetID, UID]);
 
-  const LoadingComponent = () => (
-    <Box display="flex" flexDirection="column" alignItems="center">
-      <Typography variant="h5" color="textPrimary">
-        <b>Getting Ready</b>
-      </Typography>
-      <Typography variant="subtitle2" color="textPrimary">
-        Checking Meet info
-      </Typography>
-      <br />
-      <CircularProgress />
-    </Box>
-  );
-  const ReadyComponent = () => (
-    <Box display="flex" flexDirection="column" alignItems="center">
-      <Typography variant="h5" color="textPrimary">
-        <b>Ready to join?</b>
-      </Typography>
-      <br />
-      <Button
-        size="large"
-        variant="contained"
-        color="primary"
-        onClick={joinMeetHandler}
-        startIcon={<VoiceChatOutlinedIcon />}
-      >
-        {Math.random() > 1 ? "Ask to Join" : "Join Now"}
-      </Button>
-    </Box>
-  );
-
   return (
     <>
       <Header />
@@ -114,7 +84,11 @@ const WaitingRoom: React.FC<WaitingRoomProps> = ({ joinMeetHandler }) => {
               <Preview />
             </Grid>
             <Grid item md={5}>
-              {loading ? <LoadingComponent /> : <ReadyComponent />}
+              {loading ? (
+                <LoadingComponent />
+              ) : (
+                <ReadyComponent joinMeetHandler={joinMeetHandler} />
+              )}
             </Grid>
           </Grid>
         )}

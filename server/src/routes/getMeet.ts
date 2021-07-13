@@ -30,11 +30,15 @@ export const GetMeet = Router.use("/", async (req, res) => {
     meet.invitees?.includes(user.email) ||
     meet.type === "public";
 
-  if (isInvited) {
-    return res.status(200).json(meet);
-  } else {
+  if (!isInvited) {
     return res.status(201).json({
       message: "You are not Invited",
     });
+  } else if (meet.locked) {
+    return res.status(201).json({
+      message: "Meeting Locked by Host",
+    });
+  } else {
+    return res.status(200).json(meet);
   }
 });

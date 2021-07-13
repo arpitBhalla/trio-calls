@@ -3,11 +3,9 @@ import clsx from "clsx";
 import Box from "@material-ui/core/Box";
 import Controller from "./components/Controller";
 import { makeStyles } from "@material-ui/core/styles";
-import { useVideoConf } from "./hooks/useVideoConf";
+import { useVideoConf } from "../hooks/useVideoConf";
 import { LeftBar, SidePanel, Sketch, Video } from "./components";
 import Grid, { GridSize } from "@material-ui/core/Grid";
-import { useSnackbar } from "notistack";
-import A from "./components/PollAlert";
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -41,7 +39,6 @@ const Meet: React.FC = () => {
     };
   }, [peerStream.current?.size, myStream.current?.active, reRender]);
 
-  // console.log(gridSize, peerStream.current?.size);
   return (
     <>
       <Box display="flex" height="88vh" alignItems="center">

@@ -24,7 +24,8 @@ const LeftBar: React.FC = () => {
     return () => {
       clearInterval(subs);
     };
-  }, []);
+  }, [time]);
+
   return (
     <Box className={classes.root}>
       <Typography variant="h6" color="textSecondary">

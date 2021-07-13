@@ -13,6 +13,3 @@ export const LeftBar = loadable(() => import("./LeftBar"), {
 export const Sketch = loadable(() => import("./Sketch"), {
   fallback: <LinearProgress />,
 });
-export const Preview = loadable(() => import("./Preview"), {
-  fallback: <LinearProgress />,
-});
