@@ -57,7 +57,8 @@ A multi-participant video call platform for calling across the world for free wi
 
 ## 🚧 Workflow
 
-<img src='assets/workflow.png' />
+![Workflow](https://user-images.githubusercontent.com/55053424/125153081-1a12ef00-e16f-11eb-9da1-1f4481af451d.png)
+
 ## 🚀 Getting started
 
 Guide for local deployment -
