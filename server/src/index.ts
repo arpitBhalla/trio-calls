@@ -17,11 +17,11 @@ console.log(
 );
 
 // connect to mongoDB
-mongoose.connect(MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: true,
-});
+// mongoose.connect(MONGO_URI, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useFindAndModify: true,
+// });
 
 const app = express();
 const server = http.createServer(app);
@@ -80,10 +80,16 @@ io.on("connection", (socket) => {
       io.to(meetID).emit("onRaiseHand", incomingData);
     });
 
-    // someone raises hand
+    // poll created
     socket.on("newPoll", async (incomingData) => {
       console.log("newPoll", incomingData);
       io.to(meetID).emit("onNewPoll", incomingData);
+    });
+
+    // poll created
+    socket.on("respondPoll", async (incomingData) => {
+      console.log("newPoll", incomingData);
+      io.to(meetID).emit("respondPoll", incomingData);
     });
 
     // someone changes the tab

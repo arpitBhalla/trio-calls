@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { toggleAudio, toggleVideo } from "core/reducers/media";
 import ControlButton from "components/ControllerButton";
@@ -12,39 +11,9 @@ import {
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import ShadowBox from "components/ShadowBox";
+import { useStyles } from "./Preview.useStyles";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    position: "relative",
-    height: 350,
-    width: 550,
-    borderRadius: 10,
-    backgroundColor: "#333333",
-  },
-  controller: {
-    position: "absolute",
-    bottom: theme.spacing(2),
-    left: "50%",
-    transform: "translateX(-50%)",
-    backgroundColor: "#dddbdba7",
-    borderRadius: theme.shape.borderRadius,
-  },
-  text: {
-    position: "absolute",
-    top: "45%",
-    left: "50%",
-    transform: "translateX(-50%)",
-    color: "white",
-  },
-  video: {
-    height: "100%",
-    width: "100%",
-    objectFit: "cover",
-    borderRadius: 10,
-  },
-}));
-
-const App: React.FC = () => {
+const Preview: React.FC = () => {
   const classes = useStyles();
   const videoController = React.useRef<HTMLVideoElement>(null);
   const dispatch = useAppDispatch();
@@ -95,4 +64,4 @@ const App: React.FC = () => {
     </ShadowBox>
   );
 };
-export default App;
+export default Preview;
