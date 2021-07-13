@@ -17,13 +17,6 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-// type ParticipantBoxProps = {
-//   isHost?: boolean;
-//   isSelf?: boolean;
-//   displayName?: string;
-//   UID?: string;
-// };
-
 type Props = {
   isHost?: boolean;
   participants: Record<string, MeetParticipants>;
@@ -39,16 +32,18 @@ const Participants: React.FC<Props> = ({
 
   return (
     <>
-      <CSVLink filename="TeamsMeeting.csv" data={Object.values(participants)}>
-        <Button
-          fullWidth
-          variant="text"
-          color="primary"
-          startIcon={<GetAppOutlinedIcon />}
-        >
-          Download Attendance
-        </Button>
-      </CSVLink>
+      {isHost && (
+        <CSVLink filename="TeamsMeeting.csv" data={Object.values(participants)}>
+          <Button
+            fullWidth
+            variant="text"
+            color="primary"
+            startIcon={<GetAppOutlinedIcon />}
+          >
+            Download Attendance
+          </Button>
+        </CSVLink>
+      )}
       <Box
         display="flex"
         my={1}

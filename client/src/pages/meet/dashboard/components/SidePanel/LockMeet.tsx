@@ -1,6 +1,5 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import { useSnackbar } from "notistack";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -12,7 +11,6 @@ import { LockOpenOutlined, LockOutlined } from "@material-ui/icons";
 import { useSocket } from "core/hooks/useSocket";
 
 const LockMeet: React.FC = () => {
-  const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = React.useState(false);
   const [locked, setLocked] = React.useState(false);
   const socket = useSocket();
@@ -26,7 +24,6 @@ const LockMeet: React.FC = () => {
   const handlePress = () => {
     socket.emit("lockMeeting", true);
     setLocked(true);
-    enqueueSnackbar("Meeting Locked", { variant: "warning" });
     onClose();
   };
 
