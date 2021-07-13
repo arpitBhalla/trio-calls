@@ -39,7 +39,6 @@ const Meet: React.FC = () => {
     };
   }, [peerStream.current?.size, myStream.current?.active, reRender]);
 
-  // console.log(gridSize, peerStream.current?.size);
   return (
     <>
       <Box display="flex" height="88vh" alignItems="center">

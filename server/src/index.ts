@@ -70,7 +70,7 @@ io.on("connection", (socket) => {
     // Lock meeting
     socket.on("lockMeeting", async (incomingData) => {
       console.log("lockMeeting", incomingData);
-      await Meet.findOneAndUpdate({ meetID }, { chat: incomingData });
+      await Meet.findOneAndUpdate({ meetID }, { locked: incomingData });
       io.to(meetID).emit("lockMeeting", incomingData);
     });
 

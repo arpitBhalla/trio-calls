@@ -7,7 +7,6 @@ import {
   PeopleOutlineOutlined,
   Close,
   AssessmentOutlined,
-  LockOpenOutlined,
 } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -31,6 +30,9 @@ const MeetInfo = loadable(() => import("./Info"), {
 const Polls = loadable(() => import("./Polls"), {
   fallback: <LinearProgress />,
 });
+const LockMeet = loadable(() => import("./LockMeet"), {
+  fallback: <LinearProgress />,
+});
 
 interface Props {
   open: boolean;
@@ -40,6 +42,7 @@ interface Props {
 const SideBar: React.FC<Props> = ({ open, setOpen }) => {
   const classes = useStyles();
   const [index, setIndex] = React.useState(0);
+
   const { participants, meetDetails, poll, chat } = useAppSelector((state) => ({
     ...state.meetReducer,
     ...state.chatReducer,
@@ -136,18 +139,6 @@ const SideBar: React.FC<Props> = ({ open, setOpen }) => {
             </Badge>
           </IconButton>
         </Tooltip>
-
-        {meetDetails.isHost && (
-          <Tooltip title="Lock Meet">
-            <IconButton
-              onClick={handleIconPress(3)}
-              className={clsx(open && index === 3 && classes.selected)}
-            >
-              <LockOpenOutlined />
-            </IconButton>
-          </Tooltip>
-        )}
-
         <Tooltip title="Polls">
           <IconButton
             onClick={handleIconPress(3)}
@@ -158,6 +149,9 @@ const SideBar: React.FC<Props> = ({ open, setOpen }) => {
             </Badge>
           </IconButton>
         </Tooltip>
+        {(meetDetails.isHost || process.env.NODE_ENV === "development") && (
+          <LockMeet />
+        )}
       </Box>
     </>
   );

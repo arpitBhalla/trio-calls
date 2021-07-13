@@ -77,6 +77,9 @@ export const useVideoConf = () => {
         enqueueSnackbar(displayName + " raised hand");
       }
     });
+    socketClient.once("lockMeeting", () => {
+      enqueueSnackbar("Meeting Locked by Host", { variant: "warning" });
+    });
     socketClient.once("changeTab", ({ displayName, UID }) => {
       if (UID != authReducer.UID) {
         console.log("changes tab", displayName);
