@@ -8,7 +8,7 @@ import {
   PeopleOutlineOutlined,
   Close,
   AssessmentOutlined,
-  NoEncryptionOutlined,
+  LockOpenOutlined
 } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -166,7 +166,7 @@ const SideBar: React.FC<Props> = ({ open, setOpen }) => {
               onClick={handleIconPress(3)}
               className={clsx(open && index === 3 && classes.selected)}
             >
-              <NoEncryptionOutlined />
+              <LockOpenOutlined />
             </IconButton>
           </Tooltip>
         )}

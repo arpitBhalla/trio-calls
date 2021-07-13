@@ -1,4 +1,4 @@
-name: Build and Deploy Server
+name: Deploy Server
 on:
   push:
     branches:
@@ -6,15 +6,18 @@ on:
     paths-ignore:
       - "client/**"
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: google-github-actions/setup-gcloud@master
-        with:
-          version: "347.0.0"
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-          export_default_credentials: true
+      - uses: actions/checkout@v2
+      - name: config
+        run: |
+          cd server 
+          cat <<EOT >>  app.yaml
+          ${{ secrets.APP_YAML }} 
+          EOT
       - id: Deploy
         uses: google-github-actions/deploy-appengine@main
         with:
-          project_id: ${{ secrets.project_id }}
+          credentials: ${{ secrets.GCP_SA_KEY }}
+          working_directory: ./server
