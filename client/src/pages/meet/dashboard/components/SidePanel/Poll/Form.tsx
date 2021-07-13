@@ -1,6 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { useSnackbar } from "notistack";
 import Typography from "@material-ui/core/Typography";
 import FormControl from "@material-ui/core/FormControl";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -8,32 +6,30 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
+import { PollType } from "./PollType";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    [theme.breakpoints.up("sm")]: {
-      minWidth: "344px !important",
-    },
-  },
-}));
-
-const SnackMessage: React.FC = (props) => {
-  const classes = useStyles();
+const PollForm: React.FC<PollType> = ({ question, options }) => {
+  const [response, setResponse] = React.useState("");
 
   return (
-    <Box bgcolor="red">
+    <Box>
       <Typography variant="subtitle1" color="textPrimary">
-        Question
+        {question}
       </Typography>
       <FormControl component="fieldset" fullWidth>
-        <RadioGroup aria-label="" name="" value="saf">
-          <FormControlLabel value="aa" label="adsfasgduj" control={<Radio />} />
-          <FormControlLabel value="a" label="adsfasgduj" control={<Radio />} />
-          <FormControlLabel
-            value="aaa"
-            label="adsfasgduj"
-            control={<Radio />}
-          />
+        <RadioGroup
+          aria-label="options"
+          value={response}
+          onChange={(event, val) => setResponse(val)}
+        >
+          {options.map((opt) => (
+            <FormControlLabel
+              key={opt}
+              value={opt}
+              label={opt}
+              control={<Radio />}
+            />
+          ))}
         </RadioGroup>
       </FormControl>
       <Box display="flex" justifyContent="flex-end">
@@ -45,4 +41,4 @@ const SnackMessage: React.FC = (props) => {
   );
 };
 
-export default SnackMessage;
+export default PollForm;

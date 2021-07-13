@@ -80,10 +80,16 @@ io.on("connection", (socket) => {
       io.to(meetID).emit("onRaiseHand", incomingData);
     });
 
-    // someone raises hand
+    // poll created
     socket.on("newPoll", async (incomingData) => {
       console.log("newPoll", incomingData);
       io.to(meetID).emit("onNewPoll", incomingData);
+    });
+
+    // poll respond
+    socket.on("respondPoll", async (incomingData) => {
+      console.log("newPoll", incomingData);
+      io.to(meetID).emit("respondPoll", incomingData);
     });
 
     // someone changes the tab

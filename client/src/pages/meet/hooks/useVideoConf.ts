@@ -7,7 +7,11 @@ import { iceServers } from "core/config";
 import { useSocket } from "core/hooks/useSocket";
 import { useAudio } from "core/hooks/useAudio";
 import { useDocVisible } from "core/hooks/useDocVisible";
-import { removeParticipant, updateParticipant } from "core/reducers/meeting";
+import {
+  removeParticipant,
+  updateParticipant,
+  updatePoll,
+} from "core/reducers/meeting";
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useVideoConf = () => {
@@ -51,11 +55,10 @@ export const useVideoConf = () => {
   }, []);
 
   React.useEffect(() => {
-    let done = true;
-    if (done) {
-      // socketClient.emit("changeTab", authReducer.displayName);
-      done = false;
-    }
+    socketClient.emit("changeTab", {
+      displayName: authReducer.displayName,
+      UID: authReducer.UID,
+    });
   }, [changeTab]);
 
   const socketEvents = () => {
@@ -74,9 +77,14 @@ export const useVideoConf = () => {
         enqueueSnackbar(displayName + " raised hand");
       }
     });
-    socketClient.once("changeTab", (displayName) => {
-      console.log("changes tab", displayName);
-      enqueueSnackbar(displayName + " changing tabs");
+    socketClient.once("changeTab", ({ displayName, UID }) => {
+      if (UID != authReducer.UID) {
+        console.log("changes tab", displayName);
+        enqueueSnackbar(displayName + " changing tabs");
+      }
+    });
+    socketClient.on("onNewPoll", (pollData) => {
+      dispatch(updatePoll(pollData));
     });
     socketClient.on("disconnect", () => {
       console.log("socket disconnected --");
@@ -224,6 +232,7 @@ export const useVideoConf = () => {
       UID: authReducer.UID,
     });
   };
+
   const destroyConnection = () => {
     const myMediaTracks = myStream.current?.getTracks();
     myMediaTracks?.forEach((track) => {
