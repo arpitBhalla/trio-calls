@@ -8,8 +8,13 @@ import PollAlert from "./Poll/Form";
 import { useSocket } from "core/hooks/useSocket";
 import { PollType } from "./Poll/PollType";
 import { useAppSelector } from "core/hooks/redux";
+import Typography from "@material-ui/core/Typography";
 
-const Polls: React.FC = () => {
+type Props = {
+  isHost?: boolean;
+};
+
+const Polls: React.FC<Props> = ({ isHost }) => {
   const socketClient = useSocket();
   const { enqueueSnackbar } = useSnackbar();
   const [openModal, setOpenModal] = React.useState(false);
@@ -23,7 +28,6 @@ const Polls: React.FC = () => {
     enqueueSnackbar("Poll Published");
   }, []);
 
-  console.log(poll);
   return (
     <>
       <PollModal
@@ -42,15 +46,23 @@ const Polls: React.FC = () => {
       ) : (
         <PollAlert {...poll} />
       )}
-      <Button
-        fullWidth
-        startIcon={<AddIcon />}
-        variant="text"
-        color="secondary"
-        onClick={handlePress}
-      >
-        Create a poll
-      </Button>
+      {isHost ? (
+        <Button
+          fullWidth
+          startIcon={<AddIcon />}
+          variant="text"
+          color="secondary"
+          onClick={handlePress}
+        >
+          Create a poll
+        </Button>
+      ) : (
+        !poll.question && (
+          <Typography variant="h5" align="center" color="textSecondary">
+            Polls will appear here
+          </Typography>
+        )
+      )}
     </>
   );
 };

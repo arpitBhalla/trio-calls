@@ -10,6 +10,7 @@ import GetAppOutlinedIcon from "@material-ui/icons/GetAppOutlined";
 import Button from "@material-ui/core/Button";
 import { CSVLink } from "react-csv";
 import { MeetParticipants } from "core/reducers/meeting";
+import { useSocket } from "core/hooks/useSocket";
 
 const useStyles = makeStyles(() => ({
   avatar: {
@@ -20,15 +21,15 @@ const useStyles = makeStyles(() => ({
 type Props = {
   isHost?: boolean;
   participants: Record<string, MeetParticipants>;
-  removeParticipant?: (UID: string) => unknown;
 };
 
-const Participants: React.FC<Props> = ({
-  isHost,
-  participants,
-  removeParticipant,
-}) => {
+const Participants: React.FC<Props> = ({ isHost, participants }) => {
   const classes = useStyles();
+  const socket = useSocket();
+  const removeParticipant = (UID: string) => {
+    console.log(UID);
+    socket.emit("forceQuit", UID);
+  };
 
   return (
     <>

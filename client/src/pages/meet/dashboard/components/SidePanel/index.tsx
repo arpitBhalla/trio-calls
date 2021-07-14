@@ -96,7 +96,7 @@ const SideBar: React.FC<Props> = ({ open, setOpen }) => {
               case 2:
                 return <Chat />;
               case 3:
-                return <Polls />;
+                return <Polls isHost={meetDetails.isHost} />;
               default:
                 return null;
             }
