@@ -7,10 +7,15 @@ import Radio from "@material-ui/core/Radio";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import { PollType } from "./PollType";
+import { AfterPoll } from "./AfterPoll";
 
-const PollForm: React.FC<PollType> = ({ question, options }) => {
+const PollForm: React.FC<PollType> = ({ question, options, correct }) => {
   const [response, setResponse] = React.useState("");
+  const [submit, setSubmit] = React.useState(false);
 
+  if (submit) {
+    return <AfterPoll {...{ question, options, correct, myRes: response }} />;
+  }
   return (
     <Box>
       <Typography variant="subtitle1" color="textPrimary">
@@ -33,7 +38,12 @@ const PollForm: React.FC<PollType> = ({ question, options }) => {
         </RadioGroup>
       </FormControl>
       <Box display="flex" justifyContent="flex-end">
-        <Button size="small" variant="contained" color="primary">
+        <Button
+          onClick={() => setSubmit(true)}
+          size="small"
+          variant="contained"
+          color="primary"
+        >
           Vote
         </Button>
       </Box>

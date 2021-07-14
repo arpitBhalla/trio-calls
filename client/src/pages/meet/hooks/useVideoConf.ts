@@ -81,13 +81,20 @@ export const useVideoConf = () => {
       enqueueSnackbar("Meeting Locked by Host", { variant: "warning" });
     });
     socketClient.once("changeTab", ({ displayName, UID }) => {
-      if (UID != authReducer.UID) {
+      if (UID !== authReducer.UID) {
         console.log("changes tab", displayName);
         enqueueSnackbar(displayName + " changing tabs");
       }
     });
     socketClient.on("onNewPoll", (pollData) => {
       dispatch(updatePoll(pollData));
+    });
+    socketClient.on("forceQuit", (UID) => {
+      console.log("forceQuit", UID, authReducer.UID);
+      if (UID === peerJs.current?.id) {
+        enqueueSnackbar("You were removed by host", { variant: "info" });
+        destroyConnection();
+      }
     });
     socketClient.on("disconnect", () => {
       console.log("socket disconnected --");
@@ -245,6 +252,54 @@ export const useVideoConf = () => {
     socketClient.disconnect();
     window.location.href = "/";
   };
+  // const reInitializeStream = (type = "userMedia") => {
+  //   const media =
+  //     type === "userMedia"
+  //       ? getVideoAudioStream()
+  //       : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //         // @ts-ignore
+  //         navigator.mediaDevices.getDisplayMedia();
+  //   return new Promise((resolve) => {
+  //     media.then((stream: MediaStream) => {
+  //       if (type === "displayMedia") {
+  //         toggleVideoTrack();
+  //       }
+  //       // this.createVideo({ id: this.myID, stream });
+  //       replaceStream(stream);
+  //       resolve(true);
+  //     });
+  //   });
+  // };
+  // const toggleVideoTrack = (status) => {
+  //   const myVideo = getMyVideo();
+  //   if (myVideo && !status.video)
+  //     myVideo.srcObject?.getVideoTracks().forEach((track) => {
+  //       if (track.kind === "video") {
+  //         !status.video && track.stop();
+  //       }
+  //     });
+  //   else if (myVideo) {
+  //     reInitializeStream();
+  //   }
+  // };
+  // const replaceStream = (mediaStream: MediaStream) => {
+  //   peers.current &&
+  //     Object.values(peers.current).map((peer) => {
+  //       peer.peerConnection?.getSenders().map((sender) => {
+  //         if (sender?.track?.kind == "audio") {
+  //           if (mediaStream.getAudioTracks().length > 0) {
+  //             sender.replaceTrack(mediaStream.getAudioTracks()[0]);
+  //           }
+  //         }
+  //         if (sender?.track?.kind == "video") {
+  //           if (mediaStream.getVideoTracks().length > 0) {
+  //             sender.replaceTrack(mediaStream.getVideoTracks()[0]);
+  //           }
+  //         }
+  //       });
+  //     });
+  // };
+
   return {
     myStream,
     peerStream,

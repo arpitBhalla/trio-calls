@@ -10,6 +10,7 @@ import GetAppOutlinedIcon from "@material-ui/icons/GetAppOutlined";
 import Button from "@material-ui/core/Button";
 import { CSVLink } from "react-csv";
 import { MeetParticipants } from "core/reducers/meeting";
+import { useSocket } from "core/hooks/useSocket";
 
 const useStyles = makeStyles(() => ({
   avatar: {
@@ -17,38 +18,33 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-// type ParticipantBoxProps = {
-//   isHost?: boolean;
-//   isSelf?: boolean;
-//   displayName?: string;
-//   UID?: string;
-// };
-
 type Props = {
   isHost?: boolean;
   participants: Record<string, MeetParticipants>;
-  removeParticipant?: (UID: string) => unknown;
 };
 
-const Participants: React.FC<Props> = ({
-  isHost,
-  participants,
-  removeParticipant,
-}) => {
+const Participants: React.FC<Props> = ({ isHost, participants }) => {
   const classes = useStyles();
+  const socket = useSocket();
+  const removeParticipant = (UID: string) => {
+    console.log(UID);
+    socket.emit("forceQuit", UID);
+  };
 
   return (
     <>
-      <CSVLink filename="TeamsMeeting.csv" data={Object.values(participants)}>
-        <Button
-          fullWidth
-          variant="text"
-          color="primary"
-          startIcon={<GetAppOutlinedIcon />}
-        >
-          Download Attendance
-        </Button>
-      </CSVLink>
+      {isHost && (
+        <CSVLink filename="TeamsMeeting.csv" data={Object.values(participants)}>
+          <Button
+            fullWidth
+            variant="text"
+            color="primary"
+            startIcon={<GetAppOutlinedIcon />}
+          >
+            Download Attendance
+          </Button>
+        </CSVLink>
+      )}
       <Box
         display="flex"
         my={1}

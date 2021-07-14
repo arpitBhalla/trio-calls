@@ -15,7 +15,7 @@ const MeetRoom: React.FC = () => {
   const [meetStarted, setMeetStarted] = React.useState(false);
   const joinMeet = () => setMeetStarted(true);
 
-  if (meetStarted || process.env.NODE_ENV === "development") {
+  if (meetStarted) {
     return (
       <AudioProvider>
         <Dashboard />

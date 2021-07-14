@@ -5,10 +5,11 @@ import Chip from "@material-ui/core/Chip";
 import { BorderLinearProgress } from "../BorderLinearProgress";
 import { PollType } from "./PollType";
 
-export const AfterPoll: React.FC<PollType> = ({
+export const AfterPoll: React.FC<PollType & { myRes?: string }> = ({
   question,
   options,
   correct,
+  myRes,
 }) => (
   <Box p={2} borderRadius={3} border="1px solid #e2e2e2">
     <Box display="flex" justifyContent="space-between">
@@ -24,10 +25,13 @@ export const AfterPoll: React.FC<PollType> = ({
             {opt}
           </Typography>
           <Typography variant="caption" color="textSecondary">
-            {opt === correct} vote
+            {opt === myRes ? 1 : 0} vote
           </Typography>
         </Box>
-        <BorderLinearProgress variant="determinate" value={50} />
+        <BorderLinearProgress
+          variant="determinate"
+          value={opt === correct ? 100 : 0}
+        />
       </>
     ))}
   </Box>

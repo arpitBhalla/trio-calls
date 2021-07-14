@@ -92,6 +92,12 @@ io.on("connection", (socket) => {
       io.to(meetID).emit("respondPoll", incomingData);
     });
 
+    // remove someone
+    socket.on("forceQuit", async (incomingData) => {
+      console.log("forceQuit", incomingData);
+      io.to(meetID).emit("forceQuit", incomingData);
+    });
+
     // someone changes the tab
     socket.on("changeTab", async (incomingData) => {
       console.log("changeTab", incomingData);
