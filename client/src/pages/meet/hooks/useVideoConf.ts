@@ -29,17 +29,23 @@ export const useVideoConf = () => {
   const [reRender, setReRender] = React.useState(0);
   useTitle(meetReducer.meetDetails.title);
 
+  // Mute Audio
   React.useEffect(() => {
     if (myStream.current) {
       myStream.current.getAudioTracks()[0].enabled = mediaReducer.isAudio;
     }
   }, [mediaReducer.isAudio]);
 
+  // Start/Stop Video
   React.useEffect(() => {
     if (myStream.current) {
       myStream.current.getVideoTracks()[0].enabled = mediaReducer.isVideo;
     }
   }, [mediaReducer.isVideo]);
+
+  React.useEffect(() => {
+    reInitializeStream(mediaReducer.isScreenShare);
+  }, [mediaReducer.isScreenShare]);
 
   React.useEffect(() => {
     peers.current = {};
@@ -252,53 +258,42 @@ export const useVideoConf = () => {
     socketClient.disconnect();
     window.location.href = "/";
   };
-  // const reInitializeStream = (type = "userMedia") => {
-  //   const media =
-  //     type === "userMedia"
-  //       ? getVideoAudioStream()
-  //       : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  //         // @ts-ignore
-  //         navigator.mediaDevices.getDisplayMedia();
-  //   return new Promise((resolve) => {
-  //     media.then((stream: MediaStream) => {
-  //       if (type === "displayMedia") {
-  //         toggleVideoTrack();
-  //       }
-  //       // this.createVideo({ id: this.myID, stream });
-  //       replaceStream(stream);
-  //       resolve(true);
-  //     });
-  //   });
-  // };
-  // const toggleVideoTrack = (status) => {
-  //   const myVideo = getMyVideo();
-  //   if (myVideo && !status.video)
-  //     myVideo.srcObject?.getVideoTracks().forEach((track) => {
-  //       if (track.kind === "video") {
-  //         !status.video && track.stop();
-  //       }
-  //     });
-  //   else if (myVideo) {
-  //     reInitializeStream();
-  //   }
-  // };
-  // const replaceStream = (mediaStream: MediaStream) => {
-  //   peers.current &&
-  //     Object.values(peers.current).map((peer) => {
-  //       peer.peerConnection?.getSenders().map((sender) => {
-  //         if (sender?.track?.kind == "audio") {
-  //           if (mediaStream.getAudioTracks().length > 0) {
-  //             sender.replaceTrack(mediaStream.getAudioTracks()[0]);
-  //           }
-  //         }
-  //         if (sender?.track?.kind == "video") {
-  //           if (mediaStream.getVideoTracks().length > 0) {
-  //             sender.replaceTrack(mediaStream.getVideoTracks()[0]);
-  //           }
-  //         }
-  //       });
-  //     });
-  // };
+  const reInitializeStream = (isScreenShare: boolean) => {
+    const media = !isScreenShare
+      ? getVideoAudioStream()
+      : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        navigator.mediaDevices.getDisplayMedia();
+    return new Promise((resolve) => {
+      media.then((stream: MediaStream) => {
+        if (isScreenShare) {
+          if (myStream.current) {
+            myStream.current = stream;
+            myStream.current.getVideoTracks()[0].enabled = true;
+          }
+        }
+        replaceStream(stream);
+        resolve(true);
+      });
+    });
+  };
+  const replaceStream = (mediaStream: MediaStream) => {
+    peers.current &&
+      Object.values(peers.current).map((peer) => {
+        peer.peerConnection?.getSenders().map((sender) => {
+          if (sender?.track?.kind == "audio") {
+            if (mediaStream.getAudioTracks().length > 0) {
+              sender.replaceTrack(mediaStream.getAudioTracks()[0]);
+            }
+          }
+          if (sender?.track?.kind == "video") {
+            if (mediaStream.getVideoTracks().length > 0) {
+              sender.replaceTrack(mediaStream.getVideoTracks()[0]);
+            }
+          }
+        });
+      });
+  };
 
   return {
     myStream,

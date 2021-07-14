@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
   callEnd: {
     backgroundColor: "red",
+    margin: "0px 5px",
     color: "white",
   },
 }));
