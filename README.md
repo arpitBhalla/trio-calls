@@ -21,7 +21,7 @@ A multi-participant video call platform for calling across the world for free wi
 
 ### 🥅 Basic features
 
-- Schedule 📅 meets, send invite via email 📩 & save to calender.
+- Schedule 📅 meets, send invite via email 📩 & save to calendar.
 - Create public 🌐 or restricted ☢️ meeting.
 - Connect with multiple users via meeting link 🔗 or code.
 - Realtime chat 💬, connect before or after the meeting.
