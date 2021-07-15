@@ -1,16 +1,20 @@
 import { createServer } from "http";
-import { Server } from "socket.io";
-import Client from "socket.io-client";
+import { AddressInfo } from "net";
+import { Server, Socket as ServerSocket } from "socket.io";
+import { DefaultEventsMap } from "socket.io/dist/typed-events";
+import Client, { Socket as ClientSocket } from "socket.io-client";
 
 describe("my awesome project", () => {
-  let io, serverSocket, clientSocket;
+  let io: Server<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap>,
+    serverSocket: ServerSocket,
+    clientSocket: ClientSocket;
 
   beforeAll((done) => {
     const httpServer = createServer();
     io = new Server(httpServer);
     httpServer.listen(() => {
-      const port = httpServer.address().port;
-      clientSocket = new Client(`http://localhost:${port}`);
+      const port = (httpServer.address() as AddressInfo)?.port;
+      clientSocket = Client(`http://localhost:${port}`);
       io.on("connection", (socket) => {
         serverSocket = socket;
       });

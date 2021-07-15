@@ -37,5 +37,8 @@
   },
   "engines": {
     "node": "14.x.x"
+  },
+  "devDependencies": {
+    "socket.io-client": "^4.1.3"
   }
 }
