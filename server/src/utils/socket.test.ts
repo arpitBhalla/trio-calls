@@ -39,7 +39,7 @@ describe("my awesome project", () => {
     serverSocket.on("hi", (cb) => {
       cb("hola");
     });
-    clientSocket.emit("hi", (arg) => {
+    clientSocket.emit("hi", (arg: unknown) => {
       expect(arg).toBe("hola");
       done();
     });
