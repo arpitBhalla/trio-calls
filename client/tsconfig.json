@@ -20,9 +20,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": "src",
-    "types": [
-      "cypress"
-    ]
   },
   "include": [
     "src"
