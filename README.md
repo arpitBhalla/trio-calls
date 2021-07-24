@@ -93,23 +93,38 @@ cd client
 npm install
 ```
 
-6. Run the app
+6. Start MongoDB 
+
+```bash
+mongod
+```
+
+7. Run the app
 
 ```bash
 npm start # in client directory /client
 ```
 
 ```bash
-npm start # in server directory /server
+npm run dev # in server directory /server
 ```
 
-7. Open project at `http://localhost:3000`
+8. Open project at `http://localhost:3000`
 
-<div align="center">
 
-🌟 You are all set!
+## Testing
 
-</div>
+```bash
+# unit tests
+$ npm run test
+
+# e2e tests
+$ npm run test:e2e
+
+# test coverage
+$ npm run test:cov
+
+```
 
 ## Lighthouse Report
 
