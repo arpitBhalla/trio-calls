@@ -9,6 +9,16 @@
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended"
   ],
+  "overrides": [
+    {
+      "extends": [
+        "plugin:cypress/recommended"
+      ],
+      "files": [
+        "cypress/**/*.ts"
+      ]
+    }
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {

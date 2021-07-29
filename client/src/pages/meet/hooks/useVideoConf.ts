@@ -29,18 +29,26 @@ export const useVideoConf = () => {
   const [reRender, setReRender] = React.useState(0);
   useTitle(meetReducer.meetDetails.title);
 
+  // Start/Stop Audio
   React.useEffect(() => {
-    if (myStream.current) {
+    if (myStream.current && !mediaReducer.isScreenShare) {
       myStream.current.getAudioTracks()[0].enabled = mediaReducer.isAudio;
     }
   }, [mediaReducer.isAudio]);
 
+  // Start/Stop Video
   React.useEffect(() => {
-    if (myStream.current) {
+    if (myStream.current && myStream.current.getVideoTracks()[0]) {
       myStream.current.getVideoTracks()[0].enabled = mediaReducer.isVideo;
     }
   }, [mediaReducer.isVideo]);
 
+  // Start/Stop ScreenShare
+  React.useEffect(() => {
+    reInitializeStream(mediaReducer.isScreenShare);
+  }, [mediaReducer.isScreenShare]);
+
+  // Initialize Socket & PeerJS
   React.useEffect(() => {
     peers.current = {};
     peerStream.current = new Map();
@@ -54,6 +62,7 @@ export const useVideoConf = () => {
     initializePeersEvents();
   }, []);
 
+  // Emit when user changes tab
   React.useEffect(() => {
     socketClient.emit("changeTab", {
       displayName: authReducer.displayName,
@@ -61,6 +70,7 @@ export const useVideoConf = () => {
     });
   }, [changeTab]);
 
+  // Socket.io Listeners
   const socketEvents = () => {
     socketClient.on("connect", () => {
       console.log("socket connected");
@@ -104,6 +114,7 @@ export const useVideoConf = () => {
     });
   };
 
+  // Initialize PeerJS Events
   const initializePeersEvents = () => {
     peerJs.current?.on("open", (id) => {
       const userData = {
@@ -123,18 +134,17 @@ export const useVideoConf = () => {
   const setNavigatorToStream = () => {
     getVideoAudioStream().then((stream) => {
       if (stream) {
-        stream.getVideoTracks()[0].enabled = mediaReducer.isAudio;
-        stream.getVideoTracks()[0].enabled = mediaReducer.isVideo;
-
         myStream.current = stream;
         setPeersListeners(stream);
         newUserConnection(stream);
+        setReRender(0);
       }
     });
   };
+
+  // Get Video & Audio from navigator
   const getVideoAudioStream = () => {
     const myNavigator = navigator.mediaDevices.getUserMedia;
-
     return myNavigator({
       video: {
         frameRate: 12,
@@ -145,6 +155,7 @@ export const useVideoConf = () => {
       audio: true,
     });
   };
+  // Listens for call
   const setPeersListeners = (stream: MediaStream) => {
     peerJs.current?.on("call", (call) => {
       call.answer(stream);
@@ -184,6 +195,8 @@ export const useVideoConf = () => {
       peers.current && (peers.current[call.metadata.id] = call);
     });
   };
+
+  // Handler for new user connect
   const newUserConnection = (stream: MediaStream) => {
     socketClient.on("user-connected", (userData) => {
       console.log("New User Connected", userData);
@@ -200,6 +213,7 @@ export const useVideoConf = () => {
       setReRender(16);
     });
   };
+  // Call user
   const connectToNewUser = (
     userData: { userID: string; displayName: string },
     stream: MediaStream
@@ -236,6 +250,8 @@ export const useVideoConf = () => {
     });
     peers.current && call && (peers.current[userID] = call);
   };
+
+  // raise hand handler
   const raiseHand = () => {
     socketClient.emit("raiseHand", {
       displayName: authReducer.displayName,
@@ -243,6 +259,7 @@ export const useVideoConf = () => {
     });
   };
 
+  // end call handler
   const destroyConnection = () => {
     const myMediaTracks = myStream.current?.getTracks();
     myMediaTracks?.forEach((track) => {
@@ -252,53 +269,47 @@ export const useVideoConf = () => {
     socketClient.disconnect();
     window.location.href = "/";
   };
-  // const reInitializeStream = (type = "userMedia") => {
-  //   const media =
-  //     type === "userMedia"
-  //       ? getVideoAudioStream()
-  //       : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  //         // @ts-ignore
-  //         navigator.mediaDevices.getDisplayMedia();
-  //   return new Promise((resolve) => {
-  //     media.then((stream: MediaStream) => {
-  //       if (type === "displayMedia") {
-  //         toggleVideoTrack();
-  //       }
-  //       // this.createVideo({ id: this.myID, stream });
-  //       replaceStream(stream);
-  //       resolve(true);
-  //     });
-  //   });
-  // };
-  // const toggleVideoTrack = (status) => {
-  //   const myVideo = getMyVideo();
-  //   if (myVideo && !status.video)
-  //     myVideo.srcObject?.getVideoTracks().forEach((track) => {
-  //       if (track.kind === "video") {
-  //         !status.video && track.stop();
-  //       }
-  //     });
-  //   else if (myVideo) {
-  //     reInitializeStream();
-  //   }
-  // };
-  // const replaceStream = (mediaStream: MediaStream) => {
-  //   peers.current &&
-  //     Object.values(peers.current).map((peer) => {
-  //       peer.peerConnection?.getSenders().map((sender) => {
-  //         if (sender?.track?.kind == "audio") {
-  //           if (mediaStream.getAudioTracks().length > 0) {
-  //             sender.replaceTrack(mediaStream.getAudioTracks()[0]);
-  //           }
-  //         }
-  //         if (sender?.track?.kind == "video") {
-  //           if (mediaStream.getVideoTracks().length > 0) {
-  //             sender.replaceTrack(mediaStream.getVideoTracks()[0]);
-  //           }
-  //         }
-  //       });
-  //     });
-  // };
+
+  // change screen share and video stream
+  const reInitializeStream = (isScreenShare: boolean) => {
+    const media = !isScreenShare
+      ? getVideoAudioStream()
+      : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        navigator.mediaDevices.getDisplayMedia();
+    return new Promise((resolve) => {
+      media.then((stream: MediaStream) => {
+        myStream.current = stream;
+        if (isScreenShare) {
+          // if (myStream.current) {
+          //   myStream.current.getVideoTracks()[0].enabled = true;
+          // }
+        }
+        setReRender(9);
+        replaceStream(stream);
+        resolve(true);
+      });
+    });
+  };
+
+  // change screen share for other users
+  const replaceStream = (mediaStream: MediaStream) => {
+    peers.current &&
+      Object.values(peers.current).map((peer) => {
+        peer.peerConnection?.getSenders().map((sender) => {
+          if (sender?.track?.kind == "audio") {
+            if (mediaStream.getAudioTracks().length > 0) {
+              sender.replaceTrack(mediaStream.getAudioTracks()[0]);
+            }
+          }
+          if (sender?.track?.kind == "video") {
+            if (mediaStream.getVideoTracks().length > 0) {
+              sender.replaceTrack(mediaStream.getVideoTracks()[0]);
+            }
+          }
+        });
+      });
+  };
 
   return {
     myStream,
