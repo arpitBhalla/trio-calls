@@ -281,9 +281,9 @@ export const useVideoConf = () => {
       media.then((stream: MediaStream) => {
         myStream.current = stream;
         if (isScreenShare) {
-          if (myStream.current) {
-            myStream.current.getVideoTracks()[0].enabled = true;
-          }
+          // if (myStream.current) {
+          //   myStream.current.getVideoTracks()[0].enabled = true;
+          // }
         }
         setReRender(9);
         replaceStream(stream);
