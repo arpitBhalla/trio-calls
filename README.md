@@ -63,25 +63,25 @@ A multi-participant video call platform for calling across the world for free wi
 
 Guide for local deployment -
 
-1. Clone the repository
+- Clone the repository
 
 ```bash
 git clone git@github.com:arpitBhalla/MicrosoftEngageMentorship2021.git
 ```
 
-1. Install dependencies
+- Install dependencies
 
 ```bash
 npm install
 ```
 
-1. Start MongoDB
+- Start MongoDB
 
 ```bash
 mongod
 ```
 
-1. Run the app
+- Run the app
 
 ```bash
 npm start:client
@@ -91,7 +91,7 @@ npm start:client
 npm start:server
 ```
 
-1. Open project at `http://localhost:3000`
+- Open project at `http://localhost:3000`
 
 ## Testing
 
