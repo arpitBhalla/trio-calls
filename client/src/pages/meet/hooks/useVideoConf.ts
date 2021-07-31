@@ -31,21 +31,23 @@ export const useVideoConf = () => {
 
   // Start/Stop Audio
   React.useEffect(() => {
-    if (myStream.current && !mediaReducer.isScreenShare) {
+    if (myStream.current) {
       myStream.current.getAudioTracks()[0].enabled = mediaReducer.isAudio;
     }
   }, [mediaReducer.isAudio]);
 
   // Start/Stop Video
   React.useEffect(() => {
-    if (myStream.current && myStream.current.getVideoTracks()[0]) {
+    if (myStream.current) {
       myStream.current.getVideoTracks()[0].enabled = mediaReducer.isVideo;
     }
   }, [mediaReducer.isVideo]);
 
   // Start/Stop ScreenShare
   React.useEffect(() => {
-    reInitializeStream(mediaReducer.isScreenShare);
+    if(mediaReducer.isScreenShare){
+      reInitializeStream(mediaReducer.isScreenShare);
+    }
   }, [mediaReducer.isScreenShare]);
 
   // Initialize Socket & PeerJS
