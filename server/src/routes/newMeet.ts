@@ -57,7 +57,7 @@ export const NewMeet = Router.use("/", async (req, res) => {
      * Create a calender event sent as attachment
      */
     const { value } = createEvent({
-      title: title || "Teams Meet",
+      title: title || "Trio Calls Meet",
       description: "You are invited for MS Teams meeting",
       start: [
         now.getFullYear(),
@@ -73,9 +73,9 @@ export const NewMeet = Router.use("/", async (req, res) => {
 
     try {
       await sendMail({
-        from: "'MS Teams' <teams@arpitbhalla.me>", // sender address
+        from: "'Trio Calls' <teams@arpitbhalla.me>", // sender address
         cc: invitees,
-        subject: "You are invited for MS Teams meeting",
+        subject: "You are invited for Trio Calls meeting",
         html,
         icalEvent: {
           filename: "invitation.ics",

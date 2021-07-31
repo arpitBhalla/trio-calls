@@ -4,8 +4,8 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "Microsoft Teams",
-  "short_name": "MS Teams",
+  "name": "Trio Calls",
+  "short_name": "Trio Calls",
   "description": "A multi-participant video call platform for calling across the world for free with screen sharing!",
   "icons": [
     {

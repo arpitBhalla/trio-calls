@@ -1,4 +1,4 @@
-# Teams
+# Trio Calls
 
 ## ✨ Feature list
 

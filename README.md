@@ -69,48 +69,29 @@ Guide for local deployment -
 git clone git@github.com:arpitBhalla/MicrosoftEngageMentorship2021.git
 ```
 
-2. Change the working directory
-
-```bash
-cd server
-```
-
-3. Install dependencies
+1. Install dependencies
 
 ```bash
 npm install
 ```
 
-4. Change the working directory
-
-```bash
-cd client
-```
-
-5. Install dependencies
-
-```bash
-npm install
-```
-
-6. Start MongoDB 
+1. Start MongoDB
 
 ```bash
 mongod
 ```
 
-7. Run the app
+1. Run the app
 
 ```bash
-npm start # in client directory /client
+npm start:client
 ```
 
 ```bash
-npm run dev # in server directory /server
+npm start:server
 ```
 
-8. Open project at `http://localhost:3000`
-
+1. Open project at `http://localhost:3000`
 
 ## Testing
 

@@ -1,10 +1,11 @@
 {
-  "name": "ms-teams",
+  "name": "trio-calls",
   "version": "1.1.0",
-  "description": "Microsoft Teams ",
+  "description": "Trio Calls",
   "scripts": {
+    "install": "cd client && npm i && cd ../server & cd npm install",
     "start:client": "cd client && npm start",
-    "start:server": "cd server && npm start"
+    "start:server": "cd server && npm run dev"
   },
   "repository": {
     "type": "git",

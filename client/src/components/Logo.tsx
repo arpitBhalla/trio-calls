@@ -19,7 +19,7 @@ const Logo: React.FC<Props> = ({ size = 6 }) => {
   return (
     <img
       className={classes.logo}
-      alt="Teams"
+      alt="Trio Calls"
       src={logo}
       onClick={() => history.push("/")}
     />

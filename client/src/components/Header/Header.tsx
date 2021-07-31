@@ -85,7 +85,7 @@ const Header: React.FC<HeaderProps> = ({
       <Toolbar>
         <Logo size={5} />
         <Typography variant="h6" color="primary" className={classes.headerText}>
-          Microsoft Teams
+          Trio Calls
         </Typography>
         <Tooltip title="Toggle Theme (Alt+t)">
           <IconButton
