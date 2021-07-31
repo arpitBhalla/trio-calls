@@ -275,7 +275,7 @@ export const InviteTemplate = ({
 													<p
 														style="margin: 0; font-size: 11px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 13px; margin-top: 0; margin-bottom: 0;">
 														<span style="font-size: 11px;">Please create account with same
-															email to access chat if you are new to Teams</span></p>
+															email to access chat if you are new to Trio Calls</span></p>
 												</div>
 											</div>
 											<!--[if mso]></td></tr></table><![endif]-->
@@ -310,7 +310,7 @@ export const InviteTemplate = ({
 													style="font-size: 14px; line-height: 1.2; font-family: 'Ubuntu', Tahoma, Verdana, Segoe, sans-serif; color: #555555; mso-line-height-alt: 17px;">
 													<p
 														style="margin: 0; font-size: 14px; line-height: 1.2; text-align: center; word-break: break-word; mso-line-height-alt: 17px; margin-top: 0; margin-bottom: 0;">
-														Teams by Arpit Bhalla</p>
+														Trio Calls by Arpit Bhalla</p>
 												</div>
 											</div>
 											<!--[if mso]></td></tr></table><![endif]-->

@@ -1,6 +1,5 @@
-# <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Microsoft_Office_Teams_%282018%E2%80%93present%29.svg/1200px-Microsoft_Office_Teams_%282018%E2%80%93present%29.svg.png' width='25'> Teams
-
-[![DeepSource](https://deepsource.io/gh/arpitBhalla/MicrosoftEngageMentorship2021.svg/?label=resolved+issues&show_trend=true&token=qkGeZPDLrtbe0wdM5TdpQsLV)](https://deepsource.io/gh/arpitBhalla/MicrosoftEngageMentorship2021/?ref=repository-badge) [![Test](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/test.yaml/badge.svg)](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/test.yaml) [![Deploy Server](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/deploy.yml/badge.svg)](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/deploy.yml)
+# Trio Calls
+[![DeepSource](https://deepsource.io/gh/arpitBhalla/Trio-Calls.svg/?label=resolved+issues&show_trend=true&token=qkGeZPDLrtbe0wdM5TdpQsLV)](https://deepsource.io/gh/arpitBhalla/Trio-Calls/?ref=repository-badge) [![Test](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/test.yaml/badge.svg)](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/test.yaml) [![Deploy Server](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/deploy.yml/badge.svg)](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/deploy.yml)
 
 A multi-participant video call platform for calling across the world for free with screen sharing!
 
@@ -63,54 +62,35 @@ A multi-participant video call platform for calling across the world for free wi
 
 Guide for local deployment -
 
-1. Clone the repository
+- Clone the repository
 
 ```bash
 git clone git@github.com:arpitBhalla/MicrosoftEngageMentorship2021.git
 ```
 
-2. Change the working directory
-
-```bash
-cd server
-```
-
-3. Install dependencies
+- Install dependencies
 
 ```bash
 npm install
 ```
 
-4. Change the working directory
-
-```bash
-cd client
-```
-
-5. Install dependencies
-
-```bash
-npm install
-```
-
-6. Start MongoDB 
+- Start MongoDB
 
 ```bash
 mongod
 ```
 
-7. Run the app
+- Run the app
 
 ```bash
-npm start # in client directory /client
+npm start:client
 ```
 
 ```bash
-npm run dev # in server directory /server
+npm start:server
 ```
 
-8. Open project at `http://localhost:3000`
-
+- Open project at `http://localhost:3000`
 
 ## Testing
 

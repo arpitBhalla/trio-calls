@@ -80,7 +80,7 @@ const SignIn: React.FC = () => {
           Sign in
         </Typography>
         <Typography variant="body1" align="center" color="primary">
-          Use your teams account
+          Use your Trio Calls account
         </Typography>
         <Box py={2}>
           <Collapse in={!firstStepOver} timeout={200}>

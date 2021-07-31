@@ -1,7 +1,7 @@
 {
-  "name": "backend-server-ms-teams",
+  "name": "backend-server-trio-calls",
   "version": "1.0.0",
-  "description": "MS Teams Backend",
+  "description": "MS Trio Calls Backend",
   "main": "index.ts",
   "scripts": {
     "start": "ts-node src/index.ts",

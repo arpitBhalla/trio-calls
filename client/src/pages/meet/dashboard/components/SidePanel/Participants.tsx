@@ -34,7 +34,10 @@ const Participants: React.FC<Props> = ({ isHost, participants }) => {
   return (
     <>
       {isHost && (
-        <CSVLink filename="TeamsMeeting.csv" data={Object.values(participants)}>
+        <CSVLink
+          filename="TrioCallsMeeting.csv"
+          data={Object.values(participants)}
+        >
           <Button
             fullWidth
             variant="text"

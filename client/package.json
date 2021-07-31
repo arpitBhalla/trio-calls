@@ -1,6 +1,6 @@
 {
-  "name": "teams-client",
-  "description": "Teams Web Client",
+  "name": "trio-calls-client",
+  "description": "Trio Calls Web Client",
   "version": "1.0.0",
   "author": "Arpit Bhalla <https://github.com/arpitBhalla>",
   "private": true,
