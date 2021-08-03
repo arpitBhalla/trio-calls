@@ -1,5 +1,5 @@
 # Trio Calls
-[![DeepSource](https://deepsource.io/gh/arpitBhalla/Trio-Calls.svg/?label=resolved+issues&show_trend=true&token=qkGeZPDLrtbe0wdM5TdpQsLV)](https://deepsource.io/gh/arpitBhalla/Trio-Calls/?ref=repository-badge) [![Test](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/test.yaml/badge.svg)](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/test.yaml) [![Deploy Server](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/deploy.yml/badge.svg)](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/deploy.yml)
+[![DeepSource](https://deepsource.io/gh/arpitBhalla/MicrosoftEngageMentorship2021.svg/?label=resolved+issues&show_trend=true&token=qkGeZPDLrtbe0wdM5TdpQsLV)](https://deepsource.io/gh/arpitBhalla/Trio-Calls/?ref=repository-badge) [![Test](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/test.yaml/badge.svg)](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/test.yaml) [![Deploy Server](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/deploy.yml/badge.svg)](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/deploy.yml)
 
 A multi-participant video call platform for calling across the world for free with screen sharing!
 
