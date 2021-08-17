@@ -1,21 +1,43 @@
-# Trio Calls
+<div align="center" id="top"> 
+  <img src="./client/public/favicon.png" alt="Trio Calls" width=80 />
+
+&#xa0;
+
+<a href="https://trio-calls.vercel.app">Demo</a>
+
+</div>
+
+<h1 align="center">Trio Calls</h1>
+
+<p align="center">
+  <img alt="Github top language" src="https://img.shields.io/github/languages/top/arpitBhalla/trio-calls?color=56BEB8">
+
+  <img alt="Github language count" src="https://img.shields.io/github/languages/count/arpitBhalla/trio-calls?color=56BEB8">
+
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/arpitBhalla/trio-calls?color=56BEB8">
+
+  <img alt="License" src="https://img.shields.io/github/license/arpitBhalla/trio-calls?color=56BEB8">
+
+  <img alt="Github stars" src="https://img.shields.io/github/stars/arpitBhalla/trio-calls?color=56BEB8" />
+</p>
+
+<p align="center">
+  <a href="#dart-about">About</a> &#xa0; | &#xa0; 
+  <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
+  <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
+  <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
+  <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
+  <a href="#memo-license">License</a> &#xa0; | &#xa0;
+  <a href="https://github.com/arpitBhalla" target="_blank">Author</a>
+</p>
+
+<br>
+
+## :dart: About
 
 A multi-participant video call platform for calling across the world for free with screen sharing!
 
----
-
-- [Trio Calls](#trio-calls)
-  - [✨ Feature list](#-feature-list)
-    - [🥅 Basic features](#-basic-features)
-    - [🧑‍🎓 Classroom specific features](#-classroom-specific-features)
-    - [👨‍💻 Code features](#-code-features)
-  - [🙇🏻‍♂️ Acknowledgement](#️-acknowledgement)
-  - [🚧 Workflow](#-workflow)
-  - [🚀 Getting started](#-getting-started)
-  - [Testing](#testing)
-  - [🤞 Made possible with](#-made-possible-with)
-
-## ✨ Feature list
+## :sparkles: Features
 
 ### 🥅 Basic features
 
@@ -40,46 +62,35 @@ A multi-participant video call platform for calling across the world for free wi
 - Lock 🔒 meeting, late comer would not able to join 🚫.
 - Get notified 👀 if student changes tab.
 
-### 👨‍💻 Code features
+## :rocket: Technologies
 
-- 100% strict ⚠️ typescript
-- `eslint` and `prettier` friendly code
-- Code splitting using `@loadable/component`
-- Hooks 🪝 like `React.useCallback` `React.memo` which will increase performance.
-- Unit tested with `jest` & `e2e` tested with `cypress`.
-- Proper use of `/** comments */` and descriptions for functions.
+The following tools were used in this project:
 
-## 🙇🏻‍♂️ Acknowledgement
+- [Node.js](https://nodejs.org/en/)
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
 
-- Thanks [arjhun777](https://dev.to/arjhun777) for providing [https://dev.to/arjhun777/video-chatting-and-screen-sharing-with-react-node-webrtc-peerjs-18fg](https://dev.to/arjhun777/video-chatting-and-screen-sharing-with-react-node-webrtc-peerjs-18fg)
+## :white_check_mark: Requirements
 
-## 🚧 Workflow
+Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
 
-![Workflow](https://user-images.githubusercontent.com/55053424/125153081-1a12ef00-e16f-11eb-9da1-1f4481af451d.png)
-
-## 🚀 Getting started
-
-Guide for local deployment, ensure that mongoose instance is running
-
-- Clone the repository
+## :checkered_flag: Starting
 
 ```bash
-# clone the repo
-git clone https://github.com/arpitBhalla/trio-calls.git
+# Clone this project
+$ git clone https://github.com/arpitBhalla/trio-calls
+
+# Access
+$ cd trio-calls
+
 # Install dependencies
-npm install
+$ yarn
+
+# Run the project
+$ yarn start
+
+# The server will initialize in the <http://localhost:3000>
 ```
-
-- Run the app
-
-```bash
-# client app
-npm start:client
-# server
-npm start:server
-```
-
-- Open project at `http://localhost:3000`
 
 ## Testing
 
@@ -92,13 +103,16 @@ $ npm run test:e2e
 
 ```
 
-## 🤞 Made possible with
+## 🙇🏻‍♂️ Acknowledgement
 
-<div>
-<img src='assets/typescript.svg' width='70'>
-<img src='assets/redux.svg' width='70'>
-<img src='assets/mui.svg' width='70'>
-<img src='assets/node.svg' width='70'>
-<img src='https://cdn.iconscout.com/icon/free/png-256/google-cloud-2038785-1721675.png' width='70'>
-<img src='assets/mongo.svg' width='70'>
-</div>
+- Thanks [arjhun777](https://dev.to/arjhun777) for providing [https://dev.to/arjhun777/video-chatting-and-screen-sharing-with-react-node-webrtc-peerjs-18fg](https://dev.to/arjhun777/video-chatting-and-screen-sharing-with-react-node-webrtc-peerjs-18fg)
+
+## :memo: License
+
+This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
+
+Made with :heart: by <a href="https://github.com/arpitBhalla" target="_blank">Arpit Bhalla</a>
+
+&#xa0;
+
+<a href="#top">Back to top</a>
