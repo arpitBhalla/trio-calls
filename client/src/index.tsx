@@ -2,12 +2,6 @@ if (process.env.NODE_ENV === "production") {
   console.log = function () {
     return;
   };
-  console.warn = function () {
-    return;
-  };
-  console.error = function () {
-    return;
-  };
 }
 import React from "react";
 import ReactDOM from "react-dom";
