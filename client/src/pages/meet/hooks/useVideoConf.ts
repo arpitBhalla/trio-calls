@@ -6,12 +6,21 @@ import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { iceServers } from "core/config";
 import { useSocket } from "core/hooks/useSocket";
 import { useAudio } from "core/hooks/useAudio";
+import { useUpdate } from "core/hooks/useUpdate";
 import { useDocVisible } from "core/hooks/useDocVisible";
 import {
   removeParticipant,
   updateParticipant,
   updatePoll,
 } from "core/reducers/meeting";
+import { toggleHand } from "core/reducers/media";
+
+const logger =
+  process.env.NODE_ENV === "development"
+    ? console.log
+    : () => {
+        return;
+      };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useVideoConf = () => {
@@ -26,8 +35,10 @@ export const useVideoConf = () => {
     React.useRef<Map<string, { displayName: string; stream: MediaStream }>>();
   const peerJs = React.useRef<Peer>();
   const { mediaReducer, meetReducer, authReducer } = useAppSelector((s) => s);
-  const [reRender, setReRender] = React.useState(0);
+  const update = useUpdate();
   useTitle(meetReducer.meetDetails.title);
+
+  logger(mediaReducer);
 
   // Start/Stop Audio
   React.useEffect(() => {
@@ -42,13 +53,6 @@ export const useVideoConf = () => {
       myStream.current.getVideoTracks()[0].enabled = mediaReducer.isVideo;
     }
   }, [mediaReducer.isVideo]);
-
-  // Start/Stop ScreenShare
-  React.useEffect(() => {
-    if(mediaReducer.isScreenShare){
-      reInitializeStream(mediaReducer.isScreenShare);
-    }
-  }, [mediaReducer.isScreenShare]);
 
   // Initialize Socket & PeerJS
   React.useEffect(() => {
@@ -75,16 +79,16 @@ export const useVideoConf = () => {
   // Socket.io Listeners
   const socketEvents = () => {
     socketClient.on("connect", () => {
-      console.log("socket connected");
+      logger("socket connected");
     });
     socketClient.on("user-disconnected", (userID) => {
-      console.log("user disconnected-- closing peers", userID);
+      logger("user disconnected-- closing peers", userID);
       peers.current?.[userID]?.close();
     });
     socketClient.on("onRaiseHand", ({ displayName, UID }) => {
-      console.log("user raised hand", displayName);
+      logger("user raised hand", displayName);
       if (UID != authReducer.UID) {
-        console.log(UID, authReducer.UID);
+        logger(UID, authReducer.UID);
         playAudio?.();
         enqueueSnackbar(displayName + " raised hand");
       }
@@ -94,7 +98,7 @@ export const useVideoConf = () => {
     });
     socketClient.once("changeTab", ({ displayName, UID }) => {
       if (UID !== authReducer.UID) {
-        console.log("changes tab", displayName);
+        logger("changes tab", displayName);
         enqueueSnackbar(displayName + " changing tabs");
       }
     });
@@ -102,17 +106,17 @@ export const useVideoConf = () => {
       dispatch(updatePoll(pollData));
     });
     socketClient.on("forceQuit", (UID) => {
-      console.log("forceQuit", UID, authReducer.UID);
+      logger("forceQuit", UID, authReducer.UID);
       if (UID === peerJs.current?.id) {
         enqueueSnackbar("You were removed by host", { variant: "info" });
         destroyConnection();
       }
     });
     socketClient.on("disconnect", () => {
-      console.log("socket disconnected --");
+      logger("socket disconnected --");
     });
     socketClient.on("error", (err) => {
-      console.log("socket error --", err);
+      logger("socket error --", err);
     });
   };
 
@@ -124,12 +128,12 @@ export const useVideoConf = () => {
         meetID: meetReducer.meetDetails.meetID,
         displayName: authReducer.displayName,
       };
-      console.log("peers established and joined room", userData);
+      logger("peers established and joined room", userData);
       socketClient.emit("join-room", userData);
       setNavigatorToStream();
     });
     peerJs.current?.on("error", (err) => {
-      console.log("peer connection error", err);
+      logger("peer connection error", err);
       // peerJs.current?.reconnect();
     });
   };
@@ -137,9 +141,11 @@ export const useVideoConf = () => {
     getVideoAudioStream().then((stream) => {
       if (stream) {
         myStream.current = stream;
+        myStream.current.getAudioTracks()[0].enabled = mediaReducer.isAudio;
+        myStream.current.getVideoTracks()[0].enabled = mediaReducer.isVideo;
         setPeersListeners(stream);
         newUserConnection(stream);
-        setReRender(0);
+        update();
       }
     });
   };
@@ -162,7 +168,7 @@ export const useVideoConf = () => {
     peerJs.current?.on("call", (call) => {
       call.answer(stream);
       call.on("stream", (userVideoStream) => {
-        console.log("user stream data", userVideoStream);
+        logger("user stream data", userVideoStream);
         playAudio?.();
         peerStream.current?.set(call.metadata.id, {
           stream: userVideoStream,
@@ -174,10 +180,10 @@ export const useVideoConf = () => {
             displayName: call.metadata.displayName,
           })
         );
-        setReRender(12);
+        update();
       });
       call.on("close", () => {
-        console.log("closing peers listeners", call.metadata.id);
+        logger("closing peers listeners", call.metadata.id);
         enqueueSnackbar(call.metadata.displayName + " left", {
           variant: "info",
         });
@@ -186,12 +192,12 @@ export const useVideoConf = () => {
             UID: call.metadata.id,
           })
         );
-        setReRender(2);
+        update();
 
         peerStream.current?.delete(call.metadata.id);
       });
       call.on("error", () => {
-        console.log("peer error ------");
+        logger("peer error ------");
         peerStream.current?.delete(call.metadata.id);
       });
       peers.current && (peers.current[call.metadata.id] = call);
@@ -201,7 +207,7 @@ export const useVideoConf = () => {
   // Handler for new user connect
   const newUserConnection = (stream: MediaStream) => {
     socketClient.on("user-connected", (userData) => {
-      console.log("New User Connected", userData);
+      logger("New User Connected", userData);
       connectToNewUser(userData, stream);
       enqueueSnackbar(userData.displayName + " joined", {
         variant: "info",
@@ -212,7 +218,7 @@ export const useVideoConf = () => {
           displayName: userData.displayName,
         })
       );
-      setReRender(16);
+      update();
     });
   };
   // Call user
@@ -234,27 +240,28 @@ export const useVideoConf = () => {
         stream: userVideoStream,
         displayName,
       });
-      setReRender(0);
+      update();
     });
     call?.on("close", () => {
-      console.log("closing new user", userID);
+      logger("closing new user", userID);
       peerStream.current?.delete(userID);
       dispatch(
         removeParticipant({
           UID: userID,
         })
       );
-      setReRender(16);
+      update();
     });
     call?.on("error", () => {
-      console.log("peer error ------");
-      console.log("closing new user", userID);
+      logger("peer error ------");
+      logger("closing new user", userID);
     });
     peers.current && call && (peers.current[userID] = call);
   };
 
   // raise hand handler
   const raiseHand = () => {
+    dispatch(toggleHand(null));
     socketClient.emit("raiseHand", {
       displayName: authReducer.displayName,
       UID: authReducer.UID,
@@ -272,52 +279,10 @@ export const useVideoConf = () => {
     window.location.href = "/";
   };
 
-  // change screen share and video stream
-  const reInitializeStream = (isScreenShare: boolean) => {
-    const media = !isScreenShare
-      ? getVideoAudioStream()
-      : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        navigator.mediaDevices.getDisplayMedia();
-    return new Promise((resolve) => {
-      media.then((stream: MediaStream) => {
-        myStream.current = stream;
-        if (isScreenShare) {
-          // if (myStream.current) {
-          //   myStream.current.getVideoTracks()[0].enabled = true;
-          // }
-        }
-        setReRender(9);
-        replaceStream(stream);
-        resolve(true);
-      });
-    });
-  };
-
-  // change screen share for other users
-  const replaceStream = (mediaStream: MediaStream) => {
-    peers.current &&
-      Object.values(peers.current).map((peer) => {
-        peer.peerConnection?.getSenders().map((sender) => {
-          if (sender?.track?.kind == "audio") {
-            if (mediaStream.getAudioTracks().length > 0) {
-              sender.replaceTrack(mediaStream.getAudioTracks()[0]);
-            }
-          }
-          if (sender?.track?.kind == "video") {
-            if (mediaStream.getVideoTracks().length > 0) {
-              sender.replaceTrack(mediaStream.getVideoTracks()[0]);
-            }
-          }
-        });
-      });
-  };
-
   return {
     myStream,
     peerStream,
     destroyConnection,
     raiseHand,
-    reRender,
   };
 };

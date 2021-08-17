@@ -72,7 +72,7 @@ const JoinMeet: React.FC = () => {
             Recently joined meetings
           </Typography>
           <br />
-          {recentCalls?.map((callName) => (
+          {[...new Set(recentCalls)]?.map((callName) => (
             <Chip
               style={{ margin: 2 }}
               key={callName}
