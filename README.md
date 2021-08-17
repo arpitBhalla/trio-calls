@@ -1,20 +1,19 @@
 # Trio Calls
-[![DeepSource](https://deepsource.io/gh/arpitBhalla/MicrosoftEngageMentorship2021.svg/?label=resolved+issues&show_trend=true&token=qkGeZPDLrtbe0wdM5TdpQsLV)](https://deepsource.io/gh/arpitBhalla/Trio-Calls/?ref=repository-badge)<!-- [![Test](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/test.yaml/badge.svg)](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/test.yaml) [![Deploy Server](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/deploy.yml/badge.svg)](https://github.com/arpitBhalla/MicrosoftEngageMentorship2021/actions/workflows/deploy.yml)-->
 
 A multi-participant video call platform for calling across the world for free with screen sharing!
 
 ---
 
-## 🤞 Made possible with
-
-<div>
-<img src='assets/typescript.svg' width='70'>
-<img src='assets/redux.svg' width='70'>
-<img src='assets/mui.svg' width='70'>
-<img src='assets/node.svg' width='70'>
-<img src='https://cdn.iconscout.com/icon/free/png-256/google-cloud-2038785-1721675.png' width='70'>
-<img src='assets/mongo.svg' width='70'>
-</div>
+- [Trio Calls](#trio-calls)
+  - [✨ Feature list](#-feature-list)
+    - [🥅 Basic features](#-basic-features)
+    - [🧑‍🎓 Classroom specific features](#-classroom-specific-features)
+    - [👨‍💻 Code features](#-code-features)
+  - [🙇🏻‍♂️ Acknowledgement](#️-acknowledgement)
+  - [🚧 Workflow](#-workflow)
+  - [🚀 Getting started](#-getting-started)
+  - [Testing](#testing)
+  - [🤞 Made possible with](#-made-possible-with)
 
 ## ✨ Feature list
 
@@ -60,33 +59,23 @@ A multi-participant video call platform for calling across the world for free wi
 
 ## 🚀 Getting started
 
-Guide for local deployment -
+Guide for local deployment, ensure that mongoose instance is running
 
 - Clone the repository
 
 ```bash
-git clone git@github.com:arpitBhalla/MicrosoftEngageMentorship2021.git
-```
-
-- Install dependencies
-
-```bash
+# clone the repo
+git clone https://github.com/arpitBhalla/trio-calls.git
+# Install dependencies
 npm install
-```
-
-- Start MongoDB
-
-```bash
-mongod
 ```
 
 - Run the app
 
 ```bash
+# client app
 npm start:client
-```
-
-```bash
+# server
 npm start:server
 ```
 
@@ -101,18 +90,15 @@ $ npm run test
 # e2e tests
 $ npm run test:e2e
 
-# test coverage
-$ npm run test:cov
-
 ```
 
-## Lighthouse Report
+## 🤞 Made possible with
 
-![Lighthouse](https://user-images.githubusercontent.com/55053424/125126171-51a27c80-e118-11eb-9aee-96787d5ea749.png)
-
-<div align="center">
-Developed with ❤️ in India 🇮🇳 by
-
-[@arpitBhallla](https://github.com/arpitBhalla)
-
+<div>
+<img src='assets/typescript.svg' width='70'>
+<img src='assets/redux.svg' width='70'>
+<img src='assets/mui.svg' width='70'>
+<img src='assets/node.svg' width='70'>
+<img src='https://cdn.iconscout.com/icon/free/png-256/google-cloud-2038785-1721675.png' width='70'>
+<img src='assets/mongo.svg' width='70'>
 </div>
