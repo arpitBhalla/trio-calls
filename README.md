@@ -10,15 +10,15 @@
 <h1 align="center">Trio Calls</h1>
 
 <p align="center">
-  <img alt="Github top language" src="https://img.shields.io/github/languages/top/arpitBhalla/trio-calls?color=56BEB8">
+  <img alt="Github top language" src="https://img.shields.io/github/languages/top/arpitBhalla/trio-calls?style=flat-square&color=6642E9">
 
-  <img alt="Github language count" src="https://img.shields.io/github/languages/count/arpitBhalla/trio-calls?color=56BEB8">
+  <img alt="Github language count" src="https://img.shields.io/github/languages/count/arpitBhalla/trio-calls?style=flat-square&color=6642E9">
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/arpitBhalla/trio-calls?color=56BEB8">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/arpitBhalla/trio-calls?style=flat-square&color=6642E9">
 
-  <img alt="License" src="https://img.shields.io/github/license/arpitBhalla/trio-calls?color=56BEB8">
+  <img alt="License" src="https://img.shields.io/github/license/arpitBhalla/trio-calls?style=flat-square&color=6642E9">
 
-  <img alt="Github stars" src="https://img.shields.io/github/stars/arpitBhalla/trio-calls?color=56BEB8" />
+  <img alt="Github stars" src="https://img.shields.io/github/stars/arpitBhalla/trio-calls?style=flat-square&color=6642E9" />
 </p>
 
 <p align="center">
