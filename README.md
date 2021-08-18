@@ -1,10 +1,5 @@
 <div align="center" id="top"> 
   <img src="./client/public/favicon.png" alt="Trio Calls" width=80 />
-
-&#xa0;
-
-<a href="https://trio-calls.vercel.app">Demo</a>
-
 </div>
 
 <h1 align="center">Trio Calls</h1>
