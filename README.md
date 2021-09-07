@@ -104,7 +104,7 @@ $ npm run test:e2e
 
 ## :memo: License
 
-This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
+This project is under license from GPL v3. For more details, see the [LICENSE](LICENSE) file. You need to seek permission from original author before using it for commercial purpose.
 
 Made with :heart: by <a href="https://github.com/arpitBhalla" target="_blank">Arpit Bhalla</a>
 
