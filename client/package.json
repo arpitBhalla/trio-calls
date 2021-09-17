@@ -28,7 +28,7 @@
     "react-icons": "^4.2.0",
     "react-linkify": "^1.0.0-alpha",
     "react-markdown": "^6.0.2",
-    "react-redux": "^7.2.4",
+    "react-redux": "^7.2.5",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-sketch-canvas": "^5.3.4",
