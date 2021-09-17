@@ -9,7 +9,7 @@
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
-    "@reduxjs/toolkit": "^1.6.0",
+    "@reduxjs/toolkit": "^1.6.1",
     "@types/react-csv": "^1.1.2",
     "@types/react-howler": "^3.7.3",
     "axios": "^0.21.1",
