@@ -2,10 +2,9 @@
  * URL for hosted Server
  */
 export const ServerURL =
-  // process.env.NODE_ENV === "development"
-  // ? "http://localhost:4000"
-  // :
-  "https://ms-teams-arpit.herokuapp.com/";
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:4000"
+    : process.env.SERVER_URL;
 
 /**
  * URLs for ICE Server
