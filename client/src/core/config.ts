@@ -4,7 +4,7 @@
 export const ServerURL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:4000"
-    : "https://ms-teams-arpit.herokuapp.com/";
+    : process.env.REACT_APP_SERVER_URL || "";
 
 /**
  * URLs for ICE Server

@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 export const mediaStore = createSlice({
   name: "mediaDevices",
   initialState: {
-    isAudio: false,
-    isVideo: false,
+    isAudio: true,
+    isVideo: true,
     isHand: false,
     isScreenShare: false,
     isWhiteBoard: false,

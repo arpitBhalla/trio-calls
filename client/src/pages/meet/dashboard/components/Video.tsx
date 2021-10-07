@@ -7,20 +7,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     position: "relative",
     height: "30rem",
-    width: "40rem",
-    backgroundColor: "#333333",
+    width: "60rem",
+    backgroundColor: "#a2a2a2",
     maxWidth: "800px",
     maxHeight: "900px",
     borderRadius: 8,
-  },
-  avatar: {
-    position: "absolute",
-    top: "40%",
-    left: "50%",
-    transform: "translateX(-50%)",
-    color: "white",
-    width: theme.spacing(10),
-    height: theme.spacing(10),
   },
   video: {
     height: "100%",

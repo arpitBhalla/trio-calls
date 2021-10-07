@@ -74,7 +74,9 @@ const SignIn: React.FC = () => {
     <Container maxWidth="xs">
       <ShadowBox p={4} py={5} mt={10}>
         <Typography align="center">
-          <Logo size={16} />
+          <Box p={1}>
+            <Logo size={8} />
+          </Box>
         </Typography>
         <Typography variant="h5" align="center" color="primary">
           Sign in

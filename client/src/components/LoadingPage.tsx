@@ -1,6 +1,7 @@
 import React from "react";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import Logo from "./Logo";
 
@@ -19,7 +20,9 @@ const LoadingPage: React.FC = () => {
 
   return (
     <Backdrop className={classes.backdrop} open>
-      <Logo size={16} />
+      <Box p={2}>
+        <Logo size={10} />
+      </Box>
       <CircularProgress color="primary" />
     </Backdrop>
   );

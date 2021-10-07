@@ -51,9 +51,8 @@ const Controller: React.FC<ControllerProps> = ({
 }) => {
   const classes = useStyles();
   const dispatch = useAppDispatch();
-  const { isAudio, isVideo, isScreenShare, isWhiteBoard } = useAppSelector(
-    ({ mediaReducer }) => mediaReducer
-  );
+  const { isAudio, isVideo, isScreenShare, isWhiteBoard, isHand } =
+    useAppSelector(({ mediaReducer }) => mediaReducer);
 
   return (
     <Box className={classes.root}>
@@ -110,7 +109,7 @@ const Controller: React.FC<ControllerProps> = ({
       />
       <ControlButton
         title="Raise Hand"
-        isEnabled={false}
+        isEnabled={isHand}
         shortCut="r"
         IconOn={PanTool}
         IconOff={PanToolOutlined}

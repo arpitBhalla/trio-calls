@@ -8,7 +8,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Logo from "../Logo";
+import Logo from "./Logo";
 import { toggleDarkMode } from "core/reducers/theme";
 import IconButton from "@material-ui/core/IconButton";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
@@ -50,8 +50,9 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   const classes = useStyles({ toolBarBottomMargin });
   const dispatch = useAppDispatch();
-  const [anchorEl, setAnchorEl] =
-    React.useState<(EventTarget & HTMLDivElement) | null>(null);
+  const [anchorEl, setAnchorEl] = React.useState<
+    (EventTarget & HTMLDivElement) | null
+  >(null);
   const [newDisplayName, setNewDisplayName] = React.useState("");
   const [profileDialog, setProfileDialog] = React.useState(false);
   const { displayName, useDark } = useAppSelector(
@@ -83,7 +84,7 @@ const Header: React.FC<HeaderProps> = ({
       className={classes.appBar}
     >
       <Toolbar>
-        <Logo size={5} />
+        <Logo size={4} />
         <Typography variant="h6" color="primary" className={classes.headerText}>
           Trio Calls
         </Typography>

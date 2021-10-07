@@ -25,8 +25,7 @@ const Meet: React.FC = () => {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles({ open });
 
-  const { myStream, peerStream, destroyConnection, raiseHand, reRender } =
-    useVideoConf();
+  const { myStream, peerStream, destroyConnection, raiseHand } = useVideoConf();
   const [gridSize, setGridSize] = React.useState(1);
 
   React.useEffect(() => {
@@ -37,7 +36,7 @@ const Meet: React.FC = () => {
     return () => {
       mount = false;
     };
-  }, [peerStream.current?.size, myStream.current?.active, reRender]);
+  }, [peerStream.current?.size, myStream.current?.active]);
 
   return (
     <>

@@ -60,7 +60,7 @@ const WaitingRoom: React.FC<WaitingRoomProps> = ({ joinMeetHandler }) => {
 
   return (
     <>
-      <Header />
+      <Header elevation={1} />
       <Container maxWidth="md">
         {meetOk === false ? (
           <Box textAlign="center">
