@@ -5,36 +5,14 @@
 <h1 align="center">Trio Calls</h1>
 
 <p align="center">
-  <img alt="Github top language" src="https://img.shields.io/github/languages/top/arpitBhalla/trio-calls?style=flat-square&color=6642E9">
-
-  <img alt="Github language count" src="https://img.shields.io/github/languages/count/arpitBhalla/trio-calls?style=flat-square&color=6642E9">
-
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/arpitBhalla/trio-calls?style=flat-square&color=6642E9">
-
-  <img alt="License" src="https://img.shields.io/github/license/arpitBhalla/trio-calls?style=flat-square&color=6642E9">
-
-  <img alt="Github stars" src="https://img.shields.io/github/stars/arpitBhalla/trio-calls?style=flat-square&color=6642E9" />
-</p>
-
-<p align="center">
-  <a href="#dart-about">About</a> &#xa0; | &#xa0; 
-  <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
-  <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
-  <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
-  <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
-  <a href="#memo-license">License</a> &#xa0; | &#xa0;
-  <a href="https://github.com/arpitBhalla" target="_blank">Author</a>
+  <img alt="Github top language" src="https://img.shields.io/github/languages/top/arpitBhalla/trio-calls?style=flat-square">
+  <img alt="License" src="https://img.shields.io/github/license/arpitBhalla/trio-calls?style=flat-square">
+  <img alt="Github stars" src="https://img.shields.io/github/stars/arpitBhalla/trio-calls?style=flat-square" />
 </p>
 
 <br>
 
-## :dart: About
-
-A multi-participant video call platform for calling across the world for free with screen sharing!
-
 ## :sparkles: Features
-
-### 🥅 Basic features
 
 - Schedule 📅 meets, send invite via email 📩 & save to calendar.
 - Create public 🌐 or restricted ☢️ meeting.
@@ -57,37 +35,35 @@ A multi-participant video call platform for calling across the world for free wi
 - Lock 🔒 meeting, late comer would not able to join 🚫.
 - Get notified 👀 if student changes tab.
 
-## :rocket: Technologies
+## :eyes: [Preview](https://trio-calls.vercel.app)
 
-The following tools were used in this project:
+![Trio calls preview](https://user-images.githubusercontent.com/55053424/152016159-3d577bca-3170-4283-b3b3-3d49b4e9a424.gif)
 
-- [Node.js](https://nodejs.org/en/)
-- [React](https://reactjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-
-## :white_check_mark: Requirements
+## :tada: Local setup
 
 Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
-
-## :checkered_flag: Starting
 
 ```bash
 # Clone this project
 $ git clone https://github.com/arpitBhalla/trio-calls
 
-# Access
 $ cd trio-calls
 
-# Install dependencies
-$ yarn
+# Install server dependencies
+$ yarn --cwd client install
 
-# Run the project
-$ yarn start
+$ yarn --cwd client start
 
-# The server will initialize in the <http://localhost:3000>
+# Install server dependencies
+$ yarn --cwd server install
+
+# Run server
+$ yarn --cwd server dev
+
+# The server will start at <http://localhost:3000>
 ```
 
-## Testing
+## 🔧 Testing
 
 ```bash
 # unit tests
