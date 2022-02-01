@@ -30,8 +30,9 @@ const useStyles = makeStyles((theme) => ({
 const ChatTextInput: React.FC<ChatTextInputProps> = ({ onSend, isSmall }) => {
   const classes = useStyles();
   const [text, setText] = React.useState("");
-  const [anchorEl, setAnchorEl] =
-    React.useState<(EventTarget & HTMLButtonElement) | null>(null);
+  const [anchorEl, setAnchorEl] = React.useState<
+    (EventTarget & HTMLButtonElement) | null
+  >(null);
 
   const handleClick: React.MouseEventHandler<HTMLButtonElement> = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);

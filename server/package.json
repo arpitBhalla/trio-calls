@@ -2,9 +2,9 @@
   "name": "backend-server-trio-calls",
   "version": "1.0.0",
   "description": "MS Trio Calls Backend",
-  "main": "index.ts",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "node dist/index.js",
+    "build": "tsc",
     "dev": "DEV=true nodemon --exec 'ts-node src/index.ts' -e .ts",
     "test": "jest",
     "lint": "eslint .",
@@ -33,12 +33,7 @@
     "socket.io": "^4.1.2",
     "ts-jest": "^27.0.3",
     "ts-node": "^10.0.0",
-    "typescript": "^4.3.5"
-  },
-  "engines": {
-    "node": "14.x.x"
-  },
-  "devDependencies": {
+    "typescript": "^4.3.5",
     "socket.io-client": "^4.1.3"
   }
 }
