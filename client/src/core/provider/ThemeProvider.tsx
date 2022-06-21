@@ -2,7 +2,7 @@ import React from "react";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { CssBaseline } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme } from "@material-ui/core/styles";
 import { deepPurple } from "@material-ui/core/colors";
 import { useAppSelector } from "core/hooks/redux";
 
@@ -12,7 +12,7 @@ const App: React.FC = ({ children }) => {
   const useDark = useAppSelector((state) => state.themeReducer.useDark);
   const theme = React.useMemo(
     () =>
-      createMuiTheme({
+      createTheme({
         palette: {
           primary: {
             main:
@@ -25,6 +25,8 @@ const App: React.FC = ({ children }) => {
         },
         overrides: {
           MuiCssBaseline: {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             "@global": {
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore

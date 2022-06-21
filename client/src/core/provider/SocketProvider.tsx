@@ -1,7 +1,12 @@
 import React from "react";
 import io, { Socket } from "socket.io-client";
-import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import { ServerURL } from "core/config";
+
+export interface DefaultEventsMap {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  [event: string]: (...args: any[]) => void;
+}
 
 const socket: Socket<DefaultEventsMap, DefaultEventsMap> = io(ServerURL);
 

@@ -1,7 +1,6 @@
 import React from "react";
 import { Socket } from "socket.io-client";
-import { DefaultEventsMap } from "socket.io-client/build/typed-events";
-import { SocketContext } from "core/provider/SocketProvider";
+import { SocketContext, DefaultEventsMap } from "core/provider/SocketProvider";
 
 export const useSocket = (): Socket<DefaultEventsMap, DefaultEventsMap> => {
   const socketConsumerContext = React.useContext(SocketContext);

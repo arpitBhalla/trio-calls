@@ -10,6 +10,8 @@ const theme = createMuiTheme({
   },
   overrides: {
     MuiCssBaseline: {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       "@global": {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
