@@ -10,7 +10,7 @@ import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import { useHistory, useParams } from "react-router-dom";
-import { ChatParticipantSkeleton } from "components/Chat/ChatSkeleton";
+import { ChatParticipantSkeleton } from "@arpitbhalla/trio-calls/components/Chat/ChatSkeleton";
 import { getAllMeets } from "utils/chat.fetch";
 import { useSnackbar } from "notistack";
 import { Meeting } from "utils/types";

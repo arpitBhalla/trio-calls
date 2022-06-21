@@ -8,8 +8,8 @@ import {
 } from "react-router-dom";
 import { useAppSelector } from "core/hooks/redux";
 import loadable from "@loadable/component";
-import NotFound from "components/NotFound";
-import LoadingPage from "components/LoadingPage";
+import NotFound from "@arpitbhalla/trio-calls/components/NotFound";
+import LoadingPage from "@arpitbhalla/trio-calls/components/LoadingPage";
 
 const SignIn = loadable(() => import("./SignIn"), {
   fallback: <LoadingPage />,

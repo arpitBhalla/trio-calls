@@ -16,8 +16,8 @@ import EmailIcon from "@material-ui/icons/EmailOutlined";
 import PasswordIcon from "@material-ui/icons/LockOpen";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Logo from "components/Logo";
-import ShadowBox from "components/ShadowBox";
+import Logo from "@arpitbhalla/trio-calls/components/Logo";
+import ShadowBox from "@arpitbhalla/trio-calls/components/ShadowBox";
 import { useLocalStorage } from "core/hooks/common";
 
 const INITIAL_STATE = { text: "", error: "" };

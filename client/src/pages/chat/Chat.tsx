@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Header from "components/Header";
-import ShadowBox from "components/ShadowBox";
+import Header from "@arpitbhalla/trio-calls/components/Header";
+import ShadowBox from "@arpitbhalla/trio-calls/components/ShadowBox";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import ChatHeader from "./components/ChatHeader";

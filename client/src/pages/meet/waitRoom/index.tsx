@@ -3,7 +3,7 @@ import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import Preview from "./Preview";
 import Box from "@material-ui/core/Box";
-import Header from "components/Header";
+import Header from "@arpitbhalla/trio-calls/components/Header";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { getMeet } from "utils/meeting.fetch";

@@ -4,12 +4,12 @@ import Grid from "@material-ui/core/Grid";
 import NewMeet from "./components/NewMeet";
 import JoinMeet from "./components/JoinMeet";
 import Fade from "@material-ui/core/Fade";
-import Header from "components/Header";
+import Header from "@arpitbhalla/trio-calls/components/Header";
 import Fab from "@material-ui/core/Fab";
 import ChatOutlinedIcon from "@material-ui/icons/ChatOutlined";
 import Tooltip from "@material-ui/core/Tooltip";
 import { useHistory } from "react-router-dom";
-import ShadowBox from "components/ShadowBox";
+import ShadowBox from "@arpitbhalla/trio-calls/components/ShadowBox";
 import { useTitle } from "core/hooks/common";
 
 const useStyles = makeStyles((theme) => ({

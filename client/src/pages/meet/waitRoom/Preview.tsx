@@ -1,7 +1,7 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { toggleAudio, toggleVideo } from "core/reducers/media";
-import ControlButton from "components/ControllerButton";
+import ControlButton from "@arpitbhalla/trio-calls/components/ControllerButton";
 import {
   MicOutlined,
   MicOffOutlined,
@@ -10,7 +10,7 @@ import {
 } from "@material-ui/icons";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import ShadowBox from "components/ShadowBox";
+import ShadowBox from "@arpitbhalla/trio-calls/components/ShadowBox";
 import { useStyles } from "./Preview.useStyles";
 
 const Preview: React.FC = () => {

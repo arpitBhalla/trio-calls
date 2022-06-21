@@ -12,7 +12,7 @@ import { useLocalStorage } from "core/hooks/common";
 import { useSnackbar } from "notistack";
 import { updateAuth } from "core/reducers/auth";
 import { useConnection } from "core/hooks/useConnection";
-import LoadingPage from "components/LoadingPage";
+import LoadingPage from "@arpitbhalla/trio-calls/components/LoadingPage";
 
 const Home = loadable(() => import("./home/Home"), {
   fallback: <LoadingPage />,

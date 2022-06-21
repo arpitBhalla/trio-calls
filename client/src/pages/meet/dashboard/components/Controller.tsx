@@ -23,7 +23,7 @@ import {
   toggleVideo,
   toggleWhiteBoard,
 } from "core/reducers/media";
-import ControlButton from "components/ControllerButton";
+import ControlButton from "@arpitbhalla/trio-calls/components/ControllerButton";
 import { toggleDarkMode } from "core/reducers/theme";
 
 const useStyles = makeStyles((theme) => ({

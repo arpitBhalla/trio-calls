@@ -14,7 +14,7 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Tooltip from "@material-ui/core/Tooltip";
 import clsx from "clsx";
-import ShadowBox from "components/ShadowBox";
+import ShadowBox from "@arpitbhalla/trio-calls/components/ShadowBox";
 // Icon
 import BrushOutlinedIcon from "@material-ui/icons/BrushOutlined";
 import FormatPaintOutlinedIcon from "@material-ui/icons/FormatPaintOutlined";
