@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from "react";
-import { getChat } from "../../utils/chat.fetch";
+import { getChat } from "@arpitbhalla/trio-calls/utils/chat.fetch";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { useSocket } from "./useSocket";

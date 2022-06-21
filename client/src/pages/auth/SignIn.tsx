@@ -2,7 +2,7 @@ import * as React from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "core/hooks/redux";
 import { updateAuth } from "core/reducers/auth";
-import { signIn } from "utils/auth.fetch";
+import { signIn } from "@arpitbhalla/trio-calls/utils/auth.fetch";
 import { useSnackbar } from "notistack";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";

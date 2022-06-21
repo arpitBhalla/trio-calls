@@ -7,7 +7,7 @@ import {
 } from "@arpitbhalla/trio-calls/components/Chat";
 import { useMsgs } from "core/hooks/useMsgs";
 import { useAppSelector } from "core/hooks/redux";
-import { dateToTime } from "utils/common";
+import { dateToTime } from "@arpitbhalla/trio-calls/utils/common";
 import { useParams } from "react-router-dom";
 import { LinearProgress } from "@material-ui/core";
 

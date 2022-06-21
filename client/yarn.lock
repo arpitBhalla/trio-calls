@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@arpitbhalla/trio-calls@^0.0.0-alpha.0":
-  version "0.0.0-alpha.0"
-  resolved "https://npm.pkg.github.com/download/@arpitbhalla/trio-calls/0.0.0-alpha.0/2f97addf9f4a75d6ebdbc7a71974bb0d02272c753bda32d9c20a0b695ec13322#a0365fc0a36f510e42df3356e8e3aa7145184b79"
-  integrity sha512-FWvzdkIv4DA5Ye43Mq3F2q1oDa+/08mhcLqW3CK4YxOYD3aPrAFTq663hYdPUUeNMTU5rCbP61vdJriJrgWqmg==
+"@arpitbhalla/trio-calls@^0.0.0":
+  version "0.0.0"
+  resolved "https://npm.pkg.github.com/download/@arpitbhalla/trio-calls/0.0.0/de98093ea1301d9afd9a6107bb19414859735696a431fcf904c2ef74a83b6cad#a887d22bdfa90c1d28b988203a53772501e24bb4"
+  integrity sha512-HGqea2iq3/lFKnRxHg7bqbjJBulpZ8eNDrChBNL1NqUgElGv1jObcZ8gRa8ykIEcYqRjP5THlnFx409I/UD2og==
 
 "@babel/code-frame@7.10.4":
   version "7.10.4"

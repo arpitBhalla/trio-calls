@@ -5,3 +5,4 @@ cypress/videos/
 # cypress
 cypress/screenshots/
 cypress/videos/
+.env

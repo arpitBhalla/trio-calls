@@ -11,7 +11,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
 import ChipInput from "material-ui-chip-input";
-import { newMeet } from "utils/meeting.fetch";
+import { newMeet } from "@arpitbhalla/trio-calls/utils/meeting.fetch";
 import { useAppSelector } from "core/hooks/redux";
 import { useSnackbar } from "notistack";
 import { useHistory } from "react-router-dom";

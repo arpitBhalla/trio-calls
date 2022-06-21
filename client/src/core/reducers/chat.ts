@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Chat } from "utils/types";
+import { Chat } from "@arpitbhalla/trio-calls/utils/types";
 
 export const chatStore = createSlice({
   name: "meeting",

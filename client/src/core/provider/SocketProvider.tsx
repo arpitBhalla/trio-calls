@@ -3,7 +3,7 @@ import io, { Socket } from "socket.io-client";
 import { ServerURL } from "core/config";
 
 export interface DefaultEventsMap {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // eslint-disable-next-line
   // @ts-ignore
   [event: string]: (...args: any[]) => void;
 }

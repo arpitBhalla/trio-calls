@@ -11,12 +11,12 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import { useHistory, useParams } from "react-router-dom";
 import { ChatParticipantSkeleton } from "@arpitbhalla/trio-calls/components/Chat/ChatSkeleton";
-import { getAllMeets } from "utils/chat.fetch";
+import { getAllMeets } from "@arpitbhalla/trio-calls/utils/chat.fetch";
 import { useSnackbar } from "notistack";
-import { Meeting } from "utils/types";
+import { Meeting } from "@arpitbhalla/trio-calls/utils/types";
 import { useStyles } from "./styles/ChatParticipants";
 import { useAppSelector } from "core/hooks/redux";
-import { dateToTime } from "utils/common";
+import { dateToTime } from "@arpitbhalla/trio-calls/utils/common";
 
 type Props = {
   handleTitle?: (title: string) => unknown;

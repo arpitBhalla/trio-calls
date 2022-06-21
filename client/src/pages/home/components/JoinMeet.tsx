@@ -3,7 +3,10 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import KeyboardIcon from "@material-ui/icons/Keyboard";
-import { isValidMeetID, stringToMeetID } from "utils/common";
+import {
+  isValidMeetID,
+  stringToMeetID,
+} from "@arpitbhalla/trio-calls/utils/common";
 import { useHistory } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import FormControl from "@material-ui/core/FormControl";

@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import FileCopyOutlinedIcon from "@material-ui/icons/FileCopyOutlined";
 import { useSnackbar } from "notistack";
-import { CopyToClipboard } from "utils/common";
+import { CopyToClipboard } from "@arpitbhalla/trio-calls/utils/common";
 
 type Props = {
   meetLink?: string;

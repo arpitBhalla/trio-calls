@@ -6,7 +6,7 @@ import Box from "@material-ui/core/Box";
 import Header from "@arpitbhalla/trio-calls/components/Header";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import { getMeet } from "utils/meeting.fetch";
+import { getMeet } from "@arpitbhalla/trio-calls/utils/meeting.fetch";
 import { useHistory, useParams } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import { useAppSelector, useAppDispatch } from "core/hooks/redux";

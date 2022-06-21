@@ -10,7 +10,7 @@ import { useSocket } from "core/hooks/useSocket";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "core/hooks/redux";
 import { ChatMsgSkeleton } from "@arpitbhalla/trio-calls/components/Chat/ChatSkeleton";
-import { dateToTime } from "utils/common";
+import { dateToTime } from "@arpitbhalla/trio-calls/utils/common";
 
 const useStyles = makeStyles((theme) => ({
   root: {
