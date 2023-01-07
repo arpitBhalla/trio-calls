@@ -1,7 +1,8 @@
 {
-  "name": "backend-server-trio-calls",
+  "name": "@trio-calls/server",
+  "private": true,
   "version": "1.0.0",
-  "description": "MS Trio Calls Backend",
+  "description": "Trio Calls Backend",
   "scripts": {
     "start": "node dist/index.js",
     "build": "tsc",

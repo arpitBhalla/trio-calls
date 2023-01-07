@@ -44,7 +44,7 @@ export const NewMeet = Router.use("/", async (req, res) => {
      */
     const hostedURL = process.env.DEV
       ? "http://localhost:3000/"
-      : "http://ms-teams.vercel.app/";
+      : "http://trio-calls.vercel.app/";
     const chatLink = hostedURL + "chat/" + meet.meetID;
     const meetLink = hostedURL + meet.meetID;
     const html = InviteTemplate({

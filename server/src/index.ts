@@ -8,16 +8,16 @@ import Routes from "./routes";
 import mongoose from "mongoose";
 import chalk from "chalk";
 
-const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/teams";
+const MONGO_URI = process.env.MONGO_URI;
 
 console.log(
-  process.env.MONGO_URI
+  MONGO_URI
     ? chalk.red.bold("Using production DB")
     : chalk.yellow.bold("Using development DB")
 );
 
 // connect to mongoDB
-mongoose.connect(MONGO_URI, {
+mongoose.connect(MONGO_URI || "mongodb://localhost:27017/trio-calls", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: true,
@@ -36,6 +36,11 @@ app.use(cors());
 app.use(express.json());
 // routes for REST API
 app.use(Routes);
+
+app.get("/", (_req, res) => {
+  res.send("Server is up and running");
+});
+
 // Peer js endpoint
 app.use("/peerjs", peerServer);
 // Initialize Socket Server

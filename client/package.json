@@ -1,5 +1,5 @@
 {
-  "name": "trio-calls-client",
+  "name": "@trio-calls/client",
   "description": "Trio Calls Web Client",
   "version": "1.0.0",
   "author": "Arpit Bhalla <https://github.com/arpitBhalla>",
